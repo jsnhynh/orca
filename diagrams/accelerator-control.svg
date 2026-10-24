@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 820" width="1800" height="820" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 z" fill="context-stroke" stroke="context-stroke"/></marker></defs>
+<rect width="1800" height="820" fill="#ffffff"/>
+<text x="30" y="40" font-size="22" font-weight="bold" fill="#000">FIN control and DMA state machines</text>
+<rect x="20" y="70" width="1760" height="400" rx="18" fill="#f5f5f5" fill-opacity="0.5" stroke="#666" stroke-opacity="0.5"/>
+<text x="28" y="86" font-size="11" font-weight="bold" fill="#333" fill-opacity="0.7">fin_ctrl: tiled job</text>
+<rect x="20" y="500" width="1760" height="280" rx="18" fill="#f5f5f5" fill-opacity="0.5" stroke="#666" stroke-opacity="0.5"/>
+<text x="28" y="516" font-size="11" font-weight="bold" fill="#333" fill-opacity="0.7">fin_dma: load and store (one command at a time)</text>
+<path d="M260,155 L285,155" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M505,155 L530,155" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M750,155 L775,155" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M995,155 L1020,155" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1240,155 L1265,155" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1485,155 L1510,155" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1675,190 L1675,215 L50,215 L50,235 L50,250" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M290,285 L325,285" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M575,285 L610,285" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M860,285 L895,285" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1145,285 L1180,285" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1430,285 L1465,285" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1700,320 L1700,330 L1760,330 L1760,100 L150,100 L150,120" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M310,585 L330,585" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M600,585 L620,585" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M890,585 L910,585" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1180,585 L1200,585" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1470,585 L1490,585" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<rect x="40" y="120" width="220" height="70" rx="10.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="150.0" y="152" font-size="12" text-anchor="middle" fill="#000">T_IDLE</text>
+<text x="150.0" y="166" font-size="12" text-anchor="middle" fill="#000">wait for start</text>
+<rect x="285" y="120" width="220" height="70" rx="10.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="395.0" y="152" font-size="12" text-anchor="middle" fill="#000">T_LATCH</text>
+<text x="395.0" y="166" font-size="12" text-anchor="middle" fill="#000">snapshot job fields</text>
+<rect x="530" y="120" width="220" height="70" rx="10.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="640.0" y="152" font-size="12" text-anchor="middle" fill="#000">T_VALIDATE</text>
+<text x="640.0" y="166" font-size="12" text-anchor="middle" fill="#000">checks 0 to 4</text>
+<rect x="775" y="120" width="220" height="70" rx="10.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="885.0" y="152" font-size="12" text-anchor="middle" fill="#000">T_LOAD_A</text>
+<text x="885.0" y="166" font-size="12" text-anchor="middle" fill="#000">A strip by DMA</text>
+<rect x="1020" y="120" width="220" height="70" rx="10.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="1130.0" y="152" font-size="12" text-anchor="middle" fill="#000">T_SETUP_TILE</text>
+<text x="1130.0" y="166" font-size="12" text-anchor="middle" fill="#000">start a C tile</text>
+<rect x="1265" y="120" width="220" height="70" rx="10.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="1375.0" y="152" font-size="12" text-anchor="middle" fill="#000">T_LOAD_BIAS</text>
+<text x="1375.0" y="166" font-size="12" text-anchor="middle" fill="#000">N slice, if needed</text>
+<rect x="1510" y="120" width="220" height="70" rx="10.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="1620.0" y="152" font-size="12" text-anchor="middle" fill="#000">T_LOAD_B</text>
+<text x="1620.0" y="166" font-size="12" text-anchor="middle" fill="#000">weight tile by DMA</text>
+<rect x="40" y="250" width="250" height="70" rx="10.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="165.0" y="282" font-size="12" text-anchor="middle" fill="#000">T_PRELOAD</text>
+<text x="165.0" y="296" font-size="12" text-anchor="middle" fill="#000">prime RAM, load 16 PE rows</text>
+<rect x="325" y="250" width="250" height="70" rx="10.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="450.0" y="282" font-size="12" text-anchor="middle" fill="#000">T_COMPUTE</text>
+<text x="450.0" y="296" font-size="12" text-anchor="middle" fill="#000">feed A rows, drain, accumulate</text>
+<rect x="610" y="250" width="250" height="70" rx="10.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="735.0" y="282" font-size="12" text-anchor="middle" fill="#000">T_NEXT_K</text>
+<text x="735.0" y="296" font-size="12" text-anchor="middle" fill="#000">count, advance K or store</text>
+<rect x="895" y="250" width="250" height="70" rx="10.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="1020.0" y="282" font-size="12" text-anchor="middle" fill="#000">T_STORE</text>
+<text x="1020.0" y="296" font-size="12" text-anchor="middle" fill="#000">DMA the valid C tile</text>
+<rect x="1180" y="250" width="250" height="70" rx="10.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="1305.0" y="282" font-size="12" text-anchor="middle" fill="#000">T_NEXT_TILE</text>
+<text x="1305.0" y="296" font-size="12" text-anchor="middle" fill="#000">advance N, then M</text>
+<rect x="1465" y="250" width="250" height="70" rx="10.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="1590.0" y="282" font-size="12" text-anchor="middle" fill="#000">T_DONE</text>
+<text x="1590.0" y="296" font-size="12" text-anchor="middle" fill="#000">status, IRQ latched</text>
+<rect x="40" y="350" width="520" height="90" rx="13.5" fill="#f8cecc" stroke="#b85450" stroke-width="1"/>
+<text x="300.0" y="384" font-size="12" text-anchor="middle" fill="#000">T_ERROR</text>
+<text x="300.0" y="399" font-size="12" text-anchor="middle" fill="#000">validation or AXI error: error status, IRQ latched,</text>
+<text x="300.0" y="414" font-size="12" text-anchor="middle" fill="#000">then T_IDLE</text>
+<rect x="600" y="350" width="1140" height="90" rx="13.5" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="1170.0" y="384" font-size="12" text-anchor="middle" fill="#000">Tile loops</text>
+<text x="1170.0" y="399" font-size="12" text-anchor="middle" fill="#000">K inner, then N, then M; the A strip is loaded once per M tile and reused for every N tile</text>
+<text x="1170.0" y="414" font-size="12" text-anchor="middle" fill="#000">more K returns to T_LOAD_B; final K goes to T_STORE; more N returns to T_SETUP_TILE; more M returns to T_LOAD_A</text>
+<rect x="40" y="550" width="270" height="70" rx="10.5" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="175.0" y="582" font-size="12" text-anchor="middle" fill="#000">D_IDLE</text>
+<text x="175.0" y="596" font-size="12" text-anchor="middle" fill="#000">wait for a command</text>
+<rect x="330" y="550" width="270" height="70" rx="10.5" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="465.0" y="582" font-size="12" text-anchor="middle" fill="#000">D_LD_ROW</text>
+<text x="465.0" y="596" font-size="12" text-anchor="middle" fill="#000">last word of the row</text>
+<rect x="620" y="550" width="270" height="70" rx="10.5" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="755.0" y="582" font-size="12" text-anchor="middle" fill="#000">D_LD_AR</text>
+<text x="755.0" y="596" font-size="12" text-anchor="middle" fill="#000">read address, burst count</text>
+<rect x="910" y="550" width="270" height="70" rx="10.5" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="1045.0" y="582" font-size="12" text-anchor="middle" fill="#000">D_LD_R</text>
+<text x="1045.0" y="596" font-size="12" text-anchor="middle" fill="#000">accept a 32-bit beat</text>
+<rect x="1200" y="550" width="270" height="70" rx="10.5" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="1335.0" y="582" font-size="12" text-anchor="middle" fill="#000">D_LD_WR</text>
+<text x="1335.0" y="596" font-size="12" text-anchor="middle" fill="#000">write a byte or word, or pad zero</text>
+<rect x="1490" y="550" width="270" height="70" rx="10.5" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="1625.0" y="582" font-size="12" text-anchor="middle" fill="#000">D_RSP</text>
+<text x="1625.0" y="596" font-size="12" text-anchor="middle" fill="#000">completion, error bit</text>
+<rect x="40" y="650" width="1700" height="100" rx="15.0" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="890.0" y="682" font-size="12" text-anchor="middle" fill="#000">Behavior</text>
+<text x="890.0" y="696" font-size="12" text-anchor="middle" fill="#000">a burst never reads into the next logical row; elements in the same word are consumed without another beat;</text>
+<text x="890.0" y="712" font-size="12" text-anchor="middle" fill="#000">padding elements inside the fill rectangle write zero without moving the external address;</text>
+<text x="890.0" y="726" font-size="12" text-anchor="middle" fill="#000">the store path is a separate state machine with AXI write bursts and a response wait</text>
+<text x="30" y="804" font-size="10" fill="#333">T_ states belong to fin_ctrl. D_ states belong to fin_dma. Any validation or AXI error moves the controller to T_ERROR, then idle.</text></svg>

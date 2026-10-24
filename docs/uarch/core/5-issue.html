@@ -1,0 +1,658 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../genindex.html"><link rel="search" title="Search" href="../../search.html"><link rel="next" title="Stage 6: Execute" href="6-execute.html"><link rel="prev" title="Stage 4: Dispatch" href="4-dispatch.html">
+
+    <!-- Generated with Sphinx 9.2.0 and Furo 2025.12.19 -->
+        <title>Stage 5: Issue - ORCA</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/orca.css?v=d973d532" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #3973DA;
+  --color-brand-content: #3973DA;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #5aa9f0;
+  --color-brand-content: #5aa9f0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #5aa9f0;
+  --color-brand-content: #5aa9f0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">ORCA</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  <span class="sidebar-brand-text">ORCA</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../results.html">Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../building.html">Building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../learnings.html">Learnings</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Microarchitecture</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Core</a><input aria-label="Toggle navigation of Core" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2 current has-children"><a class="reference internal" href="stages.html">Pipeline stages</a><input aria-label="Toggle navigation of Pipeline stages" checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="0-branch.html">Stage 0: Branch prediction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1-fetch.html">Stage 1: Fetch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2-decode.html">Stage 2: Decode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3-rename.html">Stage 3: Rename</a></li>
+<li class="toctree-l3"><a class="reference internal" href="4-dispatch.html">Stage 4: Dispatch</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Stage 5: Issue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="6-execute.html">Stage 6: Execute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="7-writeback.html">Stage 7: Writeback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="8-commit.html">Stage 8: Commit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="m-extension.html">M extension: multiply and divide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="a-extension.html">A extension: atomics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="m_mode.html">Machine-mode traps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isa.html">ISA and software contract</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../memory/index.html">Memory</a><input aria-label="Toggle navigation of Memory" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../memory/cache.html">L1 caches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../memory/boot-rom.html">Boot ROM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../memory/main-memory.html">DDR and main memory</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../soc/index.html">SoC</a><input aria-label="Toggle navigation of SoC" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../soc/interconnect.html">Interconnect and clocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../soc/peripherals.html">Peripherals and registers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../soc/platform.html">FPGA and KV260 boundary</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../accel/index.html">FIN accelerator</a><input aria-label="Toggle navigation of FIN accelerator" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../accel/array.html">FIN systolic array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../accel/datapath.html">FIN datapath</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../accel/axi.html">FIN AXI interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../accel/ctrl.html">FIN control FSM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../accel/tiling.html">FIN hardware tiling</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Verification</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../verification/index.html">Verification</a><input aria-label="Toggle navigation of Verification" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../verification/testbenches.html">Testbenches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../verification/system-tests.html">System tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../verification/coverage.html">Coverage</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">FPGA bring-up</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../bringup/index.html">FPGA bring-up</a><input aria-label="Toggle navigation of FPGA bring-up" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../bringup/infrastructure.html">Infrastructure</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="stage-5-issue">
+<h1>Stage 5: Issue<a class="headerlink" href="#stage-5-issue" title="Link to this heading">¶</a></h1>
+<p>The scheduler waits for operands and then selects ready work in age order, not program order. The ROB still retires in program order. This stage also holds the load/store queues, which is where most of the memory-ordering logic lives.</p>
+<p>Related notes: <a class="reference internal" href="4-dispatch.html"><span class="std std-doc">Stage 4: Dispatch</span></a>, <a class="reference internal" href="6-execute.html"><span class="std std-doc">Stage 6: Execute</span></a>, <a class="reference internal" href="7-writeback.html"><span class="std std-doc">Stage 7: Writeback</span></a>, <a class="reference internal" href="../memory/cache.html"><span class="std std-doc">L1 caches</span></a> and <a class="reference internal" href="3-rename.html"><span class="std std-doc">Stage 3: Rename</span></a>.</p>
+<section id="files">
+<h2>Files<a class="headerlink" href="#files" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>File</p></th>
+<th class="head"><p>Job</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/5-issue/issue.sv</span></code></p></td>
+<td><p>queue composition, PRF/context read selection, and FU packet formation</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/5-issue/scheduler.sv</span></code></p></td>
+<td><p>the 16-entry scheduler: ALU, branch, multiply/divide, CSR and memory address-generation work on three issue ports</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/5-issue/register_read.sv</span></code></p></td>
+<td><p>accepted selections for ports 0-2, held read identities, recovery and operand packet formation</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/5-issue/lsq.sv</span></code></p></td>
+<td><p>load/store queues: address and store-data entries, disambiguation, forwarding and draining</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="queue-integration">
+<h2>Queue integration<a class="headerlink" href="#queue-integration" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">issue.sv</span></code> instantiates one <code class="docutils literal notranslate"><span class="pre">scheduler</span></code> and the load/store queues. The scheduler stores narrow <code class="docutils literal notranslate"><span class="pre">uop_entry_t</span></code> records (32 bits: a ROB tag plus readiness, class and fast-wakeup destination) and never stores <code class="docutils literal notranslate"><span class="pre">instruction_t</span></code> operand values. Each record carries an issue class: ALU/branch, multiply/divide, CSR or memory. The issue wrapper reads immutable controls from <code class="docutils literal notranslate"><span class="pre">payload_array</span></code>, and physical values from the PRF, only after selection.</p>
+<p>Every load and store takes both a scheduler entry and a load-queue or store-queue slot at dispatch. The scheduler issues it on port 2 like multiply/divide work. Register read supplies the base register, the immediate and, for a store, the data register, and the AGU (slot 3) computes the address. The AGU result fills the queue entry by ROB tag. The queues hold no operands and see no CDB traffic.</p>
+<p>Six PRF read ports provide four operands for ports 0 and 1 and two for port 2. Three issue-side context ports serve the three scheduler ports. Load and store insertion take the payload being written in that cycle and do not read it back. Three other context ports belong to retirement.</p>
+<p>Readiness on port 2 depends on the selected class. Memory work advances whenever the AGU accepts, which is always. Multiply/divide and CSR work advance when both of those units accept. The class comes from the registered selection, so the handshake never depends on the payload read. Issuing from the queues to memory needs both the LSU request path and result-holding capacity, and their readiness signals are ANDed before they are exposed as <code class="docutils literal notranslate"><span class="pre">dmem_rdy</span></code>.</p>
+</section>
+<section id="queue-inventory">
+<h2>Queue inventory<a class="headerlink" href="#queue-inventory" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Queue</p></th>
+<th class="head text-right"><p>Entries</p></th>
+<th class="head text-right"><p>Issue ports</p></th>
+<th class="head"><p>FU slots</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Scheduler, ALU/branch</p></td>
+<td class="text-right"><p>16 shared</p></td>
+<td class="text-right"><p>2 (ports 0 and 1)</p></td>
+<td><p>0, 1</p></td>
+</tr>
+<tr class="row-odd"><td><p>Scheduler, multiply/divide, CSR and memory address generation</p></td>
+<td class="text-right"><p>16 shared</p></td>
+<td class="text-right"><p>1 (port 2)</p></td>
+<td><p>3 (AGU), 4, 5</p></td>
+</tr>
+<tr class="row-even"><td><p>Load</p></td>
+<td class="text-right"><p>12</p></td>
+<td class="text-right"><p>1 shared</p></td>
+<td><p>2 through LSQ arbitration</p></td>
+</tr>
+<tr class="row-odd"><td><p>Store</p></td>
+<td class="text-right"><p>12</p></td>
+<td class="text-right"><p>1 shared</p></td>
+<td><p>2 through LSQ arbitration</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Loads and stores share one memory request. A slot is an execute input and is not another scheduling queue.</p>
+</section>
+<section id="the-integer-scheduler">
+<h2>The integer scheduler<a class="headerlink" href="#the-integer-scheduler" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">scheduler</span></code> holds up to 16 entries. Each entry has a valid bit, a ROB ID, two six-bit physical source IDs, source use and readiness bits, and an issue class. The PC, immediate, destination and operation controls are in the shared payload array.</p>
+<p>Port 2 serves multiply/divide, CSR and memory work together. It takes the oldest ready memory entry, and otherwise the oldest ready multiply/divide or CSR entry. A CSR entry waits at the ROB head, so younger memory work cannot starve it beyond a full load/store queue. CSR entries are ready only when their ROB ID equals <code class="docutils literal notranslate"><span class="pre">rob_head</span></code>. A store is ready when both its base and data registers are ready.</p>
+<section id="resident-wakeup">
+<h3>Resident wakeup<a class="headerlink" href="#resident-wakeup" title="Link to this heading">¶</a></h3>
+<p>A qualified CDB physical destination sets the matching readiness bits. Held entries capture that readiness, so backpressure cannot lose a one-cycle broadcast. Same-cycle resident wakeup stays enabled:</p>
+<div class="highlight-systemverilog notranslate"><div class="highlight"><pre><span></span><span class="n">entries_woken</span><span class="p">[</span><span class="n">e</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wake_uop</span><span class="p">(</span><span class="n">entries</span><span class="p">[</span><span class="n">e</span><span class="p">],</span><span class="w"> </span><span class="n">cdb_ports</span><span class="p">);</span>
+<span class="n">entry_ready</span><span class="p">[</span><span class="n">e</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">!</span><span class="n">rst</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">flush</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">recovery</span><span class="p">.</span><span class="n">val</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">entries</span><span class="p">[</span><span class="n">e</span><span class="p">].</span><span class="n">is_valid</span><span class="w"> </span><span class="o">&amp;&amp;</span>
+<span class="w">    </span><span class="p">(</span><span class="o">!</span><span class="n">entries</span><span class="p">[</span><span class="n">e</span><span class="p">].</span><span class="n">rs1_used</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">entries_woken</span><span class="p">[</span><span class="n">e</span><span class="p">].</span><span class="n">rs1_ready</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span>
+<span class="w">    </span><span class="p">(</span><span class="o">!</span><span class="n">entries</span><span class="p">[</span><span class="n">e</span><span class="p">].</span><span class="n">rs2_used</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">entries_woken</span><span class="p">[</span><span class="n">e</span><span class="p">].</span><span class="n">rs2_ready</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>New allocations register before selection, and a coincident completion is captured at insertion. Only accepted, successful physical writes wake consumers. Reset, flush and recovery suppress issue. Recovery discards only younger ROB lifetimes, and issue clears validity without changing physical register ownership.</p>
+</section>
+<section id="age-and-selection">
+<h3>Age and selection<a class="headerlink" href="#age-and-selection" title="Link to this heading">¶</a></h3>
+<p>A pairwise matrix records allocation order across all classes. Of two live entries exactly one is older, so only the upper triangle is stored (<code class="docutils literal notranslate"><span class="pre">older_than[a][b]</span></code> for <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&lt;</span> <span class="pre">b</span></code>) and the other order is its inverse. Among ready ALU entries, the one with no older ready ALU peer has rank zero, and exactly one older ready peer means rank one. Ports 0 and 1 take these ranks according to FU availability. Port 2 takes the ready multiply/divide, CSR or memory entry with no older ready peer of those classes.</p>
+<p>Allocation sees only registered empty slots, not same-edge issue space. New lifetimes are younger than all survivors, and dispatch lane order breaks ties. Recovery and issue remove the old lifetime from the order bits before the next registered state. The focused timestamp bench checks one, two and three issue ports independently, plus head-only ordering, wakeup, stalls and recovery.</p>
+</section>
+<section id="register-read-after-selection">
+<h3>Register read after selection<a class="headerlink" href="#register-read-after-selection" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">issue.sv</span></code> routes every scheduler selection through <code class="docutils literal notranslate"><span class="pre">register_read</span></code> before it presents source IDs to the combinational PRF read ports and binary ROB IDs to the context reads. Ports 0 and 1 go through <code class="docutils literal notranslate"><span class="pre">alu_register_read</span></code> and port 2 goes through <code class="docutils literal notranslate"><span class="pre">aux_register_read</span></code>. This adds one issue-to-execute cycle to multiply/divide, CSR and memory work. Multiply/divide packets take both register operands from the PRF, so PC and immediate selection is not needed for them. An AGU packet carries the base register, the immediate and the store data.</p>
+<p>The IDs are not decoded into one-hot vectors for the array to re-encode. Disabled reads address entry zero and return zero, and there is no speculative ungated context read. Retirement keeps its three one-hot selectors. <code class="docutils literal notranslate"><span class="pre">materialize_uop</span></code> rebuilds the FU packet: register operands come from the PRF, and the PC, immediate and controls come from the 106-bit payload. Branches get register comparison operands and PC/immediate target operands from these two sources.</p>
+<p><code class="docutils literal notranslate"><span class="pre">register_read.sv</span></code> holds one 25-bit accepted selection per ALU lane. In the following cycle it reads PRF values and context in parallel and forms the packet for the ALU input register. A lane accepts when it is empty or when its current packet can enter the ALU. Same-edge consume and replacement allows two independent selections per cycle with no forced bubble. Under backpressure the selected identities hold, and the scheduler removes an instruction only on an accepted selection. Reset and full flush clear both lanes. Recovery disables reads, input acceptance and visible output for that cycle, removes younger selections and keeps older ones, and transfers resume afterward. This also stops the ALU’s register-enable logic from capturing work during its recovery-qualified <code class="docutils literal notranslate"><span class="pre">ready=0</span></code> interval.</p>
+<p>Accepted-write PRF bypass stays available during operand read. Fixed-latency integer ALU operations also announce their physical destination on an accepted register-read-to-ALU transfer. The scheduler can select a dependent in that cycle, and the dependent’s following read cycle receives the producer’s computed value through forwarding. Loads wake speculatively (below). Branches, jumps, multiply/divide and system operations wake on actual completion. Fast tags also apply at enqueue. They do not clear rename busy bits, write the PRF or complete the ROB.</p>
+<p>The announced destination travels in the scheduler entry (<code class="docutils literal notranslate"><span class="pre">fast_pdst</span></code>, set at dispatch from the payload for fast ALU operations and zero otherwise). It does not come from register read’s payload-array read, which keeps the payload LUTRAM read out of the select, announce, wake, select loop.</p>
+<p>Each ALU forwards both its current computation and its held output, so announced values stay available when CDB grants or consumer acceptance stall. Forwarding rejects exceptions and physical register zero, and recovery suppresses transfers and killed producers. The computation starts from registered ALU operands, not the current read packet, so there is no unregistered chain through multiple ALUs. Source values and ROB payloads must stay live while a selected instruction waits. Normal in-order retirement prevents a younger writer from freeing its source physical register before the waiting reader completes.</p>
+</section>
+<section id="speculative-load-wakeup">
+<h3>Speculative load wakeup<a class="headerlink" href="#speculative-load-wakeup" title="Link to this heading">¶</a></h3>
+<p>The LSU announces <code class="docutils literal notranslate"><span class="pre">spec_wake</span></code> for a cache-path load in the cycle after its request is accepted. The scheduler treats it like a fast wakeup for ALU, branch and memory consumers, which are selected in the cycle the data is expected. The multiply/divide and CSR classes do not wake early. The announcement is a promise made before the hit is known, so a selection that depended on it carries a flag, and the outcome arrives one cycle later as <code class="docutils literal notranslate"><span class="pre">spec_check</span></code>:</p>
+<ul class="simple">
+<li><p><strong>Hit.</strong> The consumer’s scheduler entry, which was kept for that one cycle, is freed. Its operand comes from the LSU result register through register read’s forwarding input, because the register file is not written until the CDB grant.</p></li>
+<li><p><strong>Miss.</strong> Register read drops the selection, and the scheduler takes back the readiness the wakeup gave (<code class="docutils literal notranslate"><span class="pre">cancel</span></code>) for every entry waiting on that register. The entry never left the scheduler, so it keeps its age and re-issues when the real result is broadcast. The drop also applies in a recovery cycle, when the lane is otherwise frozen, because the check does not repeat.</p></li>
+</ul>
+<p>Entries that were not selected in the wake cycle but were marked ready by it are covered by the same cancel. A selection held in register read by a busy functional unit clears its flag after its first cycle, because that is the only cycle its check is valid.</p>
+<p><code class="docutils literal notranslate"><span class="pre">spec_wakeup_tb</span></code> drives the real scheduler, register read and register file against a model load unit with hits, misses, delayed grants, a single result register and recovery pulses. It checks that every transfer carries real operand data, that every uop transfers exactly once, and that the scheduler drains. It fails if the register-read kill or the readiness cancel is removed. The CoreMark oracle and GEMM64 check the same behavior end to end.</p>
+</section>
+</section>
+<section id="csr-and-system-work">
+<h2>CSR and system work<a class="headerlink" href="#csr-and-system-work" title="Link to this heading">¶</a></h2>
+<p>CSR and system entries issue only when <code class="docutils literal notranslate"><span class="pre">entry.rob_id</span> <span class="pre">==</span> <span class="pre">rob_head</span></code>. They then read their source through port 2 and enter the CSR unit, so architectural CSR state stays non-speculative.</p>
+</section>
+<section id="load-store-queue">
+<h2>Load/store queue<a class="headerlink" href="#load-store-queue" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">lsq.sv</span></code> owns the two queues, memory disambiguation, store-to-load forwarding, store draining and a two-cycle recovery sequence. It does not schedule address generation or track operands.</p>
+<section id="structure">
+<h3>Structure<a class="headerlink" href="#structure" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Load queue.</strong> 12 entries in a circular FIFO (<code class="docutils literal notranslate"><span class="pre">ldq_head</span></code>, <code class="docutils literal notranslate"><span class="pre">ldq_tail</span></code>, <code class="docutils literal notranslate"><span class="pre">ldq_count</span></code>). Loads allocate at the tail in dispatch order (a lone second-lane load takes the first slot, so there is no hole) and free as they retire. The head advances over leading entries that are free this cycle, and branch recovery rolls the tail back past the killed loads in the cleanup cycle. Loads issue out of order, and age is the distance from the head.</p></li>
+<li><p><strong>Store queue.</strong> 12 entries in a strict circular FIFO (<code class="docutils literal notranslate"><span class="pre">stq_head</span></code>, <code class="docutils literal notranslate"><span class="pre">stq_tail</span></code>, <code class="docutils literal notranslate"><span class="pre">stq_count</span></code>). Stores must drain in order, and age is the distance from the head.</p></li>
+<li><p><strong>Order.</strong> Load against load and store against store come from FIFO position. The head pointer is turned into a thermometer code (<code class="docutils literal notranslate"><span class="pre">head</span> <span class="pre">&lt;=</span> <span class="pre">x</span></code>), and entry <code class="docutils literal notranslate"><span class="pre">j</span></code> is older than entry <code class="docutils literal notranslate"><span class="pre">i</span></code> by two gates on those bits. Load against store is a count: <code class="docutils literal notranslate"><span class="pre">ld_older_cnt[ld]</span></code> is how many stores were queued when the load allocated (plus the earlier stores of its own dispatch group, found by a tag compare per dispatch channel), and each store pop counts it down. The stores it counts are the oldest in the store FIFO, so store <code class="docutils literal notranslate"><span class="pre">st</span></code> is older than the load when its distance from <code class="docutils literal notranslate"><span class="pre">stq_head</span></code> (<code class="docutils literal notranslate"><span class="pre">stq_pos[st]</span></code>) is below the count. A store killed by recovery is younger than every surviving load, so recovery and flush need no handling here. A simulation-only age matrix runs beside this order, and an assertion checks that the two agree for every pair of live entries in every cycle.</p></li>
+</ul>
+<p>The order state is one small count per load plus FIFO pointers. A full age matrix would need 576 bits, and the logic that reads the FIFO order is simpler.</p>
+<p>Each entry also has side state: <code class="docutils literal notranslate"><span class="pre">agu_comp</span></code> (the address, and for stores the data, has arrived) and, for stores, <code class="docutils literal notranslate"><span class="pre">committed</span></code> (authorized by the ROB). A load entry holds validity, ROB ID, physical destination, access size and sign, an <code class="docutils literal notranslate"><span class="pre">issued</span></code> flag, a <code class="docutils literal notranslate"><span class="pre">wait_older</span></code> bit, a 4-bit load-PC hash and a 32-bit address. Store data is not in the entry: the 32 bits per store sit in a small LUT RAM (<code class="docutils literal notranslate"><span class="pre">stq_data_mem</span></code>) that is written when the AGU result arrives and read in only two places, the store at the head and the forwarding select. <code class="docutils literal notranslate"><span class="pre">load_entry</span></code> and <code class="docutils literal notranslate"><span class="pre">store_entry</span></code> take the identity fields at insertion, and <code class="docutils literal notranslate"><span class="pre">load_packet</span></code> and <code class="docutils literal notranslate"><span class="pre">store_packet</span></code> rebuild the LSU interface at issue with queue-implied opcodes. Load selection stays one-hot through the compact payload mux. Simulation assertions reject a live non-load or non-store inserted into the matching queue. Precise exception PCs come from the ROB. The simulation-only <code class="docutils literal notranslate"><span class="pre">stq_pc</span></code> keeps each store’s PC for traces, including committed stores that outlive their ROB context.</p>
+<p>A load is marked <code class="docutils literal notranslate"><span class="pre">issued</span></code> when it is selected either for a cache request or for store-to-load forwarding, and the LSU then owns any outstanding request or CDB backpressure. The load keeps its entry until it retires, so a store whose address arrives later can still be checked against it. Retirement comes from the core’s retire ports (<code class="docutils literal notranslate"><span class="pre">retire_valid</span></code>, <code class="docutils literal notranslate"><span class="pre">retire_ids</span></code>), sampled a cycle late, so the commit count never reaches the queue’s state. A store leaves the store queue when its authorized memory request is accepted, and the ROB, the LSU and the saved ROB tag keep retirement waiting for the write response. Leaving the queue therefore does not mean the store has retired.</p>
+</section>
+<section id="address-generation">
+<h3>Address generation<a class="headerlink" href="#address-generation" title="Link to this heading">¶</a></h3>
+<p>The scheduler issues a load or store on port 2 once its registers are ready. Register read forms the AGU packet, and the AGU computes the address in the next cycle. The result returns by ROB tag, with the store data alongside:</p>
+<div class="highlight-systemverilog notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">stq</span><span class="p">[</span><span class="n">e</span><span class="p">].</span><span class="n">is_valid</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">stq_agu_comp</span><span class="p">[</span><span class="n">e</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">stq</span><span class="p">[</span><span class="n">e</span><span class="p">].</span><span class="n">dest_tag</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">agu_result</span><span class="p">.</span><span class="n">dest_tag</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">    </span><span class="n">stq_next</span><span class="p">[</span><span class="n">e</span><span class="p">].</span><span class="n">addr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">agu_result</span><span class="p">.</span><span class="n">result</span><span class="p">;</span><span class="w">      </span><span class="c1">// the data goes to stq_data_mem[e]</span>
+<span class="w">    </span><span class="n">stq_agu_comp_next</span><span class="p">[</span><span class="n">e</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">!</span><span class="n">agu_result</span><span class="p">.</span><span class="n">exception</span><span class="p">;</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>Only the first result completes an entry. A faulting (misaligned) result leaves it incomplete, and the ROB’s exception flushes it. Disambiguation and memory issue read <code class="docutils literal notranslate"><span class="pre">ldq_addr_ready_comb</span></code> and <code class="docutils literal notranslate"><span class="pre">stq_addr_ready_comb</span></code>, which are derived from registered entries, so the AGU adder never reaches the cache request. Memory work uses the scheduler, register read and forwarding like every other class.</p>
+</section>
+<section id="disambiguation-and-forwarding">
+<h3>Disambiguation and forwarding<a class="headerlink" href="#disambiguation-and-forwarding" title="Link to this heading">¶</a></h3>
+<p>For each load, against every store:</p>
+<div class="highlight-systemverilog notranslate"><div class="highlight"><pre><span></span><span class="n">older_store</span><span class="p">[</span><span class="n">st</span><span class="p">]</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="n">stq</span><span class="p">[</span><span class="n">st</span><span class="p">].</span><span class="n">is_valid</span><span class="w"> </span><span class="o">&amp;&amp;</span>
+<span class="w">                       </span><span class="p">(</span><span class="n">stq_committed</span><span class="p">[</span><span class="n">st</span><span class="p">]</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">stq_pos</span><span class="p">[</span><span class="n">st</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">ld_older_cnt</span><span class="p">[</span><span class="n">ld</span><span class="p">]);</span>
+<span class="n">unresolved_store</span><span class="p">[</span><span class="n">st</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">older_store</span><span class="p">[</span><span class="n">st</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">stq_addr_ready_comb</span><span class="p">[</span><span class="n">st</span><span class="p">];</span>
+<span class="n">alias_store</span><span class="p">[</span><span class="n">st</span><span class="p">]</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="n">older_store</span><span class="p">[</span><span class="n">st</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">addresses</span><span class="w"> </span><span class="n">share</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">word</span><span class="w"> </span><span class="o">&amp;&amp;</span>
+<span class="w">                       </span><span class="kt">byte</span><span class="w"> </span><span class="n">masks</span><span class="w"> </span><span class="n">overlap</span><span class="p">;</span>
+<span class="n">alias_full_cover</span><span class="p">[</span><span class="n">st</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alias_store</span><span class="p">[</span><span class="n">st</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">store</span><span class="w"> </span><span class="n">mask</span><span class="w"> </span><span class="n">covers</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">whole</span><span class="w"> </span><span class="n">load</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The outcome is:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Condition</p></th>
+<th class="head"><p>Result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>an older store has no address and the load’s <code class="docutils literal notranslate"><span class="pre">wait_older</span></code> bit is set</p></td>
+<td><p><strong>stall</strong> (otherwise the load proceeds; see load speculation below)</p></td>
+</tr>
+<tr class="row-odd"><td><p>youngest alias has no data yet</p></td>
+<td><p><strong>stall</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>youngest alias fully covers the load</p></td>
+<td><p><strong>forward</strong> from the store queue</p></td>
+</tr>
+<tr class="row-odd"><td><p>youngest alias only partially covers</p></td>
+<td><p><strong>stall</strong> until the store drains</p></td>
+</tr>
+<tr class="row-even"><td><p>youngest alias is an atomic</p></td>
+<td><p><strong>stall</strong> until the atomic drains</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For example, an older word store to address <code class="docutils literal notranslate"><span class="pre">A</span></code> can forward all four bytes to a younger word load from <code class="docutils literal notranslate"><span class="pre">A</span></code>. An older byte store covers only part of that word, so a younger word load must wait. ORCA does not merge bytes from the store queue with bytes from the cache.</p>
+<p>The youngest alias is found by masking every alias candidate that has a younger alias, using store-queue position from the head pointer. This avoids a serial mux chain across the twelve stores on the D-cache request path.</p>
+<p>An atomic sits in the store queue with its address and <code class="docutils literal notranslate"><span class="pre">rs2</span></code>, but <code class="docutils literal notranslate"><span class="pre">rs2</span></code> is not the value it leaves in memory, so it never forwards. A younger load of the same word waits until the atomic leaves the queue. From then on the LSU is busy with the atomic until it finishes, so the load reads the new word. A load of another word can still forward from an older plain store across the atomic.</p>
+<p>Loads speculate past unresolved older stores, guarded by a one-bit wait table and order-violation replay (next section). There is no store-set predictor.</p>
+</section>
+<section id="load-speculation-and-order-violations">
+<h3>Load speculation and order violations<a class="headerlink" href="#load-speculation-and-order-violations" title="Link to this heading">¶</a></h3>
+<p>A load does not wait for every older store address. It waits only if its <code class="docutils literal notranslate"><span class="pre">wait_older</span></code> bit is set. Otherwise it ignores older stores whose address is unknown, and it still obeys the resolved ones (forward, or stall on partial cover, missing data or an atomic). <code class="docutils literal notranslate"><span class="pre">wait_older</span></code> is set at insertion from a 256-entry, one-bit table indexed by <code class="docutils literal notranslate"><span class="pre">pc[9:2]</span></code>. The table is distributed RAM that starts at zero and has no reset.</p>
+<p>The “an older store is unresolved” vector that <code class="docutils literal notranslate"><span class="pre">wait_older</span></code> loads check is registered, so it reaches selection one cycle late and the store-queue scan stays off the select-to-issue-packet path. The vector is only a performance hint. A load released by a stale value is still checked by violation detection and replayed if it was wrong. A new store reaches the register before any load allocated with it can have an address.</p>
+<p>In the cycle after a store’s address arrives (<code class="docutils literal notranslate"><span class="pre">stq_resolved_q</span></code>), the queue compares that store, through the word-match bits taken when that address arrived (<code class="docutils literal notranslate"><span class="pre">viol_same_q</span></code>, one bit per load) and the byte masks, with every younger load that has already executed. <code class="docutils literal notranslate"><span class="pre">LR</span></code> writes nothing and is skipped. The oldest overlapping load is the violation. Its ROB ID goes to the ROB in a register (<code class="docutils literal notranslate"><span class="pre">replay_valid</span></code>, <code class="docutils literal notranslate"><span class="pre">replay_tag</span></code>), and in the next cycle its table bit is set. The ROB refetches from that load when it reaches the head (<a class="reference internal" href="8-commit.html"><span class="std std-doc">Commit</span></a>). A slow sweep clears one entry every 512 cycles, so a full pass takes 2^17 cycles and a load that stopped colliding speculates again. A new violation wins over the sweep in the same cycle. The table is only a hint: a bit that is stale, aliased by another load, or left over across a reset can hold a load back for a while, and it can never make a load wrong.</p>
+<p>A load that forwarded from a younger store may be flagged needlessly when an older aliasing store resolves. A refetch is always correct and only slower.</p>
+<p>The report is not suppressed during branch recovery. The store’s resolution is a one-cycle pulse, so a violating load older than the mispredicted branch would otherwise retire its stale value. The oldest violator is reported unconditionally. If it is younger than the branch, it is killed with every younger violator, and the ROB ignores the replay for an invalid entry. <code class="docutils literal notranslate"><span class="pre">lsq_entry_tb</span></code> checks both recovery offsets.</p>
+</section>
+<section id="memory-arbitration-two-stages">
+<h3>Memory arbitration: two stages<a class="headerlink" href="#memory-arbitration-two-stages" title="Link to this heading">¶</a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>select:
+  oldest load candidate                    -&gt; stage register holds the load
+  otherwise a load whose address arrives   -&gt; bypass straight into the stage
+    from the AGU this cycle (cacheable,       register
+    allowed by the wait table)
+  otherwise authorized store-queue head    -&gt; stage register holds the store
+  (the store goes first instead when the store queue has two or fewer free slots)
+issue (the cycle after):
+  store -&gt; dmem request; the store leaves the queue only on acceptance
+  load  -&gt; dmem request from the register; in parallel, its
+           word-match bits (iss_same_q: taken as it entered the stage
+           register, kept current while it waits there) are checked against
+           older resolved stores:
+             youngest alias covers the load -&gt; forward, cancel the request
+             alias cannot forward           -&gt; cancel, bounce the load
+             no alias                       -&gt; the cache answers
+</pre></div>
+</div>
+<p>Loads go first because a committed store is already architecturally done and only has to reach the cache eventually, while a load is usually on some instruction’s critical path. Pointer chasing shows the difference: in a loop that loads the next pointer and then stores to the node it came from, a store that went first would hold the cache for two cycles on every iteration, right when the next pointer load arrives. A store still goes first when the queue is nearly full, so stores always drain. The bypass load’s AGU result feeds this choice, which is the one place the selection does not come from registered state alone.</p>
+<p>A load candidate has its address, has not executed, is not held by the wait table, and has not bounced since the store queue last changed (a store resolved or left). An uncached load is a candidate only at the ROB head with no authorized store pending, so it never needs forwarding or a cancel and never reads a device speculatively. <code class="docutils literal notranslate"><span class="pre">dmem_cancel</span></code> tells the LSU to drop the response of the request issued that cycle and not to wake its consumers.</p>
+<p>Only the selected load is checked for forwarding, which makes that logic 1 by 16 instead of 16 by 16 and lets the cache request start at a register. Stores issue one cycle after selection, and back-to-back stores still go out every cycle, because the next entry is selected while the head leaves. An executed load keeps its slot until it retires, and a store’s slot frees when its request is accepted. Allocation readiness comes from registered validity, so freed capacity becomes visible on the following cycle.</p>
+</section>
+<section id="store-authorization">
+<h3>Store authorization<a class="headerlink" href="#store-authorization" title="Link to this heading">¶</a></h3>
+<p>Stores compute addresses and data speculatively but never become visible until the ROB authorizes them. <code class="docutils literal notranslate"><span class="pre">commit_store_vals</span></code> is that token. The queue maps tokens onto the first unauthorized valid entries in the occupied FIFO prefix. <code class="docutils literal notranslate"><span class="pre">store_commit_mask</span></code> counts each entry’s eligible predecessors independently of the token count, and then authorizes entries whose rank is less than that count. This keeps the late ROB token out of the rank accumulation. It matches a simple token-limited walk, including holes, circular wrap, 0, 1 or 2 tokens and a blocked authorized head. The precise protocol normally has one token in flight, and the helper does not assume that restriction. <code class="docutils literal notranslate"><span class="pre">lsq_tb</span></code> runs a case that compares the helper with the simple walk across 112,512 cases at depths 4 and 8, and it also compares the production wiring during queue traffic.</p>
+<p>Atomics use the same token. The ROB issues it for an atomic only when the atomic is the head and its address has resolved, so the atomic drains like a committed store but is non-speculative and has no older store ahead of it. The queue sends it to the LSU as an <code class="docutils literal notranslate"><span class="pre">OPC_AMO</span></code> packet carrying the operation in <code class="docutils literal notranslate"><span class="pre">funct7</span></code> and its destination register.</p>
+<p>The token never reaches the memory request in its own cycle. The committed bits that the request logic reads are the registered ones, so an authorized store issues in the cycle after the ROB’s token. That removes the chain commit decision, authorization, LSQ request, router and cache write enable. <code class="docutils literal notranslate"><span class="pre">lsq_tb</span></code> checks that a token alone does not produce a store request in its own cycle.</p>
+<p>The queue also registers the token itself, so the ROB’s commit decision never reaches the store queue in its own cycle. The store still retires in the cycle after authorization, and the queue marks it committed a cycle later. The token in flight counts as pending in <code class="docutils literal notranslate"><span class="pre">stq_drained</span></code> (so <code class="docutils literal notranslate"><span class="pre">fence.i</span></code> and an uncached load at the head still wait for it) and in flush preservation.</p>
+</section>
+<section id="flush-and-recovery">
+<h3>Flush and recovery<a class="headerlink" href="#flush-and-recovery" title="Link to this heading">¶</a></h3>
+<p>The LSQ treats two events differently, and the difference is what makes this block hard.</p>
+<p><strong>Flush</strong> (architectural) preserves committed stores. They are already architecturally visible and must still reach memory:</p>
+<div class="highlight-systemverilog notranslate"><div class="highlight"><pre><span></span><span class="n">stq_committed</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">stq_flush_keep</span><span class="p">;</span><span class="w">          </span><span class="c1">// in-order committed prefix</span>
+<span class="n">stq_tail</span><span class="w">      </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">stq_add</span><span class="p">(</span><span class="n">stq_head</span><span class="p">,</span><span class="w"> </span><span class="n">stq_flush_count</span><span class="p">);</span>
+<span class="n">ldq</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">is_valid</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mb">1'b0</span><span class="p">;</span><span class="w">                  </span><span class="c1">// every load dies</span>
+</pre></div>
+</div>
+<p><strong>Branch recovery</strong> is a two-cycle sequence. On <code class="docutils literal notranslate"><span class="pre">recovery.val</span></code> the LSQ latches the branch’s age coordinate and sets <code class="docutils literal notranslate"><span class="pre">recovery_pending_q</span></code>. In the following cycle it does the actual cleanup:</p>
+<div class="highlight-systemverilog notranslate"><div class="highlight"><pre><span></span><span class="n">recovery_head_q</span><span class="w">       </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">rob_head_q</span><span class="p">;</span>
+<span class="n">recovery_branch_age_q</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">recovery</span><span class="p">.</span><span class="n">rob_tag</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">rob_head_q</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Splitting it this way keeps the age comparison out of the cycle that resolves the branch. Throughout both cycles <code class="docutils literal notranslate"><span class="pre">recovery_active</span></code> blocks allocation and memory issue, which lets the cleanup logic read registered state directly and not the combinational next state.</p>
+<p>Stores survive recovery if they are committed or older than the branch. Loads survive only if they are older.</p>
+</section>
+</section>
+<section id="known-limits">
+<h2>Known limits<a class="headerlink" href="#known-limits" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Load speculation uses only a one-bit wait table. There is no store-set predictor.</p></li>
+<li><p>A store generates its address only when its data register is ready too, because there is no separate store-address and store-data issue.</p></li>
+<li><p>Partial-overlap forwarding is not supported, and the load stalls instead.</p></li>
+<li><p>One memory operation issues per cycle across both queues.</p></li>
+<li><p>The store queue is a strict FIFO, so a blocked head blocks all draining.</p></li>
+</ul>
+</section>
+<section id="tests">
+<h2>Tests<a class="headerlink" href="#tests" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">sim/cpu/tb/5-issue/</span></code> holds these benches:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">lsq_tb</span></code>: forwarding, aliasing, ordering, flush preservation, the two-cycle recovery, first-result-wins and faulting AGU results.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lsq_entry_tb</span></code>: entry contents, capture by tag, and forwarding of every access size at depths 4 and 8.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">issue_tb</span></code>: memory work reaches only the AGU, with base, immediate and store data, and advances while the multiply/divide and CSR units are busy.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">register_read_tb</span></code>, <code class="docutils literal notranslate"><span class="pre">fast_wakeup_tb</span></code> and <code class="docutils literal notranslate"><span class="pre">spec_wakeup_tb</span></code>: operand reads, fast wakeup and speculative load wakeup.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dispatch_tb</span></code>: a memory op needs a scheduler lane and a queue slot.</p></li>
+</ul>
+<p>Mutations that drop store-data capture, let a second result overwrite an entry, or route memory work to the CSR unit each fail a bench.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="6-execute.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Stage 6: Execute</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="4-dispatch.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Stage 4: Dispatch</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026 Jason Huynh. All rights reserved.
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Stage 5: Issue</a><ul>
+<li><a class="reference internal" href="#files">Files</a></li>
+<li><a class="reference internal" href="#queue-integration">Queue integration</a></li>
+<li><a class="reference internal" href="#queue-inventory">Queue inventory</a></li>
+<li><a class="reference internal" href="#the-integer-scheduler">The integer scheduler</a><ul>
+<li><a class="reference internal" href="#resident-wakeup">Resident wakeup</a></li>
+<li><a class="reference internal" href="#age-and-selection">Age and selection</a></li>
+<li><a class="reference internal" href="#register-read-after-selection">Register read after selection</a></li>
+<li><a class="reference internal" href="#speculative-load-wakeup">Speculative load wakeup</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#csr-and-system-work">CSR and system work</a></li>
+<li><a class="reference internal" href="#load-store-queue">Load/store queue</a><ul>
+<li><a class="reference internal" href="#structure">Structure</a></li>
+<li><a class="reference internal" href="#address-generation">Address generation</a></li>
+<li><a class="reference internal" href="#disambiguation-and-forwarding">Disambiguation and forwarding</a></li>
+<li><a class="reference internal" href="#load-speculation-and-order-violations">Load speculation and order violations</a></li>
+<li><a class="reference internal" href="#memory-arbitration-two-stages">Memory arbitration: two stages</a></li>
+<li><a class="reference internal" href="#store-authorization">Store authorization</a></li>
+<li><a class="reference internal" href="#flush-and-recovery">Flush and recovery</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#known-limits">Known limits</a></li>
+<li><a class="reference internal" href="#tests">Tests</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=3b5cce75"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>

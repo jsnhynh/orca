@@ -1,0 +1,20 @@
+PASS      1/19 aha-mont64  cycles=2986117 instret=4974515 ipc=1.666 rc=0
+PASS      2/19 crc32  cycles=2614333 instret=4005932 ipc=1.532 rc=0
+PASS      3/19 depthconv  cycles=2096562 instret=3515696 ipc=1.677 rc=0
+PASS      4/19 edn  cycles=1906912 instret=3228258 ipc=1.693 rc=0
+PASS      5/19 huffbench  cycles=2077090 instret=2131276 ipc=1.026 rc=0
+PASS      6/19 matmult-int  cycles=1751373 instret=2689078 ipc=1.535 rc=0
+PASS      7/19 md5sum  cycles=1571463 instret=2650157 ipc=1.686 rc=0
+PASS      8/19 nettle-aes  cycles=2309000 instret=4069269 ipc=1.762 rc=0
+PASS      9/19 nettle-sha256  cycles=2602488 instret=4646675 ipc=1.785 rc=0
+PASS     10/19 nsichneu  cycles=5724574 instret=2242296 ipc=0.392 rc=0
+PASS     11/19 picojpeg  cycles=1995008 instret=2861081 ipc=1.434 rc=0
+PASS     12/19 qrduino  cycles=2587260 instret=2778477 ipc=1.074 rc=0
+PASS     13/19 sglib-combined  cycles=2887299 instret=2484849 ipc=0.861 rc=0
+PASS     14/19 slre  cycles=2129931 instret=2641725 ipc=1.240 rc=0
+PASS     15/19 statemate  cycles=2584204 instret=2697352 ipc=1.044 rc=0
+PASS     16/19 tarfind  cycles=924645 instret=1172049 ipc=1.268 rc=0
+PASS     17/19 ud  cycles=2985256 instret=2595447 ipc=0.869 rc=0
+PASS     18/19 wikisort  cycles=1099620 instret=1261444 ipc=1.147 rc=0
+PASS     19/19 xgboost  cycles=6111778 instret=3506553 ipc=0.574 rc=0
+embench on the board: 19 passed, 0 failed, 0 unknown, 0 timed out, 19 run

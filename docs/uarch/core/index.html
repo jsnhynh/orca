@@ -1,0 +1,1091 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../genindex.html"><link rel="search" title="Search" href="../../search.html"><link rel="next" title="Pipeline stages" href="stages.html"><link rel="prev" title="Learnings" href="../../learnings.html">
+
+    <!-- Generated with Sphinx 9.2.0 and Furo 2025.12.19 -->
+        <title>Core - ORCA</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/orca.css?v=d973d532" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #3973DA;
+  --color-brand-content: #3973DA;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #5aa9f0;
+  --color-brand-content: #5aa9f0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #5aa9f0;
+  --color-brand-content: #5aa9f0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">ORCA</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  <span class="sidebar-brand-text">ORCA</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../results.html">Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../building.html">Building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../learnings.html">Learnings</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Microarchitecture</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">Core</a><input aria-label="Toggle navigation of Core" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="stages.html">Pipeline stages</a><input aria-label="Toggle navigation of Pipeline stages" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="0-branch.html">Stage 0: Branch prediction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1-fetch.html">Stage 1: Fetch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2-decode.html">Stage 2: Decode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3-rename.html">Stage 3: Rename</a></li>
+<li class="toctree-l3"><a class="reference internal" href="4-dispatch.html">Stage 4: Dispatch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="5-issue.html">Stage 5: Issue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="6-execute.html">Stage 6: Execute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="7-writeback.html">Stage 7: Writeback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="8-commit.html">Stage 8: Commit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="m-extension.html">M extension: multiply and divide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="a-extension.html">A extension: atomics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="m_mode.html">Machine-mode traps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isa.html">ISA and software contract</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../memory/index.html">Memory</a><input aria-label="Toggle navigation of Memory" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../memory/cache.html">L1 caches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../memory/boot-rom.html">Boot ROM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../memory/main-memory.html">DDR and main memory</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../soc/index.html">SoC</a><input aria-label="Toggle navigation of SoC" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../soc/interconnect.html">Interconnect and clocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../soc/peripherals.html">Peripherals and registers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../soc/platform.html">FPGA and KV260 boundary</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../accel/index.html">FIN accelerator</a><input aria-label="Toggle navigation of FIN accelerator" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../accel/array.html">FIN systolic array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../accel/datapath.html">FIN datapath</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../accel/axi.html">FIN AXI interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../accel/ctrl.html">FIN control FSM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../accel/tiling.html">FIN hardware tiling</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Verification</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../verification/index.html">Verification</a><input aria-label="Toggle navigation of Verification" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../verification/testbenches.html">Testbenches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../verification/system-tests.html">System tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../verification/coverage.html">Coverage</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">FPGA bring-up</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../bringup/index.html">FPGA bring-up</a><input aria-label="Toggle navigation of FPGA bring-up" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../bringup/infrastructure.html">Infrastructure</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="core">
+<h1>Core<a class="headerlink" href="#core" title="Link to this heading">¶</a></h1>
+<p>ORCA is a two-wide, out-of-order RV32IMA core. The front and back ends move up to two instructions per cycle, ready instructions execute ahead of older stalled ones, and the reorder buffer (ROB) retires them in program order, so software observes in-order behavior.</p>
+<p>The core renames explicitly onto a physical register file. The speculative register alias table (RAT) maps each architectural register to its newest physical destination, and a separate committed RAT identifies retired state. There are 64 physical registers and 64 ROB entries. Physical IDs address values, and ROB IDs track instruction age and retirement.</p>
+<p>This page is the map of the whole core. The <a class="reference internal" href="stages.html"><span class="std std-doc">pipeline stages</span></a>, the M and A extensions, machine mode and the ISA each have their own page. The nine stages are numbered to match the directories under <code class="docutils literal notranslate"><span class="pre">rtl/cpu/</span></code>, so a stage number tells you where the code lives. A stage is a job, and a job does not always have exactly one register before or after it.</p>
+<p>Related notes: <a class="reference internal" href="0-branch.html"><span class="std std-doc">Stage 0: Branch prediction</span></a>, <a class="reference internal" href="../memory/cache.html"><span class="std std-doc">L1 caches</span></a>,
+<a class="reference internal" href="../memory/index.html"><span class="std std-doc">Memory</span></a>, <a class="reference internal" href="isa.html"><span class="std std-doc">ISA and software contract</span></a>, and
+<a class="reference internal" href="m_mode.html"><span class="std std-doc">Machine-mode traps</span></a>.</p>
+<section id="pipeline-stages">
+<h2>Pipeline stages<a class="headerlink" href="#pipeline-stages" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-right"><p>#</p></th>
+<th class="head"><p>Stage</p></th>
+<th class="head"><p>Work</p></th>
+<th class="head"><p>Directory</p></th>
+<th class="head"><p>Note</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-right"><p>0</p></td>
+<td><p>Branch prediction</p></td>
+<td><p>L0 lookup and request steering</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/0-branch</span></code></p></td>
+<td><p><a class="reference internal" href="0-branch.html"><span class="std std-doc">0-branch</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>1</p></td>
+<td><p>Fetch</p></td>
+<td><p>I-cache response, L1 correction, instruction buffering</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/1-fetch</span></code></p></td>
+<td><p><a class="reference internal" href="1-fetch.html"><span class="std std-doc">1-fetch</span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>2</p></td>
+<td><p>Decode</p></td>
+<td><p>RV32 decode, operand formation, and legality checks</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/2-decode</span></code></p></td>
+<td><p><a class="reference internal" href="2-decode.html"><span class="std std-doc">2-decode</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>3</p></td>
+<td><p>Rename</p></td>
+<td><p>RAT lookup, physical and ROB allocation, destination ownership</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/3-rename</span></code></p></td>
+<td><p><a class="reference internal" href="3-rename.html"><span class="std std-doc">3-rename</span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>4</p></td>
+<td><p>Dispatch (shares the rename cycle)</p></td>
+<td><p>classification, queue routing and ROB writes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/4-dispatch</span></code></p></td>
+<td><p><a class="reference internal" href="4-dispatch.html"><span class="std std-doc">4-dispatch</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>5</p></td>
+<td><p>Issue</p></td>
+<td><p>oldest-ready selection, then a register-read cycle (PRF, payload, forwarding)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/5-issue</span></code></p></td>
+<td><p><a class="reference internal" href="5-issue.html"><span class="std std-doc">5-issue</span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>6</p></td>
+<td><p>Execute</p></td>
+<td><p>ALUs, AGU and LSU, pipelined multiply, iterative divide, branch validation, CSR operation</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/6-execute</span></code></p></td>
+<td><p><a class="reference internal" href="6-execute.html"><span class="std std-doc">6-execute</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>7</p></td>
+<td><p>Writeback</p></td>
+<td><p>two CDB results and operand wakeup</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/7-writeback</span></code></p></td>
+<td><p><a class="reference internal" href="7-writeback.html"><span class="std std-doc">7-writeback</span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>8</p></td>
+<td><p>Commit</p></td>
+<td><p>up to two in-order instructions and committed stores</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/8-commit</span></code></p></td>
+<td><p><a class="reference internal" href="8-commit.html"><span class="std std-doc">8-commit</span></a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Dispatch has no pipeline register of its own: queue write enables come from
+registered queue occupancy, so rename and queue allocation share one cycle.
+<code class="docutils literal notranslate"><span class="pre">rtl/cpu/core.sv</span></code> wires all nine stages together, and <code class="docutils literal notranslate"><span class="pre">rtl/cpu/cpu.sv</span></code> wraps
+the core with the private L1 caches and the data-side routing boundary. CPU,
+caches, and fabric share one clock; only FIN crosses clock domains.</p>
+</section>
+<section id="dataflow">
+<h2>Dataflow<a class="headerlink" href="#dataflow" title="Link to this heading">¶</a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>   ┌──────────────────────── redirect ───────────────────────────────┐
+   │                                                                 │
+   v                                                                 │
+[0 branch] ──&gt; [1 fetch] ──&gt; [2 decode] ──&gt; [3 rename] ──&gt; [4 dispatch]
+                   ^                            │                │
+                   │                            │ tags           │ ordered
+                I-cache                         v                v  prefix
+                                              [8 commit] &lt;───  [5 issue]
+                                                   ^               │
+                                                   │               v
+                                              [7 writeback] &lt;── [6 execute]
+                                                   │               │
+                                                   └── CDB ────────┘
+</pre></div>
+</div>
+<p>The loop that matters is: rename asks the ROB for tags, dispatch writes the ROB
+entry with those tags in the same cycle, execute completes onto the CDB, and
+commit turns the result into architectural state. <strong>Architectural state</strong> is
+the state software is allowed to observe, such as integer registers, CSRs, and
+committed memory writes. Queue entries and predictions are microarchitectural
+state and may be discarded after a wrong-path guess.</p>
+</section>
+<section id="structures">
+<h2>Structures<a class="headerlink" href="#structures" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Structure</p></th>
+<th class="head"><p>Size</p></th>
+<th class="head"><p>Set in</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ROB</p></td>
+<td><p>64 entries</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">uarch_pkg::ROB_ENTRIES</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Physical register file</p></td>
+<td><p>64 x 32-bit values, six read and two write ports</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Unified scheduler (ALU, branch, multiply/divide, CSR, memory address generation)</p></td>
+<td><p>16 x 32-bit entries, three issue ports</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">uarch_pkg::SCHED_ENTRIES</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Immutable payload array</p></td>
+<td><p>64 x 106-bit contexts, ROB-indexed</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Load queue</p></td>
+<td><p>12 entries</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">uarch_pkg::LSQ_ENTRIES</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Store queue</p></td>
+<td><p>12 entries</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">uarch_pkg::LSQ_ENTRIES</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Instruction buffer</p></td>
+<td><p>4 entries</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">uarch_pkg::INST_BUF_DEPTH</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>FTQ</p></td>
+<td><p>16 entries</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">uarch_pkg::FTQ_ENTRIES</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>L0 BTB</p></td>
+<td><p>128 entries</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">l0_btb</span></code> parameter, set in <code class="docutils literal notranslate"><span class="pre">bpu</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>BTB</p></td>
+<td><p>512 entries</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">branch_pkg::BTB_ENTRIES</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>TAGE base</p></td>
+<td><p>512 entries</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">branch_pkg::BASE_ENTRIES</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>TAGE tagged</p></td>
+<td><p>4 x 1024 entries</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">branch_pkg::TAGE_ENTRIES</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>RAS</p></td>
+<td><p>16 entries</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">branch_pkg::RAS_ENTRIES</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>L1 I-cache and D-cache</p></td>
+<td><p>16 KiB each, 2-way, 64-byte lines</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Widths come from <code class="docutils literal notranslate"><span class="pre">uarch_pkg::PIPE_WIDTH</span></code> and <code class="docutils literal notranslate"><span class="pre">FETCH_WIDTH</span></code>, both 2.</p>
+<p>There are six functional-unit slots: two integer ALUs, one load/store unit
+(LSU), one address-generation unit (AGU), one multiply/divide unit (MDU), and
+one system/CSR unit. A <strong>slot</strong> is an execute input, not a separate queue.
+Scheduler ports 0 and 1 feed the ALUs; port 2 feeds the AGU, MDU or CSR unit,
+preferring memory work. The load and store queues then share the LSU. The
+common data bus (CDB) accepts at most two results in a cycle. The scheduler keeps
+an age matrix, and the load/store queues keep order by FIFO position and a load-by-store mask, so neither subtracts every entry from the ROB head.</p>
+</section>
+<section id="rename-and-retirement">
+<h2>Rename and retirement<a class="headerlink" href="#rename-and-retirement" title="Link to this heading">¶</a></h2>
+<p>Rename reads source physical IDs from the RAT and allocates a distinct physical
+destination for each nonzero register writer. Scheduler entries hold only
+physical IDs and readiness, set by qualified CDB destinations. After selection,
+every port spends one register-read cycle: operands come from the PRF or the
+forwarding network, and execution controls from the ROB-indexed payload array.
+The LSQ holds only memory-operation state; the AGU fills its addresses.
+Commit updates the committed RAT and frees the stale destination, not the new
+one. Fixed-latency ALU results wake consumers early (fast wakeup), and loads
+wake their consumers speculatively assuming a cache hit, with a replay check a
+cycle later. Other operations wake on actual completion.</p>
+</section>
+<section id="where-the-registers-are">
+<h2>Where the registers are<a class="headerlink" href="#where-the-registers-are" title="Link to this heading">¶</a></h2>
+<p>Nine named stages does not mean nine pipeline registers. The important
+sequential state is:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Location</p></th>
+<th class="head"><p>Registered state</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>prediction and fetch</p></td>
+<td><p>fetch PC, prediction-metadata FIFO, and predictor SRAM state</p></td>
+</tr>
+<tr class="row-odd"><td><p>fetch output</p></td>
+<td><p>4-entry instruction buffer</p></td>
+</tr>
+<tr class="row-even"><td><p>decode</p></td>
+<td><p>the decode register (<code class="docutils literal notranslate"><span class="pre">decoded_insts</span></code>), two decoded instructions</p></td>
+</tr>
+<tr class="row-odd"><td><p>rename</p></td>
+<td><p>speculative/committed RATs, free-list FIFO pointers, busy bits and recovery ownership</p></td>
+</tr>
+<tr class="row-even"><td><p>immutable context</p></td>
+<td><p>ROB-indexed <code class="docutils literal notranslate"><span class="pre">payload_array</span></code>, allocation-only PC/immediate/controls</p></td>
+</tr>
+<tr class="row-odd"><td><p>issue</p></td>
+<td><p>the 16-entry integer scheduler and the load/store queues</p></td>
+</tr>
+<tr class="row-even"><td><p>register read</p></td>
+<td><p>three accepted selections (ports 0, 1, 2); parallel PRF/context reads and computed/held-result forwarding precede the FU input register; accepted fixed-latency ALU transfers announce fast tags to the scheduler</p></td>
+</tr>
+<tr class="row-odd"><td><p>execute input and internals</p></td>
+<td><p>FU input registers, the multiply pipeline, divider state, and LSU transaction state</p></td>
+</tr>
+<tr class="row-even"><td><p>execute output</p></td>
+<td><p>ALU, MDU, CSR, and LSU result-holding registers; ALU work and cache load results can bypass an empty result slot, while forwarded loads remain registered; the AGU returns from its registered input directly to the LSQ</p></td>
+</tr>
+<tr class="row-odd"><td><p>result capture</p></td>
+<td><p>ROB completion fields and physical PRF values; the CDB itself is combinational</p></td>
+</tr>
+<tr class="row-even"><td><p>commit</p></td>
+<td><p>committed RAT mappings and architectural CSRs; integer values stay in the PRF</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Rename, dispatch routing and queue insertion share one cycle, working from the
+decode register. The ROB entry and the queue entry are written on the same edge, and queue readiness
+comes from registered occupancy, so nothing in that cycle depends on a
+same-cycle issue.</p>
+<p>Every scheduler selection has a separate register-read cycle: ports 0 and 1
+(ALU and branch) and port 2 (memory address generation, multiply/divide and
+CSR). The load/store queues then issue memory requests from AGU-filled entries
+without another register read.</p>
+</section>
+<section id="stage-timing">
+<h2>Stage timing<a class="headerlink" href="#stage-timing" title="Link to this heading">¶</a></h2>
+<p>These cycle counts come from a trace of a short loop on a warm cache. <code class="docutils literal notranslate"><span class="pre">sim/common/pipe_trace_monitor.sv</span></code> binds into <code class="docutils literal notranslate"><span class="pre">core</span></code> and, with <code class="docutils literal notranslate"><span class="pre">+pipe_trace</span></code>,
+prints one line per stage handshake. <code class="docutils literal notranslate"><span class="pre">sim/cpu/tests/asm/pipe_timing.s</span></code> runs a
+short loop three times; these numbers come from the warm third iteration of
+<code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run</span> <span class="pre">tb=cpu_tb</span> <span class="pre">test=pipe_timing</span> <span class="pre">EXTRA_RUN_PLUSARGS=+pipe_trace</span></code>. Cycle
+offsets are relative to the I-cache request; an event at cycle n is captured
+on the edge that ends cycle n. The trace’s <code class="docutils literal notranslate"><span class="pre">r</span></code>, <code class="docutils literal notranslate"><span class="pre">dp</span></code> and <code class="docutils literal notranslate"><span class="pre">q</span></code> events fall in one
+cycle because rename and queue insertion share it; <code class="docutils literal notranslate"><span class="pre">d</span></code> is a cycle earlier.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-right"><p>Cycle</p></th>
+<th class="head"><p>Stage</p></th>
+<th class="head"><p>Work</p></th>
+<th class="head"><p>Ends in</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-right"><p>0</p></td>
+<td><p>F1</p></td>
+<td><p>fetch PC, L0 BTB, I-cache and BTB/TAGE/RAS request</p></td>
+<td><p>SRAM address</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>1</p></td>
+<td><p>F2</p></td>
+<td><p>I-cache SRAM read and tag compare</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pipe_resp</span></code> register</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>2</p></td>
+<td><p>F3</p></td>
+<td><p>response accept, predecode, L1 verdict, lane scrub</p></td>
+<td><p>instruction buffer</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>3</p></td>
+<td><p>D</p></td>
+<td><p>decode</p></td>
+<td><p>decode register</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>4</p></td>
+<td><p>R</p></td>
+<td><p>rename, ROB/payload allocation, queue write</p></td>
+<td><p>scheduler or LSQ entry</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>5</p></td>
+<td><p>I</p></td>
+<td><p>wakeup and age select</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">register_read</span></code> selection</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>6</p></td>
+<td><p>RR</p></td>
+<td><p>PRF and payload read, bypass</p></td>
+<td><p>FU input register</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>7</p></td>
+<td><p>EX</p></td>
+<td><p>ALU; non-control result goes straight onto the CDB</p></td>
+<td><p>PRF write, ROB completion</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>8</p></td>
+<td><p>C</p></td>
+<td><p>retirement</p></td>
+<td><p>committed state</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Path</p></th>
+<th class="head"><p>Cycles</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Independent ALU op, I-cache request to retire</p></td>
+<td><p>9</p></td>
+</tr>
+<tr class="row-odd"><td><p>Dependent ALU → ALU</p></td>
+<td><p>back-to-back selects; consumer executes one cycle after the producer</p></td>
+</tr>
+<tr class="row-even"><td><p>Load, queue entry to data on the CDB</p></td>
+<td><p>4: AGU select + PRF read, AGU (address returns to the LSQ), LSQ memory issue, D-cache hit → CDB</p></td>
+</tr>
+<tr class="row-odd"><td><p>Load → dependent ALU</p></td>
+<td><p>dependent is selected the same cycle the hit reaches the CDB; it executes two cycles later</p></td>
+</tr>
+<tr class="row-even"><td><p>MUL accept → CDB</p></td>
+<td><p>4</p></td>
+</tr>
+<tr class="row-odd"><td><p>Store with ready data</p></td>
+<td><p>memory request only at the ROB head; retires the next cycle (2 cycles at the head)</p></td>
+</tr>
+<tr class="row-even"><td><p>Branch mispredict, branch execute → correct-path execute</p></td>
+<td><p>8: recovery is registered (+1), fetch restarts the next cycle, then F1 to RR</p></td>
+</tr>
+<tr class="row-odd"><td><p>Taken loop branch learned by L0</p></td>
+<td><p>zero fetch bubbles</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>These are single-instruction latencies on a warm loop. They do not show
+queue-full or cache-miss behavior; CoreMark counters cover that.</p>
+</section>
+<section id="branch-recovery-and-the-three-kinds-of-squash">
+<h2>Branch recovery and the three kinds of squash<a class="headerlink" href="#branch-recovery-and-the-three-kinds-of-squash" title="Link to this heading">¶</a></h2>
+<p>Branches are checked in execute. A mismatch sends the resolving ROB tag,
+correct PC, and FTQ metadata to the recovery path. Rename restores its FTQ
+checkpoint, the frontend redirects, and backend queues remove work younger
+than the branch. Commit remains the final in-order boundary.</p>
+<p>Recovery is deliberately staged inside the LSQ. Stores already authorized by
+commit survive a speculative flush, while younger loads and stores are
+discarded. This avoids putting global recovery, ROB age comparison, queue
+repair, and memory issue in one combinational path.</p>
+<p>Three kinds of squash explain most of the backend’s structure.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Signal</p></th>
+<th class="head"><p>Raised by</p></th>
+<th class="head"><p>Scope</p></th>
+<th class="head"><p>What it clears</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">recovery</span></code></p></td>
+<td><p>execute-time branch misprediction</p></td>
+<td><p>selective: work older than the resolving branch survives everywhere</p></td>
+<td><p>rename restores an FTQ-indexed checkpoint and free-list head; the ROB rewinds its tail; the scheduler and load/store queues drop only younger entries; the LSQ keeps committed stores and older accesses</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">flush</span></code></p></td>
+<td><p>the union of commit recovery, execute recovery and architectural redirect</p></td>
+<td><p>front end</p></td>
+<td><p>fetch, the instruction buffer and the prediction pipeline</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">full_flush</span></code></p></td>
+<td><p>commit-time recovery or an architectural redirect (trap, <code class="docutils literal notranslate"><span class="pre">MRET</span></code>, <code class="docutils literal notranslate"><span class="pre">FENCE.I</span></code>)</p></td>
+<td><p>total</p></td>
+<td><p>rename, the ROB, the scheduler and the load/store queues; committed stores in the store queue stay, because they are already architecturally visible and must still drain</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Every comparison in <code class="docutils literal notranslate"><span class="pre">recovery</span></code> uses circular age arithmetic against <code class="docutils literal notranslate"><span class="pre">rob_head</span></code>.</p>
+<div class="highlight-systemverilog notranslate"><div class="highlight"><pre><span></span><span class="k">assign</span><span class="w"> </span><span class="n">full_flush</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">commit_flush</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">arch_redirect</span><span class="p">.</span><span class="n">valid</span><span class="p">;</span>
+<span class="k">assign</span><span class="w"> </span><span class="n">flush</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="n">commit_flush</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">recovery</span><span class="p">.</span><span class="n">val</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">arch_redirect</span><span class="p">.</span><span class="n">valid</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="circular-age-arithmetic">
+<h2>Circular age arithmetic<a class="headerlink" href="#circular-age-arithmetic" title="Link to this heading">¶</a></h2>
+<p>Used in every stage that has to compare “is this younger than that”. Subtract
+the ROB head from both tags and compare the distances:</p>
+<div class="highlight-systemverilog notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">entry</span><span class="p">.</span><span class="n">dest_tag</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">rob_head</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">recovery</span><span class="p">.</span><span class="n">rob_tag</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">rob_head</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Wraparound is handled for free, and no epoch bit is needed. The scheduler keeps a pairwise order matrix instead, so selection reads
+registered bits and does no arithmetic. The load/store queues take order from FIFO
+position and one registered load-by-store mask. See <a class="reference internal" href="5-issue.html"><span class="std std-doc">Stage 5</span></a>.</p>
+</section>
+<section id="memory-ordering">
+<h2>Memory ordering<a class="headerlink" href="#memory-ordering" title="Link to this heading">¶</a></h2>
+<p>Loads may execute out of order when their addresses and operands are ready.
+Stores compute addresses and data speculatively but do not become externally
+visible until commit authorizes them. The store queue is therefore the main
+guard for precise state.</p>
+<p>A load may also run ahead of an older store whose address is still unknown.
+A one-bit wait table indexed by load PC holds back loads that have conflicted
+before, and a load that did read stale data is caught when the store’s address
+arrives and is replayed from the load. The caches are not
+coherent with FIN or the host, so shared buffers use the uncached DMA region
+described on the <a class="reference internal" href="../memory/index.html"><span class="std std-doc">Memory</span></a> page.</p>
+</section>
+<section id="system-instructions">
+<h2>System instructions<a class="headerlink" href="#system-instructions" title="Link to this heading">¶</a></h2>
+<p>CSR and system operations share the scheduler but issue only at the ROB
+head. This prevents speculative CSR state from escaping. Illegal instructions,
+<code class="docutils literal notranslate"><span class="pre">ECALL</span></code>, <code class="docutils literal notranslate"><span class="pre">EBREAK</span></code>, and address misalignment trap precisely at commit, and
+<code class="docutils literal notranslate"><span class="pre">MRET</span></code> uses the same architectural redirect. The trap microarchitecture is in
+<a class="reference internal" href="m_mode.html"><span class="std std-doc">Machine-mode traps</span></a>, while <a class="reference internal" href="isa.html"><span class="std std-doc">ISA and software</span></a> defines the
+software-visible support boundary.</p>
+</section>
+<section id="cpu-tile-boundary">
+<h2>CPU tile boundary<a class="headerlink" href="#cpu-tile-boundary" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">cpu.sv</span></code> has two memory exits. Cacheable instruction and data traffic reaches
+memory (the boot ROM or DDR) through one 128-bit line port. MMIO and the uncached
+DMA region leave as AXI4. Both interfaces are direct <code class="docutils literal notranslate"><span class="pre">core_clk</span></code>
+connections. UART, timer, software, and ACT interrupt levels are also
+core-clocked; <code class="docutils literal notranslate"><span class="pre">soc.sv</span></code> synchronizes the separate FIN completion level before
+combining external interrupts.</p>
+<p>The line port remains in the core clock domain, which prevents two CDC wrappers from
+being placed around the same transaction.</p>
+</section>
+<section id="core-integration">
+<h2>Core integration<a class="headerlink" href="#core-integration" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">core.sv</span></code> contains almost no instruction algorithm of its own. Its important
+job is to keep the side channels paired with the main pipeline:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Signal</p></th>
+<th class="head"><p>Goes to</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CDB results</p></td>
+<td><p>the ROB, the PRF and the scheduler</p></td>
+</tr>
+<tr class="row-odd"><td><p>AGU results</p></td>
+<td><p>the load/store queues</p></td>
+</tr>
+<tr class="row-even"><td><p>AGU, LSU and branch exception reports</p></td>
+<td><p>the ROB directly, with a tag</p></td>
+</tr>
+<tr class="row-odd"><td><p>execute recovery</p></td>
+<td><p>every structure that must discard younger work</p></td>
+</tr>
+<tr class="row-even"><td><p>commit backstop or architectural redirect</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">full_flush</span></code>; execute recovery creates only the selective <code class="docutils literal notranslate"><span class="pre">recovery</span></code> path</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">FENCE.I</span></code> and CSR redirects</p></td>
+<td><p>merged, with the fence redirect taking priority if both are asserted</p></td>
+</tr>
+<tr class="row-even"><td><p>architectural <code class="docutils literal notranslate"><span class="pre">cycle</span></code> and <code class="docutils literal notranslate"><span class="pre">instret</span></code></p></td>
+<td><p>replace the predictor-local placeholders in the exported performance packet</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The simulation-only assertion that commit slot 1 never reports a control-flow
+instruction protects the BPU’s one-branch-per-cycle training interface.</p>
+</section>
+<section id="rtl-implementation-map">
+<h2>RTL implementation map<a class="headerlink" href="#rtl-implementation-map" title="Link to this heading">¶</a></h2>
+<p>This table is the bridge from the English notes to the source tree. Every file
+under <code class="docutils literal notranslate"><span class="pre">rtl/cpu</span></code> appears once. The stage pages explain the algorithms and state
+in more detail.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>RTL file</p></th>
+<th class="head"><p>What it implements</p></th>
+<th class="head"><p>Detail</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/cpu.sv</span></code></p></td>
+<td><p>CPU tile wrapper, private L1 subsystem, cached-versus-AXI data routing, interrupt synchronization, optional AXI clock crossing</p></td>
+<td><p><a class="reference internal" href="#cpu-tile-boundary">CPU tile boundary</a>, <a class="reference internal" href="../memory/cache.html"><span class="std std-doc">L1 caches</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/core.sv</span></code></p></td>
+<td><p>pipeline wiring, flush distribution, architectural redirect selection, exported performance counters</p></td>
+<td><p><a class="reference internal" href="#core-integration">Core integration</a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/common/uarch_pkg.sv</span></code></p></td>
+<td><p>widths, queue sizes, compact CSR IDs, and packets shared by the backend</p></td>
+<td><p><a class="reference internal" href="2-decode.html#packets-and-constants"><span class="std std-ref">Packets and constants</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/common/branch_pkg.sv</span></code></p></td>
+<td><p>predictor sizes and the prediction, FTQ, resolve, and recovery packets</p></td>
+<td><p><a class="reference internal" href="0-branch.html#shared-predictor-types"><span class="std std-ref">Branch prediction</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/0-branch/bpu.sv</span></code></p></td>
+<td><p>branch-prediction unit (SONAR) container, prediction-metadata FIFO, PC selection, and flush priority</p></td>
+<td><p><a class="reference internal" href="0-branch.html"><span class="std std-doc">Branch prediction</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/0-branch/bpu_predict_ctrl.sv</span></code></p></td>
+<td><p>registered L1 prediction check and repair</p></td>
+<td><p><a class="reference internal" href="0-branch.html#l1-decision-and-metadata-alignment"><span class="std std-ref">L1 decision</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/0-branch/bpu_alloc_ctrl.sv</span></code></p></td>
+<td><p>FTQ allocation plus speculative GHR and RAS updates</p></td>
+<td><p><a class="reference internal" href="0-branch.html#allocation-and-speculative-state"><span class="std std-ref">FTQ allocation</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/0-branch/bpu_execute_recover.sv</span></code></p></td>
+<td><p>oldest execute-time branch recovery selection</p></td>
+<td><p><a class="reference internal" href="0-branch.html#recovery-paths"><span class="std std-ref">Recovery</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/0-branch/bpu_commit_ctrl.sv</span></code></p></td>
+<td><p>commit backstop, predictor training, and branch counters</p></td>
+<td><p><a class="reference internal" href="0-branch.html#training-policy"><span class="std std-ref">Training</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/0-branch/l0_btb.sv</span></code></p></td>
+<td><p>same-cycle, 128-entry taken-target table</p></td>
+<td><p><a class="reference internal" href="0-branch.html#l0-btb"><span class="std std-ref">L0 BTB</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/0-branch/btb.sv</span></code></p></td>
+<td><p>banked 512-entry target/type table</p></td>
+<td><p><a class="reference internal" href="0-branch.html#btb"><span class="std std-ref">BTB</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/0-branch/tage.sv</span></code></p></td>
+<td><p>global history, folded hashes, provider selection, and update control</p></td>
+<td><p><a class="reference internal" href="0-branch.html#tage"><span class="std std-ref">TAGE</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/0-branch/tage_base_table.sv</span></code></p></td>
+<td><p>banked bimodal fallback counters</p></td>
+<td><p><a class="reference internal" href="0-branch.html#tage-table-storage"><span class="std std-ref">TAGE tables</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/0-branch/tage_tagged_table.sv</span></code></p></td>
+<td><p>one banked tagged counter/usefulness table; instantiated four times</p></td>
+<td><p><a class="reference internal" href="0-branch.html#tage-table-storage"><span class="std std-ref">TAGE tables</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/0-branch/ras.sv</span></code></p></td>
+<td><p>speculative return-address stack with recovery pointer</p></td>
+<td><p><a class="reference internal" href="0-branch.html#ras"><span class="std std-ref">RAS</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/0-branch/ftq.sv</span></code></p></td>
+<td><p>branch metadata FIFO plus random lookup by FTQ ID</p></td>
+<td><p><a class="reference internal" href="0-branch.html#ftq"><span class="std std-ref">FTQ</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/1-fetch/fetch.sv</span></code></p></td>
+<td><p>fetch PC, cache request/response control, held packets, lane scrubbing, FTQ candidates, and computed direct targets</p></td>
+<td><p><a class="reference internal" href="1-fetch.html"><span class="std std-doc">Fetch</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/1-fetch/inst_buffer.sv</span></code></p></td>
+<td><p>four-entry FIFO of two-instruction fetch groups</p></td>
+<td><p><a class="reference internal" href="1-fetch.html#instruction-buffer"><span class="std std-ref">Instruction buffer</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/1-fetch/predecoder.sv</span></code></p></td>
+<td><p>early branch, jump, call, and return classification</p></td>
+<td><p><a class="reference internal" href="1-fetch.html#predecode"><span class="std std-ref">Predecode</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/2-decode/decode.sv</span></code></p></td>
+<td><p>parallel instruction decode, legality, immediates, and output register</p></td>
+<td><p><a class="reference internal" href="2-decode.html"><span class="std std-doc">Decode</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/3-rename/rename.sv</span></code></p></td>
+<td><p>active physical RATs, allocation, readiness, retirement and recovery</p></td>
+<td><p><a class="reference internal" href="3-rename.html"><span class="std std-doc">Rename</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/3-rename/physical_regfile.sv</span></code></p></td>
+<td><p>banked physical values, asynchronous reads and accepted-write bypass</p></td>
+<td><p><a class="reference internal" href="3-rename.html"><span class="std std-doc">Rename</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/4-dispatch/dispatch.sv</span></code></p></td>
+<td><p>issue-class selection, queue routing, readiness, and initial ROB payloads</p></td>
+<td><p><a class="reference internal" href="4-dispatch.html"><span class="std std-doc">Dispatch</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/4-dispatch/payload_array.sv</span></code></p></td>
+<td><p>immutable ROB-indexed retirement context with combinational one-hot reads</p></td>
+<td><p><a class="reference internal" href="8-commit.html#immutable-payload-ownership"><span class="std std-ref">Payload ownership</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/5-issue/issue.sv</span></code></p></td>
+<td><p>wires queue classes to the six execute slots</p></td>
+<td><p><a class="reference internal" href="5-issue.html#queue-integration"><span class="std std-ref">Issue</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/5-issue/register_read.sv</span></code></p></td>
+<td><p>registers every scheduler selection (ports 0-2) before the operand/context read cycle, then feeds the execute input registers</p></td>
+<td><p><a class="reference internal" href="5-issue.html#register-read-after-selection"><span class="std std-ref">Register read</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/5-issue/scheduler.sv</span></code></p></td>
+<td><p>16-entry unified scheduler: ALU, branch, multiply/divide, CSR and memory address generation on three issue ports</p></td>
+<td><p><a class="reference internal" href="5-issue.html#the-integer-scheduler"><span class="std std-ref">Integer scheduler</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/5-issue/lsq.sv</span></code></p></td>
+<td><p>load/store queues filled by the AGU, disambiguation, forwarding, load speculation and replay, and store authorization</p></td>
+<td><p><a class="reference internal" href="5-issue.html#load-store-queue"><span class="std std-ref">Load/store queue</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/6-execute/execute.sv</span></code></p></td>
+<td><p>wires six execute slots and their side-band completion ports</p></td>
+<td><p><a class="reference internal" href="6-execute.html"><span class="std std-doc">Execute</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/6-execute/alu.sv</span></code></p></td>
+<td><p>integer operations, branch outcome, and target-misalignment detection</p></td>
+<td><p><a class="reference internal" href="6-execute.html#alu"><span class="std std-ref">ALU</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/6-execute/agu.sv</span></code></p></td>
+<td><p>effective address and data-alignment checking</p></td>
+<td><p><a class="reference internal" href="6-execute.html#agu"><span class="std std-ref">AGU</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/6-execute/lsu.sv</span></code></p></td>
+<td><p>word-lane conversion and one outstanding data-memory transaction</p></td>
+<td><p><a class="reference internal" href="6-execute.html#lsu"><span class="std std-ref">LSU</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/6-execute/mdu.sv</span></code></p></td>
+<td><p>pipelined multiply and iterative divide/remainder</p></td>
+<td><p><a class="reference internal" href="6-execute.html#mdu"><span class="std std-ref">MDU</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/6-execute/csr_fu.sv</span></code></p></td>
+<td><p>CSR read/modify/write calculation before commit</p></td>
+<td><p><a class="reference internal" href="6-execute.html#csr-fu"><span class="std std-ref">CSR unit</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/7-writeback/cdb.sv</span></code></p></td>
+<td><p>two-lane fair arbitration over execute results</p></td>
+<td><p><a class="reference internal" href="7-writeback.html"><span class="std std-doc">Writeback</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/8-commit/rob.sv</span></code></p></td>
+<td><p>allocation, completion, in-order retirement, stores, fences, traps, and recovery</p></td>
+<td><p><a class="reference internal" href="8-commit.html"><span class="std std-doc">Commit</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/8-commit/csr.sv</span></code></p></td>
+<td><p>machine CSR bank, counters, interrupt priority, and architectural redirects</p></td>
+<td><p><a class="reference internal" href="8-commit.html#csr-bank"><span class="std std-ref">CSR bank</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/cache/cache.sv</span></code></p></td>
+<td><p>parameterized blocking, write-back, set-associative L1 cache</p></td>
+<td><p><a class="reference internal" href="../memory/cache.html#state-machine"><span class="std std-ref">Cache state machine</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/cache/cache_arbiter.sv</span></code></p></td>
+<td><p>fixed-priority sharing of the backing line port</p></td>
+<td><p><a class="reference internal" href="../memory/cache.html#line-port-arbitration"><span class="std std-ref">Line-port arbitration</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/cache/cpu_l1_subsystem.sv</span></code></p></td>
+<td><p>I/D cache instances, fetch-address tracking, and <code class="docutils literal notranslate"><span class="pre">FENCE.I</span></code> sequencing</p></td>
+<td><p><a class="reference internal" href="../memory/cache.html#l1-integration"><span class="std std-ref">L1 integration</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/cache/dmem_router.sv</span></code></p></td>
+<td><p>cached request path and single-beat AXI MMIO/DMA-buffer path</p></td>
+<td><p><a class="reference internal" href="../memory/cache.html#data-memory-router"><span class="std std-ref">Data-memory router</span></a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">rtl/common/riscv_isa_pkg.sv</span></code> is outside <code class="docutils literal notranslate"><span class="pre">rtl/cpu</span></code>, but it is part of the CPU
+contract. It defines architectural widths, instruction encodings, CSR
+addresses, reset PC, and trap causes. It contains constants only; it does not
+hold runtime state.</p>
+</section>
+<section id="limits-worth-remembering">
+<h2>Limits worth remembering<a class="headerlink" href="#limits-worth-remembering" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Area</p></th>
+<th class="head"><p>Limit</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>In-flight window</p></td>
+<td><p>physical allocation (32 free registers) and the 64-entry ROB both bound it; with 64 physical registers, rename runs out first</p></td>
+</tr>
+<tr class="row-odd"><td><p>Results</p></td>
+<td><p>only two can use the CDB in one cycle</p></td>
+</tr>
+<tr class="row-even"><td><p>Multiply and divide</p></td>
+<td><p>multiply is a four-cycle pipeline; divide and remainder are iterative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Memory</p></td>
+<td><p>the load/store subsystem favors simple ordering over aggressive speculation</p></td>
+</tr>
+<tr class="row-even"><td><p>Supported</p></td>
+<td><p>precise synchronous exceptions, machine interrupts, a minimal U-mode for no-MMU Linux, and uncached/MMIO load/store access faults; <code class="docutils literal notranslate"><span class="pre">FENCE.I</span></code> writes back dirty D-cache lines, invalidates both L1s, and restarts the front end</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="stages.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Pipeline stages</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../../learnings.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Learnings</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026 Jason Huynh. All rights reserved.
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Core</a><ul>
+<li><a class="reference internal" href="#pipeline-stages">Pipeline stages</a></li>
+<li><a class="reference internal" href="#dataflow">Dataflow</a></li>
+<li><a class="reference internal" href="#structures">Structures</a></li>
+<li><a class="reference internal" href="#rename-and-retirement">Rename and retirement</a></li>
+<li><a class="reference internal" href="#where-the-registers-are">Where the registers are</a></li>
+<li><a class="reference internal" href="#stage-timing">Stage timing</a></li>
+<li><a class="reference internal" href="#branch-recovery-and-the-three-kinds-of-squash">Branch recovery and the three kinds of squash</a></li>
+<li><a class="reference internal" href="#circular-age-arithmetic">Circular age arithmetic</a></li>
+<li><a class="reference internal" href="#memory-ordering">Memory ordering</a></li>
+<li><a class="reference internal" href="#system-instructions">System instructions</a></li>
+<li><a class="reference internal" href="#cpu-tile-boundary">CPU tile boundary</a></li>
+<li><a class="reference internal" href="#core-integration">Core integration</a></li>
+<li><a class="reference internal" href="#rtl-implementation-map">RTL implementation map</a></li>
+<li><a class="reference internal" href="#limits-worth-remembering">Limits worth remembering</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=3b5cce75"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>

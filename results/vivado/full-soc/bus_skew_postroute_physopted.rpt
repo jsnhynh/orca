@@ -1,0 +1,17 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version      : Vivado v.2026.1 (win64) Build 6511674 Tue Jun 16 11:02:23 MDT 2026
+| Date              : Sat Oct 24 02:16:34 2026
+| Host              : host running 64-bit major release  (build 9200)
+| Command           : report_bus_skew -warn_on_violation -file orca_kv260_wrapper_bus_skew_postroute_physopted.rpt -pb orca_kv260_wrapper_bus_skew_postroute_physopted.pb -rpx orca_kv260_wrapper_bus_skew_postroute_physopted.rpx
+| Design            : orca_kv260_wrapper
+| Device            : xck26-sfvc784
+| Speed File        : -2LV  PRODUCTION 1.31 12-08-2025
+| Design State      : Physopt postRoute
+| Temperature Grade : C
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Bus Skew Report
+
+No bus skew constraints
+

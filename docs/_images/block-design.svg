@@ -1,0 +1,160 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1900 940" width="1900" height="940" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 z" fill="context-stroke" stroke="context-stroke"/></marker></defs>
+<rect width="1900" height="940" fill="#ffffff"/>
+<text x="30" y="40" font-size="22" font-weight="bold" fill="#000">ORCA core block design</text>
+<rect x="20" y="80" width="590" height="420" rx="18" fill="#f5f5f5" fill-opacity="0.5" stroke="#666" stroke-opacity="0.5"/>
+<text x="28" y="96" font-size="11" font-weight="bold" fill="#333" fill-opacity="0.7">Front end (stage 0 to 2)</text>
+<rect x="630" y="80" width="460" height="420" rx="18" fill="#f5f5f5" fill-opacity="0.5" stroke="#666" stroke-opacity="0.5"/>
+<text x="638" y="96" font-size="11" font-weight="bold" fill="#333" fill-opacity="0.7">Rename and dispatch (stage 3 and 4)</text>
+<rect x="1130" y="80" width="360" height="420" rx="18" fill="#f5f5f5" fill-opacity="0.5" stroke="#666" stroke-opacity="0.5"/>
+<text x="1138" y="96" font-size="11" font-weight="bold" fill="#333" fill-opacity="0.7">Issue and register read (stage 5)</text>
+<rect x="1530" y="80" width="350" height="420" rx="18" fill="#f5f5f5" fill-opacity="0.5" stroke="#666" stroke-opacity="0.5"/>
+<text x="1538" y="96" font-size="11" font-weight="bold" fill="#333" fill-opacity="0.7">Execute and writeback (stage 6 and 7)</text>
+<rect x="20" y="560" width="1860" height="330" rx="18" fill="#f5f5f5" fill-opacity="0.5" stroke="#666" stroke-opacity="0.5"/>
+<text x="28" y="576" font-size="11" font-weight="bold" fill="#333" fill-opacity="0.7">Commit (stage 8), traps and memory</text>
+<path d="M490,260 L490,285 L125,285 L125,310" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M210,345 L230,345" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M400,345 L420,345" fill="none" stroke="#82b366" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M505,380 L505,410" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M590,445 L620,445 L620,150 L650,150" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M755,260 L755,310" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M860,345 L875,345" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M755,380 L755,410" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M755,310 L755,285 L1110,285 L1110,155 L1150,155" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M755,310 L755,295 L1100,295 L1100,255 L1104,255 A6,6 0 0 1 1116,255 L1150,255" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1150,155 L1135,155 L1135,355 L1150,355" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1300,355 L1320,355" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1300,355 L1510,355 L1510,145 L1550,145" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1550,145 L1520,145 L1520,370 L1550,370" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1790,170 L1790,340" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1790,240 L1790,340" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1625,310 L1625,340" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1790,310 L1790,340" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1550,215 L1526,215 A6,6 0 0 0 1514,215 L1516,215 A6,6 0 0 0 1504,215 L1500,215 L1500,235 L1470,235" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1470,265 L1500,265 L1500,285 L1504,285 A6,6 0 0 1 1516,285 L1514,285 A6,6 0 0 1 1526,285 L1720,285" fill="none" stroke="#d79b00" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1705,400 L1705,445 L1530,445 L1350,445" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1705,400 L1705,440 L1500,440 L1395,440 L1395,390" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1690,400 L1690,520 L860,520 L860,480" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M860,480 L860,535 L260,535 L260,610" fill="none" stroke="#d79b00" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M480,655 L500,655" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1790,310 L1790,550 L1290,550 L1290,610" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1430,655 L1450,655" fill="none" stroke="#82b366" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M315,380 L315,505 L854,505 A6,6 0 0 1 866,505 L854,505 A6,6 0 0 1 866,505 L1570,505 L1570,610" fill="none" stroke="#82b366" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1310,300 L1310,305 L1480,305 L1480,590 L1380,590 L1380,610" fill="none" stroke="#d79b00" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1570,700 L1570,760" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1785,700 L1785,760" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1790,310 L1790,610" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1625,120 L1625,62 L614,62 L614,230 L590,230" fill="none" stroke="#d6b656" stroke-width="1.2" stroke-dasharray="3,3" marker-end="url(#a)"/>
+<path d="M40,655 L12,655 L12,345 L40,345" fill="none" stroke="#d6b656" stroke-width="1.2" stroke-dasharray="3,3" marker-end="url(#a)"/>
+<text x="1525" y="218" font-size="10" text-anchor="middle" fill="#000" stroke="#fff" stroke-width="4" paint-order="stroke">address</text>
+<text x="1797" y="473" font-size="10" text-anchor="middle" fill="#000" stroke="#fff" stroke-width="4" paint-order="stroke">uncached</text>
+<text x="1100" y="58" font-size="10" text-anchor="middle" fill="#000" stroke="#fff" stroke-width="4" paint-order="stroke">recovery</text>
+<rect x="40" y="120" width="160" height="60" rx="9.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="120.0" y="146" font-size="12" text-anchor="middle" fill="#000">L0 BTB</text>
+<text x="120.0" y="162" font-size="12" text-anchor="middle" fill="#000">128 entries, LUTRAM</text>
+<rect x="215" y="120" width="160" height="60" rx="9.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="295.0" y="146" font-size="12" text-anchor="middle" fill="#000">BTB</text>
+<text x="295.0" y="162" font-size="12" text-anchor="middle" fill="#000">512 entries, BRAM</text>
+<rect x="390" y="120" width="200" height="60" rx="9.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="490.0" y="146" font-size="12" text-anchor="middle" fill="#000">TAGE</text>
+<text x="490.0" y="162" font-size="12" text-anchor="middle" fill="#000">4 x 1024 tagged + 512 base</text>
+<rect x="40" y="200" width="160" height="60" rx="9.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="120.0" y="226" font-size="12" text-anchor="middle" fill="#000">RAS</text>
+<text x="120.0" y="242" font-size="12" text-anchor="middle" fill="#000">16 entries</text>
+<rect x="215" y="200" width="160" height="60" rx="9.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="295.0" y="219" font-size="12" text-anchor="middle" fill="#000">FTQ</text>
+<text x="295.0" y="234" font-size="12" text-anchor="middle" fill="#000">16 entries</text>
+<text x="295.0" y="249" font-size="12" text-anchor="middle" fill="#000">GHR + RAS checkpoints</text>
+<rect x="390" y="200" width="200" height="60" rx="9.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="490.0" y="226" font-size="12" text-anchor="middle" fill="#000">BPU control</text>
+<text x="490.0" y="242" font-size="12" text-anchor="middle" fill="#000">predict, alloc, commit, recover</text>
+<rect x="40" y="310" width="170" height="70" rx="10.5" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="125.0" y="342" font-size="12" text-anchor="middle" fill="#000">Fetch</text>
+<text x="125.0" y="356" font-size="12" text-anchor="middle" fill="#000">PC, F1 F2 F3, redirect</text>
+<rect x="230" y="310" width="170" height="70" rx="10.5" fill="#d5e8d4" stroke="#82b366" stroke-width="1"/>
+<text x="315.0" y="342" font-size="12" text-anchor="middle" fill="#000">I-cache</text>
+<text x="315.0" y="356" font-size="12" text-anchor="middle" fill="#000">16 KiB 2-way, BRAM</text>
+<rect x="420" y="310" width="170" height="70" rx="10.5" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="505.0" y="342" font-size="12" text-anchor="middle" fill="#000">Instruction buffer</text>
+<text x="505.0" y="356" font-size="12" text-anchor="middle" fill="#000">predecode, lane scrub</text>
+<rect x="40" y="410" width="550" height="70" rx="10.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="315.0" y="442" font-size="12" text-anchor="middle" fill="#000">Decode</text>
+<text x="315.0" y="456" font-size="12" text-anchor="middle" fill="#000">2 decoders, legality check, immediates, exception tag, uop fields</text>
+<rect x="650" y="120" width="210" height="140" rx="21.0" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="755.0" y="172" font-size="12" text-anchor="middle" fill="#000">Rename</text>
+<text x="755.0" y="186" font-size="12" text-anchor="middle" fill="#000">speculative + committed RAT</text>
+<text x="755.0" y="202" font-size="12" text-anchor="middle" fill="#000">checkpoints, 16</text>
+<text x="755.0" y="216" font-size="12" text-anchor="middle" fill="#000">owner storage, LUTRAM</text>
+<rect x="875" y="120" width="195" height="140" rx="21.0" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="972.5" y="179" font-size="12" text-anchor="middle" fill="#000">Free list</text>
+<text x="972.5" y="194" font-size="12" text-anchor="middle" fill="#000">FIFO, 64 physical registers</text>
+<text x="972.5" y="209" font-size="12" text-anchor="middle" fill="#000">busy table</text>
+<rect x="650" y="310" width="210" height="70" rx="10.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="755.0" y="342" font-size="12" text-anchor="middle" fill="#000">Dispatch</text>
+<text x="755.0" y="356" font-size="12" text-anchor="middle" fill="#000">queue routing, ROB allocation</text>
+<rect x="875" y="310" width="195" height="70" rx="10.5" fill="#ffe6cc" stroke="#d79b00" stroke-width="1"/>
+<text x="972.5" y="342" font-size="12" text-anchor="middle" fill="#000">Payload array</text>
+<text x="972.5" y="356" font-size="12" text-anchor="middle" fill="#000">ROB-indexed, immutable</text>
+<rect x="650" y="410" width="420" height="70" rx="10.5" fill="#ffe6cc" stroke="#d79b00" stroke-width="1"/>
+<text x="860.0" y="442" font-size="12" text-anchor="middle" fill="#000">Reorder buffer</text>
+<text x="860.0" y="456" font-size="12" text-anchor="middle" fill="#000">64 entries, status + result storage, 2-wide retire</text>
+<rect x="1150" y="120" width="320" height="70" rx="10.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="1310.0" y="152" font-size="12" text-anchor="middle" fill="#000">Scheduler</text>
+<text x="1310.0" y="166" font-size="12" text-anchor="middle" fill="#000">16 entries, age matrix, 3 issue ports</text>
+<rect x="1150" y="210" width="320" height="90" rx="13.5" fill="#ffe6cc" stroke="#d79b00" stroke-width="1"/>
+<text x="1310.0" y="244" font-size="12" text-anchor="middle" fill="#000">Load/store queues</text>
+<text x="1310.0" y="259" font-size="12" text-anchor="middle" fill="#000">load 12 (FIFO), store 12 (FIFO)</text>
+<text x="1310.0" y="274" font-size="12" text-anchor="middle" fill="#000">wait table 256, forwarding, atomics</text>
+<rect x="1150" y="320" width="150" height="70" rx="10.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="1225.0" y="352" font-size="12" text-anchor="middle" fill="#000">Register read</text>
+<text x="1225.0" y="366" font-size="12" text-anchor="middle" fill="#000">bypass, replay</text>
+<rect x="1320" y="320" width="150" height="70" rx="10.5" fill="#ffe6cc" stroke="#d79b00" stroke-width="1"/>
+<text x="1395.0" y="352" font-size="12" text-anchor="middle" fill="#000">Physical registers</text>
+<text x="1395.0" y="366" font-size="12" text-anchor="middle" fill="#000">64 x 32, 6 read ports</text>
+<rect x="1150" y="410" width="200" height="70" rx="10.5" fill="#ffe6cc" stroke="#d79b00" stroke-width="1"/>
+<text x="1250.0" y="434" font-size="12" text-anchor="middle" fill="#000">Wakeup</text>
+<text x="1250.0" y="449" font-size="12" text-anchor="middle" fill="#000">CDB wake view</text>
+<text x="1250.0" y="464" font-size="12" text-anchor="middle" fill="#000">speculative load wake</text>
+<rect x="1550" y="120" width="150" height="50" rx="7.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="1625.0" y="142" font-size="12" text-anchor="middle" fill="#000">ALU 0</text>
+<text x="1625.0" y="156" font-size="12" text-anchor="middle" fill="#000">branch resolve</text>
+<rect x="1720" y="120" width="140" height="50" rx="7.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="1790.0" y="149" font-size="12" text-anchor="middle" fill="#000">ALU 1</text>
+<rect x="1550" y="190" width="150" height="50" rx="7.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="1625.0" y="212" font-size="12" text-anchor="middle" fill="#000">AGU</text>
+<text x="1625.0" y="226" font-size="12" text-anchor="middle" fill="#000">address to LSQ</text>
+<rect x="1720" y="190" width="140" height="50" rx="7.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="1790.0" y="212" font-size="12" text-anchor="middle" fill="#000">MDU</text>
+<text x="1790.0" y="226" font-size="12" text-anchor="middle" fill="#000">mul 4 cycles, div</text>
+<rect x="1550" y="260" width="150" height="50" rx="7.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="1625.0" y="289" font-size="12" text-anchor="middle" fill="#000">CSR unit</text>
+<rect x="1720" y="260" width="140" height="50" rx="7.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="1790.0" y="282" font-size="12" text-anchor="middle" fill="#000">LSU</text>
+<text x="1790.0" y="296" font-size="12" text-anchor="middle" fill="#000">AMO sequencer</text>
+<rect x="1550" y="340" width="310" height="60" rx="9.0" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="1705.0" y="366" font-size="12" text-anchor="middle" fill="#000">Writeback</text>
+<text x="1705.0" y="382" font-size="12" text-anchor="middle" fill="#000">CDB arbiter, 2 results per cycle</text>
+<rect x="40" y="610" width="440" height="90" rx="13.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="260.0" y="652" font-size="12" text-anchor="middle" fill="#000">Commit</text>
+<text x="260.0" y="666" font-size="12" text-anchor="middle" fill="#000">ROB head, 2-wide retire, store token, serialization</text>
+<rect x="500" y="610" width="300" height="90" rx="13.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="650.0" y="652" font-size="12" text-anchor="middle" fill="#000">Trap unit</text>
+<text x="650.0" y="666" font-size="12" text-anchor="middle" fill="#000">machine mode, user mode, CLINT interrupts, CSRs</text>
+<rect x="1150" y="610" width="280" height="90" rx="13.5" fill="#d5e8d4" stroke="#82b366" stroke-width="1"/>
+<text x="1290.0" y="652" font-size="12" text-anchor="middle" fill="#000">D-cache</text>
+<text x="1290.0" y="666" font-size="12" text-anchor="middle" fill="#000">16 KiB 2-way, write-back</text>
+<rect x="1450" y="610" width="240" height="90" rx="13.5" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="1570.0" y="652" font-size="12" text-anchor="middle" fill="#000">L1 router + line arbiter</text>
+<text x="1570.0" y="666" font-size="12" text-anchor="middle" fill="#000">128-bit line port</text>
+<rect x="1710" y="610" width="150" height="90" rx="13.5" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="1785.0" y="652" font-size="12" text-anchor="middle" fill="#000">Uncached AXI</text>
+<text x="1785.0" y="666" font-size="12" text-anchor="middle" fill="#000">MMIO, DMA window</text>
+<rect x="1150" y="760" width="710" height="70" rx="10.5" fill="#e1d5e7" stroke="#9673a6" stroke-width="1"/>
+<text x="1505.0" y="792" font-size="12" text-anchor="middle" fill="#000">SoC fabric and memory</text>
+<text x="1505.0" y="806" font-size="12" text-anchor="middle" fill="#000">see the SoC diagram</text>
+<text x="40" y="780" font-size="13" text-anchor="start" font-weight="bold" fill="#000">Control signals</text>
+<text x="40" y="805" font-size="11" text-anchor="start" fill="#000">recovery: execute-time mispredict, selective kill of younger work</text>
+<text x="40" y="825" font-size="11" text-anchor="start" fill="#000">flush / full_flush: commit, trap, MRET, FENCE.I; full_flush also wipes rename, ROB and queues</text>
+<text x="40" y="845" font-size="11" text-anchor="start" fill="#000">store token: the ROB authorizes a store (an atomic only at the head); the LSQ issues it the next cycle</text>
+<text x="40" y="865" font-size="11" text-anchor="start" fill="#000">retire ids: commit frees physical registers and load queue entries</text>
+<text x="30" y="924" font-size="10" fill="#333">Solid arrows: instruction and data flow. Dashed arrows: control and redirects. File names are under rtl/cpu/ in the design repository.</text></svg>

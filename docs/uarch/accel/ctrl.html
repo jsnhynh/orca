@@ -1,0 +1,843 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../genindex.html"><link rel="search" title="Search" href="../../search.html"><link rel="next" title="FIN hardware tiling" href="tiling.html"><link rel="prev" title="FIN AXI interfaces" href="axi.html">
+
+    <!-- Generated with Sphinx 9.2.0 and Furo 2025.12.19 -->
+        <title>FIN control FSM - ORCA</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/orca.css?v=d973d532" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #3973DA;
+  --color-brand-content: #3973DA;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #5aa9f0;
+  --color-brand-content: #5aa9f0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #5aa9f0;
+  --color-brand-content: #5aa9f0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">ORCA</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  <span class="sidebar-brand-text">ORCA</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../results.html">Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../building.html">Building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../learnings.html">Learnings</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Microarchitecture</span></p>
+<ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../core/index.html">Core</a><input aria-label="Toggle navigation of Core" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../core/stages.html">Pipeline stages</a><input aria-label="Toggle navigation of Pipeline stages" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/0-branch.html">Stage 0: Branch prediction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/1-fetch.html">Stage 1: Fetch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/2-decode.html">Stage 2: Decode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/3-rename.html">Stage 3: Rename</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/4-dispatch.html">Stage 4: Dispatch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/5-issue.html">Stage 5: Issue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/6-execute.html">Stage 6: Execute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/7-writeback.html">Stage 7: Writeback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/8-commit.html">Stage 8: Commit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/m-extension.html">M extension: multiply and divide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/a-extension.html">A extension: atomics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/m_mode.html">Machine-mode traps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/isa.html">ISA and software contract</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../memory/index.html">Memory</a><input aria-label="Toggle navigation of Memory" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../memory/cache.html">L1 caches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../memory/boot-rom.html">Boot ROM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../memory/main-memory.html">DDR and main memory</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../soc/index.html">SoC</a><input aria-label="Toggle navigation of SoC" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../soc/interconnect.html">Interconnect and clocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../soc/peripherals.html">Peripherals and registers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../soc/platform.html">FPGA and KV260 boundary</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">FIN accelerator</a><input aria-label="Toggle navigation of FIN accelerator" checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="array.html">FIN systolic array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datapath.html">FIN datapath</a></li>
+<li class="toctree-l2"><a class="reference internal" href="axi.html">FIN AXI interfaces</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">FIN control FSM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tiling.html">FIN hardware tiling</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Verification</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../verification/index.html">Verification</a><input aria-label="Toggle navigation of Verification" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../verification/testbenches.html">Testbenches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../verification/system-tests.html">System tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../verification/coverage.html">Coverage</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">FPGA bring-up</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../bringup/index.html">FPGA bring-up</a><input aria-label="Toggle navigation of FPGA bring-up" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../bringup/infrastructure.html">Infrastructure</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="fin-control-fsm">
+<h1>FIN control FSM<a class="headerlink" href="#fin-control-fsm" title="Link to this heading">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">rtl/accel/fin_ctrl.sv</span></code> is the sequencer for the accelerator. It does not
+contain tensor data. It remembers the active job, checks whether its addresses
+are safe, walks the M/N/K tiles, tells DMA which rectangle to move, and
+generates cycle-exact enables for the datapath.</p>
+<p>The state type and every control structure live in <code class="docutils literal notranslate"><span class="pre">rtl/accel/fin_pkg.sv</span></code>.
+Related notes: <a class="reference internal" href="index.html"><span class="std std-doc">FIN accelerator</span></a>, <a class="reference internal" href="tiling.html"><span class="std std-doc">FIN hardware tiling</span></a>,
+<a class="reference internal" href="axi.html"><span class="std std-doc">FIN AXI interfaces</span></a>, <a class="reference internal" href="datapath.html"><span class="std std-doc">FIN datapath</span></a>, and
+<a class="reference internal" href="array.html"><span class="std std-doc">FIN systolic array</span></a>.</p>
+<section id="the-controller-s-main-registers">
+<h2>The controller’s main registers<a class="headerlink" href="#the-controller-s-main-registers" title="Link to this heading">¶</a></h2>
+<p>The important state is grouped by purpose:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Register</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">state</span></code></p></td>
+<td><p>current <code class="docutils literal notranslate"><span class="pre">fin_tiled_state_t</span></code> state; <code class="docutils literal notranslate"><span class="pre">next</span></code> is its combinational successor</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">job_q</span></code>, <code class="docutils literal notranslate"><span class="pre">mode_q</span></code></p></td>
+<td><p>complete job snapshot and raw/tiled selection</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">job_m_last_q</span></code>, <code class="docutils literal notranslate"><span class="pre">job_k_last_q</span></code></p></td>
+<td><p>latched <code class="docutils literal notranslate"><span class="pre">M-1</span></code> and <code class="docutils literal notranslate"><span class="pre">K-1</span></code> validation operands</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">m0_q</span></code>, <code class="docutils literal notranslate"><span class="pre">n0_q</span></code>, <code class="docutils literal notranslate"><span class="pre">k0_q</span></code></p></td>
+<td><p>first element of the active physical tile in each dimension</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">a_row_q</span></code>, <code class="docutils literal notranslate"><span class="pre">c_row_q</span></code>, <code class="docutils literal notranslate"><span class="pre">b_k_q</span></code></p></td>
+<td><p>incrementally maintained byte offsets for the current rows</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">counter</span></code></p></td>
+<td><p>preload/compute cycle counter, cleared at phase boundaries</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">vstep_q</span></code></p></td>
+<td><p>which multi-cycle validation check is running</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mul_p_q</span></code>, <code class="docutils literal notranslate"><span class="pre">mul_limit_q</span></code>, <code class="docutils literal notranslate"><span class="pre">mul_base_oob_q</span></code></p></td>
+<td><p>pipelined span product and matching arena bound</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dma_busy_q</span></code></p></td>
+<td><p>one rectangle command was accepted and its response is outstanding</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">legacy_partial_valid_q</span></code></p></td>
+<td><p>raw mode has a previous output tile available to add</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">err_*_q</span></code>, <code class="docutils literal notranslate"><span class="pre">done_id_q</span></code></p></td>
+<td><p>sticky completion information</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ctr_q</span></code></p></td>
+<td><p>phase and utilization counters</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">done_r</span></code></p></td>
+<td><p>sticky successful-completion bit</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">irq_pending_q</span></code></p></td>
+<td><p>completion/error interrupt level, retained across slower-domain synchronization</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Active-high <code class="docutils literal notranslate"><span class="pre">rst</span></code> and <code class="docutils literal notranslate"><span class="pre">ctrl.soft_rst</span></code> return the controller to <code class="docutils literal notranslate"><span class="pre">T_IDLE</span></code> and
+clear all of these controller registers. They do not erase scratchpad RAM.</p>
+</section>
+<section id="start-and-job-snapshot">
+<h2>Start and job snapshot<a class="headerlink" href="#start-and-job-snapshot" title="Link to this heading">¶</a></h2>
+<p>The generated CSR block turns writing <code class="docutils literal notranslate"><span class="pre">ctrl.start=1</span></code> into a registered
+single-cycle pulse. In <code class="docutils literal notranslate"><span class="pre">T_IDLE</span></code>, seeing that pulse moves the controller to
+<code class="docutils literal notranslate"><span class="pre">T_LATCH</span></code>. The extra latch state is required because the other fields written
+with <code class="docutils literal notranslate"><span class="pre">start</span></code> become visible after the same register-file edge. <code class="docutils literal notranslate"><span class="pre">job_latch</span></code> is
+high while the state is <code class="docutils literal notranslate"><span class="pre">T_LATCH</span></code>, so the following edge captures a stable
+record into <code class="docutils literal notranslate"><span class="pre">job_q</span></code> and <code class="docutils literal notranslate"><span class="pre">mode_q</span></code>.</p>
+<p>START is accepted in <code class="docutils literal notranslate"><span class="pre">T_IDLE</span></code> or successful <code class="docutils literal notranslate"><span class="pre">T_DONE</span></code>; a pulse in other states
+is not queued. However, every START pulse clears sticky DONE and IRQ, including
+an unaccepted busy-state pulse. Software must check busy and retain exclusive
+ownership while describing and launching a job.</p>
+<p>The registered START pulse adds one CSR-to-launch edge compared with the former
+write-modification strobe; compute and DMA pipeline latency are unchanged.
+Soft reset has priority over completion and clears the interrupt. It resets
+controller state but does not abandon accepted AXI DMA traffic: an outstanding
+rectangle drains normally and may continue writing external memory. Software
+must not reuse that memory until traffic is quiescent; no new DMA-idle CSR is
+provided by this change.</p>
+<p>Tiled mode copies <code class="docutils literal notranslate"><span class="pre">job_csr</span></code> as one <code class="docutils literal notranslate"><span class="pre">fin_job_t</span></code>. Later CSR writes do not change
+the running job. Raw mode creates an equivalent internal record:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>M=N=K=16
+shift, bias_en, relu_en = raw control registers
+internal raw-output request = ctrl.acc_en OR ctrl.raw_en
+</pre></div>
+</div>
+<p>Representing both interfaces as <code class="docutils literal notranslate"><span class="pre">job_q</span></code> lets the same preload, compute, and
+store logic serve both modes.</p>
+<p>Raw mode’s four DMA address registers are not part of that snapshot.
+The controller reads them when forming each rectangle command. Keep them
+unchanged until the raw job finishes; do not interpret the tiled snapshot
+guarantee as permission to reprogram a raw job’s later transfers.</p>
+</section>
+<section id="state-machine">
+<h2>State machine<a class="headerlink" href="#state-machine" title="Link to this heading">¶</a></h2>
+<p>The encoded states are all declared in <code class="docutils literal notranslate"><span class="pre">fin_pkg.sv</span></code>. The tiled path is:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>T_IDLE -&gt; T_LATCH -&gt; T_VALIDATE -&gt; T_LOAD_A
+       -&gt; T_SETUP_TILE -&gt; optional T_LOAD_BIAS -&gt; T_LOAD_B
+       -&gt; T_PRELOAD -&gt; T_COMPUTE -&gt; T_NEXT_K
+          more K: --------------------^ through T_LOAD_B
+          final K: -&gt; T_STORE -&gt; T_NEXT_TILE
+       -&gt; more N: T_SETUP_TILE
+       -&gt; more M: T_LOAD_A
+       -&gt; T_DONE -&gt; T_IDLE
+
+any validation or AXI error -&gt; T_ERROR -&gt; T_IDLE
+</pre></div>
+</div>
+<p>Each state has one concrete responsibility:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>State</p></th>
+<th class="head"><p>Work and exit condition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">T_IDLE</span></code></p></td>
+<td><p>wait for <code class="docutils literal notranslate"><span class="pre">start</span></code>; sticky completion remains readable</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">T_LATCH</span></code></p></td>
+<td><p>snapshot mode and all job fields; always advance</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">T_VALIDATE</span></code></p></td>
+<td><p>run validation steps 0 through 4; raw mode skips the checks</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">T_LOAD_A</span></code></p></td>
+<td><p>issue one activation-strip rectangle and wait for DMA response</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">T_SETUP_TILE</span></code></p></td>
+<td><p>begin one <code class="docutils literal notranslate"><span class="pre">(m0,n0)</span></code> C tile; route to bias or B load</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">T_LOAD_BIAS</span></code></p></td>
+<td><p>load the current N slice when needed and wait for DMA</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">T_LOAD_B</span></code></p></td>
+<td><p>load the current <code class="docutils literal notranslate"><span class="pre">(k0,n0)</span></code> weight tile and wait for DMA</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">T_PRELOAD</span></code></p></td>
+<td><p>prime synchronous RAM reads and load 16 PE weight rows</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">T_COMPUTE</span></code></p></td>
+<td><p>feed A rows, drain the array, accumulate, and write local C</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">T_NEXT_K</span></code></p></td>
+<td><p>count this physical operation; advance K or select store</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">T_STORE</span></code></p></td>
+<td><p>DMA the valid part of the local C tile to external memory</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">T_NEXT_TILE</span></code></p></td>
+<td><p>restart K and advance N first, then M, or finish</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">T_DONE</span></code></p></td>
+<td><p>finish successful status; accept an immediate new start or return idle; IRQ remains latched</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">T_ERROR</span></code></p></td>
+<td><p>finish error status, then return idle; IRQ remains latched</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The state remains in each DMA phase until <code class="docutils literal notranslate"><span class="pre">dma_busy_q</span> <span class="pre">&amp;&amp;</span> <span class="pre">dma_rsp_valid</span></code> makes
+<code class="docutils literal notranslate"><span class="pre">dma_done</span></code> true. <code class="docutils literal notranslate"><span class="pre">dma_cmd_valid</span></code> is high in a DMA state only while no command
+is outstanding. A <code class="docutils literal notranslate"><span class="pre">cmd_valid</span> <span class="pre">&amp;&amp;</span> <span class="pre">cmd_ready</span></code> handshake sets <code class="docutils literal notranslate"><span class="pre">dma_busy_q</span></code>; the
+DMA response clears it. This prevents repeated commands while a slow transfer
+is still running.</p>
+<section id="raw-mode-state-order">
+<h3>Raw-mode state order<a class="headerlink" href="#raw-mode-state-order" title="Link to this heading">¶</a></h3>
+<p>Raw mode has no A-strip reuse or validation record. Its route is:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>IDLE -&gt; LATCH -&gt; VALIDATE -&gt; SETUP_TILE -&gt; LOAD_BIAS
+     -&gt; LOAD_A -&gt; LOAD_B -&gt; PRELOAD -&gt; COMPUTE
+     -&gt; NEXT_K -&gt; STORE -&gt; NEXT_TILE -&gt; DONE
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">VALIDATE</span></code> exits immediately because <code class="docutils literal notranslate"><span class="pre">mode_q=0</span></code>. Raw mode always loads bias,
+even when raw output will bypass it, to preserve the externally visible
+transfer sequence of the original interface.</p>
+</section>
+</section>
+<section id="tile-loop-and-incremental-addresses">
+<h2>Tile loop and incremental addresses<a class="headerlink" href="#tile-loop-and-incremental-addresses" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">m0_q</span></code>, <code class="docutils literal notranslate"><span class="pre">n0_q</span></code>, and <code class="docutils literal notranslate"><span class="pre">k0_q</span></code> are element offsets, not tile numbers. Remaining
+elements and valid edge sizes are purely subtract-and-compare operations:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>valid_m = min(16, M - m0)
+valid_n = min(16, N - n0)
+valid_k = min(16, K - k0)
+</pre></div>
+</div>
+<p>The controller avoids a multiplier in the active tile loop by maintaining
+three row offsets:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>a_row_q = a_offset + m0 * a_stride
+c_row_q = c_offset + m0 * c_stride
+b_k_q   = b_offset + k0 * b_stride
+</pre></div>
+</div>
+<p>Advancing K by 16 adds <code class="docutils literal notranslate"><span class="pre">b_stride</span> <span class="pre">&lt;&lt;</span> <span class="pre">4</span></code> to <code class="docutils literal notranslate"><span class="pre">b_k_q</span></code>. Advancing M by 16 adds
+<code class="docutils literal notranslate"><span class="pre">a_stride</span> <span class="pre">&lt;&lt;</span> <span class="pre">4</span></code> and <code class="docutils literal notranslate"><span class="pre">c_stride</span> <span class="pre">&lt;&lt;</span> <span class="pre">4</span></code> to their row bases. Advancing N only adds
+<code class="docutils literal notranslate"><span class="pre">n0</span></code> when a command address is formed. At every new C tile, K returns to zero
+and <code class="docutils literal notranslate"><span class="pre">b_k_q</span></code> returns to <code class="docutils literal notranslate"><span class="pre">b_offset</span></code>.</p>
+<p>The external command addresses are:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>A strip = arena_base + a_row_q
+B tile  = arena_base + b_k_q + n0
+bias     = arena_base + bias_offset + 4*n0
+C tile   = arena_base + c_row_q + 4*n0
+</pre></div>
+</div>
+<p>A omits <code class="docutils literal notranslate"><span class="pre">k0</span></code> because the complete K-wide strip is already resident. B is
+INT8, so <code class="docutils literal notranslate"><span class="pre">n0</span></code> is a byte count. Bias and C are INT32, so their N offsets are
+multiplied by four.</p>
+<section id="example-tile-walk">
+<h3>Example tile walk<a class="headerlink" href="#example-tile-walk" title="Link to this heading">¶</a></h3>
+<p>For <code class="docutils literal notranslate"><span class="pre">M=20</span></code>, <code class="docutils literal notranslate"><span class="pre">N=33</span></code>, <code class="docutils literal notranslate"><span class="pre">K=24</span></code>, the tile positions are:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>m0 = 0, 16
+n0 = 0, 16, 32
+k0 = 0, 16
+</pre></div>
+</div>
+<p>That produces 2 A-strip loads, 6 output stores, and 12 physical array
+operations. At the final corner, <code class="docutils literal notranslate"><span class="pre">valid_m=4</span></code>, <code class="docutils literal notranslate"><span class="pre">valid_n=1</span></code>, and <code class="docutils literal notranslate"><span class="pre">valid_k=8</span></code>.
+The DMA zero-fills all other local lanes, while the counter adds only
+<code class="docutils literal notranslate"><span class="pre">4*1*8=32</span></code> useful MACs for that physical operation.</p>
+</section>
+</section>
+<section id="dma-command-generation">
+<h2>DMA command generation<a class="headerlink" href="#dma-command-generation" title="Link to this heading">¶</a></h2>
+<p>The active DMA state selects all fields of one <code class="docutils literal notranslate"><span class="pre">fin_dma_cmd_t</span></code>:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>State</p></th>
+<th class="head"><p>Region</p></th>
+<th class="head"><p>Shape and special behavior</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">T_LOAD_A</span></code></p></td>
+<td><p>activation</p></td>
+<td><p>tiled: <code class="docutils literal notranslate"><span class="pre">valid_m</span></code> rows by full job K, stride <code class="docutils literal notranslate"><span class="pre">a_stride</span></code>, transpose locally, fill 16 rows by K; raw: 16 by 16</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">T_LOAD_B</span></code></p></td>
+<td><p>weight</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">valid_k</span></code> by <code class="docutils literal notranslate"><span class="pre">valid_n</span></code>, stride <code class="docutils literal notranslate"><span class="pre">b_stride</span></code>, fill full 16 by 16 tile</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">T_LOAD_BIAS</span></code></p></td>
+<td><p>bias</p></td>
+<td><p>one row of <code class="docutils literal notranslate"><span class="pre">valid_n</span></code> words, fill all 16 words</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">T_STORE</span></code></p></td>
+<td><p>output</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">valid_m</span></code> by <code class="docutils literal notranslate"><span class="pre">valid_n</span></code> words, stride <code class="docutils literal notranslate"><span class="pre">c_stride</span></code>, no fill</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Raw mode substitutes the four raw DMA address registers and fixed tight
+strides. In tiled mode, bias is loaded only when <code class="docutils literal notranslate"><span class="pre">bias_en=1</span></code> and <code class="docutils literal notranslate"><span class="pre">raw_en=0</span></code>.
+A raw INT32 result does not consume bias. <code class="docutils literal notranslate"><span class="pre">fin_dma</span></code> converts these rectangle
+commands into AXI activity as described in <a class="reference internal" href="axi.html"><span class="std std-doc">AXI interfaces</span></a>.</p>
+</section>
+<section id="multi-cycle-job-validation">
+<h2>Multi-cycle job validation<a class="headerlink" href="#multi-cycle-job-validation" title="Link to this heading">¶</a></h2>
+<p>Validation is tiled-mode hardware enforcement before the first DMA request.
+One shared, output-registered 16 by 32 product computes long row spans over
+five steps. Two parallel 16 by 16 DSP partial products multiply the stride’s
+low and high halves. A fabric addition forms the upper 32 product bits;
+the low 16 bits come directly from the low partial product. DSP/fabric
+attributes express the mapping intent; the routed netlist must confirm it.
+The existing 48-bit product register is unchanged. A product is checked on
+the following step while the next product
+is launched. The bias-only check launches C, so valid jobs still use five
+validation steps.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-right"><p><code class="docutils literal notranslate"><span class="pre">vstep_q</span></code></p></th>
+<th class="head"><p>Multiplier launch</p></th>
+<th class="head"><p>Check</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-right"><p>0</p></td>
+<td><p>none</p></td>
+<td><p>nonzero M/N/K, <code class="docutils literal notranslate"><span class="pre">K&lt;=1024</span></code>, four-byte alignment, minimum strides, and <code class="docutils literal notranslate"><span class="pre">arena_base</span> <span class="pre">+</span> <span class="pre">arena_size</span></code> fitting in 32-bit address space</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>1</p></td>
+<td><p>A span</p></td>
+<td><p>none</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>2</p></td>
+<td><p>B span</p></td>
+<td><p>A result</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>3</p></td>
+<td><p>C span</p></td>
+<td><p>B result, then bias span when bias is enabled</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>4</p></td>
+<td><p>none</p></td>
+<td><p>C result</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The multiplier keeps the complete 48-bit product and base additions keep a
+33rd carry bit. Any high product or base bit fails before the remaining 32-bit
+arena-space comparison, so arithmetic cannot silently wrap:</p>
+<p><code class="docutils literal notranslate"><span class="pre">fin_ctrl_tb</span></code>’s span-product scenario checks the actual product against a full-width multiply
+and verifies its existing capture edge across 768 programmed jobs, including
+high products. The rewrite changes neither error priority nor validation
+latency. Physical timing improvement remains a separate implementation gate.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>A span    = a_offset    + (M-1)*a_stride + K
+B span    = b_offset    + (K-1)*b_stride + N
+bias span = bias_offset + 4*N
+C span    = c_offset    + (M-1)*c_stride + 4*N
+</pre></div>
+</div>
+<p>Minimum legal strides are K bytes for A, N bytes for B, and <code class="docutils literal notranslate"><span class="pre">4*N</span></code> bytes for
+C. Arena base, arena size, all offsets, and all strides are required to be
+four-byte aligned, except <code class="docutils literal notranslate"><span class="pre">bias_offset</span></code> is checked only when bias is enabled.</p>
+<p>The validation reasons the controller emits are <code class="docutils literal notranslate"><span class="pre">ZERO_DIM</span></code>, <code class="docutils literal notranslate"><span class="pre">CAPACITY</span></code>, <code class="docutils literal notranslate"><span class="pre">ALIGN</span></code>,
+<code class="docutils literal notranslate"><span class="pre">STRIDE</span></code>, <code class="docutils literal notranslate"><span class="pre">OVERFLOW</span></code>, and <code class="docutils literal notranslate"><span class="pre">ARENA</span></code>. <code class="docutils literal notranslate"><span class="pre">MODE</span></code> and the flags field identifiers are
+defined in <code class="docutils literal notranslate"><span class="pre">fin_pkg.sv</span></code> but no current <code class="docutils literal notranslate"><span class="pre">fin_ctrl</span></code> branch emits them. Shift
+values are five bits by construction and are not otherwise rejected. The
+controller checks that each object fits in the declared arena; it does not
+check whether two legal object spans overlap.</p>
+</section>
+<section id="preload-and-compute-cycle-counter">
+<h2>Preload and compute cycle counter<a class="headerlink" href="#preload-and-compute-cycle-counter" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">counter</span></code> is wide enough for <code class="docutils literal notranslate"><span class="pre">6*N</span></code> values. It increments only in
+<code class="docutils literal notranslate"><span class="pre">T_PRELOAD</span></code> or <code class="docutils literal notranslate"><span class="pre">T_COMPUTE</span></code> and clears when those phases begin or end. A single
+counter is reused because no two phases overlap.</p>
+<p>For <code class="docutils literal notranslate"><span class="pre">N=16</span></code>, the constants are:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>PRELOAD_LAST   = 16
+COMPUTE_LAST   = 72
+FIRST_VALID_IN = 47
+LAST_VALID_IN  = 62
+FIRST_WRITE    = 50
+LAST_WRITE     = 65
+</pre></div>
+</div>
+<section id="preload-outputs">
+<h3>Preload outputs<a class="headerlink" href="#preload-outputs" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">sys_ctrl.weight_row=counter</span></code> while the counter is below 16. Because the RAM
+is synchronous, counter 0 primes weight row 0 and counter <code class="docutils literal notranslate"><span class="pre">i+1</span></code> pulses
+<code class="docutils literal notranslate"><span class="pre">weight_ld[i]</span></code>. <code class="docutils literal notranslate"><span class="pre">sys_ctrl.preload</span></code> also makes the PEs clear their arithmetic
+pipelines and causes bias to load one word per cycle.</p>
+</section>
+<section id="compute-outputs">
+<h3>Compute outputs<a class="headerlink" href="#compute-outputs" title="Link to this heading">¶</a></h3>
+<p>The activation RAM is primed with local M row 0 during preload. At compute
+counter 0, the array consumes row 0 while <code class="docutils literal notranslate"><span class="pre">sys_ctrl.act_col</span></code> requests row 1.
+It requests rows 1 through 15, then returns the address to zero while the
+wavefront drains. <code class="docutils literal notranslate"><span class="pre">sys_ctrl.act_group=k0/16</span></code> selects the correct resident
+K group.</p>
+<p>The deskewed sums for C rows 0 through 15 are valid during counters 47 through
+62. <code class="docutils literal notranslate"><span class="pre">pp_ctrl.valid_in</span></code> marks those 16 clocks. A processed result is written
+three cycles later, counters 50 through 65. A raw result skips post-processing
+and uses the original 47 through 62 window.</p>
+<p>When an old K partial is needed, <code class="docutils literal notranslate"><span class="pre">out_wr_ctrl.rd_en</span></code> runs one cycle before the
+47-through-62 valid window. Its row address is the valid row number. This
+places synchronous output-RAM data at the accumulator before <code class="docutils literal notranslate"><span class="pre">psum_out</span></code>
+arrives.</p>
+</section>
+</section>
+<section id="partial-sums-and-raw-output">
+<h2>Partial sums and raw output<a class="headerlink" href="#partial-sums-and-raw-output" title="Link to this heading">¶</a></h2>
+<p>For tiled mode:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>partial_accumulate = k0 is not zero
+raw_output = another K tile remains OR job.raw_en
+</pre></div>
+</div>
+<p>Thus every intermediate K tile stores a full INT32 partial. The first K tile
+ignores old output RAM. The final K tile either applies post-processing or,
+when <code class="docutils literal notranslate"><span class="pre">raw_en=1</span></code>, stores the final INT32 sum.</p>
+<section id="raw-mode-partial-history">
+<h3>Raw-mode partial history<a class="headerlink" href="#raw-mode-partial-history" title="Link to this heading">¶</a></h3>
+<p>Raw mode uses <code class="docutils literal notranslate"><span class="pre">legacy_partial_valid_q</span></code> across software launches:</p>
+<ol class="arabic simple">
+<li><p>a launch with <code class="docutils literal notranslate"><span class="pre">acc_en=1</span></code> stores an unprocessed INT32 tile;</p></li>
+<li><p>after compute, <code class="docutils literal notranslate"><span class="pre">legacy_partial_valid_q</span></code> becomes one;</p></li>
+<li><p>the next raw launch adds that resident tile before writing; and</p></li>
+<li><p>a launch with <code class="docutils literal notranslate"><span class="pre">acc_en=0</span></code> clears the remembered-valid state after compute.</p></li>
+</ol>
+<p><code class="docutils literal notranslate"><span class="pre">ctrl.raw_en=1</span></code> selects raw output for the current launch but does not keep the
+partial-valid state by itself. If neither <code class="docutils literal notranslate"><span class="pre">acc_en</span></code> nor <code class="docutils literal notranslate"><span class="pre">raw_en</span></code> is set, the
+current result uses post-processing. This history is controller state; the
+output RAM itself has no valid bits.</p>
+</section>
+</section>
+<section id="completion-errors-and-counters">
+<h2>Completion, errors, and counters<a class="headerlink" href="#completion-errors-and-counters" title="Link to this heading">¶</a></h2>
+<p>The first error is sticky until the next <code class="docutils literal notranslate"><span class="pre">job_latch</span></code> or reset. Validation
+records <code class="docutils literal notranslate"><span class="pre">vreason</span></code> and <code class="docutils literal notranslate"><span class="pre">vfield</span></code>. A failed DMA load records <code class="docutils literal notranslate"><span class="pre">AXI_READ</span></code> plus A,
+B, or bias; a failed store records <code class="docutils literal notranslate"><span class="pre">AXI_WRITE</span></code> plus C. Both errors and normal
+completion copy <code class="docutils literal notranslate"><span class="pre">job_q.run_id</span></code> to <code class="docutils literal notranslate"><span class="pre">done_id_q</span></code>. No later error overwrites the
+first one.</p>
+<p>The visible signals have precise timing:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>status.busy = state is neither T_IDLE nor T_DONE
+status.done = sticky done_r
+status.err_pending = sticky err_valid_q
+irq = sticky irq_pending_q
+</pre></div>
+</div>
+<p>Consequently <code class="docutils literal notranslate"><span class="pre">busy</span></code> is low during successful <code class="docutils literal notranslate"><span class="pre">T_DONE</span></code>, while <code class="docutils literal notranslate"><span class="pre">irq</span></code> is high.
+At the edge leaving <code class="docutils literal notranslate"><span class="pre">T_DONE</span></code>, <code class="docutils literal notranslate"><span class="pre">done_r</span></code> becomes one and remains visible in
+<code class="docutils literal notranslate"><span class="pre">T_IDLE</span></code>. A start has priority over setting <code class="docutils literal notranslate"><span class="pre">done_r</span></code>: an immediate restart
+from <code class="docutils literal notranslate"><span class="pre">T_DONE</span></code> clears done rather than briefly reporting the previous job.
+<code class="docutils literal notranslate"><span class="pre">T_ERROR</span></code> counts as busy for its one state cycle, then returns idle. An error
+does not set <code class="docutils literal notranslate"><span class="pre">status.done</span></code>. Entering <code class="docutils literal notranslate"><span class="pre">T_DONE</span></code> or <code class="docutils literal notranslate"><span class="pre">T_ERROR</span></code> sets IRQ unless reset,
+soft reset, or START has priority. IRQ remains asserted after returning idle,
+until reset, soft reset, or another START; it is not a one-cycle pulse. This is
+what permits the core-domain two-flop synchronizer to observe completion.</p>
+<p>All counters clear at <code class="docutils literal notranslate"><span class="pre">job_latch</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dma_read_cycles</span></code> increments in <code class="docutils literal notranslate"><span class="pre">T_LOAD_A</span></code>, <code class="docutils literal notranslate"><span class="pre">T_LOAD_B</span></code>, or <code class="docutils literal notranslate"><span class="pre">T_LOAD_BIAS</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">compute_cycles</span></code> increments in both <code class="docutils literal notranslate"><span class="pre">T_PRELOAD</span></code> and <code class="docutils literal notranslate"><span class="pre">T_COMPUTE</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dma_write_cycles</span></code> increments in <code class="docutils literal notranslate"><span class="pre">T_STORE</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stall_cycles</span></code> increments when DMA needs an AXI handshake that does not
+advance;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tile_ops</span></code> increments once in every <code class="docutils literal notranslate"><span class="pre">T_NEXT_K</span></code>; and</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">valid_macs</span></code> adds <code class="docutils literal notranslate"><span class="pre">valid_m</span> <span class="pre">*</span> <span class="pre">valid_n</span> <span class="pre">*</span> <span class="pre">valid_k</span></code> at the same point.</p></li>
+</ul>
+<p>Phase counters include command setup and response-wait cycles because they
+count whole controller states. <code class="docutils literal notranslate"><span class="pre">stall_cycles</span></code> is a subset focused only on
+blocked AXI channels, not every cycle in a DMA state.</p>
+</section>
+<section id="limits">
+<h2>Limits<a class="headerlink" href="#limits" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">soft_rst</span></code> resets the controller, not the DMA transaction engine. Accepted
+DMA work drains independently and may still write memory; there is no
+software-visible DMA-idle acknowledgement for safely restarting that arena.</p></li>
+<li><p>Validation protects tiled jobs. Raw addresses are used as supplied.</p></li>
+<li><p>One rectangle can be outstanding, so no DMA phase overlaps another phase.</p></li>
+<li><p>Preload and compute windows are constants derived for the current array and
+memory latency. Changing <code class="docutils literal notranslate"><span class="pre">N</span></code> or a pipeline latency requires re-derivation.</p></li>
+<li><p>The controller relies on fixed-latency local RAM; it has no per-vector
+ready/valid backpressure inside the datapath.</p></li>
+</ul>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="tiling.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">FIN hardware tiling</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="axi.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">FIN AXI interfaces</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026 Jason Huynh. All rights reserved.
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">FIN control FSM</a><ul>
+<li><a class="reference internal" href="#the-controller-s-main-registers">The controller’s main registers</a></li>
+<li><a class="reference internal" href="#start-and-job-snapshot">Start and job snapshot</a></li>
+<li><a class="reference internal" href="#state-machine">State machine</a><ul>
+<li><a class="reference internal" href="#raw-mode-state-order">Raw-mode state order</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tile-loop-and-incremental-addresses">Tile loop and incremental addresses</a><ul>
+<li><a class="reference internal" href="#example-tile-walk">Example tile walk</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#dma-command-generation">DMA command generation</a></li>
+<li><a class="reference internal" href="#multi-cycle-job-validation">Multi-cycle job validation</a></li>
+<li><a class="reference internal" href="#preload-and-compute-cycle-counter">Preload and compute cycle counter</a><ul>
+<li><a class="reference internal" href="#preload-outputs">Preload outputs</a></li>
+<li><a class="reference internal" href="#compute-outputs">Compute outputs</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#partial-sums-and-raw-output">Partial sums and raw output</a><ul>
+<li><a class="reference internal" href="#raw-mode-partial-history">Raw-mode partial history</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#completion-errors-and-counters">Completion, errors, and counters</a></li>
+<li><a class="reference internal" href="#limits">Limits</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=3b5cce75"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>

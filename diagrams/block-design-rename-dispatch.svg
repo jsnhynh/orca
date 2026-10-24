@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 860" width="1800" height="860" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 z" fill="context-stroke" stroke="context-stroke"/></marker></defs>
+<rect width="1800" height="860" fill="#ffffff"/>
+<text x="30" y="40" font-size="22" font-weight="bold" fill="#000">Rename and dispatch</text>
+<rect x="20" y="70" width="760" height="460" rx="18" fill="#f5f5f5" fill-opacity="0.5" stroke="#666" stroke-opacity="0.5"/>
+<text x="28" y="86" font-size="11" font-weight="bold" fill="#333" fill-opacity="0.7">Rename (stage 3)</text>
+<rect x="820" y="70" width="960" height="460" rx="18" fill="#f5f5f5" fill-opacity="0.5" stroke="#666" stroke-opacity="0.5"/>
+<text x="828" y="86" font-size="11" font-weight="bold" fill="#333" fill-opacity="0.7">Dispatch (stage 4, same cycle as rename)</text>
+<rect x="20" y="570" width="1760" height="240" rx="18" fill="#f5f5f5" fill-opacity="0.5" stroke="#666" stroke-opacity="0.5"/>
+<text x="28" y="586" font-size="11" font-weight="bold" fill="#333" fill-opacity="0.7">Retirement side</text>
+<path d="M200,145 L230,145" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M490,145 L505,145 L520,145" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M360,180 L360,195 L360,210" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M360,340 L360,370" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M490,420 L520,420" fill="none" stroke="#d79b00" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M760,435 L790,435 L790,160 L840,160" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1120,150 L1160,150" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1440,150 L1480,150" fill="none" stroke="#d79b00" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M980,220 L980,260" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1120,295 L1140,295 L1160,295" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1440,295 L1460,295 L1480,295" fill="none" stroke="#d79b00" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M370,670 L420,670" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M585,620 L585,590 L360,590 L360,345 L360,340" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1000,620 L1000,570 L430,570 L430,345 L430,340" fill="none" stroke="#d79b00" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M205,720 L205,760 L1500,760 L1500,720" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<rect x="40" y="110" width="160" height="70" rx="10.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="120.0" y="142" font-size="12" text-anchor="middle" fill="#000">Decode register</text>
+<text x="120.0" y="156" font-size="12" text-anchor="middle" fill="#000">2 instructions</text>
+<rect x="230" y="110" width="260" height="70" rx="10.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="360.0" y="142" font-size="12" text-anchor="middle" fill="#000">Speculative RAT</text>
+<text x="360.0" y="156" font-size="12" text-anchor="middle" fill="#000">32 x 6-bit, newest mapping</text>
+<rect x="520" y="110" width="240" height="70" rx="10.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="640.0" y="142" font-size="12" text-anchor="middle" fill="#000">Committed RAT</text>
+<text x="640.0" y="156" font-size="12" text-anchor="middle" fill="#000">32 x 6-bit, retired state</text>
+<rect x="230" y="210" width="260" height="130" rx="19.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="360.0" y="249" font-size="12" text-anchor="middle" fill="#000">Free list</text>
+<text x="360.0" y="264" font-size="12" text-anchor="middle" fill="#000">circular FIFO of free physical IDs</text>
+<text x="360.0" y="279" font-size="12" text-anchor="middle" fill="#000">head, tail, commit head</text>
+<text x="360.0" y="294" font-size="12" text-anchor="middle" fill="#000">two LUTRAM banks, two pops per group</text>
+<text x="360.0" y="309" font-size="12" text-anchor="middle" fill="#000">registered credit admits a group</text>
+<rect x="520" y="210" width="240" height="60" rx="9.0" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="640.0" y="236" font-size="12" text-anchor="middle" fill="#000">Busy table</text>
+<text x="640.0" y="252" font-size="12" text-anchor="middle" fill="#000">allocated, not yet completed</text>
+<rect x="520" y="290" width="240" height="80" rx="12.0" fill="#ffe6cc" stroke="#d79b00" stroke-width="1"/>
+<text x="640.0" y="319" font-size="12" text-anchor="middle" fill="#000">Checkpoints</text>
+<text x="640.0" y="334" font-size="12" text-anchor="middle" fill="#000">RAT snapshot per FTQ entry</text>
+<text x="640.0" y="349" font-size="12" text-anchor="middle" fill="#000">with the free-list head</text>
+<rect x="230" y="370" width="260" height="70" rx="10.5" fill="#ffe6cc" stroke="#d79b00" stroke-width="1"/>
+<text x="360.0" y="394" font-size="12" text-anchor="middle" fill="#000">Owner storage</text>
+<text x="360.0" y="409" font-size="12" text-anchor="middle" fill="#000">LUTRAM per ROB entry</text>
+<text x="360.0" y="424" font-size="12" text-anchor="middle" fill="#000">destination, stale destination, flags</text>
+<rect x="520" y="400" width="240" height="70" rx="10.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="640.0" y="432" font-size="12" text-anchor="middle" fill="#000">Renamed group</text>
+<text x="640.0" y="446" font-size="12" text-anchor="middle" fill="#000">physical IDs and ROB IDs</text>
+<rect x="40" y="220" width="170" height="220" rx="25.5" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="125.0" y="282" font-size="12" text-anchor="middle" fill="#000">Group rules</text>
+<text x="125.0" y="296" font-size="12" text-anchor="middle" fill="#000">sources read first</text>
+<text x="125.0" y="312" font-size="12" text-anchor="middle" fill="#000">younger lane sees the</text>
+<text x="125.0" y="326" font-size="12" text-anchor="middle" fill="#000">older lane&#x27;s mapping</text>
+<text x="125.0" y="342" font-size="12" text-anchor="middle" fill="#000">p0 reads zero, never</text>
+<text x="125.0" y="356" font-size="12" text-anchor="middle" fill="#000">allocated</text>
+<text x="125.0" y="372" font-size="12" text-anchor="middle" fill="#000">reset: x0..x31 map to</text>
+<text x="125.0" y="386" font-size="12" text-anchor="middle" fill="#000">p0..p31, p32..p63 free</text>
+<rect x="840" y="110" width="280" height="110" rx="16.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="980.0" y="146" font-size="12" text-anchor="middle" fill="#000">Classification</text>
+<text x="980.0" y="162" font-size="12" text-anchor="middle" fill="#000">every instruction without an exception</text>
+<text x="980.0" y="176" font-size="12" text-anchor="middle" fill="#000">enters the scheduler;</text>
+<text x="980.0" y="192" font-size="12" text-anchor="middle" fill="#000">loads and stores also take a queue slot</text>
+<rect x="1160" y="110" width="280" height="80" rx="12.0" fill="#ffe6cc" stroke="#d79b00" stroke-width="1"/>
+<text x="1300.0" y="139" font-size="12" text-anchor="middle" fill="#000">ROB allocation</text>
+<text x="1300.0" y="154" font-size="12" text-anchor="middle" fill="#000">64 entries, status 3 bits</text>
+<text x="1300.0" y="169" font-size="12" text-anchor="middle" fill="#000">2 per cycle</text>
+<rect x="1480" y="110" width="280" height="80" rx="12.0" fill="#ffe6cc" stroke="#d79b00" stroke-width="1"/>
+<text x="1620.0" y="139" font-size="12" text-anchor="middle" fill="#000">Payload array</text>
+<text x="1620.0" y="154" font-size="12" text-anchor="middle" fill="#000">64 x 106-bit, ROB-indexed</text>
+<text x="1620.0" y="169" font-size="12" text-anchor="middle" fill="#000">PC, immediate, controls</text>
+<rect x="840" y="260" width="280" height="70" rx="10.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="980.0" y="284" font-size="12" text-anchor="middle" fill="#000">Scheduler</text>
+<text x="980.0" y="299" font-size="12" text-anchor="middle" fill="#000">16 x 32-bit entries</text>
+<text x="980.0" y="314" font-size="12" text-anchor="middle" fill="#000">class: ALU, MDU, SYS, MEM</text>
+<rect x="1160" y="260" width="280" height="70" rx="10.5" fill="#ffe6cc" stroke="#d79b00" stroke-width="1"/>
+<text x="1300.0" y="292" font-size="12" text-anchor="middle" fill="#000">Load queue</text>
+<text x="1300.0" y="306" font-size="12" text-anchor="middle" fill="#000">12 entries, FIFO</text>
+<rect x="1480" y="260" width="280" height="70" rx="10.5" fill="#ffe6cc" stroke="#d79b00" stroke-width="1"/>
+<text x="1620.0" y="292" font-size="12" text-anchor="middle" fill="#000">Store queue</text>
+<text x="1620.0" y="306" font-size="12" text-anchor="middle" fill="#000">12 entries, FIFO (stores, atomics)</text>
+<rect x="840" y="360" width="920" height="70" rx="10.5" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="1300.0" y="384" font-size="12" text-anchor="middle" fill="#000">Exception path</text>
+<text x="1300.0" y="399" font-size="12" text-anchor="middle" fill="#000">an instruction that already carries an exception still gets a ROB entry, in program order,</text>
+<text x="1300.0" y="414" font-size="12" text-anchor="middle" fill="#000">but never occupies an issue slot or an execution unit</text>
+<rect x="40" y="620" width="330" height="100" rx="15.0" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="205.0" y="659" font-size="12" text-anchor="middle" fill="#000">Retire ids (registered)</text>
+<text x="205.0" y="674" font-size="12" text-anchor="middle" fill="#000">commit frees one stale physical ID</text>
+<text x="205.0" y="689" font-size="12" text-anchor="middle" fill="#000">per committed writer, in program order</text>
+<rect x="420" y="620" width="330" height="100" rx="15.0" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="585.0" y="659" font-size="12" text-anchor="middle" fill="#000">Free-list push</text>
+<text x="585.0" y="674" font-size="12" text-anchor="middle" fill="#000">stale IDs at the tail;</text>
+<text x="585.0" y="689" font-size="12" text-anchor="middle" fill="#000">available the following cycle</text>
+<rect x="800" y="620" width="400" height="100" rx="15.0" fill="#ffe6cc" stroke="#d79b00" stroke-width="1"/>
+<text x="1000.0" y="652" font-size="12" text-anchor="middle" fill="#000">Recovery and flush</text>
+<text x="1000.0" y="666" font-size="12" text-anchor="middle" fill="#000">recovery restores the checkpointed head</text>
+<text x="1000.0" y="682" font-size="12" text-anchor="middle" fill="#000">full flush restores the commit head</text>
+<text x="1000.0" y="696" font-size="12" text-anchor="middle" fill="#000">no allocation masks or bitmaps</text>
+<rect x="1250" y="620" width="500" height="100" rx="15.0" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="1500.0" y="659" font-size="12" text-anchor="middle" fill="#000">Committed RAT update</text>
+<text x="1500.0" y="674" font-size="12" text-anchor="middle" fill="#000">retirement changes the map; values stay in the</text>
+<text x="1500.0" y="689" font-size="12" text-anchor="middle" fill="#000">physical register file, nothing is copied</text>
+<text x="30" y="844" font-size="10" fill="#333">A two-instruction group advances only when physical registers, a ROB entry and queue space are all available.</text></svg>

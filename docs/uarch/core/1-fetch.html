@@ -1,0 +1,548 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../genindex.html"><link rel="search" title="Search" href="../../search.html"><link rel="next" title="Stage 2: Decode" href="2-decode.html"><link rel="prev" title="Stage 0: Branch prediction" href="0-branch.html">
+
+    <!-- Generated with Sphinx 9.2.0 and Furo 2025.12.19 -->
+        <title>Stage 1: Fetch - ORCA</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/orca.css?v=d973d532" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #3973DA;
+  --color-brand-content: #3973DA;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #5aa9f0;
+  --color-brand-content: #5aa9f0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #5aa9f0;
+  --color-brand-content: #5aa9f0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">ORCA</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  <span class="sidebar-brand-text">ORCA</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../results.html">Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../building.html">Building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../learnings.html">Learnings</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Microarchitecture</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Core</a><input aria-label="Toggle navigation of Core" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2 current has-children"><a class="reference internal" href="stages.html">Pipeline stages</a><input aria-label="Toggle navigation of Pipeline stages" checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="0-branch.html">Stage 0: Branch prediction</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Stage 1: Fetch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2-decode.html">Stage 2: Decode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3-rename.html">Stage 3: Rename</a></li>
+<li class="toctree-l3"><a class="reference internal" href="4-dispatch.html">Stage 4: Dispatch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="5-issue.html">Stage 5: Issue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="6-execute.html">Stage 6: Execute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="7-writeback.html">Stage 7: Writeback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="8-commit.html">Stage 8: Commit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="m-extension.html">M extension: multiply and divide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="a-extension.html">A extension: atomics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="m_mode.html">Machine-mode traps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isa.html">ISA and software contract</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../memory/index.html">Memory</a><input aria-label="Toggle navigation of Memory" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../memory/cache.html">L1 caches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../memory/boot-rom.html">Boot ROM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../memory/main-memory.html">DDR and main memory</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../soc/index.html">SoC</a><input aria-label="Toggle navigation of SoC" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../soc/interconnect.html">Interconnect and clocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../soc/peripherals.html">Peripherals and registers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../soc/platform.html">FPGA and KV260 boundary</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../accel/index.html">FIN accelerator</a><input aria-label="Toggle navigation of FIN accelerator" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../accel/array.html">FIN systolic array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../accel/datapath.html">FIN datapath</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../accel/axi.html">FIN AXI interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../accel/ctrl.html">FIN control FSM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../accel/tiling.html">FIN hardware tiling</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Verification</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../verification/index.html">Verification</a><input aria-label="Toggle navigation of Verification" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../verification/testbenches.html">Testbenches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../verification/system-tests.html">System tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../verification/coverage.html">Coverage</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">FPGA bring-up</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../bringup/index.html">FPGA bring-up</a><input aria-label="Toggle navigation of FPGA bring-up" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../bringup/infrastructure.html">Infrastructure</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="stage-1-fetch">
+<h1>Stage 1: Fetch<a class="headerlink" href="#stage-1-fetch" title="Link to this heading">¶</a></h1>
+<p>Fetch turns a predicted PC into instruction bits. On paper that is a FIFO and an SRAM read. In practice it is the most intricate stage in the core, because it is the one place where a multi-cycle cache, a two-speed predictor and four different flush sources all have to agree on which bytes are real. Most of the odd-looking registers on this page exist to keep that agreement.</p>
+<p>Related notes: <a class="reference internal" href="0-branch.html"><span class="std std-doc">Stage 0: Branch prediction</span></a>, <a class="reference internal" href="2-decode.html"><span class="std std-doc">Stage 2: Decode</span></a>, <a class="reference internal" href="../memory/cache.html"><span class="std std-doc">L1 caches</span></a> and <a class="reference internal" href="../memory/index.html"><span class="std std-doc">Memory</span></a>.</p>
+<section id="files">
+<h2>Files<a class="headerlink" href="#files" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>File</p></th>
+<th class="head"><p>Job</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/1-fetch/fetch.sv</span></code></p></td>
+<td><p>request launch, response accept, hold, FTQ alloc</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/1-fetch/inst_buffer.sv</span></code></p></td>
+<td><p>4-entry decoupling FIFO</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/1-fetch/predecoder.sv</span></code></p></td>
+<td><p>combinational branch classification</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="shape">
+<h2>Shape<a class="headerlink" href="#shape" title="Link to this heading">¶</a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>        pc ──&gt; imem_req ──&gt; I-cache ──(n cycles)──&gt; imem_rec
+                                                       │
+                                            predecode ─┤
+                                            hold reg  ─┤
+                                                       v
+                                              inst_buffer (4 deep)
+                                                       │
+                                                       v
+                                                    decode
+</pre></div>
+</div>
+<p>Two instructions per request, aligned to an 8-byte group. When <code class="docutils literal notranslate"><span class="pre">pc[2]</span></code> is set
+the group only has one valid lane, so <code class="docutils literal notranslate"><span class="pre">direct_resp_vals</span></code> is <code class="docutils literal notranslate"><span class="pre">2'b01</span></code> instead of
+<code class="docutils literal notranslate"><span class="pre">2'b11</span></code>.</p>
+</section>
+<section id="predecode">
+<h2>Predecode<a class="headerlink" href="#predecode" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">predecoder.sv</span></code> looks only at opcode, <code class="docutils literal notranslate"><span class="pre">rd</span></code>, and <code class="docutils literal notranslate"><span class="pre">rs1</span></code>. It recognizes conditional
+branches, <code class="docutils literal notranslate"><span class="pre">JAL</span></code>, and <code class="docutils literal notranslate"><span class="pre">JALR</span></code> before full decode, and classifies writes to <code class="docutils literal notranslate"><span class="pre">x1</span></code> or
+<code class="docutils literal notranslate"><span class="pre">x5</span></code> as calls and a <code class="docutils literal notranslate"><span class="pre">JALR</span> <span class="pre">x0,</span> <span class="pre">(x1|x5)</span></code> as a return. It does not decide whether
+an encoding is legal; <a class="reference internal" href="2-decode.html"><span class="std std-doc">decode</span></a> owns that check. Fetch uses this
+early classification only to allocate FTQ metadata, update speculative history,
+and remove an unreachable younger lane.</p>
+</section>
+<section id="request-launch">
+<h2>Request launch<a class="headerlink" href="#request-launch" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">imem_req_val</span></code> is asserted whenever the downstream window has room, and
+<code class="docutils literal notranslate"><span class="pre">effective_pc_next</span></code> picks the address by priority:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>pred_redirect_val   -&gt; pc_next          (L1 repair, from the BPU)
+flush_pending_q     -&gt; flush_target_q   (latched architectural redirect)
+startup_q           -&gt; PC_RESET
+next_req_pending_q  -&gt; next_req_pc_q    (deferred successor)
+otherwise           -&gt; pc_req_next      (fallthrough or L0 target)
+</pre></div>
+</div>
+<p>Two of these need a word of explanation.</p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">flush_pending_q</span></code>.</strong> A redirect target is only driven on <code class="docutils literal notranslate"><span class="pre">pc_next</span></code> during the
+flush cycle itself. If the I-cache cannot accept a request that cycle, the
+target would be lost and fetch would resume at <code class="docutils literal notranslate"><span class="pre">pc+8</span></code>. So the target is
+latched and re-driven until the request actually fires.</p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">next_req_pending_q</span></code>.</strong> When a response is accepted but no request can go out
+in the same cycle, the successor PC belonging to that packet’s FTQ entry is
+held and used for the next request.</p>
+<p>Ordinary launch does not wait for the late L1 prediction. Registered instruction-buffer and FTQ occupancy are enough to reserve a slot. If L1 later redirects, the speculative request is killed and replaced in exactly the cycle a non-speculative scheme would have launched the correct one, so nothing is lost. The payoff is that the <code class="docutils literal notranslate"><span class="pre">response</span> <span class="pre">bits</span> <span class="pre">-&gt;</span> <span class="pre">predecode</span> <span class="pre">-&gt;</span> <span class="pre">req_valid</span> <span class="pre">-&gt;</span> <span class="pre">I-cache</span> <span class="pre">address</span></code> path does not exist.</p>
+</section>
+<section id="response-handling-and-the-hold-register">
+<h2>Response handling and the hold register<a class="headerlink" href="#response-handling-and-the-hold-register" title="Link to this heading">¶</a></h2>
+<p>When the L1 predictor says a fetch group ends in a taken branch, that group
+cannot be pushed downstream immediately, because the redirect and the packet have to leave together with matching metadata. <code class="docutils literal notranslate"><span class="pre">hold_q</span></code> parks the whole packet (PC,
+lane valids, instruction bits, prediction metadata) for one cycle:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hold_capture = pred_hold &amp;&amp; imem_rec_val &amp;&amp; imem_rec_rdy &amp;&amp; !flush &amp;&amp; !hold_q
+hold_release = hold_q &amp;&amp; inst_buffer_rdy &amp;&amp; alloc_rdy &amp;&amp; !flush
+selected_val = hold_q ? hold_release : direct_push
+</pre></div>
+</div>
+<p>While a packet is held, <code class="docutils literal notranslate"><span class="pre">imem_rec_rdy</span></code> drops to zero so the cache backpressures and no second response is dropped. If a redirect arrives
+while the packet is still held, the prediction metadata is refreshed from the
+new <code class="docutils literal notranslate"><span class="pre">bpu_pred</span></code> so the FTQ entry stays consistent with what was actually
+predicted.</p>
+<p>Fetch has no response-side epoch filter. The L1 subsystem guarantees that <code class="docutils literal notranslate"><span class="pre">kill</span></code> removes every stale response, and response PCs travel with the cache data and are never rebuilt from the newest request. A response can therefore always be trusted to belong to the request that is still live.</p>
+</section>
+<section id="lane-scrubbing">
+<h2>Lane scrubbing<a class="headerlink" href="#lane-scrubbing" title="Link to this heading">¶</a></h2>
+<p>Predecode runs on the selected packet and kills younger lanes that are
+architecturally unreachable:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>slot0 is an unconditional transfer           -&gt; resp_pc_vals = 2'b01
+slot0 hits BTB as taken (or non-conditional) -&gt; resp_pc_vals = 2'b01
+</pre></div>
+</div>
+<p>The unconditional case matters even without a BTB hit. A cold <code class="docutils literal notranslate"><span class="pre">JAL</span></code> or <code class="docutils literal notranslate"><span class="pre">JALR</span></code> has no prediction yet, but slot 1 is still unreachable and must not receive an FTQ entry. Killed lanes have their instruction bits zeroed so that consumers
+which only check <code class="docutils literal notranslate"><span class="pre">fetch_vals</span></code> cannot see garbage.</p>
+</section>
+<section id="ftq-allocation">
+<h2>FTQ allocation<a class="headerlink" href="#ftq-allocation" title="Link to this heading">¶</a></h2>
+<p>For every valid lane that predecodes as a branch, fetch builds an <code class="docutils literal notranslate"><span class="pre">ftq_alloc_t</span></code>
+carrying the branch PC and its prediction. On a BTB miss the predecoded branch
+type is substituted, so the FTQ still knows whether it is looking at a call, a
+return, or an ordinary jump.</p>
+</section>
+<section id="direct-targets">
+<h2>Direct targets<a class="headerlink" href="#direct-targets" title="Link to this heading">¶</a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">JAL</span></code> or a conditional branch holds its own target: the PC plus an immediate in the instruction word. So fetch does not need the BTB to learn where these go. When the I-cache response arrives, <code class="docutils literal notranslate"><span class="pre">fetch.sv</span></code> adds the immediate to each lane’s PC (<code class="docutils literal notranslate"><span class="pre">direct_target</span></code> in <code class="docutils literal notranslate"><span class="pre">fetch.sv</span></code>) and hands the result to the branch predictor as <code class="docutils literal notranslate"><span class="pre">pred_direct</span></code>. It carries a valid bit, whether the instruction is a <code class="docutils literal notranslate"><span class="pre">JAL</span></code>, the branch type (a <code class="docutils literal notranslate"><span class="pre">JAL</span></code> that writes <code class="docutils literal notranslate"><span class="pre">x1</span></code> or <code class="docutils literal notranslate"><span class="pre">x5</span></code> is a call) and the target.</p>
+<p>The predictor uses it only when the BTB has no entry for that lane. A <code class="docutils literal notranslate"><span class="pre">JAL</span></code> is then predicted taken to the computed target. A conditional branch takes the TAGE direction and, when TAGE says taken, the computed target. The prediction is recorded in the FTQ exactly like a BTB hit, so execute and commit check it the way they check any other prediction. It reaches the request stream through the L1 repair described on the <a class="reference internal" href="0-branch.html"><span class="std std-doc">branch page</span></a>, so a computed target costs the same one-cycle bubble as an L0 miss. A BTB hit always wins over the computed target. <code class="docutils literal notranslate"><span class="pre">JALR</span></code> and returns still need the BTB or the RAS, because their target is not in the instruction.</p>
+<p>The cost is one adder per lane on the response path. The gain is that a branch’s first encounter, and any branch the BTB has evicted, no longer costs a full redirect from execute. A small BTB therefore loses less than it would without it.</p>
+<p><code class="docutils literal notranslate"><span class="pre">alloc_accept</span></code> is the architectural handshake, and the candidate payload is built unconditionally. Keeping recovery control out of the payload path lets the FTQ precompute its data without broadcasting flush through every bit.</p>
+</section>
+<section id="instruction-buffer">
+<h2>Instruction buffer<a class="headerlink" href="#instruction-buffer" title="Link to this heading">¶</a></h2>
+<p>A plain 4-entry circular FIFO. One entry holds an entire fetch group: base PC,
+lane valids, FTQ valids and IDs, and both instruction words. Decode reads
+<code class="docutils literal notranslate"><span class="pre">buff[rd_ptr]</span></code>, splits it into two lanes, and derives <code class="docutils literal notranslate"><span class="pre">inst_pcs[1]</span></code> as
+<code class="docutils literal notranslate"><span class="pre">pc</span> <span class="pre">+</span> <span class="pre">4</span></code>. The buffer head feeds decode, whose output is registered before
+rename (<a class="reference internal" href="2-decode.html#handshake-and-the-decode-register"><span class="std std-ref">decode register</span></a>).</p>
+<p>Its job is decoupling. The cache has variable latency and decode has variable backpressure, and without the buffer every decode stall would immediately stall the cache.</p>
+<p><code class="docutils literal notranslate"><span class="pre">inst_buffer_rdy</span></code> is <code class="docutils literal notranslate"><span class="pre">~is_full</span> <span class="pre">||</span> <span class="pre">flush</span></code>, and both pointer updates are
+qualified with <code class="docutils literal notranslate"><span class="pre">!flush</span></code> so a flush cycle cannot move data. The read data itself is not gated by flush. In a flush cycle the buffer may still present its head group, and the decode register clears on flush. Gating the read mux would put the architectural redirect at the head of the decode, rename, dispatch and queue-insertion chain, so the data path is left ungated. The fetch benches check that the buffer is empty from the edge that ends the flush cycle.</p>
+<p>The FIFO uses independent read and write pointers plus a count. A simultaneous
+push and pop leaves the count unchanged. A full FIFO does not credit a same-cycle pop as new input space, so upstream waits one cycle. That keeps decode readiness out of the cache request path. Reset clears payloads as well
+as pointers, while a flush only resets pointers and count because invalid
+payload bits are unobservable.</p>
+</section>
+<section id="backpressure">
+<h2>Backpressure<a class="headerlink" href="#backpressure" title="Link to this heading">¶</a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>fetch_window_rdy = inst_buffer_rdy &amp;&amp; alloc_rdy
+imem_rec_rdy     = hold_q ? 0 : (pred_hold ? 1 : fetch_window_rdy)
+imem_req_val     = !flush &amp;&amp; (hold_q ? release-with-redirect : fetch_window_rdy)
+</pre></div>
+</div>
+<p>A held predicted-taken packet can still be captured while the downstream window
+is full. In that case no speculative request is launched until the packet can
+be released; the hold register itself provides the storage.</p>
+</section>
+<section id="flush-behavior">
+<h2>Flush behavior<a class="headerlink" href="#flush-behavior" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">flush</span></code> clears the instruction buffer pointers and the hold register, kills the
+in-flight cache access via <code class="docutils literal notranslate"><span class="pre">icache_kill</span></code>, and blocks request launch for that
+cycle. An assertion checks that no request fires during architectural recovery:</p>
+<div class="highlight-systemverilog notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">flush</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">req_fire</span><span class="p">))</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="p">$</span><span class="n">fatal</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">"FETCH: request fired during architectural recovery"</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="known-limits">
+<h2>Known limits<a class="headerlink" href="#known-limits" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Hold storage is one fetch group deep, so a second consecutive predicted-taken group backpressures the cache.</p></li>
+<li><p>No fetch-target-buffer style multi-group prediction: one group per request.</p></li>
+<li><p>Misaligned groups always waste the upper lane.</p></li>
+<li><p>The instruction-cache interface has no error bit, so this stage cannot
+create an instruction access-fault report.</p></li>
+</ul>
+</section>
+<section id="tests">
+<h2>Tests<a class="headerlink" href="#tests" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">sim/cpu/tb/1-fetch/fetch_tb.sv</span></code> tests the unit alone. <code class="docutils literal notranslate"><span class="pre">sim/cpu/tb/1-fetch/fetch_int_tb.sv</span></code> tests the integrated predictor, cache and redirect interaction.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="2-decode.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Stage 2: Decode</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="0-branch.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Stage 0: Branch prediction</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026 Jason Huynh. All rights reserved.
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Stage 1: Fetch</a><ul>
+<li><a class="reference internal" href="#files">Files</a></li>
+<li><a class="reference internal" href="#shape">Shape</a></li>
+<li><a class="reference internal" href="#predecode">Predecode</a></li>
+<li><a class="reference internal" href="#request-launch">Request launch</a></li>
+<li><a class="reference internal" href="#response-handling-and-the-hold-register">Response handling and the hold register</a></li>
+<li><a class="reference internal" href="#lane-scrubbing">Lane scrubbing</a></li>
+<li><a class="reference internal" href="#ftq-allocation">FTQ allocation</a></li>
+<li><a class="reference internal" href="#direct-targets">Direct targets</a></li>
+<li><a class="reference internal" href="#instruction-buffer">Instruction buffer</a></li>
+<li><a class="reference internal" href="#backpressure">Backpressure</a></li>
+<li><a class="reference internal" href="#flush-behavior">Flush behavior</a></li>
+<li><a class="reference internal" href="#known-limits">Known limits</a></li>
+<li><a class="reference internal" href="#tests">Tests</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=3b5cce75"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>

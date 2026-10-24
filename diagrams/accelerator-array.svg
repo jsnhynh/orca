@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 780" width="1800" height="780" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 z" fill="context-stroke" stroke="context-stroke"/></marker></defs>
+<rect width="1800" height="780" fill="#ffffff"/>
+<text x="30" y="40" font-size="22" font-weight="bold" fill="#000">FIN systolic array detail</text>
+<rect x="20" y="70" width="760" height="410" rx="18" fill="#f5f5f5" fill-opacity="0.5" stroke="#666" stroke-opacity="0.5"/>
+<text x="28" y="86" font-size="11" font-weight="bold" fill="#333" fill-opacity="0.7">One processing element (pe.sv)</text>
+<rect x="820" y="70" width="960" height="410" rx="18" fill="#f5f5f5" fill-opacity="0.5" stroke="#666" stroke-opacity="0.5"/>
+<text x="828" y="86" font-size="11" font-weight="bold" fill="#333" fill-opacity="0.7">Array and wavefront</text>
+<rect x="20" y="510" width="1760" height="230" rx="18" fill="#f5f5f5" fill-opacity="0.5" stroke="#666" stroke-opacity="0.5"/>
+<text x="28" y="526" font-size="11" font-weight="bold" fill="#333" fill-opacity="0.7">Scratchpad feeds</text>
+<path d="M210,170 L240,170" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M160,240 L240,240" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M100,280 L100,330 L240,330" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M410,220 L450,220" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M535,150 L535,180" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M620,220 L650,220" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M410,330 L450,330" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M620,330 L650,330" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1090,220 L1120,220" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1500,165 L1530,165" fill="none" stroke="#82b366" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1645,210 L1645,230" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M960,560 L960,540 L960,325 L960,320" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M320,560 L320,535 L954,535 A6,6 0 0 1 966,535 L1300,535 L1300,325 L1300,320" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1760,275 L1790,275 L1790,535 L1490,535 L1490,560" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<rect x="40" y="120" width="170" height="60" rx="9.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="125.0" y="146" font-size="12" text-anchor="middle" fill="#000">weight_r</text>
+<text x="125.0" y="162" font-size="12" text-anchor="middle" fill="#000">INT8, loaded by weight_ld</text>
+<rect x="40" y="220" width="120" height="60" rx="9.0" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="100.0" y="246" font-size="12" text-anchor="middle" fill="#000">a_in</text>
+<text x="100.0" y="262" font-size="12" text-anchor="middle" fill="#000">INT8</text>
+<rect x="450" y="100" width="170" height="50" rx="7.5" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="535.0" y="122" font-size="12" text-anchor="middle" fill="#000">v_in</text>
+<text x="535.0" y="136" font-size="12" text-anchor="middle" fill="#000">INT32 from above</text>
+<rect x="240" y="160" width="170" height="100" rx="15.0" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="325.0" y="199" font-size="12" text-anchor="middle" fill="#000">Stage 1</text>
+<text x="325.0" y="214" font-size="12" text-anchor="middle" fill="#000">pipe_reg &lt;- a_in x weight_r</text>
+<text x="325.0" y="229" font-size="12" text-anchor="middle" fill="#000">signed 8 x 8</text>
+<rect x="240" y="300" width="170" height="60" rx="9.0" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="325.0" y="326" font-size="12" text-anchor="middle" fill="#000">a_pipe</text>
+<text x="325.0" y="342" font-size="12" text-anchor="middle" fill="#000">first activation delay</text>
+<rect x="450" y="180" width="170" height="80" rx="12.0" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="535.0" y="209" font-size="12" text-anchor="middle" fill="#000">Stage 2</text>
+<text x="535.0" y="224" font-size="12" text-anchor="middle" fill="#000">v_sum_r &lt;- pipe_reg + v_in</text>
+<text x="535.0" y="239" font-size="12" text-anchor="middle" fill="#000">32-bit, wraps</text>
+<rect x="450" y="300" width="170" height="60" rx="9.0" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="535.0" y="326" font-size="12" text-anchor="middle" fill="#000">a_out_r</text>
+<text x="535.0" y="342" font-size="12" text-anchor="middle" fill="#000">second activation delay</text>
+<rect x="650" y="190" width="110" height="60" rx="9.0" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="705.0" y="216" font-size="12" text-anchor="middle" fill="#000">v_out</text>
+<text x="705.0" y="232" font-size="12" text-anchor="middle" fill="#000">to the PE below</text>
+<rect x="650" y="300" width="110" height="60" rx="9.0" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="705.0" y="326" font-size="12" text-anchor="middle" fill="#000">a_out</text>
+<text x="705.0" y="342" font-size="12" text-anchor="middle" fill="#000">to the right</text>
+<rect x="40" y="390" width="720" height="70" rx="10.5" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="400.0" y="414" font-size="12" text-anchor="middle" fill="#000">Control</text>
+<text x="400.0" y="429" font-size="12" text-anchor="middle" fill="#000">preload clears the arithmetic registers while a weight row loads; compute_en advances both stages;</text>
+<text x="400.0" y="444" font-size="12" text-anchor="middle" fill="#000">otherwise the registers hold. Overflow wraps; saturation happens in postproc after the whole dot product.</text>
+<rect x="840" y="120" width="250" height="200" rx="30.0" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="965.0" y="194" font-size="12" text-anchor="middle" fill="#000">skew_buf</text>
+<text x="965.0" y="209" font-size="12" text-anchor="middle" fill="#000">row r delayed by r enabled clocks</text>
+<text x="965.0" y="224" font-size="12" text-anchor="middle" fill="#000">row 0 direct, row 15 fifteen registers</text>
+<text x="965.0" y="239" font-size="12" text-anchor="middle" fill="#000">turns a vertical wall of A values</text>
+<text x="965.0" y="254" font-size="12" text-anchor="middle" fill="#000">into a diagonal wave</text>
+<rect x="1120" y="120" width="380" height="200" rx="30.0" fill="#d5e8d4" stroke="#82b366" stroke-width="1"/>
+<text x="1310.0" y="194" font-size="12" text-anchor="middle" fill="#000">sys_arr: 16 x 16 PE grid</text>
+<text x="1310.0" y="209" font-size="12" text-anchor="middle" fill="#000">A moves left to right, partial sums top to bottom</text>
+<text x="1310.0" y="224" font-size="12" text-anchor="middle" fill="#000">PE row r holds B[r][n] for K position r</text>
+<text x="1310.0" y="239" font-size="12" text-anchor="middle" fill="#000">PE column c produces N position c</text>
+<text x="1310.0" y="254" font-size="12" text-anchor="middle" fill="#000">the bottom of column c gives one C[m][c]</text>
+<rect x="1530" y="120" width="230" height="90" rx="13.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="1645.0" y="162" font-size="12" text-anchor="middle" fill="#000">Output deskew</text>
+<text x="1645.0" y="176" font-size="12" text-anchor="middle" fill="#000">aligns the column results</text>
+<rect x="1530" y="230" width="230" height="90" rx="13.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="1645.0" y="264" font-size="12" text-anchor="middle" fill="#000">K-tile fold, postproc</text>
+<text x="1645.0" y="279" font-size="12" text-anchor="middle" fill="#000">accumulate, then bias, shift,</text>
+<text x="1645.0" y="294" font-size="12" text-anchor="middle" fill="#000">saturate, ReLU</text>
+<rect x="1340" y="350" width="420" height="120" rx="18.0" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="1550.0" y="384" font-size="12" text-anchor="middle" fill="#000">Schedule for N = 16</text>
+<text x="1550.0" y="399" font-size="12" text-anchor="middle" fill="#000">compute counter runs 0 to 72</text>
+<text x="1550.0" y="414" font-size="12" text-anchor="middle" fill="#000">preload: prime cycle, then weight_ld[0] to [15]</text>
+<text x="1550.0" y="429" font-size="12" text-anchor="middle" fill="#000">first aligned C row at counter 47, last at 62</text>
+<text x="1550.0" y="444" font-size="12" text-anchor="middle" fill="#000">raw writes 47 to 62, post-processed 50 to 65</text>
+<rect x="40" y="560" width="560" height="100" rx="15.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="320.0" y="599" font-size="12" text-anchor="middle" fill="#000">Weight scratchpad to the PE rows</text>
+<text x="320.0" y="614" font-size="12" text-anchor="middle" fill="#000">16 weights per K row, read synchronously;</text>
+<text x="320.0" y="629" font-size="12" text-anchor="middle" fill="#000">preload loads one PE row per cycle</text>
+<rect x="640" y="560" width="560" height="100" rx="15.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="920.0" y="599" font-size="12" text-anchor="middle" fill="#000">Activation scratchpad to skew_buf</text>
+<text x="920.0" y="614" font-size="12" text-anchor="middle" fill="#000">four 32-bit banks of four byte lanes give</text>
+<text x="920.0" y="629" font-size="12" text-anchor="middle" fill="#000">16 INT8 values per cycle for one M row</text>
+<rect x="1240" y="560" width="500" height="100" rx="15.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="1490.0" y="599" font-size="12" text-anchor="middle" fill="#000">Output scratchpad</text>
+<text x="1490.0" y="614" font-size="12" text-anchor="middle" fill="#000">one RAM per column; a compute write stores</text>
+<text x="1490.0" y="629" font-size="12" text-anchor="middle" fill="#000">a whole C row in one cycle</text>
+<rect x="40" y="680" width="1700" height="40" rx="6.0" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="890.0" y="704" font-size="12" text-anchor="middle" fill="#000">Every PE works during a tile, including zero-padded edge lanes; useful work is counted separately; no sparsity detection or rounding in the array</text>
+<text x="30" y="764" font-size="10" fill="#333">Rows are K positions, columns are N positions, and time carries successive M rows through the array.</text></svg>

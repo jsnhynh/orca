@@ -1,0 +1,13 @@
+--- a/package/uclibc/uclibc.mk
++++ b/package/uclibc/uclibc.mk
+@@ -276,7 +276,9 @@
+ # soft-float
+ #
+ 
+-ifeq ($(BR2_SOFT_FLOAT),y)
++# risc-v never selects BR2_SOFT_FLOAT; without the f extension it is soft-float
++# (orca rv32ima). otherwise uclibc builds riscv32 fenv with fsrm/frflags.
++ifneq ($(BR2_SOFT_FLOAT)$(if $(BR2_riscv),$(if $(BR2_RISCV_ISA_RVF),,y)),)
+ define UCLIBC_FLOAT_CONFIG
+ 	$(call KCONFIG_DISABLE_OPT,UCLIBC_HAS_FPU)
+ 	$(call KCONFIG_ENABLE_OPT,UCLIBC_HAS_FLOATS)

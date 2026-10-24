@@ -1,0 +1,113 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2026.1 (win64) Build 6511674 Tue Jun 16 11:02:23 MDT 2026
+| Date         : Sat Oct 24 02:38:39 2026
+| Host         : host running 64-bit major release  (build 9200)
+| Command      : report_utilization -hierarchical -hierarchical_depth 6 -file <project>/core-ooc/coreonly-final/route_hierarchy.rpt
+| Design       : cpu
+| Device       : xck26-sfvc784-2LV-c
+| Speed File   : -2LV
+| Design State : Physopt postRoute
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Utilization Design Information
+
+Table of Contents
+-----------------
+1. Utilization by Hierarchy
+
+1. Utilization by Hierarchy
+---------------------------
+
++--------------------------------------------------------------+--------------------------------------+------------+------------+---------+------+-------+--------+--------+------+------------+
+|                           Instance                           |                Module                | Total LUTs | Logic LUTs | LUTRAMs | SRLs |  FFs  | RAMB36 | RAMB18 | URAM | DSP Blocks |
++--------------------------------------------------------------+--------------------------------------+------------+------------+---------+------+-------+--------+--------+------+------------+
+| cpu                                                          |                                (top) |      33989 |      31043 |    2946 |    0 | 12374 |     38 |     10 |    0 |          4 |
+|   (cpu)                                                      |                                (top) |         20 |          0 |      20 |    0 |     0 |      0 |      0 |    0 |          0 |
+|   core0                                                      |                                 core |      29555 |      26821 |    2734 |    0 | 10950 |      2 |     10 |    0 |          4 |
+|     (core0)                                                  |                                 core |          1 |          1 |       0 |    0 |    64 |      0 |      0 |    0 |          0 |
+|     bpu_stage                                                |                                  bpu |       5372 |       4462 |     910 |    0 |  3046 |      2 |     10 |    0 |          0 |
+|       (bpu_stage)                                            |                                  bpu |         49 |          7 |      42 |    0 |   871 |      0 |      0 |    0 |          0 |
+|       u_btb                                                  |                                  btb |        267 |        267 |       0 |    0 |   119 |      2 |      0 |    0 |          0 |
+|         (u_btb)                                              |                                  btb |          7 |          7 |       0 |    0 |   110 |      0 |      0 |    0 |          0 |
+|         g_btb_sram[1].bank                                   |                     orca_ram_1r1w_56 |         68 |         68 |       0 |    0 |     0 |      1 |      0 |    0 |          0 |
+|         u_sweep                                              |                       sweep_clear_57 |        164 |        164 |       0 |    0 |     9 |      0 |      0 |    0 |          0 |
+|       u_commit_ctrl                                          |                      bpu_commit_ctrl |         61 |         61 |       0 |    0 |   550 |      0 |      0 |    0 |          0 |
+|       u_execute_recover                                      |                  bpu_execute_recover |        582 |        582 |       0 |    0 |   120 |      0 |      0 |    0 |          0 |
+|       u_ftq                                                  |                                  ftq |       1874 |       1290 |     584 |    0 |    91 |      0 |      0 |    0 |          0 |
+|       u_l0_btb                                               |                               l0_btb |        479 |        255 |     224 |    0 |   128 |      0 |      0 |    0 |          0 |
+|       u_predict_ctrl                                         |                     bpu_predict_ctrl |        222 |        222 |       0 |    0 |   232 |      0 |      0 |    0 |          0 |
+|       u_ras                                                  |                                  ras |        395 |        335 |      60 |    0 |   136 |      0 |      0 |    0 |          0 |
+|       u_tage                                                 |                                 tage |       1446 |       1446 |       0 |    0 |   799 |      0 |     10 |    0 |          0 |
+|         (u_tage)                                             |                                 tage |        193 |        193 |       0 |    0 |   314 |      0 |      0 |    0 |          0 |
+|         g_tagged_table[0].u_table                            |                    tage_tagged_table |        266 |        266 |       0 |    0 |   103 |      0 |      2 |    0 |          0 |
+|           (g_tagged_table[0].u_table)                        |                    tage_tagged_table |         58 |         58 |       0 |    0 |    93 |      0 |      0 |    0 |          0 |
+|           g_sram[0].bank                                     |     orca_ram_1r1w__parameterized0_53 |        115 |        115 |       0 |    0 |     0 |      0 |      1 |    0 |          0 |
+|           u_sweep                                            |       sweep_clear__parameterized0_55 |         96 |         96 |       0 |    0 |    10 |      0 |      0 |    0 |          0 |
+|         g_tagged_table[1].u_table                            |                 tage_tagged_table_42 |        290 |        290 |       0 |    0 |   113 |      0 |      2 |    0 |          0 |
+|           (g_tagged_table[1].u_table)                        |                 tage_tagged_table_42 |         66 |         66 |       0 |    0 |   103 |      0 |      0 |    0 |          0 |
+|           g_sram[0].bank                                     |     orca_ram_1r1w__parameterized0_50 |        127 |        127 |       0 |    0 |     0 |      0 |      1 |    0 |          0 |
+|           u_sweep                                            |       sweep_clear__parameterized0_52 |         94 |         94 |       0 |    0 |    10 |      0 |      0 |    0 |          0 |
+|         g_tagged_table[2].u_table                            |                 tage_tagged_table_43 |        286 |        286 |       0 |    0 |   113 |      0 |      2 |    0 |          0 |
+|           (g_tagged_table[2].u_table)                        |                 tage_tagged_table_43 |         68 |         68 |       0 |    0 |   103 |      0 |      0 |    0 |          0 |
+|           g_sram[0].bank                                     |     orca_ram_1r1w__parameterized0_47 |        116 |        116 |       0 |    0 |     0 |      0 |      1 |    0 |          0 |
+|           u_sweep                                            |       sweep_clear__parameterized0_49 |         95 |         95 |       0 |    0 |    10 |      0 |      0 |    0 |          0 |
+|         g_tagged_table[3].u_table                            |                 tage_tagged_table_44 |        322 |        322 |       0 |    0 |   113 |      0 |      2 |    0 |          0 |
+|           (g_tagged_table[3].u_table)                        |                 tage_tagged_table_44 |         73 |         73 |       0 |    0 |   103 |      0 |      0 |    0 |          0 |
+|           g_sram[0].bank                                     |        orca_ram_1r1w__parameterized0 |        148 |        148 |       0 |    0 |     0 |      0 |      1 |    0 |          0 |
+|           u_sweep                                            |          sweep_clear__parameterized0 |         95 |         95 |       0 |    0 |    10 |      0 |      0 |    0 |          0 |
+|         u_base_table                                         |                      tage_base_table |        100 |        100 |       0 |    0 |    43 |      0 |      2 |    0 |          0 |
+|           u_sweep                                            |                          sweep_clear |         60 |         60 |       0 |    0 |     9 |      0 |      0 |    0 |          0 |
+|     commit_stage                                             |                                  rob |       4018 |       3898 |     120 |    0 |  1250 |      0 |      0 |    0 |          0 |
+|       (commit_stage)                                         |                                  rob |       3620 |       3620 |       0 |    0 |  1058 |      0 |      0 |    0 |          0 |
+|       csr_value_storage                                      |     multiport_lutram__parameterized0 |        161 |        121 |      40 |    0 |    64 |      0 |      0 |    0 |          0 |
+|       result_storage                                         |     multiport_lutram__parameterized1 |        240 |        160 |      80 |    0 |   128 |      0 |      0 |    0 |          0 |
+|     csr_stage                                                |                                  csr |        222 |        222 |       0 |    0 |   396 |      0 |      0 |    0 |          0 |
+|     decode_stage                                             |                               decode |        961 |        961 |       0 |    0 |   357 |      0 |      0 |    0 |          0 |
+|     execute_stage                                            |                              execute |       5832 |       5832 |       0 |    0 |  1512 |      0 |      0 |    0 |          4 |
+|       agu_inst                                               |                                  agu |        717 |        717 |       0 |    0 |   114 |      0 |      0 |    0 |          0 |
+|         agu_packet_reg                                       |                           REGISTER_R |        717 |        717 |       0 |    0 |   114 |      0 |      0 |    0 |          0 |
+|       csr_fu_inst                                            |                               csr_fu |        280 |        280 |       0 |    0 |   137 |      0 |      0 |    0 |          0 |
+|         csr_packet_reg_i                                     |                     REGISTER_R_CE_40 |        151 |        151 |       0 |    0 |    59 |      0 |      0 |    0 |          0 |
+|         csr_write_reg_o                                      |        REGISTER_R_CE__parameterized1 |        100 |        100 |       0 |    0 |    39 |      0 |      0 |    0 |          0 |
+|       gen_alu[0].alu_inst                                    |                                  alu |       1064 |       1064 |       0 |    0 |   239 |      0 |      0 |    0 |          0 |
+|         alu_packet_reg_i                                     |                     REGISTER_R_CE_38 |        855 |        855 |       0 |    0 |   194 |      0 |      0 |    0 |          0 |
+|         alu_result_reg_o                                     |     REGISTER_R_CE__parameterized0_39 |        209 |        209 |       0 |    0 |    45 |      0 |      0 |    0 |          0 |
+|       gen_alu[1].alu_inst                                    |                               alu_36 |       2505 |       2505 |       0 |    0 |   240 |      0 |      0 |    0 |          0 |
+|         alu_packet_reg_i                                     |                        REGISTER_R_CE |       1334 |       1334 |       0 |    0 |   195 |      0 |      0 |    0 |          0 |
+|         alu_result_reg_o                                     |     REGISTER_R_CE__parameterized0_37 |       1171 |       1171 |       0 |    0 |    45 |      0 |      0 |    0 |          0 |
+|       lsu_inst                                               |                                  lsu |        749 |        749 |       0 |    0 |   377 |      0 |      0 |    0 |          0 |
+|         (lsu_inst)                                           |                                  lsu |        422 |        422 |       0 |    0 |   331 |      0 |      0 |    0 |          0 |
+|         mem_result_reg                                       |        REGISTER_R_CE__parameterized0 |        327 |        327 |       0 |    0 |    46 |      0 |      0 |    0 |          0 |
+|       mdu_inst                                               |                                  mdu |        520 |        520 |       0 |    0 |   405 |      0 |      0 |    0 |          4 |
+|     fetch_stage                                              |                                fetch |       1362 |       1362 |       0 |    0 |   835 |      0 |      0 |    0 |          0 |
+|       (fetch_stage)                                          |                                fetch |        657 |        657 |       0 |    0 |   396 |      0 |      0 |    0 |          0 |
+|       ib                                                     |                          inst_buffer |        707 |        707 |       0 |    0 |   439 |      0 |      0 |    0 |          0 |
+|     issue_stage                                              |                                issue |       6715 |       6659 |      56 |    0 |  2428 |      0 |      0 |    0 |          0 |
+|       sched_inst                                             |                            scheduler |       2436 |       2436 |       0 |    0 |   648 |      0 |      0 |    0 |          0 |
+|       alu_register_read                                      |                        register_read |        139 |        139 |       0 |    0 |    56 |      0 |      0 |    0 |          0 |
+|       lsq_inst                                               |                                  lsq |       4082 |       4026 |      56 |    0 |  1699 |      0 |      0 |    0 |          0 |
+|     payload_array_inst                                       |                        payload_array |       1613 |        805 |     808 |    0 |    64 |      0 |      0 |    0 |          0 |
+|     prf_inst                                                 |                     physical_regfile |        876 |        396 |     480 |    0 |   128 |      0 |      0 |    0 |          0 |
+|     rename_stage                                             |                               rename |       2602 |       2242 |     360 |    0 |   850 |      0 |      0 |    0 |          0 |
+|       (rename_stage)                                         |                               rename |       1507 |       1275 |     232 |    0 |   722 |      0 |      0 |    0 |          0 |
+|       owner_storage                                          |                     multiport_lutram |       1095 |        967 |     128 |    0 |   128 |      0 |      0 |    0 |          0 |
+|   dmem_router0                                               |                          dmem_router |         77 |         77 |       0 |    0 |    76 |      0 |      0 |    0 |          0 |
+|   l1_subsystem0                                              |                     cpu_l1_subsystem |       4328 |       4136 |     192 |    0 |  1343 |     36 |      0 |    0 |          0 |
+|     (l1_subsystem0)                                          |                     cpu_l1_subsystem |        228 |        228 |       0 |    0 |   354 |      0 |      0 |    0 |          0 |
+|     dcache                                                   |                                cache |       3586 |       3470 |     116 |    0 |   805 |     32 |      0 |    0 |          0 |
+|       (dcache)                                               |                                cache |        658 |        618 |      40 |    0 |   767 |      0 |      0 |    0 |          0 |
+|       (gen_data_sram_way[0].gen_data_sram_bank[1].data_sram) | orca_sram_1rw_xpm__parameterized0_10 |         57 |         57 |       0 |    0 |     0 |      0 |      0 |    0 |          0 |
+|       (gen_data_sram_way[1].gen_data_sram_bank[1].data_sram) | orca_sram_1rw_xpm__parameterized0_26 |        124 |        124 |       0 |    0 |     0 |      0 |      0 |    0 |          0 |
+|       gen_tag_sram[0].tag_sram                               |         orca_ram_1rw__parameterized0 |        708 |        670 |      38 |    0 |    19 |      0 |      0 |    0 |          0 |
+|       gen_tag_sram[1].tag_sram                               |      orca_ram_1rw__parameterized0_35 |       1780 |       1742 |      38 |    0 |    19 |      0 |      0 |    0 |          0 |
+|     icache                                                   |                               icache |        514 |        438 |      76 |    0 |   182 |      4 |      0 |    0 |          0 |
+|       (icache)                                               |                               icache |        151 |        151 |       0 |    0 |   144 |      0 |      0 |    0 |          0 |
+|       (g_way[0].g_half[1].data_ram)                          |                  orca_sram_1rw_xpm_0 |        107 |        107 |       0 |    0 |     0 |      0 |      0 |    0 |          0 |
+|       (g_way[1].g_half[1].data_ram)                          |                  orca_sram_1rw_xpm_2 |         96 |         96 |       0 |    0 |     0 |      0 |      0 |    0 |          0 |
+|       g_way[0].tag_ram                                       |                         orca_ram_1rw |         95 |         57 |      38 |    0 |    19 |      0 |      0 |    0 |          0 |
+|       g_way[1].tag_ram                                       |                       orca_ram_1rw_3 |         65 |         27 |      38 |    0 |    19 |      0 |      0 |    0 |          0 |
++--------------------------------------------------------------+--------------------------------------+------------+------------+---------+------+-------+--------+--------+------+------------+
+* Note: The sum of lower-level cells may be larger than their parent cells total, due to cross-hierarchy LUT combining
+
+

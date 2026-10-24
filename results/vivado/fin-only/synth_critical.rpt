@@ -1,0 +1,1718 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version      : Vivado v.2026.1 (win64) Build 6511674 Tue Jun 16 11:02:23 MDT 2026
+| Date              : Tue Oct 20 16:00:13 2026
+| Host              : host running 64-bit major release  (build 9200)
+| Command           : report_timing -max_paths 20 -nworst 1 -sort_by group -input_pins -file <project>/core-ooc/fin-solo-222/synth_critical.rpt
+| Design            : fin
+| Device            : xck26-sfvc784
+| Speed File        : -2LV  PRODUCTION 1.31 12-08-2025
+| Design State      : Synthesized
+| Temperature Grade : C
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             0.548ns  (required time - arrival time)
+  Source:                 u_ctrl/job_q_reg[m][1]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Destination:            u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[10]
+                            (rising edge-triggered cell DSP_M_DATA clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            4.500ns  (core_clk rise@4.500ns - core_clk rise@0.000ns)
+  Data Path Delay:        3.932ns  (logic 2.504ns (63.683%)  route 1.428ns (36.317%))
+  Logic Levels:           11  (CARRY8=1 DSP_A_B_DATA=1 DSP_MULTIPLIER=1 DSP_PREADD_DATA=1 LUT1=1 LUT6=6)
+  Clock Path Skew:        0.014ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.055ns = ( 4.555 - 4.500 ) 
+    Source Clock Delay      (SCD):    0.041ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=23059, unset)        0.041     0.041    u_ctrl/clk
+                         FDRE                                         r  u_ctrl/job_q_reg[m][1]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_FDRE_C_Q)         0.114     0.155 f  u_ctrl/job_q_reg[m][1]/Q
+                         net (fo=4, unplaced)         0.166     0.321    u_ctrl/job_q_reg[m_n_0_][1]
+                                                                      f  u_ctrl/cmd_q[rows][0]_i_12/I0
+                         LUT1 (Prop_LUT1_I0_O)        0.057     0.378 r  u_ctrl/cmd_q[rows][0]_i_12/O
+                         net (fo=1, unplaced)         0.030     0.408    u_ctrl/cmd_q[rows][0]_i_12_n_0
+                                                                      r  u_ctrl/cmd_q_reg[rows][0]_i_3/S[1]
+                         CARRY8 (Prop_CARRY8_S[1]_O[5])
+                                                      0.333     0.741 f  u_ctrl/cmd_q_reg[rows][0]_i_3/O[5]
+                         net (fo=1, unplaced)         0.172     0.913    u_ctrl/cmd_q_reg[rows][0]_i_3_n_10
+                                                                      f  u_ctrl/cmd_q[rows][4]_i_3/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.138 f  u_ctrl/cmd_q[rows][4]_i_3/O
+                         net (fo=5, unplaced)         0.229     1.367    u_ctrl/cmd_q[rows][4]_i_3_n_0
+                                                                      f  u_ctrl/cmd_q[rows][3]_i_2/I4
+                         LUT6 (Prop_LUT6_I4_O)        0.058     1.425 f  u_ctrl/cmd_q[rows][3]_i_2/O
+                         net (fo=3, unplaced)         0.123     1.548    u_ctrl/cmd_q[rows][3]_i_2_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_70/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.773 r  u_ctrl/tile_macs_q_reg_i_70/O
+                         net (fo=1, unplaced)         0.117     1.890    u_ctrl/tile_macs_q_reg_i_70_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_30/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     2.115 r  u_ctrl/tile_macs_q_reg_i_30/O
+                         net (fo=2, unplaced)         0.211     2.326    u_ctrl/tile_macs_q_reg_i_30_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_21/I5
+                         LUT6 (Prop_LUT6_I5_O)        0.058     2.384 f  u_ctrl/tile_macs_q_reg_i_21/O
+                         net (fo=3, unplaced)         0.159     2.543    u_ctrl/tile_macs_q_reg_i_21_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_8/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.137     2.680 f  u_ctrl/tile_macs_q_reg_i_8/O
+                         net (fo=1, unplaced)         0.221     2.901    u_ctrl/tile_macs_q_reg/A[7]
+                                                                      f  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A[7]
+                         DSP_A_B_DATA (Prop_DSP_A_B_DATA_A[7]_A2_DATA[7])
+                                                      0.258     3.159 r  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A2_DATA[7]
+                         net (fo=1, unplaced)         0.000     3.159    u_ctrl/tile_macs_q_reg/DSP_A_B_DATA.A2_DATA<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2_DATA[7]
+                         DSP_PREADD_DATA (Prop_DSP_PREADD_DATA_A2_DATA[7]_A2A1[7])
+                                                      0.114     3.273 r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2A1[7]
+                         net (fo=1, unplaced)         0.000     3.273    u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA.A2A1<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/A2A1[7]
+                         DSP_MULTIPLIER (Prop_DSP_MULTIPLIER_A2A1[7]_U[10])
+                                                      0.700     3.973 r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/U[10]
+                         net (fo=1, unplaced)         0.000     3.973    u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER.U<10>
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[10]
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      4.500     4.500 r  <hidden>
+                                                      0.000     4.500 r  clk
+                         net (fo=23059, unset)        0.055     4.555    u_ctrl/tile_macs_q_reg/CLK
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/CLK
+                         clock pessimism              0.000     4.555    <hidden>
+                         clock uncertainty           -0.035     4.520    <hidden>
+                         DSP_M_DATA (Setup_DSP_M_DATA_CLK_U[10])
+                                                      0.001     4.521    u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST
+  -------------------------------------------------------------------
+                         required time                          4.521    <hidden>
+                         arrival time                          -3.973    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.548    <hidden>
+
+Slack (MET) :             0.548ns  (required time - arrival time)
+  Source:                 u_ctrl/job_q_reg[m][1]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Destination:            u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[11]
+                            (rising edge-triggered cell DSP_M_DATA clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            4.500ns  (core_clk rise@4.500ns - core_clk rise@0.000ns)
+  Data Path Delay:        3.932ns  (logic 2.504ns (63.683%)  route 1.428ns (36.317%))
+  Logic Levels:           11  (CARRY8=1 DSP_A_B_DATA=1 DSP_MULTIPLIER=1 DSP_PREADD_DATA=1 LUT1=1 LUT6=6)
+  Clock Path Skew:        0.014ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.055ns = ( 4.555 - 4.500 ) 
+    Source Clock Delay      (SCD):    0.041ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=23059, unset)        0.041     0.041    u_ctrl/clk
+                         FDRE                                         r  u_ctrl/job_q_reg[m][1]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_FDRE_C_Q)         0.114     0.155 f  u_ctrl/job_q_reg[m][1]/Q
+                         net (fo=4, unplaced)         0.166     0.321    u_ctrl/job_q_reg[m_n_0_][1]
+                                                                      f  u_ctrl/cmd_q[rows][0]_i_12/I0
+                         LUT1 (Prop_LUT1_I0_O)        0.057     0.378 r  u_ctrl/cmd_q[rows][0]_i_12/O
+                         net (fo=1, unplaced)         0.030     0.408    u_ctrl/cmd_q[rows][0]_i_12_n_0
+                                                                      r  u_ctrl/cmd_q_reg[rows][0]_i_3/S[1]
+                         CARRY8 (Prop_CARRY8_S[1]_O[5])
+                                                      0.333     0.741 f  u_ctrl/cmd_q_reg[rows][0]_i_3/O[5]
+                         net (fo=1, unplaced)         0.172     0.913    u_ctrl/cmd_q_reg[rows][0]_i_3_n_10
+                                                                      f  u_ctrl/cmd_q[rows][4]_i_3/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.138 f  u_ctrl/cmd_q[rows][4]_i_3/O
+                         net (fo=5, unplaced)         0.229     1.367    u_ctrl/cmd_q[rows][4]_i_3_n_0
+                                                                      f  u_ctrl/cmd_q[rows][3]_i_2/I4
+                         LUT6 (Prop_LUT6_I4_O)        0.058     1.425 f  u_ctrl/cmd_q[rows][3]_i_2/O
+                         net (fo=3, unplaced)         0.123     1.548    u_ctrl/cmd_q[rows][3]_i_2_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_70/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.773 r  u_ctrl/tile_macs_q_reg_i_70/O
+                         net (fo=1, unplaced)         0.117     1.890    u_ctrl/tile_macs_q_reg_i_70_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_30/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     2.115 r  u_ctrl/tile_macs_q_reg_i_30/O
+                         net (fo=2, unplaced)         0.211     2.326    u_ctrl/tile_macs_q_reg_i_30_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_21/I5
+                         LUT6 (Prop_LUT6_I5_O)        0.058     2.384 f  u_ctrl/tile_macs_q_reg_i_21/O
+                         net (fo=3, unplaced)         0.159     2.543    u_ctrl/tile_macs_q_reg_i_21_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_8/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.137     2.680 f  u_ctrl/tile_macs_q_reg_i_8/O
+                         net (fo=1, unplaced)         0.221     2.901    u_ctrl/tile_macs_q_reg/A[7]
+                                                                      f  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A[7]
+                         DSP_A_B_DATA (Prop_DSP_A_B_DATA_A[7]_A2_DATA[7])
+                                                      0.258     3.159 r  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A2_DATA[7]
+                         net (fo=1, unplaced)         0.000     3.159    u_ctrl/tile_macs_q_reg/DSP_A_B_DATA.A2_DATA<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2_DATA[7]
+                         DSP_PREADD_DATA (Prop_DSP_PREADD_DATA_A2_DATA[7]_A2A1[7])
+                                                      0.114     3.273 r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2A1[7]
+                         net (fo=1, unplaced)         0.000     3.273    u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA.A2A1<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/A2A1[7]
+                         DSP_MULTIPLIER (Prop_DSP_MULTIPLIER_A2A1[7]_U[11])
+                                                      0.700     3.973 r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/U[11]
+                         net (fo=1, unplaced)         0.000     3.973    u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER.U<11>
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[11]
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      4.500     4.500 r  <hidden>
+                                                      0.000     4.500 r  clk
+                         net (fo=23059, unset)        0.055     4.555    u_ctrl/tile_macs_q_reg/CLK
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/CLK
+                         clock pessimism              0.000     4.555    <hidden>
+                         clock uncertainty           -0.035     4.520    <hidden>
+                         DSP_M_DATA (Setup_DSP_M_DATA_CLK_U[11])
+                                                      0.001     4.521    u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST
+  -------------------------------------------------------------------
+                         required time                          4.521    <hidden>
+                         arrival time                          -3.973    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.548    <hidden>
+
+Slack (MET) :             0.548ns  (required time - arrival time)
+  Source:                 u_ctrl/job_q_reg[m][1]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Destination:            u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[12]
+                            (rising edge-triggered cell DSP_M_DATA clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            4.500ns  (core_clk rise@4.500ns - core_clk rise@0.000ns)
+  Data Path Delay:        3.932ns  (logic 2.504ns (63.683%)  route 1.428ns (36.317%))
+  Logic Levels:           11  (CARRY8=1 DSP_A_B_DATA=1 DSP_MULTIPLIER=1 DSP_PREADD_DATA=1 LUT1=1 LUT6=6)
+  Clock Path Skew:        0.014ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.055ns = ( 4.555 - 4.500 ) 
+    Source Clock Delay      (SCD):    0.041ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=23059, unset)        0.041     0.041    u_ctrl/clk
+                         FDRE                                         r  u_ctrl/job_q_reg[m][1]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_FDRE_C_Q)         0.114     0.155 f  u_ctrl/job_q_reg[m][1]/Q
+                         net (fo=4, unplaced)         0.166     0.321    u_ctrl/job_q_reg[m_n_0_][1]
+                                                                      f  u_ctrl/cmd_q[rows][0]_i_12/I0
+                         LUT1 (Prop_LUT1_I0_O)        0.057     0.378 r  u_ctrl/cmd_q[rows][0]_i_12/O
+                         net (fo=1, unplaced)         0.030     0.408    u_ctrl/cmd_q[rows][0]_i_12_n_0
+                                                                      r  u_ctrl/cmd_q_reg[rows][0]_i_3/S[1]
+                         CARRY8 (Prop_CARRY8_S[1]_O[5])
+                                                      0.333     0.741 f  u_ctrl/cmd_q_reg[rows][0]_i_3/O[5]
+                         net (fo=1, unplaced)         0.172     0.913    u_ctrl/cmd_q_reg[rows][0]_i_3_n_10
+                                                                      f  u_ctrl/cmd_q[rows][4]_i_3/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.138 f  u_ctrl/cmd_q[rows][4]_i_3/O
+                         net (fo=5, unplaced)         0.229     1.367    u_ctrl/cmd_q[rows][4]_i_3_n_0
+                                                                      f  u_ctrl/cmd_q[rows][3]_i_2/I4
+                         LUT6 (Prop_LUT6_I4_O)        0.058     1.425 f  u_ctrl/cmd_q[rows][3]_i_2/O
+                         net (fo=3, unplaced)         0.123     1.548    u_ctrl/cmd_q[rows][3]_i_2_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_70/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.773 r  u_ctrl/tile_macs_q_reg_i_70/O
+                         net (fo=1, unplaced)         0.117     1.890    u_ctrl/tile_macs_q_reg_i_70_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_30/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     2.115 r  u_ctrl/tile_macs_q_reg_i_30/O
+                         net (fo=2, unplaced)         0.211     2.326    u_ctrl/tile_macs_q_reg_i_30_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_21/I5
+                         LUT6 (Prop_LUT6_I5_O)        0.058     2.384 f  u_ctrl/tile_macs_q_reg_i_21/O
+                         net (fo=3, unplaced)         0.159     2.543    u_ctrl/tile_macs_q_reg_i_21_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_8/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.137     2.680 f  u_ctrl/tile_macs_q_reg_i_8/O
+                         net (fo=1, unplaced)         0.221     2.901    u_ctrl/tile_macs_q_reg/A[7]
+                                                                      f  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A[7]
+                         DSP_A_B_DATA (Prop_DSP_A_B_DATA_A[7]_A2_DATA[7])
+                                                      0.258     3.159 r  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A2_DATA[7]
+                         net (fo=1, unplaced)         0.000     3.159    u_ctrl/tile_macs_q_reg/DSP_A_B_DATA.A2_DATA<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2_DATA[7]
+                         DSP_PREADD_DATA (Prop_DSP_PREADD_DATA_A2_DATA[7]_A2A1[7])
+                                                      0.114     3.273 r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2A1[7]
+                         net (fo=1, unplaced)         0.000     3.273    u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA.A2A1<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/A2A1[7]
+                         DSP_MULTIPLIER (Prop_DSP_MULTIPLIER_A2A1[7]_U[12])
+                                                      0.700     3.973 r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/U[12]
+                         net (fo=1, unplaced)         0.000     3.973    u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER.U<12>
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[12]
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      4.500     4.500 r  <hidden>
+                                                      0.000     4.500 r  clk
+                         net (fo=23059, unset)        0.055     4.555    u_ctrl/tile_macs_q_reg/CLK
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/CLK
+                         clock pessimism              0.000     4.555    <hidden>
+                         clock uncertainty           -0.035     4.520    <hidden>
+                         DSP_M_DATA (Setup_DSP_M_DATA_CLK_U[12])
+                                                      0.001     4.521    u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST
+  -------------------------------------------------------------------
+                         required time                          4.521    <hidden>
+                         arrival time                          -3.973    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.548    <hidden>
+
+Slack (MET) :             0.548ns  (required time - arrival time)
+  Source:                 u_ctrl/job_q_reg[m][1]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Destination:            u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[13]
+                            (rising edge-triggered cell DSP_M_DATA clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            4.500ns  (core_clk rise@4.500ns - core_clk rise@0.000ns)
+  Data Path Delay:        3.932ns  (logic 2.504ns (63.683%)  route 1.428ns (36.317%))
+  Logic Levels:           11  (CARRY8=1 DSP_A_B_DATA=1 DSP_MULTIPLIER=1 DSP_PREADD_DATA=1 LUT1=1 LUT6=6)
+  Clock Path Skew:        0.014ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.055ns = ( 4.555 - 4.500 ) 
+    Source Clock Delay      (SCD):    0.041ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=23059, unset)        0.041     0.041    u_ctrl/clk
+                         FDRE                                         r  u_ctrl/job_q_reg[m][1]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_FDRE_C_Q)         0.114     0.155 f  u_ctrl/job_q_reg[m][1]/Q
+                         net (fo=4, unplaced)         0.166     0.321    u_ctrl/job_q_reg[m_n_0_][1]
+                                                                      f  u_ctrl/cmd_q[rows][0]_i_12/I0
+                         LUT1 (Prop_LUT1_I0_O)        0.057     0.378 r  u_ctrl/cmd_q[rows][0]_i_12/O
+                         net (fo=1, unplaced)         0.030     0.408    u_ctrl/cmd_q[rows][0]_i_12_n_0
+                                                                      r  u_ctrl/cmd_q_reg[rows][0]_i_3/S[1]
+                         CARRY8 (Prop_CARRY8_S[1]_O[5])
+                                                      0.333     0.741 f  u_ctrl/cmd_q_reg[rows][0]_i_3/O[5]
+                         net (fo=1, unplaced)         0.172     0.913    u_ctrl/cmd_q_reg[rows][0]_i_3_n_10
+                                                                      f  u_ctrl/cmd_q[rows][4]_i_3/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.138 f  u_ctrl/cmd_q[rows][4]_i_3/O
+                         net (fo=5, unplaced)         0.229     1.367    u_ctrl/cmd_q[rows][4]_i_3_n_0
+                                                                      f  u_ctrl/cmd_q[rows][3]_i_2/I4
+                         LUT6 (Prop_LUT6_I4_O)        0.058     1.425 f  u_ctrl/cmd_q[rows][3]_i_2/O
+                         net (fo=3, unplaced)         0.123     1.548    u_ctrl/cmd_q[rows][3]_i_2_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_70/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.773 r  u_ctrl/tile_macs_q_reg_i_70/O
+                         net (fo=1, unplaced)         0.117     1.890    u_ctrl/tile_macs_q_reg_i_70_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_30/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     2.115 r  u_ctrl/tile_macs_q_reg_i_30/O
+                         net (fo=2, unplaced)         0.211     2.326    u_ctrl/tile_macs_q_reg_i_30_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_21/I5
+                         LUT6 (Prop_LUT6_I5_O)        0.058     2.384 f  u_ctrl/tile_macs_q_reg_i_21/O
+                         net (fo=3, unplaced)         0.159     2.543    u_ctrl/tile_macs_q_reg_i_21_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_8/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.137     2.680 f  u_ctrl/tile_macs_q_reg_i_8/O
+                         net (fo=1, unplaced)         0.221     2.901    u_ctrl/tile_macs_q_reg/A[7]
+                                                                      f  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A[7]
+                         DSP_A_B_DATA (Prop_DSP_A_B_DATA_A[7]_A2_DATA[7])
+                                                      0.258     3.159 r  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A2_DATA[7]
+                         net (fo=1, unplaced)         0.000     3.159    u_ctrl/tile_macs_q_reg/DSP_A_B_DATA.A2_DATA<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2_DATA[7]
+                         DSP_PREADD_DATA (Prop_DSP_PREADD_DATA_A2_DATA[7]_A2A1[7])
+                                                      0.114     3.273 r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2A1[7]
+                         net (fo=1, unplaced)         0.000     3.273    u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA.A2A1<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/A2A1[7]
+                         DSP_MULTIPLIER (Prop_DSP_MULTIPLIER_A2A1[7]_U[13])
+                                                      0.700     3.973 r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/U[13]
+                         net (fo=1, unplaced)         0.000     3.973    u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER.U<13>
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[13]
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      4.500     4.500 r  <hidden>
+                                                      0.000     4.500 r  clk
+                         net (fo=23059, unset)        0.055     4.555    u_ctrl/tile_macs_q_reg/CLK
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/CLK
+                         clock pessimism              0.000     4.555    <hidden>
+                         clock uncertainty           -0.035     4.520    <hidden>
+                         DSP_M_DATA (Setup_DSP_M_DATA_CLK_U[13])
+                                                      0.001     4.521    u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST
+  -------------------------------------------------------------------
+                         required time                          4.521    <hidden>
+                         arrival time                          -3.973    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.548    <hidden>
+
+Slack (MET) :             0.548ns  (required time - arrival time)
+  Source:                 u_ctrl/job_q_reg[m][1]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Destination:            u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[14]
+                            (rising edge-triggered cell DSP_M_DATA clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            4.500ns  (core_clk rise@4.500ns - core_clk rise@0.000ns)
+  Data Path Delay:        3.932ns  (logic 2.504ns (63.683%)  route 1.428ns (36.317%))
+  Logic Levels:           11  (CARRY8=1 DSP_A_B_DATA=1 DSP_MULTIPLIER=1 DSP_PREADD_DATA=1 LUT1=1 LUT6=6)
+  Clock Path Skew:        0.014ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.055ns = ( 4.555 - 4.500 ) 
+    Source Clock Delay      (SCD):    0.041ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=23059, unset)        0.041     0.041    u_ctrl/clk
+                         FDRE                                         r  u_ctrl/job_q_reg[m][1]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_FDRE_C_Q)         0.114     0.155 f  u_ctrl/job_q_reg[m][1]/Q
+                         net (fo=4, unplaced)         0.166     0.321    u_ctrl/job_q_reg[m_n_0_][1]
+                                                                      f  u_ctrl/cmd_q[rows][0]_i_12/I0
+                         LUT1 (Prop_LUT1_I0_O)        0.057     0.378 r  u_ctrl/cmd_q[rows][0]_i_12/O
+                         net (fo=1, unplaced)         0.030     0.408    u_ctrl/cmd_q[rows][0]_i_12_n_0
+                                                                      r  u_ctrl/cmd_q_reg[rows][0]_i_3/S[1]
+                         CARRY8 (Prop_CARRY8_S[1]_O[5])
+                                                      0.333     0.741 f  u_ctrl/cmd_q_reg[rows][0]_i_3/O[5]
+                         net (fo=1, unplaced)         0.172     0.913    u_ctrl/cmd_q_reg[rows][0]_i_3_n_10
+                                                                      f  u_ctrl/cmd_q[rows][4]_i_3/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.138 f  u_ctrl/cmd_q[rows][4]_i_3/O
+                         net (fo=5, unplaced)         0.229     1.367    u_ctrl/cmd_q[rows][4]_i_3_n_0
+                                                                      f  u_ctrl/cmd_q[rows][3]_i_2/I4
+                         LUT6 (Prop_LUT6_I4_O)        0.058     1.425 f  u_ctrl/cmd_q[rows][3]_i_2/O
+                         net (fo=3, unplaced)         0.123     1.548    u_ctrl/cmd_q[rows][3]_i_2_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_70/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.773 r  u_ctrl/tile_macs_q_reg_i_70/O
+                         net (fo=1, unplaced)         0.117     1.890    u_ctrl/tile_macs_q_reg_i_70_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_30/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     2.115 r  u_ctrl/tile_macs_q_reg_i_30/O
+                         net (fo=2, unplaced)         0.211     2.326    u_ctrl/tile_macs_q_reg_i_30_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_21/I5
+                         LUT6 (Prop_LUT6_I5_O)        0.058     2.384 f  u_ctrl/tile_macs_q_reg_i_21/O
+                         net (fo=3, unplaced)         0.159     2.543    u_ctrl/tile_macs_q_reg_i_21_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_8/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.137     2.680 f  u_ctrl/tile_macs_q_reg_i_8/O
+                         net (fo=1, unplaced)         0.221     2.901    u_ctrl/tile_macs_q_reg/A[7]
+                                                                      f  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A[7]
+                         DSP_A_B_DATA (Prop_DSP_A_B_DATA_A[7]_A2_DATA[7])
+                                                      0.258     3.159 r  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A2_DATA[7]
+                         net (fo=1, unplaced)         0.000     3.159    u_ctrl/tile_macs_q_reg/DSP_A_B_DATA.A2_DATA<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2_DATA[7]
+                         DSP_PREADD_DATA (Prop_DSP_PREADD_DATA_A2_DATA[7]_A2A1[7])
+                                                      0.114     3.273 r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2A1[7]
+                         net (fo=1, unplaced)         0.000     3.273    u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA.A2A1<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/A2A1[7]
+                         DSP_MULTIPLIER (Prop_DSP_MULTIPLIER_A2A1[7]_U[14])
+                                                      0.700     3.973 r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/U[14]
+                         net (fo=1, unplaced)         0.000     3.973    u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER.U<14>
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[14]
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      4.500     4.500 r  <hidden>
+                                                      0.000     4.500 r  clk
+                         net (fo=23059, unset)        0.055     4.555    u_ctrl/tile_macs_q_reg/CLK
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/CLK
+                         clock pessimism              0.000     4.555    <hidden>
+                         clock uncertainty           -0.035     4.520    <hidden>
+                         DSP_M_DATA (Setup_DSP_M_DATA_CLK_U[14])
+                                                      0.001     4.521    u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST
+  -------------------------------------------------------------------
+                         required time                          4.521    <hidden>
+                         arrival time                          -3.973    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.548    <hidden>
+
+Slack (MET) :             0.548ns  (required time - arrival time)
+  Source:                 u_ctrl/job_q_reg[m][1]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Destination:            u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[15]
+                            (rising edge-triggered cell DSP_M_DATA clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            4.500ns  (core_clk rise@4.500ns - core_clk rise@0.000ns)
+  Data Path Delay:        3.932ns  (logic 2.504ns (63.683%)  route 1.428ns (36.317%))
+  Logic Levels:           11  (CARRY8=1 DSP_A_B_DATA=1 DSP_MULTIPLIER=1 DSP_PREADD_DATA=1 LUT1=1 LUT6=6)
+  Clock Path Skew:        0.014ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.055ns = ( 4.555 - 4.500 ) 
+    Source Clock Delay      (SCD):    0.041ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=23059, unset)        0.041     0.041    u_ctrl/clk
+                         FDRE                                         r  u_ctrl/job_q_reg[m][1]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_FDRE_C_Q)         0.114     0.155 f  u_ctrl/job_q_reg[m][1]/Q
+                         net (fo=4, unplaced)         0.166     0.321    u_ctrl/job_q_reg[m_n_0_][1]
+                                                                      f  u_ctrl/cmd_q[rows][0]_i_12/I0
+                         LUT1 (Prop_LUT1_I0_O)        0.057     0.378 r  u_ctrl/cmd_q[rows][0]_i_12/O
+                         net (fo=1, unplaced)         0.030     0.408    u_ctrl/cmd_q[rows][0]_i_12_n_0
+                                                                      r  u_ctrl/cmd_q_reg[rows][0]_i_3/S[1]
+                         CARRY8 (Prop_CARRY8_S[1]_O[5])
+                                                      0.333     0.741 f  u_ctrl/cmd_q_reg[rows][0]_i_3/O[5]
+                         net (fo=1, unplaced)         0.172     0.913    u_ctrl/cmd_q_reg[rows][0]_i_3_n_10
+                                                                      f  u_ctrl/cmd_q[rows][4]_i_3/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.138 f  u_ctrl/cmd_q[rows][4]_i_3/O
+                         net (fo=5, unplaced)         0.229     1.367    u_ctrl/cmd_q[rows][4]_i_3_n_0
+                                                                      f  u_ctrl/cmd_q[rows][3]_i_2/I4
+                         LUT6 (Prop_LUT6_I4_O)        0.058     1.425 f  u_ctrl/cmd_q[rows][3]_i_2/O
+                         net (fo=3, unplaced)         0.123     1.548    u_ctrl/cmd_q[rows][3]_i_2_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_70/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.773 r  u_ctrl/tile_macs_q_reg_i_70/O
+                         net (fo=1, unplaced)         0.117     1.890    u_ctrl/tile_macs_q_reg_i_70_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_30/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     2.115 r  u_ctrl/tile_macs_q_reg_i_30/O
+                         net (fo=2, unplaced)         0.211     2.326    u_ctrl/tile_macs_q_reg_i_30_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_21/I5
+                         LUT6 (Prop_LUT6_I5_O)        0.058     2.384 f  u_ctrl/tile_macs_q_reg_i_21/O
+                         net (fo=3, unplaced)         0.159     2.543    u_ctrl/tile_macs_q_reg_i_21_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_8/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.137     2.680 f  u_ctrl/tile_macs_q_reg_i_8/O
+                         net (fo=1, unplaced)         0.221     2.901    u_ctrl/tile_macs_q_reg/A[7]
+                                                                      f  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A[7]
+                         DSP_A_B_DATA (Prop_DSP_A_B_DATA_A[7]_A2_DATA[7])
+                                                      0.258     3.159 r  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A2_DATA[7]
+                         net (fo=1, unplaced)         0.000     3.159    u_ctrl/tile_macs_q_reg/DSP_A_B_DATA.A2_DATA<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2_DATA[7]
+                         DSP_PREADD_DATA (Prop_DSP_PREADD_DATA_A2_DATA[7]_A2A1[7])
+                                                      0.114     3.273 r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2A1[7]
+                         net (fo=1, unplaced)         0.000     3.273    u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA.A2A1<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/A2A1[7]
+                         DSP_MULTIPLIER (Prop_DSP_MULTIPLIER_A2A1[7]_U[15])
+                                                      0.700     3.973 r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/U[15]
+                         net (fo=1, unplaced)         0.000     3.973    u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER.U<15>
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[15]
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      4.500     4.500 r  <hidden>
+                                                      0.000     4.500 r  clk
+                         net (fo=23059, unset)        0.055     4.555    u_ctrl/tile_macs_q_reg/CLK
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/CLK
+                         clock pessimism              0.000     4.555    <hidden>
+                         clock uncertainty           -0.035     4.520    <hidden>
+                         DSP_M_DATA (Setup_DSP_M_DATA_CLK_U[15])
+                                                      0.001     4.521    u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST
+  -------------------------------------------------------------------
+                         required time                          4.521    <hidden>
+                         arrival time                          -3.973    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.548    <hidden>
+
+Slack (MET) :             0.548ns  (required time - arrival time)
+  Source:                 u_ctrl/job_q_reg[m][1]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Destination:            u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[16]
+                            (rising edge-triggered cell DSP_M_DATA clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            4.500ns  (core_clk rise@4.500ns - core_clk rise@0.000ns)
+  Data Path Delay:        3.932ns  (logic 2.504ns (63.683%)  route 1.428ns (36.317%))
+  Logic Levels:           11  (CARRY8=1 DSP_A_B_DATA=1 DSP_MULTIPLIER=1 DSP_PREADD_DATA=1 LUT1=1 LUT6=6)
+  Clock Path Skew:        0.014ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.055ns = ( 4.555 - 4.500 ) 
+    Source Clock Delay      (SCD):    0.041ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=23059, unset)        0.041     0.041    u_ctrl/clk
+                         FDRE                                         r  u_ctrl/job_q_reg[m][1]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_FDRE_C_Q)         0.114     0.155 f  u_ctrl/job_q_reg[m][1]/Q
+                         net (fo=4, unplaced)         0.166     0.321    u_ctrl/job_q_reg[m_n_0_][1]
+                                                                      f  u_ctrl/cmd_q[rows][0]_i_12/I0
+                         LUT1 (Prop_LUT1_I0_O)        0.057     0.378 r  u_ctrl/cmd_q[rows][0]_i_12/O
+                         net (fo=1, unplaced)         0.030     0.408    u_ctrl/cmd_q[rows][0]_i_12_n_0
+                                                                      r  u_ctrl/cmd_q_reg[rows][0]_i_3/S[1]
+                         CARRY8 (Prop_CARRY8_S[1]_O[5])
+                                                      0.333     0.741 f  u_ctrl/cmd_q_reg[rows][0]_i_3/O[5]
+                         net (fo=1, unplaced)         0.172     0.913    u_ctrl/cmd_q_reg[rows][0]_i_3_n_10
+                                                                      f  u_ctrl/cmd_q[rows][4]_i_3/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.138 f  u_ctrl/cmd_q[rows][4]_i_3/O
+                         net (fo=5, unplaced)         0.229     1.367    u_ctrl/cmd_q[rows][4]_i_3_n_0
+                                                                      f  u_ctrl/cmd_q[rows][3]_i_2/I4
+                         LUT6 (Prop_LUT6_I4_O)        0.058     1.425 f  u_ctrl/cmd_q[rows][3]_i_2/O
+                         net (fo=3, unplaced)         0.123     1.548    u_ctrl/cmd_q[rows][3]_i_2_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_70/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.773 r  u_ctrl/tile_macs_q_reg_i_70/O
+                         net (fo=1, unplaced)         0.117     1.890    u_ctrl/tile_macs_q_reg_i_70_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_30/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     2.115 r  u_ctrl/tile_macs_q_reg_i_30/O
+                         net (fo=2, unplaced)         0.211     2.326    u_ctrl/tile_macs_q_reg_i_30_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_21/I5
+                         LUT6 (Prop_LUT6_I5_O)        0.058     2.384 f  u_ctrl/tile_macs_q_reg_i_21/O
+                         net (fo=3, unplaced)         0.159     2.543    u_ctrl/tile_macs_q_reg_i_21_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_8/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.137     2.680 f  u_ctrl/tile_macs_q_reg_i_8/O
+                         net (fo=1, unplaced)         0.221     2.901    u_ctrl/tile_macs_q_reg/A[7]
+                                                                      f  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A[7]
+                         DSP_A_B_DATA (Prop_DSP_A_B_DATA_A[7]_A2_DATA[7])
+                                                      0.258     3.159 r  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A2_DATA[7]
+                         net (fo=1, unplaced)         0.000     3.159    u_ctrl/tile_macs_q_reg/DSP_A_B_DATA.A2_DATA<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2_DATA[7]
+                         DSP_PREADD_DATA (Prop_DSP_PREADD_DATA_A2_DATA[7]_A2A1[7])
+                                                      0.114     3.273 r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2A1[7]
+                         net (fo=1, unplaced)         0.000     3.273    u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA.A2A1<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/A2A1[7]
+                         DSP_MULTIPLIER (Prop_DSP_MULTIPLIER_A2A1[7]_U[16])
+                                                      0.700     3.973 r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/U[16]
+                         net (fo=1, unplaced)         0.000     3.973    u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER.U<16>
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[16]
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      4.500     4.500 r  <hidden>
+                                                      0.000     4.500 r  clk
+                         net (fo=23059, unset)        0.055     4.555    u_ctrl/tile_macs_q_reg/CLK
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/CLK
+                         clock pessimism              0.000     4.555    <hidden>
+                         clock uncertainty           -0.035     4.520    <hidden>
+                         DSP_M_DATA (Setup_DSP_M_DATA_CLK_U[16])
+                                                      0.001     4.521    u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST
+  -------------------------------------------------------------------
+                         required time                          4.521    <hidden>
+                         arrival time                          -3.973    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.548    <hidden>
+
+Slack (MET) :             0.548ns  (required time - arrival time)
+  Source:                 u_ctrl/job_q_reg[m][1]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Destination:            u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[17]
+                            (rising edge-triggered cell DSP_M_DATA clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            4.500ns  (core_clk rise@4.500ns - core_clk rise@0.000ns)
+  Data Path Delay:        3.932ns  (logic 2.504ns (63.683%)  route 1.428ns (36.317%))
+  Logic Levels:           11  (CARRY8=1 DSP_A_B_DATA=1 DSP_MULTIPLIER=1 DSP_PREADD_DATA=1 LUT1=1 LUT6=6)
+  Clock Path Skew:        0.014ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.055ns = ( 4.555 - 4.500 ) 
+    Source Clock Delay      (SCD):    0.041ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=23059, unset)        0.041     0.041    u_ctrl/clk
+                         FDRE                                         r  u_ctrl/job_q_reg[m][1]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_FDRE_C_Q)         0.114     0.155 f  u_ctrl/job_q_reg[m][1]/Q
+                         net (fo=4, unplaced)         0.166     0.321    u_ctrl/job_q_reg[m_n_0_][1]
+                                                                      f  u_ctrl/cmd_q[rows][0]_i_12/I0
+                         LUT1 (Prop_LUT1_I0_O)        0.057     0.378 r  u_ctrl/cmd_q[rows][0]_i_12/O
+                         net (fo=1, unplaced)         0.030     0.408    u_ctrl/cmd_q[rows][0]_i_12_n_0
+                                                                      r  u_ctrl/cmd_q_reg[rows][0]_i_3/S[1]
+                         CARRY8 (Prop_CARRY8_S[1]_O[5])
+                                                      0.333     0.741 f  u_ctrl/cmd_q_reg[rows][0]_i_3/O[5]
+                         net (fo=1, unplaced)         0.172     0.913    u_ctrl/cmd_q_reg[rows][0]_i_3_n_10
+                                                                      f  u_ctrl/cmd_q[rows][4]_i_3/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.138 f  u_ctrl/cmd_q[rows][4]_i_3/O
+                         net (fo=5, unplaced)         0.229     1.367    u_ctrl/cmd_q[rows][4]_i_3_n_0
+                                                                      f  u_ctrl/cmd_q[rows][3]_i_2/I4
+                         LUT6 (Prop_LUT6_I4_O)        0.058     1.425 f  u_ctrl/cmd_q[rows][3]_i_2/O
+                         net (fo=3, unplaced)         0.123     1.548    u_ctrl/cmd_q[rows][3]_i_2_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_70/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.773 r  u_ctrl/tile_macs_q_reg_i_70/O
+                         net (fo=1, unplaced)         0.117     1.890    u_ctrl/tile_macs_q_reg_i_70_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_30/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     2.115 r  u_ctrl/tile_macs_q_reg_i_30/O
+                         net (fo=2, unplaced)         0.211     2.326    u_ctrl/tile_macs_q_reg_i_30_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_21/I5
+                         LUT6 (Prop_LUT6_I5_O)        0.058     2.384 f  u_ctrl/tile_macs_q_reg_i_21/O
+                         net (fo=3, unplaced)         0.159     2.543    u_ctrl/tile_macs_q_reg_i_21_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_8/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.137     2.680 f  u_ctrl/tile_macs_q_reg_i_8/O
+                         net (fo=1, unplaced)         0.221     2.901    u_ctrl/tile_macs_q_reg/A[7]
+                                                                      f  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A[7]
+                         DSP_A_B_DATA (Prop_DSP_A_B_DATA_A[7]_A2_DATA[7])
+                                                      0.258     3.159 r  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A2_DATA[7]
+                         net (fo=1, unplaced)         0.000     3.159    u_ctrl/tile_macs_q_reg/DSP_A_B_DATA.A2_DATA<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2_DATA[7]
+                         DSP_PREADD_DATA (Prop_DSP_PREADD_DATA_A2_DATA[7]_A2A1[7])
+                                                      0.114     3.273 r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2A1[7]
+                         net (fo=1, unplaced)         0.000     3.273    u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA.A2A1<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/A2A1[7]
+                         DSP_MULTIPLIER (Prop_DSP_MULTIPLIER_A2A1[7]_U[17])
+                                                      0.700     3.973 r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/U[17]
+                         net (fo=1, unplaced)         0.000     3.973    u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER.U<17>
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[17]
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      4.500     4.500 r  <hidden>
+                                                      0.000     4.500 r  clk
+                         net (fo=23059, unset)        0.055     4.555    u_ctrl/tile_macs_q_reg/CLK
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/CLK
+                         clock pessimism              0.000     4.555    <hidden>
+                         clock uncertainty           -0.035     4.520    <hidden>
+                         DSP_M_DATA (Setup_DSP_M_DATA_CLK_U[17])
+                                                      0.001     4.521    u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST
+  -------------------------------------------------------------------
+                         required time                          4.521    <hidden>
+                         arrival time                          -3.973    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.548    <hidden>
+
+Slack (MET) :             0.548ns  (required time - arrival time)
+  Source:                 u_ctrl/job_q_reg[m][1]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Destination:            u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[18]
+                            (rising edge-triggered cell DSP_M_DATA clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            4.500ns  (core_clk rise@4.500ns - core_clk rise@0.000ns)
+  Data Path Delay:        3.932ns  (logic 2.504ns (63.683%)  route 1.428ns (36.317%))
+  Logic Levels:           11  (CARRY8=1 DSP_A_B_DATA=1 DSP_MULTIPLIER=1 DSP_PREADD_DATA=1 LUT1=1 LUT6=6)
+  Clock Path Skew:        0.014ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.055ns = ( 4.555 - 4.500 ) 
+    Source Clock Delay      (SCD):    0.041ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=23059, unset)        0.041     0.041    u_ctrl/clk
+                         FDRE                                         r  u_ctrl/job_q_reg[m][1]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_FDRE_C_Q)         0.114     0.155 f  u_ctrl/job_q_reg[m][1]/Q
+                         net (fo=4, unplaced)         0.166     0.321    u_ctrl/job_q_reg[m_n_0_][1]
+                                                                      f  u_ctrl/cmd_q[rows][0]_i_12/I0
+                         LUT1 (Prop_LUT1_I0_O)        0.057     0.378 r  u_ctrl/cmd_q[rows][0]_i_12/O
+                         net (fo=1, unplaced)         0.030     0.408    u_ctrl/cmd_q[rows][0]_i_12_n_0
+                                                                      r  u_ctrl/cmd_q_reg[rows][0]_i_3/S[1]
+                         CARRY8 (Prop_CARRY8_S[1]_O[5])
+                                                      0.333     0.741 f  u_ctrl/cmd_q_reg[rows][0]_i_3/O[5]
+                         net (fo=1, unplaced)         0.172     0.913    u_ctrl/cmd_q_reg[rows][0]_i_3_n_10
+                                                                      f  u_ctrl/cmd_q[rows][4]_i_3/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.138 f  u_ctrl/cmd_q[rows][4]_i_3/O
+                         net (fo=5, unplaced)         0.229     1.367    u_ctrl/cmd_q[rows][4]_i_3_n_0
+                                                                      f  u_ctrl/cmd_q[rows][3]_i_2/I4
+                         LUT6 (Prop_LUT6_I4_O)        0.058     1.425 f  u_ctrl/cmd_q[rows][3]_i_2/O
+                         net (fo=3, unplaced)         0.123     1.548    u_ctrl/cmd_q[rows][3]_i_2_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_70/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.773 r  u_ctrl/tile_macs_q_reg_i_70/O
+                         net (fo=1, unplaced)         0.117     1.890    u_ctrl/tile_macs_q_reg_i_70_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_30/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     2.115 r  u_ctrl/tile_macs_q_reg_i_30/O
+                         net (fo=2, unplaced)         0.211     2.326    u_ctrl/tile_macs_q_reg_i_30_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_21/I5
+                         LUT6 (Prop_LUT6_I5_O)        0.058     2.384 f  u_ctrl/tile_macs_q_reg_i_21/O
+                         net (fo=3, unplaced)         0.159     2.543    u_ctrl/tile_macs_q_reg_i_21_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_8/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.137     2.680 f  u_ctrl/tile_macs_q_reg_i_8/O
+                         net (fo=1, unplaced)         0.221     2.901    u_ctrl/tile_macs_q_reg/A[7]
+                                                                      f  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A[7]
+                         DSP_A_B_DATA (Prop_DSP_A_B_DATA_A[7]_A2_DATA[7])
+                                                      0.258     3.159 r  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A2_DATA[7]
+                         net (fo=1, unplaced)         0.000     3.159    u_ctrl/tile_macs_q_reg/DSP_A_B_DATA.A2_DATA<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2_DATA[7]
+                         DSP_PREADD_DATA (Prop_DSP_PREADD_DATA_A2_DATA[7]_A2A1[7])
+                                                      0.114     3.273 r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2A1[7]
+                         net (fo=1, unplaced)         0.000     3.273    u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA.A2A1<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/A2A1[7]
+                         DSP_MULTIPLIER (Prop_DSP_MULTIPLIER_A2A1[7]_U[18])
+                                                      0.700     3.973 r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/U[18]
+                         net (fo=1, unplaced)         0.000     3.973    u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER.U<18>
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[18]
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      4.500     4.500 r  <hidden>
+                                                      0.000     4.500 r  clk
+                         net (fo=23059, unset)        0.055     4.555    u_ctrl/tile_macs_q_reg/CLK
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/CLK
+                         clock pessimism              0.000     4.555    <hidden>
+                         clock uncertainty           -0.035     4.520    <hidden>
+                         DSP_M_DATA (Setup_DSP_M_DATA_CLK_U[18])
+                                                      0.001     4.521    u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST
+  -------------------------------------------------------------------
+                         required time                          4.521    <hidden>
+                         arrival time                          -3.973    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.548    <hidden>
+
+Slack (MET) :             0.548ns  (required time - arrival time)
+  Source:                 u_ctrl/job_q_reg[m][1]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Destination:            u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[19]
+                            (rising edge-triggered cell DSP_M_DATA clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            4.500ns  (core_clk rise@4.500ns - core_clk rise@0.000ns)
+  Data Path Delay:        3.932ns  (logic 2.504ns (63.683%)  route 1.428ns (36.317%))
+  Logic Levels:           11  (CARRY8=1 DSP_A_B_DATA=1 DSP_MULTIPLIER=1 DSP_PREADD_DATA=1 LUT1=1 LUT6=6)
+  Clock Path Skew:        0.014ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.055ns = ( 4.555 - 4.500 ) 
+    Source Clock Delay      (SCD):    0.041ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=23059, unset)        0.041     0.041    u_ctrl/clk
+                         FDRE                                         r  u_ctrl/job_q_reg[m][1]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_FDRE_C_Q)         0.114     0.155 f  u_ctrl/job_q_reg[m][1]/Q
+                         net (fo=4, unplaced)         0.166     0.321    u_ctrl/job_q_reg[m_n_0_][1]
+                                                                      f  u_ctrl/cmd_q[rows][0]_i_12/I0
+                         LUT1 (Prop_LUT1_I0_O)        0.057     0.378 r  u_ctrl/cmd_q[rows][0]_i_12/O
+                         net (fo=1, unplaced)         0.030     0.408    u_ctrl/cmd_q[rows][0]_i_12_n_0
+                                                                      r  u_ctrl/cmd_q_reg[rows][0]_i_3/S[1]
+                         CARRY8 (Prop_CARRY8_S[1]_O[5])
+                                                      0.333     0.741 f  u_ctrl/cmd_q_reg[rows][0]_i_3/O[5]
+                         net (fo=1, unplaced)         0.172     0.913    u_ctrl/cmd_q_reg[rows][0]_i_3_n_10
+                                                                      f  u_ctrl/cmd_q[rows][4]_i_3/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.138 f  u_ctrl/cmd_q[rows][4]_i_3/O
+                         net (fo=5, unplaced)         0.229     1.367    u_ctrl/cmd_q[rows][4]_i_3_n_0
+                                                                      f  u_ctrl/cmd_q[rows][3]_i_2/I4
+                         LUT6 (Prop_LUT6_I4_O)        0.058     1.425 f  u_ctrl/cmd_q[rows][3]_i_2/O
+                         net (fo=3, unplaced)         0.123     1.548    u_ctrl/cmd_q[rows][3]_i_2_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_70/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.773 r  u_ctrl/tile_macs_q_reg_i_70/O
+                         net (fo=1, unplaced)         0.117     1.890    u_ctrl/tile_macs_q_reg_i_70_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_30/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     2.115 r  u_ctrl/tile_macs_q_reg_i_30/O
+                         net (fo=2, unplaced)         0.211     2.326    u_ctrl/tile_macs_q_reg_i_30_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_21/I5
+                         LUT6 (Prop_LUT6_I5_O)        0.058     2.384 f  u_ctrl/tile_macs_q_reg_i_21/O
+                         net (fo=3, unplaced)         0.159     2.543    u_ctrl/tile_macs_q_reg_i_21_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_8/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.137     2.680 f  u_ctrl/tile_macs_q_reg_i_8/O
+                         net (fo=1, unplaced)         0.221     2.901    u_ctrl/tile_macs_q_reg/A[7]
+                                                                      f  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A[7]
+                         DSP_A_B_DATA (Prop_DSP_A_B_DATA_A[7]_A2_DATA[7])
+                                                      0.258     3.159 r  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A2_DATA[7]
+                         net (fo=1, unplaced)         0.000     3.159    u_ctrl/tile_macs_q_reg/DSP_A_B_DATA.A2_DATA<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2_DATA[7]
+                         DSP_PREADD_DATA (Prop_DSP_PREADD_DATA_A2_DATA[7]_A2A1[7])
+                                                      0.114     3.273 r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2A1[7]
+                         net (fo=1, unplaced)         0.000     3.273    u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA.A2A1<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/A2A1[7]
+                         DSP_MULTIPLIER (Prop_DSP_MULTIPLIER_A2A1[7]_U[19])
+                                                      0.700     3.973 r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/U[19]
+                         net (fo=1, unplaced)         0.000     3.973    u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER.U<19>
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[19]
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      4.500     4.500 r  <hidden>
+                                                      0.000     4.500 r  clk
+                         net (fo=23059, unset)        0.055     4.555    u_ctrl/tile_macs_q_reg/CLK
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/CLK
+                         clock pessimism              0.000     4.555    <hidden>
+                         clock uncertainty           -0.035     4.520    <hidden>
+                         DSP_M_DATA (Setup_DSP_M_DATA_CLK_U[19])
+                                                      0.001     4.521    u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST
+  -------------------------------------------------------------------
+                         required time                          4.521    <hidden>
+                         arrival time                          -3.973    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.548    <hidden>
+
+Slack (MET) :             0.548ns  (required time - arrival time)
+  Source:                 u_ctrl/job_q_reg[m][1]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Destination:            u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[20]
+                            (rising edge-triggered cell DSP_M_DATA clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            4.500ns  (core_clk rise@4.500ns - core_clk rise@0.000ns)
+  Data Path Delay:        3.932ns  (logic 2.504ns (63.683%)  route 1.428ns (36.317%))
+  Logic Levels:           11  (CARRY8=1 DSP_A_B_DATA=1 DSP_MULTIPLIER=1 DSP_PREADD_DATA=1 LUT1=1 LUT6=6)
+  Clock Path Skew:        0.014ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.055ns = ( 4.555 - 4.500 ) 
+    Source Clock Delay      (SCD):    0.041ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=23059, unset)        0.041     0.041    u_ctrl/clk
+                         FDRE                                         r  u_ctrl/job_q_reg[m][1]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_FDRE_C_Q)         0.114     0.155 f  u_ctrl/job_q_reg[m][1]/Q
+                         net (fo=4, unplaced)         0.166     0.321    u_ctrl/job_q_reg[m_n_0_][1]
+                                                                      f  u_ctrl/cmd_q[rows][0]_i_12/I0
+                         LUT1 (Prop_LUT1_I0_O)        0.057     0.378 r  u_ctrl/cmd_q[rows][0]_i_12/O
+                         net (fo=1, unplaced)         0.030     0.408    u_ctrl/cmd_q[rows][0]_i_12_n_0
+                                                                      r  u_ctrl/cmd_q_reg[rows][0]_i_3/S[1]
+                         CARRY8 (Prop_CARRY8_S[1]_O[5])
+                                                      0.333     0.741 f  u_ctrl/cmd_q_reg[rows][0]_i_3/O[5]
+                         net (fo=1, unplaced)         0.172     0.913    u_ctrl/cmd_q_reg[rows][0]_i_3_n_10
+                                                                      f  u_ctrl/cmd_q[rows][4]_i_3/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.138 f  u_ctrl/cmd_q[rows][4]_i_3/O
+                         net (fo=5, unplaced)         0.229     1.367    u_ctrl/cmd_q[rows][4]_i_3_n_0
+                                                                      f  u_ctrl/cmd_q[rows][3]_i_2/I4
+                         LUT6 (Prop_LUT6_I4_O)        0.058     1.425 f  u_ctrl/cmd_q[rows][3]_i_2/O
+                         net (fo=3, unplaced)         0.123     1.548    u_ctrl/cmd_q[rows][3]_i_2_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_70/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.773 r  u_ctrl/tile_macs_q_reg_i_70/O
+                         net (fo=1, unplaced)         0.117     1.890    u_ctrl/tile_macs_q_reg_i_70_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_30/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     2.115 r  u_ctrl/tile_macs_q_reg_i_30/O
+                         net (fo=2, unplaced)         0.211     2.326    u_ctrl/tile_macs_q_reg_i_30_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_21/I5
+                         LUT6 (Prop_LUT6_I5_O)        0.058     2.384 f  u_ctrl/tile_macs_q_reg_i_21/O
+                         net (fo=3, unplaced)         0.159     2.543    u_ctrl/tile_macs_q_reg_i_21_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_8/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.137     2.680 f  u_ctrl/tile_macs_q_reg_i_8/O
+                         net (fo=1, unplaced)         0.221     2.901    u_ctrl/tile_macs_q_reg/A[7]
+                                                                      f  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A[7]
+                         DSP_A_B_DATA (Prop_DSP_A_B_DATA_A[7]_A2_DATA[7])
+                                                      0.258     3.159 r  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A2_DATA[7]
+                         net (fo=1, unplaced)         0.000     3.159    u_ctrl/tile_macs_q_reg/DSP_A_B_DATA.A2_DATA<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2_DATA[7]
+                         DSP_PREADD_DATA (Prop_DSP_PREADD_DATA_A2_DATA[7]_A2A1[7])
+                                                      0.114     3.273 r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2A1[7]
+                         net (fo=1, unplaced)         0.000     3.273    u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA.A2A1<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/A2A1[7]
+                         DSP_MULTIPLIER (Prop_DSP_MULTIPLIER_A2A1[7]_U[20])
+                                                      0.700     3.973 r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/U[20]
+                         net (fo=1, unplaced)         0.000     3.973    u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER.U<20>
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[20]
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      4.500     4.500 r  <hidden>
+                                                      0.000     4.500 r  clk
+                         net (fo=23059, unset)        0.055     4.555    u_ctrl/tile_macs_q_reg/CLK
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/CLK
+                         clock pessimism              0.000     4.555    <hidden>
+                         clock uncertainty           -0.035     4.520    <hidden>
+                         DSP_M_DATA (Setup_DSP_M_DATA_CLK_U[20])
+                                                      0.001     4.521    u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST
+  -------------------------------------------------------------------
+                         required time                          4.521    <hidden>
+                         arrival time                          -3.973    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.548    <hidden>
+
+Slack (MET) :             0.548ns  (required time - arrival time)
+  Source:                 u_ctrl/job_q_reg[m][1]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Destination:            u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[21]
+                            (rising edge-triggered cell DSP_M_DATA clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            4.500ns  (core_clk rise@4.500ns - core_clk rise@0.000ns)
+  Data Path Delay:        3.932ns  (logic 2.504ns (63.683%)  route 1.428ns (36.317%))
+  Logic Levels:           11  (CARRY8=1 DSP_A_B_DATA=1 DSP_MULTIPLIER=1 DSP_PREADD_DATA=1 LUT1=1 LUT6=6)
+  Clock Path Skew:        0.014ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.055ns = ( 4.555 - 4.500 ) 
+    Source Clock Delay      (SCD):    0.041ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=23059, unset)        0.041     0.041    u_ctrl/clk
+                         FDRE                                         r  u_ctrl/job_q_reg[m][1]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_FDRE_C_Q)         0.114     0.155 f  u_ctrl/job_q_reg[m][1]/Q
+                         net (fo=4, unplaced)         0.166     0.321    u_ctrl/job_q_reg[m_n_0_][1]
+                                                                      f  u_ctrl/cmd_q[rows][0]_i_12/I0
+                         LUT1 (Prop_LUT1_I0_O)        0.057     0.378 r  u_ctrl/cmd_q[rows][0]_i_12/O
+                         net (fo=1, unplaced)         0.030     0.408    u_ctrl/cmd_q[rows][0]_i_12_n_0
+                                                                      r  u_ctrl/cmd_q_reg[rows][0]_i_3/S[1]
+                         CARRY8 (Prop_CARRY8_S[1]_O[5])
+                                                      0.333     0.741 f  u_ctrl/cmd_q_reg[rows][0]_i_3/O[5]
+                         net (fo=1, unplaced)         0.172     0.913    u_ctrl/cmd_q_reg[rows][0]_i_3_n_10
+                                                                      f  u_ctrl/cmd_q[rows][4]_i_3/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.138 f  u_ctrl/cmd_q[rows][4]_i_3/O
+                         net (fo=5, unplaced)         0.229     1.367    u_ctrl/cmd_q[rows][4]_i_3_n_0
+                                                                      f  u_ctrl/cmd_q[rows][3]_i_2/I4
+                         LUT6 (Prop_LUT6_I4_O)        0.058     1.425 f  u_ctrl/cmd_q[rows][3]_i_2/O
+                         net (fo=3, unplaced)         0.123     1.548    u_ctrl/cmd_q[rows][3]_i_2_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_70/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.773 r  u_ctrl/tile_macs_q_reg_i_70/O
+                         net (fo=1, unplaced)         0.117     1.890    u_ctrl/tile_macs_q_reg_i_70_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_30/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     2.115 r  u_ctrl/tile_macs_q_reg_i_30/O
+                         net (fo=2, unplaced)         0.211     2.326    u_ctrl/tile_macs_q_reg_i_30_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_21/I5
+                         LUT6 (Prop_LUT6_I5_O)        0.058     2.384 f  u_ctrl/tile_macs_q_reg_i_21/O
+                         net (fo=3, unplaced)         0.159     2.543    u_ctrl/tile_macs_q_reg_i_21_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_8/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.137     2.680 f  u_ctrl/tile_macs_q_reg_i_8/O
+                         net (fo=1, unplaced)         0.221     2.901    u_ctrl/tile_macs_q_reg/A[7]
+                                                                      f  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A[7]
+                         DSP_A_B_DATA (Prop_DSP_A_B_DATA_A[7]_A2_DATA[7])
+                                                      0.258     3.159 r  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A2_DATA[7]
+                         net (fo=1, unplaced)         0.000     3.159    u_ctrl/tile_macs_q_reg/DSP_A_B_DATA.A2_DATA<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2_DATA[7]
+                         DSP_PREADD_DATA (Prop_DSP_PREADD_DATA_A2_DATA[7]_A2A1[7])
+                                                      0.114     3.273 r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2A1[7]
+                         net (fo=1, unplaced)         0.000     3.273    u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA.A2A1<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/A2A1[7]
+                         DSP_MULTIPLIER (Prop_DSP_MULTIPLIER_A2A1[7]_U[21])
+                                                      0.700     3.973 r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/U[21]
+                         net (fo=1, unplaced)         0.000     3.973    u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER.U<21>
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[21]
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      4.500     4.500 r  <hidden>
+                                                      0.000     4.500 r  clk
+                         net (fo=23059, unset)        0.055     4.555    u_ctrl/tile_macs_q_reg/CLK
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/CLK
+                         clock pessimism              0.000     4.555    <hidden>
+                         clock uncertainty           -0.035     4.520    <hidden>
+                         DSP_M_DATA (Setup_DSP_M_DATA_CLK_U[21])
+                                                      0.001     4.521    u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST
+  -------------------------------------------------------------------
+                         required time                          4.521    <hidden>
+                         arrival time                          -3.973    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.548    <hidden>
+
+Slack (MET) :             0.548ns  (required time - arrival time)
+  Source:                 u_ctrl/job_q_reg[m][1]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Destination:            u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[22]
+                            (rising edge-triggered cell DSP_M_DATA clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            4.500ns  (core_clk rise@4.500ns - core_clk rise@0.000ns)
+  Data Path Delay:        3.932ns  (logic 2.504ns (63.683%)  route 1.428ns (36.317%))
+  Logic Levels:           11  (CARRY8=1 DSP_A_B_DATA=1 DSP_MULTIPLIER=1 DSP_PREADD_DATA=1 LUT1=1 LUT6=6)
+  Clock Path Skew:        0.014ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.055ns = ( 4.555 - 4.500 ) 
+    Source Clock Delay      (SCD):    0.041ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=23059, unset)        0.041     0.041    u_ctrl/clk
+                         FDRE                                         r  u_ctrl/job_q_reg[m][1]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_FDRE_C_Q)         0.114     0.155 f  u_ctrl/job_q_reg[m][1]/Q
+                         net (fo=4, unplaced)         0.166     0.321    u_ctrl/job_q_reg[m_n_0_][1]
+                                                                      f  u_ctrl/cmd_q[rows][0]_i_12/I0
+                         LUT1 (Prop_LUT1_I0_O)        0.057     0.378 r  u_ctrl/cmd_q[rows][0]_i_12/O
+                         net (fo=1, unplaced)         0.030     0.408    u_ctrl/cmd_q[rows][0]_i_12_n_0
+                                                                      r  u_ctrl/cmd_q_reg[rows][0]_i_3/S[1]
+                         CARRY8 (Prop_CARRY8_S[1]_O[5])
+                                                      0.333     0.741 f  u_ctrl/cmd_q_reg[rows][0]_i_3/O[5]
+                         net (fo=1, unplaced)         0.172     0.913    u_ctrl/cmd_q_reg[rows][0]_i_3_n_10
+                                                                      f  u_ctrl/cmd_q[rows][4]_i_3/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.138 f  u_ctrl/cmd_q[rows][4]_i_3/O
+                         net (fo=5, unplaced)         0.229     1.367    u_ctrl/cmd_q[rows][4]_i_3_n_0
+                                                                      f  u_ctrl/cmd_q[rows][3]_i_2/I4
+                         LUT6 (Prop_LUT6_I4_O)        0.058     1.425 f  u_ctrl/cmd_q[rows][3]_i_2/O
+                         net (fo=3, unplaced)         0.123     1.548    u_ctrl/cmd_q[rows][3]_i_2_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_70/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.773 r  u_ctrl/tile_macs_q_reg_i_70/O
+                         net (fo=1, unplaced)         0.117     1.890    u_ctrl/tile_macs_q_reg_i_70_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_30/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     2.115 r  u_ctrl/tile_macs_q_reg_i_30/O
+                         net (fo=2, unplaced)         0.211     2.326    u_ctrl/tile_macs_q_reg_i_30_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_21/I5
+                         LUT6 (Prop_LUT6_I5_O)        0.058     2.384 f  u_ctrl/tile_macs_q_reg_i_21/O
+                         net (fo=3, unplaced)         0.159     2.543    u_ctrl/tile_macs_q_reg_i_21_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_8/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.137     2.680 f  u_ctrl/tile_macs_q_reg_i_8/O
+                         net (fo=1, unplaced)         0.221     2.901    u_ctrl/tile_macs_q_reg/A[7]
+                                                                      f  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A[7]
+                         DSP_A_B_DATA (Prop_DSP_A_B_DATA_A[7]_A2_DATA[7])
+                                                      0.258     3.159 r  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A2_DATA[7]
+                         net (fo=1, unplaced)         0.000     3.159    u_ctrl/tile_macs_q_reg/DSP_A_B_DATA.A2_DATA<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2_DATA[7]
+                         DSP_PREADD_DATA (Prop_DSP_PREADD_DATA_A2_DATA[7]_A2A1[7])
+                                                      0.114     3.273 r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2A1[7]
+                         net (fo=1, unplaced)         0.000     3.273    u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA.A2A1<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/A2A1[7]
+                         DSP_MULTIPLIER (Prop_DSP_MULTIPLIER_A2A1[7]_U[22])
+                                                      0.700     3.973 r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/U[22]
+                         net (fo=1, unplaced)         0.000     3.973    u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER.U<22>
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[22]
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      4.500     4.500 r  <hidden>
+                                                      0.000     4.500 r  clk
+                         net (fo=23059, unset)        0.055     4.555    u_ctrl/tile_macs_q_reg/CLK
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/CLK
+                         clock pessimism              0.000     4.555    <hidden>
+                         clock uncertainty           -0.035     4.520    <hidden>
+                         DSP_M_DATA (Setup_DSP_M_DATA_CLK_U[22])
+                                                      0.001     4.521    u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST
+  -------------------------------------------------------------------
+                         required time                          4.521    <hidden>
+                         arrival time                          -3.973    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.548    <hidden>
+
+Slack (MET) :             0.548ns  (required time - arrival time)
+  Source:                 u_ctrl/job_q_reg[m][1]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Destination:            u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[23]
+                            (rising edge-triggered cell DSP_M_DATA clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            4.500ns  (core_clk rise@4.500ns - core_clk rise@0.000ns)
+  Data Path Delay:        3.932ns  (logic 2.504ns (63.683%)  route 1.428ns (36.317%))
+  Logic Levels:           11  (CARRY8=1 DSP_A_B_DATA=1 DSP_MULTIPLIER=1 DSP_PREADD_DATA=1 LUT1=1 LUT6=6)
+  Clock Path Skew:        0.014ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.055ns = ( 4.555 - 4.500 ) 
+    Source Clock Delay      (SCD):    0.041ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=23059, unset)        0.041     0.041    u_ctrl/clk
+                         FDRE                                         r  u_ctrl/job_q_reg[m][1]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_FDRE_C_Q)         0.114     0.155 f  u_ctrl/job_q_reg[m][1]/Q
+                         net (fo=4, unplaced)         0.166     0.321    u_ctrl/job_q_reg[m_n_0_][1]
+                                                                      f  u_ctrl/cmd_q[rows][0]_i_12/I0
+                         LUT1 (Prop_LUT1_I0_O)        0.057     0.378 r  u_ctrl/cmd_q[rows][0]_i_12/O
+                         net (fo=1, unplaced)         0.030     0.408    u_ctrl/cmd_q[rows][0]_i_12_n_0
+                                                                      r  u_ctrl/cmd_q_reg[rows][0]_i_3/S[1]
+                         CARRY8 (Prop_CARRY8_S[1]_O[5])
+                                                      0.333     0.741 f  u_ctrl/cmd_q_reg[rows][0]_i_3/O[5]
+                         net (fo=1, unplaced)         0.172     0.913    u_ctrl/cmd_q_reg[rows][0]_i_3_n_10
+                                                                      f  u_ctrl/cmd_q[rows][4]_i_3/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.138 f  u_ctrl/cmd_q[rows][4]_i_3/O
+                         net (fo=5, unplaced)         0.229     1.367    u_ctrl/cmd_q[rows][4]_i_3_n_0
+                                                                      f  u_ctrl/cmd_q[rows][3]_i_2/I4
+                         LUT6 (Prop_LUT6_I4_O)        0.058     1.425 f  u_ctrl/cmd_q[rows][3]_i_2/O
+                         net (fo=3, unplaced)         0.123     1.548    u_ctrl/cmd_q[rows][3]_i_2_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_70/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.773 r  u_ctrl/tile_macs_q_reg_i_70/O
+                         net (fo=1, unplaced)         0.117     1.890    u_ctrl/tile_macs_q_reg_i_70_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_30/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     2.115 r  u_ctrl/tile_macs_q_reg_i_30/O
+                         net (fo=2, unplaced)         0.211     2.326    u_ctrl/tile_macs_q_reg_i_30_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_21/I5
+                         LUT6 (Prop_LUT6_I5_O)        0.058     2.384 f  u_ctrl/tile_macs_q_reg_i_21/O
+                         net (fo=3, unplaced)         0.159     2.543    u_ctrl/tile_macs_q_reg_i_21_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_8/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.137     2.680 f  u_ctrl/tile_macs_q_reg_i_8/O
+                         net (fo=1, unplaced)         0.221     2.901    u_ctrl/tile_macs_q_reg/A[7]
+                                                                      f  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A[7]
+                         DSP_A_B_DATA (Prop_DSP_A_B_DATA_A[7]_A2_DATA[7])
+                                                      0.258     3.159 r  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A2_DATA[7]
+                         net (fo=1, unplaced)         0.000     3.159    u_ctrl/tile_macs_q_reg/DSP_A_B_DATA.A2_DATA<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2_DATA[7]
+                         DSP_PREADD_DATA (Prop_DSP_PREADD_DATA_A2_DATA[7]_A2A1[7])
+                                                      0.114     3.273 r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2A1[7]
+                         net (fo=1, unplaced)         0.000     3.273    u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA.A2A1<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/A2A1[7]
+                         DSP_MULTIPLIER (Prop_DSP_MULTIPLIER_A2A1[7]_U[23])
+                                                      0.700     3.973 r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/U[23]
+                         net (fo=1, unplaced)         0.000     3.973    u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER.U<23>
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[23]
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      4.500     4.500 r  <hidden>
+                                                      0.000     4.500 r  clk
+                         net (fo=23059, unset)        0.055     4.555    u_ctrl/tile_macs_q_reg/CLK
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/CLK
+                         clock pessimism              0.000     4.555    <hidden>
+                         clock uncertainty           -0.035     4.520    <hidden>
+                         DSP_M_DATA (Setup_DSP_M_DATA_CLK_U[23])
+                                                      0.001     4.521    u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST
+  -------------------------------------------------------------------
+                         required time                          4.521    <hidden>
+                         arrival time                          -3.973    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.548    <hidden>
+
+Slack (MET) :             0.548ns  (required time - arrival time)
+  Source:                 u_ctrl/job_q_reg[m][1]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Destination:            u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[24]
+                            (rising edge-triggered cell DSP_M_DATA clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            4.500ns  (core_clk rise@4.500ns - core_clk rise@0.000ns)
+  Data Path Delay:        3.932ns  (logic 2.504ns (63.683%)  route 1.428ns (36.317%))
+  Logic Levels:           11  (CARRY8=1 DSP_A_B_DATA=1 DSP_MULTIPLIER=1 DSP_PREADD_DATA=1 LUT1=1 LUT6=6)
+  Clock Path Skew:        0.014ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.055ns = ( 4.555 - 4.500 ) 
+    Source Clock Delay      (SCD):    0.041ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=23059, unset)        0.041     0.041    u_ctrl/clk
+                         FDRE                                         r  u_ctrl/job_q_reg[m][1]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_FDRE_C_Q)         0.114     0.155 f  u_ctrl/job_q_reg[m][1]/Q
+                         net (fo=4, unplaced)         0.166     0.321    u_ctrl/job_q_reg[m_n_0_][1]
+                                                                      f  u_ctrl/cmd_q[rows][0]_i_12/I0
+                         LUT1 (Prop_LUT1_I0_O)        0.057     0.378 r  u_ctrl/cmd_q[rows][0]_i_12/O
+                         net (fo=1, unplaced)         0.030     0.408    u_ctrl/cmd_q[rows][0]_i_12_n_0
+                                                                      r  u_ctrl/cmd_q_reg[rows][0]_i_3/S[1]
+                         CARRY8 (Prop_CARRY8_S[1]_O[5])
+                                                      0.333     0.741 f  u_ctrl/cmd_q_reg[rows][0]_i_3/O[5]
+                         net (fo=1, unplaced)         0.172     0.913    u_ctrl/cmd_q_reg[rows][0]_i_3_n_10
+                                                                      f  u_ctrl/cmd_q[rows][4]_i_3/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.138 f  u_ctrl/cmd_q[rows][4]_i_3/O
+                         net (fo=5, unplaced)         0.229     1.367    u_ctrl/cmd_q[rows][4]_i_3_n_0
+                                                                      f  u_ctrl/cmd_q[rows][3]_i_2/I4
+                         LUT6 (Prop_LUT6_I4_O)        0.058     1.425 f  u_ctrl/cmd_q[rows][3]_i_2/O
+                         net (fo=3, unplaced)         0.123     1.548    u_ctrl/cmd_q[rows][3]_i_2_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_70/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.773 r  u_ctrl/tile_macs_q_reg_i_70/O
+                         net (fo=1, unplaced)         0.117     1.890    u_ctrl/tile_macs_q_reg_i_70_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_30/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     2.115 r  u_ctrl/tile_macs_q_reg_i_30/O
+                         net (fo=2, unplaced)         0.211     2.326    u_ctrl/tile_macs_q_reg_i_30_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_21/I5
+                         LUT6 (Prop_LUT6_I5_O)        0.058     2.384 f  u_ctrl/tile_macs_q_reg_i_21/O
+                         net (fo=3, unplaced)         0.159     2.543    u_ctrl/tile_macs_q_reg_i_21_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_8/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.137     2.680 f  u_ctrl/tile_macs_q_reg_i_8/O
+                         net (fo=1, unplaced)         0.221     2.901    u_ctrl/tile_macs_q_reg/A[7]
+                                                                      f  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A[7]
+                         DSP_A_B_DATA (Prop_DSP_A_B_DATA_A[7]_A2_DATA[7])
+                                                      0.258     3.159 r  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A2_DATA[7]
+                         net (fo=1, unplaced)         0.000     3.159    u_ctrl/tile_macs_q_reg/DSP_A_B_DATA.A2_DATA<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2_DATA[7]
+                         DSP_PREADD_DATA (Prop_DSP_PREADD_DATA_A2_DATA[7]_A2A1[7])
+                                                      0.114     3.273 r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2A1[7]
+                         net (fo=1, unplaced)         0.000     3.273    u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA.A2A1<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/A2A1[7]
+                         DSP_MULTIPLIER (Prop_DSP_MULTIPLIER_A2A1[7]_U[24])
+                                                      0.700     3.973 r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/U[24]
+                         net (fo=1, unplaced)         0.000     3.973    u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER.U<24>
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[24]
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      4.500     4.500 r  <hidden>
+                                                      0.000     4.500 r  clk
+                         net (fo=23059, unset)        0.055     4.555    u_ctrl/tile_macs_q_reg/CLK
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/CLK
+                         clock pessimism              0.000     4.555    <hidden>
+                         clock uncertainty           -0.035     4.520    <hidden>
+                         DSP_M_DATA (Setup_DSP_M_DATA_CLK_U[24])
+                                                      0.001     4.521    u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST
+  -------------------------------------------------------------------
+                         required time                          4.521    <hidden>
+                         arrival time                          -3.973    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.548    <hidden>
+
+Slack (MET) :             0.548ns  (required time - arrival time)
+  Source:                 u_ctrl/job_q_reg[m][1]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Destination:            u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[25]
+                            (rising edge-triggered cell DSP_M_DATA clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            4.500ns  (core_clk rise@4.500ns - core_clk rise@0.000ns)
+  Data Path Delay:        3.932ns  (logic 2.504ns (63.683%)  route 1.428ns (36.317%))
+  Logic Levels:           11  (CARRY8=1 DSP_A_B_DATA=1 DSP_MULTIPLIER=1 DSP_PREADD_DATA=1 LUT1=1 LUT6=6)
+  Clock Path Skew:        0.014ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.055ns = ( 4.555 - 4.500 ) 
+    Source Clock Delay      (SCD):    0.041ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=23059, unset)        0.041     0.041    u_ctrl/clk
+                         FDRE                                         r  u_ctrl/job_q_reg[m][1]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_FDRE_C_Q)         0.114     0.155 f  u_ctrl/job_q_reg[m][1]/Q
+                         net (fo=4, unplaced)         0.166     0.321    u_ctrl/job_q_reg[m_n_0_][1]
+                                                                      f  u_ctrl/cmd_q[rows][0]_i_12/I0
+                         LUT1 (Prop_LUT1_I0_O)        0.057     0.378 r  u_ctrl/cmd_q[rows][0]_i_12/O
+                         net (fo=1, unplaced)         0.030     0.408    u_ctrl/cmd_q[rows][0]_i_12_n_0
+                                                                      r  u_ctrl/cmd_q_reg[rows][0]_i_3/S[1]
+                         CARRY8 (Prop_CARRY8_S[1]_O[5])
+                                                      0.333     0.741 f  u_ctrl/cmd_q_reg[rows][0]_i_3/O[5]
+                         net (fo=1, unplaced)         0.172     0.913    u_ctrl/cmd_q_reg[rows][0]_i_3_n_10
+                                                                      f  u_ctrl/cmd_q[rows][4]_i_3/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.138 f  u_ctrl/cmd_q[rows][4]_i_3/O
+                         net (fo=5, unplaced)         0.229     1.367    u_ctrl/cmd_q[rows][4]_i_3_n_0
+                                                                      f  u_ctrl/cmd_q[rows][3]_i_2/I4
+                         LUT6 (Prop_LUT6_I4_O)        0.058     1.425 f  u_ctrl/cmd_q[rows][3]_i_2/O
+                         net (fo=3, unplaced)         0.123     1.548    u_ctrl/cmd_q[rows][3]_i_2_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_70/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.773 r  u_ctrl/tile_macs_q_reg_i_70/O
+                         net (fo=1, unplaced)         0.117     1.890    u_ctrl/tile_macs_q_reg_i_70_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_30/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     2.115 r  u_ctrl/tile_macs_q_reg_i_30/O
+                         net (fo=2, unplaced)         0.211     2.326    u_ctrl/tile_macs_q_reg_i_30_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_21/I5
+                         LUT6 (Prop_LUT6_I5_O)        0.058     2.384 f  u_ctrl/tile_macs_q_reg_i_21/O
+                         net (fo=3, unplaced)         0.159     2.543    u_ctrl/tile_macs_q_reg_i_21_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_8/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.137     2.680 f  u_ctrl/tile_macs_q_reg_i_8/O
+                         net (fo=1, unplaced)         0.221     2.901    u_ctrl/tile_macs_q_reg/A[7]
+                                                                      f  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A[7]
+                         DSP_A_B_DATA (Prop_DSP_A_B_DATA_A[7]_A2_DATA[7])
+                                                      0.258     3.159 r  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A2_DATA[7]
+                         net (fo=1, unplaced)         0.000     3.159    u_ctrl/tile_macs_q_reg/DSP_A_B_DATA.A2_DATA<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2_DATA[7]
+                         DSP_PREADD_DATA (Prop_DSP_PREADD_DATA_A2_DATA[7]_A2A1[7])
+                                                      0.114     3.273 r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2A1[7]
+                         net (fo=1, unplaced)         0.000     3.273    u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA.A2A1<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/A2A1[7]
+                         DSP_MULTIPLIER (Prop_DSP_MULTIPLIER_A2A1[7]_U[25])
+                                                      0.700     3.973 r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/U[25]
+                         net (fo=1, unplaced)         0.000     3.973    u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER.U<25>
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[25]
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      4.500     4.500 r  <hidden>
+                                                      0.000     4.500 r  clk
+                         net (fo=23059, unset)        0.055     4.555    u_ctrl/tile_macs_q_reg/CLK
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/CLK
+                         clock pessimism              0.000     4.555    <hidden>
+                         clock uncertainty           -0.035     4.520    <hidden>
+                         DSP_M_DATA (Setup_DSP_M_DATA_CLK_U[25])
+                                                      0.001     4.521    u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST
+  -------------------------------------------------------------------
+                         required time                          4.521    <hidden>
+                         arrival time                          -3.973    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.548    <hidden>
+
+Slack (MET) :             0.548ns  (required time - arrival time)
+  Source:                 u_ctrl/job_q_reg[m][1]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Destination:            u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[26]
+                            (rising edge-triggered cell DSP_M_DATA clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            4.500ns  (core_clk rise@4.500ns - core_clk rise@0.000ns)
+  Data Path Delay:        3.932ns  (logic 2.504ns (63.683%)  route 1.428ns (36.317%))
+  Logic Levels:           11  (CARRY8=1 DSP_A_B_DATA=1 DSP_MULTIPLIER=1 DSP_PREADD_DATA=1 LUT1=1 LUT6=6)
+  Clock Path Skew:        0.014ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.055ns = ( 4.555 - 4.500 ) 
+    Source Clock Delay      (SCD):    0.041ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=23059, unset)        0.041     0.041    u_ctrl/clk
+                         FDRE                                         r  u_ctrl/job_q_reg[m][1]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_FDRE_C_Q)         0.114     0.155 f  u_ctrl/job_q_reg[m][1]/Q
+                         net (fo=4, unplaced)         0.166     0.321    u_ctrl/job_q_reg[m_n_0_][1]
+                                                                      f  u_ctrl/cmd_q[rows][0]_i_12/I0
+                         LUT1 (Prop_LUT1_I0_O)        0.057     0.378 r  u_ctrl/cmd_q[rows][0]_i_12/O
+                         net (fo=1, unplaced)         0.030     0.408    u_ctrl/cmd_q[rows][0]_i_12_n_0
+                                                                      r  u_ctrl/cmd_q_reg[rows][0]_i_3/S[1]
+                         CARRY8 (Prop_CARRY8_S[1]_O[5])
+                                                      0.333     0.741 f  u_ctrl/cmd_q_reg[rows][0]_i_3/O[5]
+                         net (fo=1, unplaced)         0.172     0.913    u_ctrl/cmd_q_reg[rows][0]_i_3_n_10
+                                                                      f  u_ctrl/cmd_q[rows][4]_i_3/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.138 f  u_ctrl/cmd_q[rows][4]_i_3/O
+                         net (fo=5, unplaced)         0.229     1.367    u_ctrl/cmd_q[rows][4]_i_3_n_0
+                                                                      f  u_ctrl/cmd_q[rows][3]_i_2/I4
+                         LUT6 (Prop_LUT6_I4_O)        0.058     1.425 f  u_ctrl/cmd_q[rows][3]_i_2/O
+                         net (fo=3, unplaced)         0.123     1.548    u_ctrl/cmd_q[rows][3]_i_2_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_70/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.773 r  u_ctrl/tile_macs_q_reg_i_70/O
+                         net (fo=1, unplaced)         0.117     1.890    u_ctrl/tile_macs_q_reg_i_70_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_30/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     2.115 r  u_ctrl/tile_macs_q_reg_i_30/O
+                         net (fo=2, unplaced)         0.211     2.326    u_ctrl/tile_macs_q_reg_i_30_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_21/I5
+                         LUT6 (Prop_LUT6_I5_O)        0.058     2.384 f  u_ctrl/tile_macs_q_reg_i_21/O
+                         net (fo=3, unplaced)         0.159     2.543    u_ctrl/tile_macs_q_reg_i_21_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_8/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.137     2.680 f  u_ctrl/tile_macs_q_reg_i_8/O
+                         net (fo=1, unplaced)         0.221     2.901    u_ctrl/tile_macs_q_reg/A[7]
+                                                                      f  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A[7]
+                         DSP_A_B_DATA (Prop_DSP_A_B_DATA_A[7]_A2_DATA[7])
+                                                      0.258     3.159 r  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A2_DATA[7]
+                         net (fo=1, unplaced)         0.000     3.159    u_ctrl/tile_macs_q_reg/DSP_A_B_DATA.A2_DATA<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2_DATA[7]
+                         DSP_PREADD_DATA (Prop_DSP_PREADD_DATA_A2_DATA[7]_A2A1[7])
+                                                      0.114     3.273 r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2A1[7]
+                         net (fo=1, unplaced)         0.000     3.273    u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA.A2A1<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/A2A1[7]
+                         DSP_MULTIPLIER (Prop_DSP_MULTIPLIER_A2A1[7]_U[26])
+                                                      0.700     3.973 r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/U[26]
+                         net (fo=1, unplaced)         0.000     3.973    u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER.U<26>
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[26]
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      4.500     4.500 r  <hidden>
+                                                      0.000     4.500 r  clk
+                         net (fo=23059, unset)        0.055     4.555    u_ctrl/tile_macs_q_reg/CLK
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/CLK
+                         clock pessimism              0.000     4.555    <hidden>
+                         clock uncertainty           -0.035     4.520    <hidden>
+                         DSP_M_DATA (Setup_DSP_M_DATA_CLK_U[26])
+                                                      0.001     4.521    u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST
+  -------------------------------------------------------------------
+                         required time                          4.521    <hidden>
+                         arrival time                          -3.973    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.548    <hidden>
+
+Slack (MET) :             0.548ns  (required time - arrival time)
+  Source:                 u_ctrl/job_q_reg[m][1]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Destination:            u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[27]
+                            (rising edge-triggered cell DSP_M_DATA clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            4.500ns  (core_clk rise@4.500ns - core_clk rise@0.000ns)
+  Data Path Delay:        3.932ns  (logic 2.504ns (63.683%)  route 1.428ns (36.317%))
+  Logic Levels:           11  (CARRY8=1 DSP_A_B_DATA=1 DSP_MULTIPLIER=1 DSP_PREADD_DATA=1 LUT1=1 LUT6=6)
+  Clock Path Skew:        0.014ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.055ns = ( 4.555 - 4.500 ) 
+    Source Clock Delay      (SCD):    0.041ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=23059, unset)        0.041     0.041    u_ctrl/clk
+                         FDRE                                         r  u_ctrl/job_q_reg[m][1]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_FDRE_C_Q)         0.114     0.155 f  u_ctrl/job_q_reg[m][1]/Q
+                         net (fo=4, unplaced)         0.166     0.321    u_ctrl/job_q_reg[m_n_0_][1]
+                                                                      f  u_ctrl/cmd_q[rows][0]_i_12/I0
+                         LUT1 (Prop_LUT1_I0_O)        0.057     0.378 r  u_ctrl/cmd_q[rows][0]_i_12/O
+                         net (fo=1, unplaced)         0.030     0.408    u_ctrl/cmd_q[rows][0]_i_12_n_0
+                                                                      r  u_ctrl/cmd_q_reg[rows][0]_i_3/S[1]
+                         CARRY8 (Prop_CARRY8_S[1]_O[5])
+                                                      0.333     0.741 f  u_ctrl/cmd_q_reg[rows][0]_i_3/O[5]
+                         net (fo=1, unplaced)         0.172     0.913    u_ctrl/cmd_q_reg[rows][0]_i_3_n_10
+                                                                      f  u_ctrl/cmd_q[rows][4]_i_3/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.138 f  u_ctrl/cmd_q[rows][4]_i_3/O
+                         net (fo=5, unplaced)         0.229     1.367    u_ctrl/cmd_q[rows][4]_i_3_n_0
+                                                                      f  u_ctrl/cmd_q[rows][3]_i_2/I4
+                         LUT6 (Prop_LUT6_I4_O)        0.058     1.425 f  u_ctrl/cmd_q[rows][3]_i_2/O
+                         net (fo=3, unplaced)         0.123     1.548    u_ctrl/cmd_q[rows][3]_i_2_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_70/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.773 r  u_ctrl/tile_macs_q_reg_i_70/O
+                         net (fo=1, unplaced)         0.117     1.890    u_ctrl/tile_macs_q_reg_i_70_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_30/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     2.115 r  u_ctrl/tile_macs_q_reg_i_30/O
+                         net (fo=2, unplaced)         0.211     2.326    u_ctrl/tile_macs_q_reg_i_30_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_21/I5
+                         LUT6 (Prop_LUT6_I5_O)        0.058     2.384 f  u_ctrl/tile_macs_q_reg_i_21/O
+                         net (fo=3, unplaced)         0.159     2.543    u_ctrl/tile_macs_q_reg_i_21_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_8/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.137     2.680 f  u_ctrl/tile_macs_q_reg_i_8/O
+                         net (fo=1, unplaced)         0.221     2.901    u_ctrl/tile_macs_q_reg/A[7]
+                                                                      f  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A[7]
+                         DSP_A_B_DATA (Prop_DSP_A_B_DATA_A[7]_A2_DATA[7])
+                                                      0.258     3.159 r  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A2_DATA[7]
+                         net (fo=1, unplaced)         0.000     3.159    u_ctrl/tile_macs_q_reg/DSP_A_B_DATA.A2_DATA<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2_DATA[7]
+                         DSP_PREADD_DATA (Prop_DSP_PREADD_DATA_A2_DATA[7]_A2A1[7])
+                                                      0.114     3.273 r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2A1[7]
+                         net (fo=1, unplaced)         0.000     3.273    u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA.A2A1<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/A2A1[7]
+                         DSP_MULTIPLIER (Prop_DSP_MULTIPLIER_A2A1[7]_U[27])
+                                                      0.700     3.973 r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/U[27]
+                         net (fo=1, unplaced)         0.000     3.973    u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER.U<27>
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[27]
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      4.500     4.500 r  <hidden>
+                                                      0.000     4.500 r  clk
+                         net (fo=23059, unset)        0.055     4.555    u_ctrl/tile_macs_q_reg/CLK
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/CLK
+                         clock pessimism              0.000     4.555    <hidden>
+                         clock uncertainty           -0.035     4.520    <hidden>
+                         DSP_M_DATA (Setup_DSP_M_DATA_CLK_U[27])
+                                                      0.001     4.521    u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST
+  -------------------------------------------------------------------
+                         required time                          4.521    <hidden>
+                         arrival time                          -3.973    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.548    <hidden>
+
+Slack (MET) :             0.548ns  (required time - arrival time)
+  Source:                 u_ctrl/job_q_reg[m][1]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Destination:            u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[28]
+                            (rising edge-triggered cell DSP_M_DATA clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            4.500ns  (core_clk rise@4.500ns - core_clk rise@0.000ns)
+  Data Path Delay:        3.932ns  (logic 2.504ns (63.683%)  route 1.428ns (36.317%))
+  Logic Levels:           11  (CARRY8=1 DSP_A_B_DATA=1 DSP_MULTIPLIER=1 DSP_PREADD_DATA=1 LUT1=1 LUT6=6)
+  Clock Path Skew:        0.014ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.055ns = ( 4.555 - 4.500 ) 
+    Source Clock Delay      (SCD):    0.041ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=23059, unset)        0.041     0.041    u_ctrl/clk
+                         FDRE                                         r  u_ctrl/job_q_reg[m][1]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_FDRE_C_Q)         0.114     0.155 f  u_ctrl/job_q_reg[m][1]/Q
+                         net (fo=4, unplaced)         0.166     0.321    u_ctrl/job_q_reg[m_n_0_][1]
+                                                                      f  u_ctrl/cmd_q[rows][0]_i_12/I0
+                         LUT1 (Prop_LUT1_I0_O)        0.057     0.378 r  u_ctrl/cmd_q[rows][0]_i_12/O
+                         net (fo=1, unplaced)         0.030     0.408    u_ctrl/cmd_q[rows][0]_i_12_n_0
+                                                                      r  u_ctrl/cmd_q_reg[rows][0]_i_3/S[1]
+                         CARRY8 (Prop_CARRY8_S[1]_O[5])
+                                                      0.333     0.741 f  u_ctrl/cmd_q_reg[rows][0]_i_3/O[5]
+                         net (fo=1, unplaced)         0.172     0.913    u_ctrl/cmd_q_reg[rows][0]_i_3_n_10
+                                                                      f  u_ctrl/cmd_q[rows][4]_i_3/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.138 f  u_ctrl/cmd_q[rows][4]_i_3/O
+                         net (fo=5, unplaced)         0.229     1.367    u_ctrl/cmd_q[rows][4]_i_3_n_0
+                                                                      f  u_ctrl/cmd_q[rows][3]_i_2/I4
+                         LUT6 (Prop_LUT6_I4_O)        0.058     1.425 f  u_ctrl/cmd_q[rows][3]_i_2/O
+                         net (fo=3, unplaced)         0.123     1.548    u_ctrl/cmd_q[rows][3]_i_2_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_70/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.773 r  u_ctrl/tile_macs_q_reg_i_70/O
+                         net (fo=1, unplaced)         0.117     1.890    u_ctrl/tile_macs_q_reg_i_70_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_30/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     2.115 r  u_ctrl/tile_macs_q_reg_i_30/O
+                         net (fo=2, unplaced)         0.211     2.326    u_ctrl/tile_macs_q_reg_i_30_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_21/I5
+                         LUT6 (Prop_LUT6_I5_O)        0.058     2.384 f  u_ctrl/tile_macs_q_reg_i_21/O
+                         net (fo=3, unplaced)         0.159     2.543    u_ctrl/tile_macs_q_reg_i_21_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_8/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.137     2.680 f  u_ctrl/tile_macs_q_reg_i_8/O
+                         net (fo=1, unplaced)         0.221     2.901    u_ctrl/tile_macs_q_reg/A[7]
+                                                                      f  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A[7]
+                         DSP_A_B_DATA (Prop_DSP_A_B_DATA_A[7]_A2_DATA[7])
+                                                      0.258     3.159 r  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A2_DATA[7]
+                         net (fo=1, unplaced)         0.000     3.159    u_ctrl/tile_macs_q_reg/DSP_A_B_DATA.A2_DATA<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2_DATA[7]
+                         DSP_PREADD_DATA (Prop_DSP_PREADD_DATA_A2_DATA[7]_A2A1[7])
+                                                      0.114     3.273 r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2A1[7]
+                         net (fo=1, unplaced)         0.000     3.273    u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA.A2A1<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/A2A1[7]
+                         DSP_MULTIPLIER (Prop_DSP_MULTIPLIER_A2A1[7]_U[28])
+                                                      0.700     3.973 r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/U[28]
+                         net (fo=1, unplaced)         0.000     3.973    u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER.U<28>
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[28]
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      4.500     4.500 r  <hidden>
+                                                      0.000     4.500 r  clk
+                         net (fo=23059, unset)        0.055     4.555    u_ctrl/tile_macs_q_reg/CLK
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/CLK
+                         clock pessimism              0.000     4.555    <hidden>
+                         clock uncertainty           -0.035     4.520    <hidden>
+                         DSP_M_DATA (Setup_DSP_M_DATA_CLK_U[28])
+                                                      0.001     4.521    u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST
+  -------------------------------------------------------------------
+                         required time                          4.521    <hidden>
+                         arrival time                          -3.973    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.548    <hidden>
+
+Slack (MET) :             0.548ns  (required time - arrival time)
+  Source:                 u_ctrl/job_q_reg[m][1]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Destination:            u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[8]
+                            (rising edge-triggered cell DSP_M_DATA clocked by core_clk  {rise@0.000ns fall@2.250ns period=4.500ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            4.500ns  (core_clk rise@4.500ns - core_clk rise@0.000ns)
+  Data Path Delay:        3.932ns  (logic 2.504ns (63.683%)  route 1.428ns (36.317%))
+  Logic Levels:           11  (CARRY8=1 DSP_A_B_DATA=1 DSP_MULTIPLIER=1 DSP_PREADD_DATA=1 LUT1=1 LUT6=6)
+  Clock Path Skew:        0.014ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.055ns = ( 4.555 - 4.500 ) 
+    Source Clock Delay      (SCD):    0.041ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=23059, unset)        0.041     0.041    u_ctrl/clk
+                         FDRE                                         r  u_ctrl/job_q_reg[m][1]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_FDRE_C_Q)         0.114     0.155 f  u_ctrl/job_q_reg[m][1]/Q
+                         net (fo=4, unplaced)         0.166     0.321    u_ctrl/job_q_reg[m_n_0_][1]
+                                                                      f  u_ctrl/cmd_q[rows][0]_i_12/I0
+                         LUT1 (Prop_LUT1_I0_O)        0.057     0.378 r  u_ctrl/cmd_q[rows][0]_i_12/O
+                         net (fo=1, unplaced)         0.030     0.408    u_ctrl/cmd_q[rows][0]_i_12_n_0
+                                                                      r  u_ctrl/cmd_q_reg[rows][0]_i_3/S[1]
+                         CARRY8 (Prop_CARRY8_S[1]_O[5])
+                                                      0.333     0.741 f  u_ctrl/cmd_q_reg[rows][0]_i_3/O[5]
+                         net (fo=1, unplaced)         0.172     0.913    u_ctrl/cmd_q_reg[rows][0]_i_3_n_10
+                                                                      f  u_ctrl/cmd_q[rows][4]_i_3/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.138 f  u_ctrl/cmd_q[rows][4]_i_3/O
+                         net (fo=5, unplaced)         0.229     1.367    u_ctrl/cmd_q[rows][4]_i_3_n_0
+                                                                      f  u_ctrl/cmd_q[rows][3]_i_2/I4
+                         LUT6 (Prop_LUT6_I4_O)        0.058     1.425 f  u_ctrl/cmd_q[rows][3]_i_2/O
+                         net (fo=3, unplaced)         0.123     1.548    u_ctrl/cmd_q[rows][3]_i_2_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_70/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     1.773 r  u_ctrl/tile_macs_q_reg_i_70/O
+                         net (fo=1, unplaced)         0.117     1.890    u_ctrl/tile_macs_q_reg_i_70_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_30/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.225     2.115 r  u_ctrl/tile_macs_q_reg_i_30/O
+                         net (fo=2, unplaced)         0.211     2.326    u_ctrl/tile_macs_q_reg_i_30_n_0
+                                                                      r  u_ctrl/tile_macs_q_reg_i_21/I5
+                         LUT6 (Prop_LUT6_I5_O)        0.058     2.384 f  u_ctrl/tile_macs_q_reg_i_21/O
+                         net (fo=3, unplaced)         0.159     2.543    u_ctrl/tile_macs_q_reg_i_21_n_0
+                                                                      f  u_ctrl/tile_macs_q_reg_i_8/I0
+                         LUT6 (Prop_LUT6_I0_O)        0.137     2.680 f  u_ctrl/tile_macs_q_reg_i_8/O
+                         net (fo=1, unplaced)         0.221     2.901    u_ctrl/tile_macs_q_reg/A[7]
+                                                                      f  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A[7]
+                         DSP_A_B_DATA (Prop_DSP_A_B_DATA_A[7]_A2_DATA[7])
+                                                      0.258     3.159 r  u_ctrl/tile_macs_q_reg/DSP_A_B_DATA_INST/A2_DATA[7]
+                         net (fo=1, unplaced)         0.000     3.159    u_ctrl/tile_macs_q_reg/DSP_A_B_DATA.A2_DATA<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2_DATA[7]
+                         DSP_PREADD_DATA (Prop_DSP_PREADD_DATA_A2_DATA[7]_A2A1[7])
+                                                      0.114     3.273 r  u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA_INST/A2A1[7]
+                         net (fo=1, unplaced)         0.000     3.273    u_ctrl/tile_macs_q_reg/DSP_PREADD_DATA.A2A1<7>
+                                                                      r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/A2A1[7]
+                         DSP_MULTIPLIER (Prop_DSP_MULTIPLIER_A2A1[7]_U[8])
+                                                      0.700     3.973 r  u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER_INST/U[8]
+                         net (fo=1, unplaced)         0.000     3.973    u_ctrl/tile_macs_q_reg/DSP_MULTIPLIER.U<8>
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/U[8]
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      4.500     4.500 r  <hidden>
+                                                      0.000     4.500 r  clk
+                         net (fo=23059, unset)        0.055     4.555    u_ctrl/tile_macs_q_reg/CLK
+                         DSP_M_DATA                                   r  u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST/CLK
+                         clock pessimism              0.000     4.555    <hidden>
+                         clock uncertainty           -0.035     4.520    <hidden>
+                         DSP_M_DATA (Setup_DSP_M_DATA_CLK_U[8])
+                                                      0.001     4.521    u_ctrl/tile_macs_q_reg/DSP_M_DATA_INST
+  -------------------------------------------------------------------
+                         required time                          4.521    <hidden>
+                         arrival time                          -3.973    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.548    <hidden>
+
+
+
+

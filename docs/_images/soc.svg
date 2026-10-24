@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 800" width="1800" height="800" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 z" fill="context-stroke" stroke="context-stroke"/></marker></defs>
+<rect width="1800" height="800" fill="#ffffff"/>
+<text x="30" y="40" font-size="22" font-weight="bold" fill="#000">ORCA SoC design</text>
+<rect x="20" y="70" width="340" height="560" rx="18" fill="#f5f5f5" fill-opacity="0.5" stroke="#666" stroke-opacity="0.5"/>
+<text x="28" y="86" font-size="11" font-weight="bold" fill="#333" fill-opacity="0.7">Initiators</text>
+<rect x="400" y="70" width="960" height="270" rx="18" fill="#f5f5f5" fill-opacity="0.5" stroke="#666" stroke-opacity="0.5"/>
+<text x="408" y="86" font-size="11" font-weight="bold" fill="#333" fill-opacity="0.7">Memory path</text>
+<rect x="400" y="360" width="960" height="340" rx="18" fill="#f5f5f5" fill-opacity="0.5" stroke="#666" stroke-opacity="0.5"/>
+<text x="408" y="376" font-size="11" font-weight="bold" fill="#333" fill-opacity="0.7">Fabric and peripherals</text>
+<rect x="1400" y="70" width="380" height="630" rx="18" fill="#f5f5f5" fill-opacity="0.5" stroke="#666" stroke-opacity="0.5"/>
+<text x="1408" y="86" font-size="11" font-weight="bold" fill="#333" fill-opacity="0.7">Platform</text>
+<path d="M340,165 L385,165 L430,165" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M560,110 L560,92 L740,92 L1220,92 L1220,110" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M560,220 L560,270 L760,270 L790,270" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M560,220 L560,330 L560,400" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M340,420 L385,420 L430,420" fill="none" stroke="#b85450" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M340,560 L385,560 L430,560" fill="none" stroke="#82b366" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M690,515 L740,515 L740,150 L790,150" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1040,150 L1100,150" fill="none" stroke="#9673a6" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M690,495 L734,495 A6,6 0 0 1 746,495 L790,495" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1040,495 L1070,495 L1070,415 L1100,415" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1040,495 L1070,495 L1070,475 L1100,475" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1040,495 L1070,495 L1070,535 L1100,535" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1040,495 L1070,495 L1070,595 L1100,595" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1040,495 L1070,495 L1070,655 L1100,655" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1040,270 L1390,270 L1390,155 L1420,155" fill="none" stroke="#9673a6" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1590,200 L1590,230" fill="none" stroke="#82b366" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M110,250 L110,220" fill="none" stroke="#666666" stroke-width="1.2" stroke-dasharray="3,3" marker-end="url(#a)"/>
+<path d="M270,250 L270,220" fill="none" stroke="#666666" stroke-width="1.2" stroke-dasharray="3,3" marker-end="url(#a)"/>
+<text x="980" y="89" font-size="10" text-anchor="middle" fill="#000" stroke="#fff" stroke-width="4" paint-order="stroke">128-bit lines</text>
+<text x="620" y="348" font-size="10" text-anchor="middle" fill="#000" stroke="#fff" stroke-width="4" paint-order="stroke">32-bit uncached AXI</text>
+<text x="362" y="423" font-size="10" text-anchor="middle" fill="#000" stroke="#fff" stroke-width="4" paint-order="stroke">DMA</text>
+<text x="362" y="563" font-size="10" text-anchor="middle" fill="#000" stroke="#fff" stroke-width="4" paint-order="stroke">host AXI</text>
+<text x="765" y="348" font-size="10" text-anchor="middle" fill="#000" stroke="#fff" stroke-width="4" paint-order="stroke">memory route</text>
+<text x="740" y="531" font-size="10" text-anchor="middle" fill="#000" stroke="#fff" stroke-width="4" paint-order="stroke">peripheral route</text>
+<text x="1215" y="265" font-size="10" text-anchor="middle" fill="#000" stroke="#fff" stroke-width="4" paint-order="stroke">M_AXI_DDR</text>
+<rect x="40" y="110" width="300" height="110" rx="16.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="190.0" y="154" font-size="12" text-anchor="middle" fill="#000">Out-of-order CPU</text>
+<text x="190.0" y="169" font-size="12" text-anchor="middle" fill="#000">RV32IMA, Zicsr, Zifencei</text>
+<text x="190.0" y="184" font-size="12" text-anchor="middle" fill="#000">L1 I-cache and D-cache, 16 KiB each</text>
+<rect x="40" y="250" width="140" height="60" rx="9.0" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="110.0" y="276" font-size="12" text-anchor="middle" fill="#000">CPU stop control</text>
+<text x="110.0" y="292" font-size="12" text-anchor="middle" fill="#000">running, draining, held</text>
+<rect x="200" y="250" width="140" height="60" rx="9.0" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="270.0" y="276" font-size="12" text-anchor="middle" fill="#000">Interrupt levels</text>
+<text x="270.0" y="292" font-size="12" text-anchor="middle" fill="#000">timer, UART, FIN</text>
+<rect x="40" y="370" width="300" height="100" rx="15.0" fill="#f8cecc" stroke="#b85450" stroke-width="1"/>
+<text x="190.0" y="409" font-size="12" text-anchor="middle" fill="#000">FIN accelerator</text>
+<text x="190.0" y="424" font-size="12" text-anchor="middle" fill="#000">DMA initiator, AXI-Lite target</text>
+<text x="190.0" y="439" font-size="12" text-anchor="middle" fill="#000">in the RTL, disabled in the KV260 build</text>
+<rect x="40" y="510" width="300" height="90" rx="13.5" fill="#d5e8d4" stroke="#82b366" stroke-width="1"/>
+<text x="190.0" y="544" font-size="12" text-anchor="middle" fill="#000">Host AXI</text>
+<text x="190.0" y="559" font-size="12" text-anchor="middle" fill="#000">from the PS, 128 KiB aperture</text>
+<text x="190.0" y="574" font-size="12" text-anchor="middle" fill="#000">translated to DMA and MMIO windows</text>
+<rect x="430" y="110" width="260" height="110" rx="16.5" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="560.0" y="154" font-size="12" text-anchor="middle" fill="#000">L1 router</text>
+<text x="560.0" y="169" font-size="12" text-anchor="middle" fill="#000">address decode</text>
+<text x="560.0" y="184" font-size="12" text-anchor="middle" fill="#000">128-bit line port + 32-bit uncached AXI</text>
+<rect x="790" y="110" width="250" height="80" rx="12.0" fill="#e1d5e7" stroke="#9673a6" stroke-width="1"/>
+<text x="915.0" y="146" font-size="12" text-anchor="middle" fill="#000">DMA guard</text>
+<text x="915.0" y="162" font-size="12" text-anchor="middle" fill="#000">uncached 16 KiB window only</text>
+<rect x="1100" y="110" width="240" height="80" rx="12.0" fill="#e1d5e7" stroke="#9673a6" stroke-width="1"/>
+<text x="1220.0" y="146" font-size="12" text-anchor="middle" fill="#000">Local memory</text>
+<text x="1220.0" y="162" font-size="12" text-anchor="middle" fill="#000">256 KiB UltraRAM array, boot ROM at 0</text>
+<rect x="790" y="230" width="250" height="80" rx="12.0" fill="#e1d5e7" stroke="#9673a6" stroke-width="1"/>
+<text x="915.0" y="259" font-size="12" text-anchor="middle" fill="#000">DDR line bridge (KV260)</text>
+<text x="915.0" y="274" font-size="12" text-anchor="middle" fill="#000">ORCA 0x1000_0000, 256 MiB</text>
+<text x="915.0" y="289" font-size="12" text-anchor="middle" fill="#000">to PS 0x7000_0000</text>
+<rect x="430" y="400" width="260" height="230" rx="34.5" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="560.0" y="482" font-size="12" text-anchor="middle" fill="#000">PULP AXI crossbar</text>
+<text x="560.0" y="496" font-size="12" text-anchor="middle" fill="#000">initiators: CPU uncached,</text>
+<text x="560.0" y="512" font-size="12" text-anchor="middle" fill="#000">FIN DMA, host</text>
+<text x="560.0" y="526" font-size="12" text-anchor="middle" fill="#000">targets: memory route,</text>
+<text x="560.0" y="542" font-size="12" text-anchor="middle" fill="#000">peripheral route</text>
+<text x="560.0" y="556" font-size="12" text-anchor="middle" fill="#000">every channel cut</text>
+<rect x="790" y="440" width="250" height="110" rx="16.5" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="915.0" y="484" font-size="12" text-anchor="middle" fill="#000">AXI to AXI-Lite</text>
+<text x="915.0" y="499" font-size="12" text-anchor="middle" fill="#000">then AXI-Lite crossbar</text>
+<text x="915.0" y="514" font-size="12" text-anchor="middle" fill="#000">4 KiB pages, one transaction per port</text>
+<rect x="1100" y="390" width="240" height="50" rx="7.5" fill="#e1d5e7" stroke="#9673a6" stroke-width="1"/>
+<text x="1220.0" y="412" font-size="12" text-anchor="middle" fill="#000">FIN 0x8000_0000</text>
+<text x="1220.0" y="426" font-size="12" text-anchor="middle" fill="#000">CSRs and scratchpads</text>
+<rect x="1100" y="450" width="240" height="50" rx="7.5" fill="#e1d5e7" stroke="#9673a6" stroke-width="1"/>
+<text x="1220.0" y="472" font-size="12" text-anchor="middle" fill="#000">UART 0x8000_1000</text>
+<text x="1220.0" y="486" font-size="12" text-anchor="middle" fill="#000">AXI-Lite to APB, PULP UART</text>
+<rect x="1100" y="510" width="240" height="50" rx="7.5" fill="#e1d5e7" stroke="#9673a6" stroke-width="1"/>
+<text x="1220.0" y="532" font-size="12" text-anchor="middle" fill="#000">Timer 0x8000_2000</text>
+<text x="1220.0" y="546" font-size="12" text-anchor="middle" fill="#000">CLINT view at 0x8001_0000</text>
+<rect x="1100" y="570" width="240" height="50" rx="7.5" fill="#e1d5e7" stroke="#9673a6" stroke-width="1"/>
+<text x="1220.0" y="592" font-size="12" text-anchor="middle" fill="#000">SoC CSRs 0x8000_3000</text>
+<text x="1220.0" y="606" font-size="12" text-anchor="middle" fill="#000">boot and stop controls</text>
+<rect x="1100" y="630" width="240" height="50" rx="7.5" fill="#e1d5e7" stroke="#9673a6" stroke-width="1"/>
+<text x="1220.0" y="652" font-size="12" text-anchor="middle" fill="#000">Host console 0x8000_4000</text>
+<text x="1220.0" y="666" font-size="12" text-anchor="middle" fill="#000">host side of the console</text>
+<rect x="1420" y="110" width="340" height="90" rx="13.5" fill="#d5e8d4" stroke="#82b366" stroke-width="1"/>
+<text x="1590.0" y="152" font-size="12" text-anchor="middle" fill="#000">Processing system</text>
+<text x="1590.0" y="166" font-size="12" text-anchor="middle" fill="#000">Arm cores, HP0 port (128-bit AXI4)</text>
+<rect x="1420" y="230" width="340" height="70" rx="10.5" fill="#d5e8d4" stroke="#82b366" stroke-width="1"/>
+<text x="1590.0" y="262" font-size="12" text-anchor="middle" fill="#000">PS DDR</text>
+<text x="1590.0" y="276" font-size="12" text-anchor="middle" fill="#000">256 MiB reserved, no-map</text>
+<rect x="1420" y="340" width="340" height="100" rx="15.0" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="1590.0" y="379" font-size="12" text-anchor="middle" fill="#000">orca_kv260_top</text>
+<text x="1590.0" y="394" font-size="12" text-anchor="middle" fill="#000">FIN disabled</text>
+<text x="1590.0" y="409" font-size="12" text-anchor="middle" fill="#000">resets, clocks, UART TX, host aperture</text>
+<rect x="1420" y="470" width="340" height="110" rx="16.5" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="1590.0" y="514" font-size="12" text-anchor="middle" fill="#000">Clock</text>
+<text x="1590.0" y="529" font-size="12" text-anchor="middle" fill="#000">one clock, 150 MHz</text>
+<text x="1590.0" y="544" font-size="12" text-anchor="middle" fill="#000">reset release synchronized</text>
+<text x="1420" y="620" font-size="11" text-anchor="start" fill="#000">No cache coherence. Shared buffers use the</text>
+<text x="1420" y="640" font-size="11" text-anchor="start" fill="#000">uncached DMA window.</text>
+<text x="30" y="784" font-size="10" fill="#333">Solid arrows: data paths. Dashed arrows: control and interrupts. Addresses are ORCA addresses; the host aperture is 128 KiB at 0xA400_0000 in the PS map.</text></svg>

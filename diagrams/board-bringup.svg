@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 940" width="1800" height="940" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 z" fill="context-stroke" stroke="context-stroke"/></marker></defs>
+<rect width="1800" height="940" fill="#ffffff"/>
+<text x="30" y="40" font-size="22" font-weight="bold" fill="#000">KV260 bring-up over USB JTAG</text>
+<rect x="20" y="60" width="640" height="820" rx="18" fill="#f5f5f5" fill-opacity="0.5" stroke="#666" stroke-opacity="0.5"/>
+<text x="28" y="76" font-size="11" font-weight="bold" fill="#333" fill-opacity="0.7">Host computer</text>
+<rect x="700" y="60" width="1080" height="820" rx="18" fill="#f5f5f5" fill-opacity="0.5" stroke="#666" stroke-opacity="0.5"/>
+<text x="708" y="76" font-size="11" font-weight="bold" fill="#333" fill-opacity="0.7">KV260 carrier and K26 module</text>
+<rect x="1010" y="100" width="740" height="400" rx="18" fill="#f5f5f5" fill-opacity="0.5" stroke="#666" stroke-opacity="0.5"/>
+<text x="1018" y="116" font-size="11" font-weight="bold" fill="#333" fill-opacity="0.7">Processing system</text>
+<rect x="1010" y="520" width="740" height="320" rx="18" fill="#f5f5f5" fill-opacity="0.5" stroke="#666" stroke-opacity="0.5"/>
+<text x="1018" y="536" font-size="11" font-weight="bold" fill="#333" fill-opacity="0.7">Programmable logic</text>
+<path d="M340,220 L340,180" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M340,300 L340,340" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M340,460 L340,420" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M630,380 L680,380 L680,145 L730,145" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M970,165 L1040,165" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1260,190 L1280,190" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1500,190 L1520,190" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1625,230 L1625,290" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M850,180 L850,200 L850,440 L1040,440" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M850,180 L850,200 L850,610 L1040,610" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1340,440 L1400,440" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1450,480 L1450,570" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1260,610 L1280,610" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1390,700 L1390,740" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1500,770 L1510,770 L1510,615 L1520,615" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1730,615 L1742,615 L1742,190 L1730,190" fill="none" stroke="#666666" stroke-width="1.2" stroke-dasharray="3,3" marker-end="url(#a)"/>
+<path d="M630,390 L680,390 L680,325 L844,325 A6,6 0 0 1 856,325 L844,325 A6,6 0 0 1 856,325 L1380,325" fill="none" stroke="#6c8ebf" stroke-width="1.2" stroke-dasharray="3,3" marker-end="url(#a)"/>
+<text x="660" y="263" font-size="10" text-anchor="middle" fill="#000" stroke="#fff" stroke-width="4" paint-order="stroke">JTAG</text>
+<text x="1645" y="508" font-size="10" text-anchor="middle" fill="#000" stroke="#fff" stroke-width="4" paint-order="stroke">relay reads the host UART</text>
+<text x="1200" y="318" font-size="10" text-anchor="middle" fill="#000" stroke="#fff" stroke-width="4" paint-order="stroke">reads the rings over JTAG</text>
+<rect x="50" y="110" width="580" height="70" rx="10.5" fill="#d5e8d4" stroke="#82b366" stroke-width="1"/>
+<text x="340.0" y="142" font-size="12" text-anchor="middle" fill="#000">Terminal</text>
+<text x="340.0" y="156" font-size="12" text-anchor="middle" fill="#000">console text in, keystrokes out (ctrl-] quits)</text>
+<rect x="50" y="220" width="580" height="80" rx="12.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="340.0" y="249" font-size="12" text-anchor="middle" fill="#000">orca_host.py --jtag</text>
+<text x="340.0" y="264" font-size="12" text-anchor="middle" fill="#000">loads, launches, relays the console</text>
+<text x="340.0" y="279" font-size="12" text-anchor="middle" fill="#000">one JTAG session at a time</text>
+<rect x="50" y="340" width="580" height="80" rx="12.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="340.0" y="376" font-size="12" text-anchor="middle" fill="#000">xsdb and kv260_jtag.tcl</text>
+<text x="340.0" y="392" font-size="12" text-anchor="middle" fill="#000">Vivado xsdb (xsct is disabled in 2026.1)</text>
+<rect x="50" y="460" width="580" height="150" rx="22.5" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="340.0" y="502" font-size="12" text-anchor="middle" fill="#000">Files in the kit (src/prebuilt)</text>
+<text x="340.0" y="516" font-size="12" text-anchor="middle" fill="#000">orca_kv260.bit  bitstream</text>
+<text x="340.0" y="532" font-size="12" text-anchor="middle" fill="#000">psu_init.tcl  PS clocks, DDR, isolation, PL reset</text>
+<text x="340.0" y="546" font-size="12" text-anchor="middle" fill="#000">relay.elf  A53 console relay</text>
+<text x="340.0" y="562" font-size="12" text-anchor="middle" fill="#000">Image + orca-kv260-143-jtag.dtb  Linux, 115200 baud</text>
+<text x="340.0" y="576" font-size="12" text-anchor="middle" fill="#000">coremark_kv260.bin  CoreMark image</text>
+<rect x="730" y="110" width="240" height="70" rx="10.5" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="850.0" y="142" font-size="12" text-anchor="middle" fill="#000">USB-JTAG</text>
+<text x="850.0" y="156" font-size="12" text-anchor="middle" fill="#000">carrier X-MLCC-01</text>
+<rect x="1040" y="150" width="220" height="80" rx="12.0" fill="#ffffff" stroke="#666666" stroke-width="1"/>
+<text x="1150.0" y="179" font-size="12" text-anchor="middle" fill="#000">1 Boot ROM</text>
+<text x="1150.0" y="194" font-size="12" text-anchor="middle" fill="#000">alternate boot mode JTAG</text>
+<text x="1150.0" y="209" font-size="12" text-anchor="middle" fill="#000">0xFF5E0200 = 0x0100, reset</text>
+<rect x="1280" y="150" width="220" height="80" rx="12.0" fill="#ffffff" stroke="#666666" stroke-width="1"/>
+<text x="1390.0" y="179" font-size="12" text-anchor="middle" fill="#000">2 psu_init</text>
+<text x="1390.0" y="194" font-size="12" text-anchor="middle" fill="#000">PLLs, pl_clk0, DDR,</text>
+<text x="1390.0" y="209" font-size="12" text-anchor="middle" fill="#000">isolation removal, PL reset</text>
+<rect x="1520" y="150" width="210" height="80" rx="12.0" fill="#ffffff" stroke="#666666" stroke-width="1"/>
+<text x="1625.0" y="179" font-size="12" text-anchor="middle" fill="#000">4 Cortex-A53 #0</text>
+<text x="1625.0" y="194" font-size="12" text-anchor="middle" fill="#000">runs relay.elf from OCM</text>
+<text x="1625.0" y="209" font-size="12" text-anchor="middle" fill="#000">no OS, MMU off</text>
+<rect x="1380" y="290" width="350" height="70" rx="10.5" fill="#ffffff" stroke="#666666" stroke-width="1"/>
+<text x="1555.0" y="314" font-size="12" text-anchor="middle" fill="#000">OCM rings</text>
+<text x="1555.0" y="329" font-size="12" text-anchor="middle" fill="#000">header 0xFFFD0000, receive ring 0xFFFE0000</text>
+<text x="1555.0" y="344" font-size="12" text-anchor="middle" fill="#000">transmit ring for keystrokes</text>
+<rect x="1040" y="400" width="300" height="80" rx="12.0" fill="#ffffff" stroke="#666666" stroke-width="1"/>
+<text x="1190.0" y="429" font-size="12" text-anchor="middle" fill="#000">PS DDR</text>
+<text x="1190.0" y="444" font-size="12" text-anchor="middle" fill="#000">0x7000_0000, 256 MiB reserved (no-map)</text>
+<text x="1190.0" y="459" font-size="12" text-anchor="middle" fill="#000">5 Image and dtb written by JTAG</text>
+<rect x="1400" y="400" width="200" height="80" rx="12.0" fill="#ffffff" stroke="#666666" stroke-width="1"/>
+<text x="1500.0" y="436" font-size="12" text-anchor="middle" fill="#000">HP0 port</text>
+<text x="1500.0" y="452" font-size="12" text-anchor="middle" fill="#000">128-bit AXI4</text>
+<rect x="1040" y="570" width="220" height="80" rx="12.0" fill="#ffffff" stroke="#666666" stroke-width="1"/>
+<text x="1150.0" y="606" font-size="12" text-anchor="middle" fill="#000">3 Bitstream</text>
+<text x="1150.0" y="622" font-size="12" text-anchor="middle" fill="#000">orca_kv260.bit loaded by xsdb</text>
+<rect x="1280" y="570" width="220" height="130" rx="19.5" fill="#ffffff" stroke="#666666" stroke-width="1"/>
+<text x="1390.0" y="616" font-size="12" text-anchor="middle" fill="#000">ORCA core</text>
+<text x="1390.0" y="632" font-size="12" text-anchor="middle" fill="#000">150 MHz, boot ROM overlay</text>
+<text x="1390.0" y="646" font-size="12" text-anchor="middle" fill="#000">DDR window 0x1000_0000</text>
+<text x="1390.0" y="662" font-size="12" text-anchor="middle" fill="#000">6 released by a host CSR write</text>
+<rect x="1520" y="570" width="210" height="90" rx="13.5" fill="#ffffff" stroke="#666666" stroke-width="1"/>
+<text x="1625.0" y="604" font-size="12" text-anchor="middle" fill="#000">Host aperture</text>
+<text x="1625.0" y="619" font-size="12" text-anchor="middle" fill="#000">0xA400_0000, 128 KiB</text>
+<text x="1625.0" y="634" font-size="12" text-anchor="middle" fill="#000">SoC CSRs, host console UART</text>
+<rect x="1280" y="740" width="220" height="60" rx="9.0" fill="#ffffff" stroke="#666666" stroke-width="1"/>
+<text x="1390.0" y="766" font-size="12" text-anchor="middle" fill="#000">ORCA UART</text>
+<text x="1390.0" y="782" font-size="12" text-anchor="middle" fill="#000">console TX and RX</text>
+<text x="50" y="650" font-size="13" text-anchor="start" font-weight="bold" fill="#000">7 Console path</text>
+<text x="50" y="675" font-size="11" text-anchor="start" fill="#000">ORCA UART TX goes to the host console UART. The A53 relay</text>
+<text x="50" y="695" font-size="11" text-anchor="start" fill="#000">copies its bytes into the OCM receive ring, xsdb reads the ring</text>
+<text x="50" y="715" font-size="11" text-anchor="start" fill="#000">in bulk, and orca_host.py prints them. Keystrokes travel the</text>
+<text x="50" y="735" font-size="11" text-anchor="start" fill="#000">other way through the transmit ring.</text>
+<text x="50" y="775" font-size="11" text-anchor="start" fill="#000">Linux: the dtb address is passed in a1, and the kernel runs</text>
+<text x="50" y="795" font-size="11" text-anchor="start" fill="#000">from the DDR window with a built-in initramfs.</text>
+<text x="50" y="820" font-size="11" text-anchor="start" fill="#000">CoreMark: coremark_kv260.bin is linked at 0x1000_0000 and</text>
+<text x="50" y="840" font-size="11" text-anchor="start" fill="#000">returns to the boot stub when it finishes.</text>
+<text x="30" y="924" font-size="10" fill="#333">Numbers give the order of the steps. No SD card or Arm Linux is involved; xsdb drives the board and the host script relays the console.</text></svg>

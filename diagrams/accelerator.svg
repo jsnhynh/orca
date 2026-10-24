@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 1000" width="1800" height="1000" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 z" fill="context-stroke" stroke="context-stroke"/></marker></defs>
+<rect width="1800" height="1000" fill="#ffffff"/>
+<text x="30" y="40" font-size="22" font-weight="bold" fill="#000">FIN matrix accelerator design</text>
+<rect x="20" y="60" width="500" height="880" rx="18" fill="#f5f5f5" fill-opacity="0.5" stroke="#666" stroke-opacity="0.5"/>
+<text x="28" y="76" font-size="11" font-weight="bold" fill="#333" fill-opacity="0.7">Fabric clock domain</text>
+<rect x="540" y="60" width="1240" height="880" rx="18" fill="#f5f5f5" fill-opacity="0.5" stroke="#666" stroke-opacity="0.5"/>
+<text x="548" y="76" font-size="11" font-weight="bold" fill="#333" fill-opacity="0.7">FIN clock domain</text>
+<path d="M160,180 L160,220" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M390,220 L390,180" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M490,250 L580,250" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M580,655 L565,655 L565,213 L565,216 L396,216 A6,6 0 0 0 384,216 L270,216 L270,220" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M690,290 L690,320" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M800,255 L850,255" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M690,390 L690,420" fill="none" stroke="#d6b656" stroke-width="1.2" stroke-dasharray="3,3" marker-end="url(#a)"/>
+<path d="M950,290 L950,320" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M800,655 L830,655 L830,385 L850,385" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1050,370 L1075,370 L1075,255 L1100,255" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1050,350 L1069,350 A6,6 0 0 1 1081,350 L1100,350" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1050,410 L1100,410" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M690,560 L690,610" fill="none" stroke="#d79b00" stroke-width="1.2" stroke-dasharray="3,3" marker-end="url(#a)"/>
+<path d="M800,480 L824,480 A6,6 0 0 1 836,480 L850,480" fill="none" stroke="#d79b00" stroke-width="1.2" stroke-dasharray="3,3" marker-end="url(#a)"/>
+<path d="M800,540 L830,540 L1345,540 L1500,540 L1500,490" fill="none" stroke="#d79b00" stroke-width="1.2" stroke-dasharray="3,3" marker-end="url(#a)"/>
+<path d="M1320,255 L1345,255 L1345,405 L1370,405" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1320,345 L1345,345 L1345,255 L1370,255" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1500,290 L1500,320" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1500,490 L1500,520" fill="none" stroke="#82b366" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1500,580 L1500,610" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1500,670 L1500,700" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1320,435 L1345,435 L1345,740 L1370,740" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1370,740 L1320,740" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1370,640 L1345,640 L1210,640 L1210,700" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1210,780 L1210,810 L690,810 L690,700" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<text x="690" y="588" font-size="10" text-anchor="middle" fill="#000" stroke="#fff" stroke-width="4" paint-order="stroke">commands</text>
+<text x="1090" y="537" font-size="10" text-anchor="middle" fill="#000" stroke="#fff" stroke-width="4" paint-order="stroke">phase, addresses, tile flags</text>
+<text x="1352" y="303" font-size="10" text-anchor="middle" fill="#000" stroke="#fff" stroke-width="4" paint-order="stroke">weights</text>
+<text x="1285" y="637" font-size="10" text-anchor="middle" fill="#000" stroke="#fff" stroke-width="4" paint-order="stroke">raw mode</text>
+<rect x="50" y="110" width="220" height="70" rx="10.5" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="160.0" y="142" font-size="12" text-anchor="middle" fill="#000">AXI-Lite target</text>
+<text x="160.0" y="156" font-size="12" text-anchor="middle" fill="#000">32-bit, from the SoC</text>
+<rect x="290" y="110" width="200" height="70" rx="10.5" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="390.0" y="142" font-size="12" text-anchor="middle" fill="#000">AXI4 initiator</text>
+<text x="390.0" y="156" font-size="12" text-anchor="middle" fill="#000">bursts to main memory</text>
+<rect x="50" y="220" width="440" height="60" rx="9.0" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="270.0" y="246" font-size="12" text-anchor="middle" fill="#000">Optional clock-domain crossings</text>
+<text x="270.0" y="262" font-size="12" text-anchor="middle" fill="#000">asynchronous FIFOs per channel, used when FIN has its own clock</text>
+<rect x="580" y="220" width="220" height="70" rx="10.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="690.0" y="252" font-size="12" text-anchor="middle" fill="#000">AXI-Lite demux</text>
+<text x="690.0" y="266" font-size="12" text-anchor="middle" fill="#000">split by address offset</text>
+<rect x="580" y="320" width="220" height="70" rx="10.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="690.0" y="352" font-size="12" text-anchor="middle" fill="#000">fin_csrs</text>
+<text x="690.0" y="366" font-size="12" text-anchor="middle" fill="#000">PeakRDL registers, job + status</text>
+<rect x="580" y="420" width="220" height="140" rx="21.0" fill="#ffe6cc" stroke="#d79b00" stroke-width="1"/>
+<text x="690.0" y="464" font-size="12" text-anchor="middle" fill="#000">fin_ctrl</text>
+<text x="690.0" y="479" font-size="12" text-anchor="middle" fill="#000">job snapshot and validation</text>
+<text x="690.0" y="494" font-size="12" text-anchor="middle" fill="#000">M, N, K tile loops, edge tiles</text>
+<text x="690.0" y="509" font-size="12" text-anchor="middle" fill="#000">phase timing, counters</text>
+<text x="690.0" y="524" font-size="12" text-anchor="middle" fill="#000">error codes</text>
+<rect x="580" y="610" width="220" height="90" rx="13.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="690.0" y="644" font-size="12" text-anchor="middle" fill="#000">fin_dma</text>
+<text x="690.0" y="659" font-size="12" text-anchor="middle" fill="#000">rectangle DMA, one command</text>
+<text x="690.0" y="674" font-size="12" text-anchor="middle" fill="#000">at a time, load and store FSM</text>
+<rect x="850" y="220" width="200" height="70" rx="10.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="950.0" y="252" font-size="12" text-anchor="middle" fill="#000">sram_window</text>
+<text x="950.0" y="266" font-size="12" text-anchor="middle" fill="#000">direct scratchpad access</text>
+<rect x="850" y="320" width="200" height="100" rx="15.0" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="950.0" y="359" font-size="12" text-anchor="middle" fill="#000">Local port muxes</text>
+<text x="950.0" y="374" font-size="12" text-anchor="middle" fill="#000">window write beats DMA write</text>
+<text x="950.0" y="389" font-size="12" text-anchor="middle" fill="#000">DMA read beats window read</text>
+<rect x="850" y="450" width="200" height="60" rx="9.0" fill="#ffe6cc" stroke="#d79b00" stroke-width="1"/>
+<text x="950.0" y="476" font-size="12" text-anchor="middle" fill="#000">Interrupt level</text>
+<text x="950.0" y="492" font-size="12" text-anchor="middle" fill="#000">set at DONE or ERROR</text>
+<rect x="1100" y="220" width="220" height="70" rx="10.5" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="1210.0" y="252" font-size="12" text-anchor="middle" fill="#000">Weight scratchpad</text>
+<text x="1210.0" y="266" font-size="12" text-anchor="middle" fill="#000">16 x 16 INT8, 4 banks</text>
+<rect x="1100" y="310" width="220" height="70" rx="10.5" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="1210.0" y="342" font-size="12" text-anchor="middle" fill="#000">Activation scratchpad</text>
+<text x="1210.0" y="356" font-size="12" text-anchor="middle" fill="#000">16 x 1024 INT8, transposed</text>
+<rect x="1100" y="400" width="220" height="70" rx="10.5" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="1210.0" y="432" font-size="12" text-anchor="middle" fill="#000">Bias scratchpad</text>
+<text x="1210.0" y="446" font-size="12" text-anchor="middle" fill="#000">16 x INT32</text>
+<rect x="1370" y="220" width="260" height="70" rx="10.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="1500.0" y="252" font-size="12" text-anchor="middle" fill="#000">skew_buf</text>
+<text x="1500.0" y="266" font-size="12" text-anchor="middle" fill="#000">row delays form the wavefront</text>
+<rect x="1370" y="320" width="260" height="170" rx="25.5" fill="#d5e8d4" stroke="#82b366" stroke-width="1"/>
+<text x="1500.0" y="386" font-size="12" text-anchor="middle" fill="#000">sys_arr: 16 x 16 PE grid</text>
+<text x="1500.0" y="402" font-size="12" text-anchor="middle" fill="#000">weight stationary, two-stage PE</text>
+<text x="1500.0" y="416" font-size="12" text-anchor="middle" fill="#000">INT8 x INT8, 32-bit accumulate</text>
+<text x="1500.0" y="432" font-size="12" text-anchor="middle" fill="#000">rows = K, columns = N, time = M</text>
+<rect x="1370" y="520" width="260" height="60" rx="9.0" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="1500.0" y="546" font-size="12" text-anchor="middle" fill="#000">Output deskew</text>
+<text x="1500.0" y="562" font-size="12" text-anchor="middle" fill="#000">aligns column results</text>
+<rect x="1370" y="610" width="260" height="60" rx="9.0" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="1500.0" y="636" font-size="12" text-anchor="middle" fill="#000">K-tile accumulate</text>
+<text x="1500.0" y="652" font-size="12" text-anchor="middle" fill="#000">partial-sum fold</text>
+<rect x="1370" y="700" width="260" height="80" rx="12.0" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="1500.0" y="729" font-size="12" text-anchor="middle" fill="#000">postproc</text>
+<text x="1500.0" y="744" font-size="12" text-anchor="middle" fill="#000">bias, shift, saturate to INT8</text>
+<text x="1500.0" y="759" font-size="12" text-anchor="middle" fill="#000">optional ReLU, 3 stages</text>
+<rect x="1100" y="700" width="220" height="80" rx="12.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="1210.0" y="729" font-size="12" text-anchor="middle" fill="#000">Output scratchpad</text>
+<text x="1210.0" y="744" font-size="12" text-anchor="middle" fill="#000">16 x 16 INT32, banked</text>
+<text x="1210.0" y="759" font-size="12" text-anchor="middle" fill="#000">read by window and DMA</text>
+<text x="580" y="840" font-size="12" text-anchor="start" font-weight="bold" fill="#000">Two programming modes</text>
+<text x="580" y="865" font-size="11" text-anchor="start" fill="#000">Tiled: one M x K by K x N job, hardware loops and edge tiles.</text>
+<text x="580" y="885" font-size="11" text-anchor="start" fill="#000">Raw: one 16 x 16 x 16 operation, software chains launches with acc_en;</text>
+<text x="580" y="905" font-size="11" text-anchor="start" fill="#000">raw mode stores the full INT32 sum and skips post-processing.</text>
+<text x="1370" y="840" font-size="12" text-anchor="start" font-weight="bold" fill="#000">Limits</text>
+<text x="1370" y="865" font-size="11" text-anchor="start" fill="#000">K &lt;= 1024 (activation scratchpad depth)</text>
+<text x="1370" y="885" font-size="11" text-anchor="start" fill="#000">No queue behind the local port muxes</text>
+<text x="1370" y="905" font-size="11" text-anchor="start" fill="#000">Software waits while a job is busy</text>
+<text x="30" y="984" font-size="10" fill="#333">Solid arrows: data. Dashed arrows: control and status. A is the activation matrix, B the weights, C the output. FIN is verified in simulation and has not been brought up on an FPGA.</text></svg>

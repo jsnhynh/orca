@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 720" width="1800" height="720" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 z" fill="context-stroke" stroke="context-stroke"/></marker></defs>
+<rect width="1800" height="720" fill="#ffffff"/>
+<text x="30" y="40" font-size="22" font-weight="bold" fill="#000">ORCA address map</text>
+<rect x="20" y="70" width="1100" height="600" rx="18" fill="#f5f5f5" fill-opacity="0.5" stroke="#666" stroke-opacity="0.5"/>
+<text x="28" y="86" font-size="11" font-weight="bold" fill="#333" fill-opacity="0.7">ORCA address space</text>
+<rect x="1160" y="70" width="620" height="460" rx="18" fill="#f5f5f5" fill-opacity="0.5" stroke="#666" stroke-opacity="0.5"/>
+<text x="1168" y="86" font-size="11" font-weight="bold" fill="#333" fill-opacity="0.7">Host aperture (PS 0xA400_0000, 128 KiB)</text>
+<rect x="40" y="110" width="500" height="50" rx="7.5" fill="#e1d5e7" stroke="#9673a6" stroke-width="1"/>
+<text x="290.0" y="132" font-size="12" text-anchor="middle" fill="#000">0x0000_0000 to 0x0000_0fff</text>
+<text x="290.0" y="146" font-size="12" text-anchor="middle" fill="#000">boot ROM overlay, 4 KiB</text>
+<rect x="40" y="170" width="500" height="50" rx="7.5" fill="#e1d5e7" stroke="#9673a6" stroke-width="1"/>
+<text x="290.0" y="192" font-size="12" text-anchor="middle" fill="#000">0x0000_1000 to 0x0000_7fff</text>
+<text x="290.0" y="206" font-size="12" text-anchor="middle" fill="#000">local main memory</text>
+<rect x="40" y="230" width="500" height="50" rx="7.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="290.0" y="252" font-size="12" text-anchor="middle" fill="#000">0x0000_8000 to 0x0000_bfff</text>
+<text x="290.0" y="266" font-size="12" text-anchor="middle" fill="#000">uncached DMA window, 16 KiB, shared by CPU, FIN and host</text>
+<rect x="40" y="290" width="500" height="50" rx="7.5" fill="#e1d5e7" stroke="#9673a6" stroke-width="1"/>
+<text x="290.0" y="312" font-size="12" text-anchor="middle" fill="#000">0x0000_c000 to 0x0003_ffff</text>
+<text x="290.0" y="326" font-size="12" text-anchor="middle" fill="#000">local main memory, rest of the 256 KiB array</text>
+<rect x="40" y="350" width="500" height="50" rx="7.5" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="290.0" y="372" font-size="12" text-anchor="middle" fill="#000">0x0004_0000 to 0x0fff_ffff</text>
+<text x="290.0" y="386" font-size="12" text-anchor="middle" fill="#000">no storage: line reads return zero, writes are discarded</text>
+<rect x="40" y="410" width="500" height="50" rx="7.5" fill="#d5e8d4" stroke="#82b366" stroke-width="1"/>
+<text x="290.0" y="432" font-size="12" text-anchor="middle" fill="#000">0x1000_0000 to 0x1fff_ffff</text>
+<text x="290.0" y="446" font-size="12" text-anchor="middle" fill="#000">PS DDR window (KV260): cached, maps to PS 0x7000_0000, 256 MiB</text>
+<rect x="40" y="470" width="500" height="50" rx="7.5" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="290.0" y="492" font-size="12" text-anchor="middle" fill="#000">0x2000_0000 to 0x7fff_ffff</text>
+<text x="290.0" y="506" font-size="12" text-anchor="middle" fill="#000">no storage</text>
+<rect x="580" y="110" width="520" height="50" rx="7.5" fill="#f8cecc" stroke="#b85450" stroke-width="1"/>
+<text x="840.0" y="132" font-size="12" text-anchor="middle" fill="#000">0x8000_0000 to 0x8000_0fff</text>
+<text x="840.0" y="146" font-size="12" text-anchor="middle" fill="#000">FIN: scratchpad windows and CSRs</text>
+<rect x="580" y="170" width="520" height="50" rx="7.5" fill="#e1d5e7" stroke="#9673a6" stroke-width="1"/>
+<text x="840.0" y="192" font-size="12" text-anchor="middle" fill="#000">0x8000_1000 to 0x8000_1fff</text>
+<text x="840.0" y="206" font-size="12" text-anchor="middle" fill="#000">UART: AXI-Lite to APB, PULP UART</text>
+<rect x="580" y="230" width="520" height="50" rx="7.5" fill="#e1d5e7" stroke="#9673a6" stroke-width="1"/>
+<text x="840.0" y="252" font-size="12" text-anchor="middle" fill="#000">0x8000_2000 to 0x8000_2fff</text>
+<text x="840.0" y="266" font-size="12" text-anchor="middle" fill="#000">machine timer: mtime, mtimecmp, msip, test interrupt</text>
+<rect x="580" y="290" width="520" height="50" rx="7.5" fill="#e1d5e7" stroke="#9673a6" stroke-width="1"/>
+<text x="840.0" y="312" font-size="12" text-anchor="middle" fill="#000">0x8000_3000 to 0x8000_3fff</text>
+<text x="840.0" y="326" font-size="12" text-anchor="middle" fill="#000">SoC CSRs: host boot controls, partial status</text>
+<rect x="580" y="350" width="520" height="50" rx="7.5" fill="#e1d5e7" stroke="#9673a6" stroke-width="1"/>
+<text x="840.0" y="372" font-size="12" text-anchor="middle" fill="#000">0x8000_4000 to 0x8000_4fff</text>
+<text x="840.0" y="386" font-size="12" text-anchor="middle" fill="#000">host console UART (host side of the console)</text>
+<rect x="580" y="410" width="520" height="50" rx="7.5" fill="#e1d5e7" stroke="#9673a6" stroke-width="1"/>
+<text x="840.0" y="432" font-size="12" text-anchor="middle" fill="#000">0x8001_0000 to 0x8001_ffff</text>
+<text x="840.0" y="446" font-size="12" text-anchor="middle" fill="#000">CLINT view of the machine timer, for Linux</text>
+<rect x="580" y="470" width="520" height="50" rx="7.5" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="840.0" y="492" font-size="12" text-anchor="middle" fill="#000">everything else above 0x8000_0000</text>
+<text x="840.0" y="506" font-size="12" text-anchor="middle" fill="#000">no target: the access returns a bus error</text>
+<rect x="1180" y="110" width="580" height="60" rx="9.0" fill="#d5e8d4" stroke="#82b366" stroke-width="1"/>
+<text x="1470.0" y="136" font-size="12" text-anchor="middle" fill="#000">0x00000 to 0x03fff</text>
+<text x="1470.0" y="152" font-size="12" text-anchor="middle" fill="#000">maps to ORCA 0x0000_8000 to 0x0000_bfff, the DMA buffer</text>
+<rect x="1180" y="190" width="580" height="60" rx="9.0" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="1470.0" y="216" font-size="12" text-anchor="middle" fill="#000">0x04000 to 0x0ffff</text>
+<text x="1470.0" y="232" font-size="12" text-anchor="middle" fill="#000">mapped to zero: the memory guard returns SLVERR</text>
+<rect x="1180" y="270" width="580" height="60" rx="9.0" fill="#d5e8d4" stroke="#82b366" stroke-width="1"/>
+<text x="1470.0" y="296" font-size="12" text-anchor="middle" fill="#000">0x10000 to 0x14fff</text>
+<text x="1470.0" y="312" font-size="12" text-anchor="middle" fill="#000">maps to ORCA 0x8000_0000 to 0x8000_4fff, five MMIO pages</text>
+<rect x="1180" y="350" width="580" height="60" rx="9.0" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="1470.0" y="376" font-size="12" text-anchor="middle" fill="#000">0x15000 to 0x1ffff</text>
+<text x="1470.0" y="392" font-size="12" text-anchor="middle" fill="#000">mapped to zero: the memory guard returns SLVERR</text>
+<text x="40" y="560" font-size="13" text-anchor="start" font-weight="bold" fill="#000">Decode</text>
+<text x="40" y="585" font-size="11" text-anchor="start" fill="#000">crossbar targets: 0 below 0x8000_0000 (memory route), 1 from 0x8000_0000 (peripherals)</text>
+<text x="40" y="605" font-size="11" text-anchor="start" fill="#000">the memory guard then admits only the uncached DMA window on the AXI side;</text>
+<text x="40" y="625" font-size="11" text-anchor="start" fill="#000">an AXI access to cached RAM receives SLVERR</text>
+<text x="40" y="665" font-size="11" text-anchor="start" fill="#000">Peripheral pages are 4 KiB. The AXI-Lite crossbar has no default target.</text>
+<text x="1180" y="450" font-size="11" text-anchor="start" fill="#000">The host reaches only the DMA buffer and the MMIO pages,</text>
+<text x="1180" y="470" font-size="11" text-anchor="start" fill="#000">never cached RAM.</text>
+<text x="30" y="704" font-size="10" fill="#333">Addresses are as the CPU, FIN DMA and host see them. The host aperture is 128 KiB at 0xA400_0000 in the PS map.</text></svg>
