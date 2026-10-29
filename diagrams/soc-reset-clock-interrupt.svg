@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 760" width="1800" height="760" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 z" fill="context-stroke" stroke="context-stroke"/></marker></defs>
+<rect width="1800" height="760" fill="#ffffff"/>
+<text x="30" y="40" font-size="22" font-weight="bold" fill="#000">Resets, clocks and interrupts</text>
+<rect x="20" y="70" width="560" height="300" rx="18" fill="#f5f5f5" fill-opacity="0.5" stroke="#666" stroke-opacity="0.5"/>
+<text x="28" y="86" font-size="11" font-weight="bold" fill="#333" fill-opacity="0.7">Clocks</text>
+<rect x="620" y="70" width="560" height="300" rx="18" fill="#f5f5f5" fill-opacity="0.5" stroke="#666" stroke-opacity="0.5"/>
+<text x="628" y="86" font-size="11" font-weight="bold" fill="#333" fill-opacity="0.7">Resets</text>
+<rect x="1220" y="70" width="560" height="300" rx="18" fill="#f5f5f5" fill-opacity="0.5" stroke="#666" stroke-opacity="0.5"/>
+<text x="1228" y="86" font-size="11" font-weight="bold" fill="#333" fill-opacity="0.7">CPU stop lifecycle (cpu_stop_ctrl)</text>
+<rect x="20" y="410" width="1760" height="300" rx="18" fill="#f5f5f5" fill-opacity="0.5" stroke="#666" stroke-opacity="0.5"/>
+<text x="28" y="426" font-size="11" font-weight="bold" fill="#333" fill-opacity="0.7">Interrupts to the CPU</text>
+<path d="M900,170 L900,190" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M900,250 L900,270" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1400,145 L1420,145" fill="none" stroke="#82b366" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1580,145 L1600,145" fill="none" stroke="#d79b00" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1500,180 L1500,200 L1500,220" fill="none" stroke="#d79b00" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M205,460 L205,440 L1615,440 L1615,460" fill="none" stroke="#9673a6" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M565,460 L565,445 L1615,445 L1615,460" fill="none" stroke="#9673a6" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1090,505 L1480,505" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<text x="1410" y="148" font-size="10" text-anchor="middle" fill="#000" stroke="#fff" stroke-width="4" paint-order="stroke">stop request</text>
+<text x="1590" y="148" font-size="10" text-anchor="middle" fill="#000" stroke="#fff" stroke-width="4" paint-order="stroke">idle</text>
+<rect x="40" y="110" width="520" height="70" rx="10.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="300.0" y="142" font-size="12" text-anchor="middle" fill="#000">core_clk</text>
+<text x="300.0" y="156" font-size="12" text-anchor="middle" fill="#000">CPU, caches, memory, AXI fabric, UART, timer, SoC CSRs</text>
+<rect x="40" y="200" width="520" height="70" rx="10.5" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="300.0" y="232" font-size="12" text-anchor="middle" fill="#000">One clock domain</text>
+<text x="300.0" y="246" font-size="12" text-anchor="middle" fill="#000">no internal clock crossings; 150 MHz on the KV260</text>
+<rect x="640" y="110" width="520" height="60" rx="9.0" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="900.0" y="136" font-size="12" text-anchor="middle" fill="#000">External reset</text>
+<text x="900.0" y="152" font-size="12" text-anchor="middle" fill="#000">active high, from the platform</text>
+<rect x="640" y="190" width="520" height="60" rx="9.0" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="900.0" y="209" font-size="12" text-anchor="middle" fill="#000">Reset release</text>
+<text x="900.0" y="224" font-size="12" text-anchor="middle" fill="#000">synchronized to core_clk in the block design;</text>
+<text x="900.0" y="239" font-size="12" text-anchor="middle" fill="#000">the SoC uses it directly</text>
+<rect x="640" y="270" width="520" height="80" rx="12.0" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="900.0" y="299" font-size="12" text-anchor="middle" fill="#000">SoC CSR reset value</text>
+<text x="900.0" y="314" font-size="12" text-anchor="middle" fill="#000">requests CPU stop; with host-controlled boot the host</text>
+<text x="900.0" y="329" font-size="12" text-anchor="middle" fill="#000">releases the CPU after loading memory</text>
+<rect x="1240" y="110" width="160" height="70" rx="10.5" fill="#d5e8d4" stroke="#82b366" stroke-width="1"/>
+<text x="1320.0" y="149" font-size="12" text-anchor="middle" fill="#000">Running</text>
+<rect x="1420" y="110" width="160" height="70" rx="10.5" fill="#ffe6cc" stroke="#d79b00" stroke-width="1"/>
+<text x="1500.0" y="134" font-size="12" text-anchor="middle" fill="#000">Draining</text>
+<text x="1500.0" y="149" font-size="12" text-anchor="middle" fill="#000">pipeline in reset-hold</text>
+<text x="1500.0" y="164" font-size="12" text-anchor="middle" fill="#000">caches clocked</text>
+<rect x="1600" y="110" width="160" height="70" rx="10.5" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="1680.0" y="134" font-size="12" text-anchor="middle" fill="#000">Held</text>
+<text x="1680.0" y="149" font-size="12" text-anchor="middle" fill="#000">whole tile in reset-hold</text>
+<text x="1680.0" y="164" font-size="12" text-anchor="middle" fill="#000">status.stopped set</text>
+<rect x="1240" y="220" width="520" height="130" rx="19.5" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="1500.0" y="266" font-size="12" text-anchor="middle" fill="#000">Drain conditions</text>
+<text x="1500.0" y="282" font-size="12" text-anchor="middle" fill="#000">router idle, both cache states and response slots idle,</text>
+<text x="1500.0" y="296" font-size="12" text-anchor="middle" fill="#000">line arbiter without an outstanding read, fence maintenance idle</text>
+<text x="1500.0" y="312" font-size="12" text-anchor="middle" fill="#000">memory, the fabric and the CSRs stay active throughout</text>
+<rect x="40" y="460" width="330" height="90" rx="13.5" fill="#e1d5e7" stroke="#9673a6" stroke-width="1"/>
+<text x="205.0" y="494" font-size="12" text-anchor="middle" fill="#000">Machine timer</text>
+<text x="205.0" y="509" font-size="12" text-anchor="middle" fill="#000">mtime compare gives the timer level;</text>
+<text x="205.0" y="524" font-size="12" text-anchor="middle" fill="#000">msip gives the software level</text>
+<rect x="400" y="460" width="330" height="90" rx="13.5" fill="#e1d5e7" stroke="#9673a6" stroke-width="1"/>
+<text x="565.0" y="502" font-size="12" text-anchor="middle" fill="#000">UART</text>
+<text x="565.0" y="516" font-size="12" text-anchor="middle" fill="#000">level interrupt</text>
+<rect x="760" y="460" width="330" height="90" rx="13.5" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="925.0" y="502" font-size="12" text-anchor="middle" fill="#000">ACT external level</text>
+<text x="925.0" y="516" font-size="12" text-anchor="middle" fill="#000">writable validation register</text>
+<rect x="1480" y="460" width="270" height="90" rx="13.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="1615.0" y="494" font-size="12" text-anchor="middle" fill="#000">CPU</text>
+<text x="1615.0" y="509" font-size="12" text-anchor="middle" fill="#000">external = UART or ACT</text>
+<text x="1615.0" y="524" font-size="12" text-anchor="middle" fill="#000">software reads the devices to tell which</text>
+<rect x="40" y="590" width="1710" height="90" rx="13.5" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="895.0" y="616" font-size="12" text-anchor="middle" fill="#000">Interrupt handling</text>
+<text x="895.0" y="632" font-size="12" text-anchor="middle" fill="#000">levels are not queued; the CPU takes them at commit when enabled in mie and mstatus, and an interrupt waits while</text>
+<text x="895.0" y="646" font-size="12" text-anchor="middle" fill="#000">a store or atomic is authorized. The SoC ties return, trap, failure and completion status inputs to zero today;</text>
+<text x="895.0" y="662" font-size="12" text-anchor="middle" fill="#000">the boot stub reports completion through two words in the DMA buffer.</text>
+<text x="30" y="744" font-size="10" fill="#333">The KV260 build runs everything on one clock, core_clk.</text></svg>

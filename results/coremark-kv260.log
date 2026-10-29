@@ -1,0 +1,17 @@
+2K performance run parameters for coremark.
+CoreMark Size    : 666
+Total ticks      : 36337810
+Total time (secs): 11
+Iterations/Sec   : 1090
+Iterations       : 12000
+Compiler version : GCC 15.2.0
+Compiler flags   : -O3 -march=rv32im_zicsr_zifencei -mabi=ilp32 -ffreestanding -nostdlib -nostartfiles  -msmall-data-limit=0 -fdata-sections -ffunction-sections -fno-builtin -fno-tree-loop-distribute-patterns
+Memory location  : STATIC
+seedcrc          : 0xe9f5
+[0]crclist       : 0xe714
+[0]crcmatrix     : 0x1fd7
+[0]crcstate      : 0x8e3a
+[0]crcfinal      : 0xd340
+Correct operation validated. See README.md for run and reporting rules.
+ORCA_COMPARE cycles=2325619874 instret=3506466502 iterations=12000 failed=0
+run=1 mailbox=0x00000000 status=0x2 cycles=2340827074 instructions=3508398176

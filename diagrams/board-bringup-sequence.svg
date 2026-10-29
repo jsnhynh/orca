@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 940" width="1800" height="940" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 z" fill="context-stroke" stroke="context-stroke"/></marker></defs>
+<rect width="1800" height="940" fill="#ffffff"/>
+<text x="30" y="40" font-size="22" font-weight="bold" fill="#000">Bring-up sequence</text>
+<path d="M790,160 L810,160" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M790,270 L810,270" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M790,380 L810,380" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M790,490 L810,490" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M790,600 L810,600" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M790,710 L810,710" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M790,820 L810,820" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<rect x="40" y="115" width="190" height="90" rx="13.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="135.0" y="164" font-size="12" text-anchor="middle" fill="#000">1  Select JTAG boot</text>
+<rect x="250" y="115" width="540" height="90" rx="13.5" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="520.0" y="156" font-size="12" text-anchor="middle" fill="#000">Host</text>
+<text x="520.0" y="172" font-size="12" text-anchor="middle" fill="#000">write 0xFF5E0200 = 0x0100, reset the system</text>
+<rect x="810" y="115" width="950" height="90" rx="13.5" fill="#d5e8d4" stroke="#82b366" stroke-width="1"/>
+<text x="1285.0" y="156" font-size="12" text-anchor="middle" fill="#000">Board</text>
+<text x="1285.0" y="172" font-size="12" text-anchor="middle" fill="#000">the boot ROM waits instead of starting the QSPI firmware</text>
+<rect x="40" y="225" width="190" height="90" rx="13.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="135.0" y="274" font-size="12" text-anchor="middle" fill="#000">2  Run psu_init</text>
+<rect x="250" y="225" width="540" height="90" rx="13.5" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="520.0" y="266" font-size="12" text-anchor="middle" fill="#000">Host</text>
+<text x="520.0" y="282" font-size="12" text-anchor="middle" fill="#000">run psu_init.tcl from the platform export</text>
+<rect x="810" y="225" width="950" height="90" rx="13.5" fill="#d5e8d4" stroke="#82b366" stroke-width="1"/>
+<text x="1285.0" y="266" font-size="12" text-anchor="middle" fill="#000">Board</text>
+<text x="1285.0" y="282" font-size="12" text-anchor="middle" fill="#000">PLLs and pl_clk0, DDR controller, PS to PL isolation removed, PL reset</text>
+<rect x="40" y="335" width="190" height="90" rx="13.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="135.0" y="384" font-size="12" text-anchor="middle" fill="#000">3  Program the logic</text>
+<rect x="250" y="335" width="540" height="90" rx="13.5" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="520.0" y="376" font-size="12" text-anchor="middle" fill="#000">Host</text>
+<text x="520.0" y="392" font-size="12" text-anchor="middle" fill="#000">download orca_kv260.bit over JTAG</text>
+<rect x="810" y="335" width="950" height="90" rx="13.5" fill="#d5e8d4" stroke="#82b366" stroke-width="1"/>
+<text x="1285.0" y="376" font-size="12" text-anchor="middle" fill="#000">Board</text>
+<text x="1285.0" y="392" font-size="12" text-anchor="middle" fill="#000">ORCA is configured and held in reset by the SoC CSR</text>
+<rect x="40" y="445" width="190" height="90" rx="13.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="135.0" y="494" font-size="12" text-anchor="middle" fill="#000">4  Start the relay</text>
+<rect x="250" y="445" width="540" height="90" rx="13.5" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="520.0" y="486" font-size="12" text-anchor="middle" fill="#000">Host</text>
+<text x="520.0" y="502" font-size="12" text-anchor="middle" fill="#000">load relay.elf into OCM and run it on Cortex-A53 #0</text>
+<rect x="810" y="445" width="950" height="90" rx="13.5" fill="#d5e8d4" stroke="#82b366" stroke-width="1"/>
+<text x="1285.0" y="486" font-size="12" text-anchor="middle" fill="#000">Board</text>
+<text x="1285.0" y="502" font-size="12" text-anchor="middle" fill="#000">bare metal, MMU off; it copies the host console UART into an OCM ring</text>
+<rect x="40" y="555" width="190" height="90" rx="13.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="135.0" y="604" font-size="12" text-anchor="middle" fill="#000">5  Load the image</text>
+<rect x="250" y="555" width="540" height="90" rx="13.5" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="520.0" y="596" font-size="12" text-anchor="middle" fill="#000">Host</text>
+<text x="520.0" y="612" font-size="12" text-anchor="middle" fill="#000">write Image and the device tree into PS DDR at 0x7000_0000</text>
+<rect x="810" y="555" width="950" height="90" rx="13.5" fill="#d5e8d4" stroke="#82b366" stroke-width="1"/>
+<text x="1285.0" y="596" font-size="12" text-anchor="middle" fill="#000">Board</text>
+<text x="1285.0" y="612" font-size="12" text-anchor="middle" fill="#000">ORCA sees them at 0x1000_0000 through the DDR line bridge</text>
+<rect x="40" y="665" width="190" height="90" rx="13.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="135.0" y="714" font-size="12" text-anchor="middle" fill="#000">6  Release ORCA</text>
+<rect x="250" y="665" width="540" height="90" rx="13.5" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="520.0" y="706" font-size="12" text-anchor="middle" fill="#000">Host</text>
+<text x="520.0" y="722" font-size="12" text-anchor="middle" fill="#000">write the SoC CSR through the host aperture (offset 0x13000)</text>
+<rect x="810" y="665" width="950" height="90" rx="13.5" fill="#d5e8d4" stroke="#82b366" stroke-width="1"/>
+<text x="1285.0" y="706" font-size="12" text-anchor="middle" fill="#000">Board</text>
+<text x="1285.0" y="722" font-size="12" text-anchor="middle" fill="#000">the boot ROM stub starts the image; Linux gets the device tree address in a1</text>
+<rect x="40" y="775" width="190" height="90" rx="13.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="135.0" y="824" font-size="12" text-anchor="middle" fill="#000">7  Relay the console</text>
+<rect x="250" y="775" width="540" height="90" rx="13.5" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="520.0" y="816" font-size="12" text-anchor="middle" fill="#000">Host</text>
+<text x="520.0" y="832" font-size="12" text-anchor="middle" fill="#000">read the OCM rings in bulk; write keystrokes into the transmit ring</text>
+<rect x="810" y="775" width="950" height="90" rx="13.5" fill="#d5e8d4" stroke="#82b366" stroke-width="1"/>
+<text x="1285.0" y="816" font-size="12" text-anchor="middle" fill="#000">Board</text>
+<text x="1285.0" y="832" font-size="12" text-anchor="middle" fill="#000">orca_host.py prints the bytes; ctrl-] ends the session</text>
+<text x="60" y="100" font-size="12" text-anchor="start" font-weight="bold" fill="#000">Step</text>
+<text x="260" y="100" font-size="12" text-anchor="start" font-weight="bold" fill="#000">Host action</text>
+<text x="820" y="100" font-size="12" text-anchor="start" font-weight="bold" fill="#000">Board result</text>
+<text x="30" y="924" font-size="10" fill="#333">Each step is one xsdb action driven by orca_host.py. The board needs only power and its USB cable.</text></svg>

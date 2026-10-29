@@ -1,0 +1,953 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Building" href="building.html"><link rel="prev" title="Results" href="results.html">
+
+    <!-- Generated with Sphinx 9.2.0 and Furo 2025.12.19 -->
+        <title>Design Decisions - ORCA</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="_static/orca.css?v=6f7e3969" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #3973DA;
+  --color-brand-content: #3973DA;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #5aa9f0;
+  --color-brand-content: #5aa9f0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #5aa9f0;
+  --color-brand-content: #5aa9f0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">ORCA</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  <span class="sidebar-brand-text">ORCA</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="results.html">Results</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Design Decisions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="building.html">Building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="learnings.html">Learnings</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Microarchitecture</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="uarch/core/index.html">Core</a><input aria-label="Toggle navigation of Core" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="uarch/core/stages.html">Pipeline stages</a><input aria-label="Toggle navigation of Pipeline stages" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="uarch/core/0-branch.html">Stage 0: Branch prediction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uarch/core/1-fetch.html">Stage 1: Fetch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uarch/core/2-decode.html">Stage 2: Decode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uarch/core/3-rename.html">Stage 3: Rename</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uarch/core/4-dispatch.html">Stage 4: Dispatch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uarch/core/5-issue.html">Stage 5: Issue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uarch/core/6-execute.html">Stage 6: Execute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uarch/core/7-writeback.html">Stage 7: Writeback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uarch/core/8-commit.html">Stage 8: Commit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="uarch/core/m-extension.html">M extension: multiply and divide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uarch/core/a-extension.html">A extension: atomics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uarch/core/m_mode.html">Machine-mode traps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uarch/core/isa.html">ISA and software contract</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="uarch/memory/index.html">Memory</a><input aria-label="Toggle navigation of Memory" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="uarch/memory/cache.html">L1 caches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uarch/memory/boot-rom.html">Boot ROM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uarch/memory/main-memory.html">DDR and main memory</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="uarch/soc/index.html">SoC</a><input aria-label="Toggle navigation of SoC" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="uarch/soc/interconnect.html">Interconnect and clocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uarch/soc/peripherals.html">Peripherals and registers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uarch/soc/platform.html">FPGA and KV260 boundary</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Verification</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="verification/index.html">Verification</a><input aria-label="Toggle navigation of Verification" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="verification/testbenches.html">Testbenches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="verification/system-tests.html">System tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="verification/coverage.html">Coverage</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">FPGA bring-up</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="bringup/index.html">FPGA bring-up</a><input aria-label="Toggle navigation of FPGA bring-up" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="bringup/infrastructure.html">Infrastructure</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="design-decisions">
+<h1>Design Decisions<a class="headerlink" href="#design-decisions" title="Link to this heading">¶</a></h1>
+<p>The microarchitecture pages describe what the core does. This page keeps the measurements behind some of the choices, including the options I measured and did not take. Each table compares variants of the same RTL, built and run the same way, so the numbers within a table are comparable with each other.</p>
+<p>Embench scores are Embench-IoT’s speed score per MHz (higher is better). CoreMark is timed cycles for the same run (lower is better). LUT counts are the core plus its L1 caches, synthesized out of context for the KV260 part.</p>
+<section id="how-a-branch-mispredict-is-recovered">
+<h2>How a branch mispredict is recovered<a class="headerlink" href="#how-a-branch-mispredict-is-recovered" title="Link to this heading">¶</a></h2>
+<p>When execute finds that a branch was mispredicted, everything fetched after it is wrong. The question is how much of the pipeline to repair right away and how much to leave until the branch retires.</p>
+<p>The usual answer is checkpoints. Rename saves a copy of its map for each in-flight branch. Every instruction carries a mask of the branches it is younger than, and a mispredict throws away exactly the work with that branch’s bit. The correct path can rename the very next cycle. The cost is that the mask travels with every instruction, and every queue and functional unit needs logic to squash by it.</p>
+<p>I measured how many checkpoint slots pay for themselves. A branch that finds no free slot is repaired at commit, with a full flush and refetch.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Checkpoint slots</p></th>
+<th class="head"><p>Embench per MHz</p></th>
+<th class="head"><p>CoreMark cycles</p></th>
+<th class="head"><p>LUTs</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>2.085</p></td>
+<td><p>1,957,996</p></td>
+<td><p>30,691</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>2.070</p></td>
+<td><p>1,962,302</p></td>
+<td><p>30,719</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>2.053</p></td>
+<td><p>1,966,224</p></td>
+<td><p>29,681</p></td>
+</tr>
+<tr class="row-odd"><td><p>0 (every mispredict at commit)</p></td>
+<td><p>2.037</p></td>
+<td><p>1,977,569</p></td>
+<td><p>28,151</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Two slots cost as much area as four, because the snapshots live in LUT RAM whose cost follows width, not depth. What does scale with the slot count is the masks everywhere else. Zero slots saves about 2,500 LUTs and loses 2.3% on Embench, because a mispredict now waits for its branch to reach the head before anything restarts.</p>
+<p>Then I tried a middle path with no checkpoints at all. On a mispredict, execute redirects only the front end: fetch restarts on the correct path, and the FTQ, global history and return stack roll back. The back end is left alone. Rename simply stops taking new instructions until the branch retires, and then the whole back end is flushed and rename restores its committed map. This is safe because rename hands out work in program order: everything already in the back end is older than anything on the correct path, so nothing needs to be picked apart.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Recovery</p></th>
+<th class="head"><p>Embench per MHz</p></th>
+<th class="head"><p>CoreMark cycles</p></th>
+<th class="head"><p>LUTs</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4 checkpoint slots</p></td>
+<td><p>2.085</p></td>
+<td><p>1,957,996</p></td>
+<td><p>30,691</p></td>
+</tr>
+<tr class="row-odd"><td><p>0 slots, repair at commit</p></td>
+<td><p>2.037</p></td>
+<td><p>1,977,569</p></td>
+<td><p>28,151</p></td>
+</tr>
+<tr class="row-even"><td><p>0 slots, front end redirected at execute</p></td>
+<td><p>2.079</p></td>
+<td><p>1,959,194</p></td>
+<td><p>29,192</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The front-end redirect gets almost all of the checkpoint performance back. While the back end drains the older work, the front end is already fetching, predicting and decoding the correct path, so by the time the flush comes the instruction buffer is full. It is within 0.3% of four slots on Embench and 0.06% on CoreMark, with about 1,500 fewer LUTs and no masks anywhere in the back end. I chose it.</p>
+<p>The first version of the redirect was much slower: CoreMark took 11% more cycles, and one Embench program ran 40% longer. A loop branch was being redirected again on every iteration, about 50,000 times against roughly 500 real mispredicts, so the predictor never learned it. When a branch retired in the same cycle a redirect cut the FTQ back, the FTQ dropped that retirement, so from then on commit no longer lined up with its FTQ entries and the branch was never trained. Once the FTQ applied both in that cycle, redirects fell to the real mispredict count.</p>
+<p>At -O3, the front-end redirect design scores 2.277 Embench per MHz. NaxRiscv, built with the same compiler and flags, scores 2.266.</p>
+</section>
+<section id="a-naxriscv-style-issue-window">
+<h2>A NaxRiscv-style issue window<a class="headerlink" href="#a-naxriscv-style-issue-window" title="Link to this heading">¶</a></h2>
+<p>NaxRiscv keeps its issue queue in dispatch order, so age is just position and no age matrix is needed. I built that shape (rows of two in a circular buffer, a row freed when both entries have issued) and compared it with my scheduler, which reuses any free entry and tracks age in a matrix.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Issue queue</p></th>
+<th class="head"><p>Embench per MHz</p></th>
+<th class="head"><p>CoreMark cycles</p></th>
+<th class="head"><p>Queue LUTs</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>scheduler, 12 entries</p></td>
+<td><p>2.085</p></td>
+<td><p>1,957,996</p></td>
+<td><p>2,191</p></td>
+</tr>
+<tr class="row-odd"><td><p>window, 12</p></td>
+<td><p>1.849</p></td>
+<td><p>2,246,142</p></td>
+<td><p>1,823</p></td>
+</tr>
+<tr class="row-even"><td><p>window, 16</p></td>
+<td><p>1.955</p></td>
+<td><p>2,121,449</p></td>
+<td><p>2,571</p></td>
+</tr>
+<tr class="row-odd"><td><p>window, 20</p></td>
+<td><p>2.012</p></td>
+<td><p>2,014,993</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>An issued entry leaves a hole that cannot be reused until its whole row has issued, and the oldest row holds everything behind it. Programs with long chains of loads and multiplies suffered most (one ran 67% longer at 12 entries). Twelve entries saved 368 LUTs for an 11% loss, and matching today’s performance would need more than 20 entries, which costs more than the scheduler. I kept the scheduler.</p>
+</section>
+<section id="reaching-175-mhz">
+<h2>Reaching 175 MHz<a class="headerlink" href="#reaching-175-mhz" title="Link to this heading">¶</a></h2>
+<p>At 175 MHz (a 5.714 ns clock), the core missed timing by about 0.46 ns, and not on one path. Six unrelated paths each missed by about the same amount, so fixing one only exposed the next. Most of the delay was routing, not logic.</p>
+<p>I changed the tools first. The same RTL with a different placement and routing directive (<code class="docutils literal notranslate"><span class="pre">ExtraNetDelay_high</span></code> placement, <code class="docutils literal notranslate"><span class="pre">AggressiveExplore</span></code> routing) gained about 0.2 ns. Turning on retiming in synthesis lost 0.1 ns.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Same RTL, different directives</p></th>
+<th class="head"><p>Worst slack</p></th>
+<th class="head"><p>Failing endpoints</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>my previous closure profile</p></td>
+<td><p>-0.463 ns</p></td>
+<td><p>2,104</p></td>
+</tr>
+<tr class="row-odd"><td><p>plus retiming in synthesis</p></td>
+<td><p>-0.562 ns</p></td>
+<td><p>2,418</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ExtraNetDelay_high</span></code> placement, <code class="docutils literal notranslate"><span class="pre">AggressiveExplore</span></code> routing</p></td>
+<td><p>-0.251 ns</p></td>
+<td><p>1,327</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Then I shortened the paths. Almost every fix had the same shape: something late (a grant, a ready, a commit decision) sat in front of a lot of work, and I moved the work ahead of it. Instead of picking a value and then comparing it, the logic compares every candidate in parallel and lets the late signal pick a result at the end. None of these changes moves an instruction by a single cycle. I checked that cycle for cycle on CoreMark and four Embench programs, and most of them carry a simulation check that compares the new logic with the old form every cycle.</p>
+<p>The last and largest one was the scheduler’s wakeup. A result reaches the two result-bus lanes through a mux controlled by the bus grant, and every scheduler entry compared its operand tags against those lanes. So the path ran grant, mux, compare, ready, select, all in one cycle. Now every entry compares against all six execution units’ results directly, and the grant only qualifies the matches. That costs about 230 LUTs in the scheduler and closed the last gap. Doing the same for the uncached load at the head of the load queue cost about 460 more in the load/store queue.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Worst slack at 175 MHz</p></th>
+<th class="head"><p>LUTs</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>before</p></td>
+<td><p>-0.463 ns</p></td>
+<td><p>29,004</p></td>
+</tr>
+<tr class="row-odd"><td><p>path fixes and new directives</p></td>
+<td><p>+0.009 ns</p></td>
+<td><p>29,226</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>One move did change timing. When a branch mispredict is only caught at commit, the history restore in the branch predictor now happens one cycle after the branch retires instead of in the same cycle. It made no difference to the cycle count of any program I ran, because the front end is restarting from the flush in that cycle anyway.</p>
+<p>The +0.009 ns comes from one set of directives on this exact RTL. Small RTL changes moved the result by about 0.2 ns in either direction, and other placement directives on the same RTL still fail, so 175 MHz closes but without much margin.</p>
+<section id="on-the-board">
+<h3>On the board<a class="headerlink" href="#on-the-board" title="Link to this heading">¶</a></h3>
+<p>The numbers above are for the core on its own. On the KV260 the core sits inside the full design (the processor system’s ports, the memory bridge, the AXI crossbar and the peripherals), and the same RTL missed again, by up to 0.35 ns. Most of the new failures came from one place: the dispatch handshake (does the ROB have room, did rename succeed, does each queue have a slot) decided whether the load/store queue and ROB entries were written, and that decision reached every bit of every entry. Now a free slot takes the incoming entry every cycle, and only its valid bit waits for the handshake. Nothing reads a free slot, so nothing changes. A few more of the same kind of fix, and an extra round of post-route optimization at the end of the build, closed the whole design at 174.998 MHz with 0.001 ns to spare. On the board it runs CoreMark at 900 per second (5.14 per MHz, up from 720 at 150 MHz), passes all 67 architecture tests and scores 2.25 per MHz on Embench at -O3.</p>
+</section>
+</section>
+<section id="shrinking-for-clock-speed">
+<h2>Shrinking for clock speed<a class="headerlink" href="#shrinking-for-clock-speed" title="Link to this heading">¶</a></h2>
+<p>Past 175 MHz the failing paths were mostly wire, spread across the chip, so I measured what each structure’s size costs in performance before cutting any of it. Each variant ran CoreMark and all 19 Embench programs in simulation:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Smaller structure</p></th>
+<th class="head"><p>CoreMark</p></th>
+<th class="head"><p>Embench</p></th>
+<th class="head"><p>Hit hardest</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ROB, 64 to 32 entries</p></td>
+<td><p>0.0%</p></td>
+<td><p>-0.1%</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">depthconv</span></code> +1.3%</p></td>
+</tr>
+<tr class="row-odd"><td><p>load/store queues, 12 to 10</p></td>
+<td><p>-0.2%</p></td>
+<td><p>-1.4%</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ud</span></code> +8.7%</p></td>
+</tr>
+<tr class="row-even"><td><p>load/store queues, 12 to 8</p></td>
+<td><p>-0.7%</p></td>
+<td><p>-3.0%</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ud</span></code> +15.5%, <code class="docutils literal notranslate"><span class="pre">statemate</span></code> +11.6%</p></td>
+</tr>
+<tr class="row-odd"><td><p>scheduler, 12 to 10</p></td>
+<td><p>-1.2%</p></td>
+<td><p>-2.4%</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">crc32</span></code> +28.5%</p></td>
+</tr>
+<tr class="row-even"><td><p>scheduler, 12 to 8</p></td>
+<td><p>-4.4%</p></td>
+<td><p>-4.1%</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">crc32</span></code> +28.5%</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The ROB is almost free to halve. The load queue holds each load until it retires, so it limits how many loads are in flight, and the store queue holds stores until they drain after commit; both cost the programs that already trail NaxRiscv. The scheduler is the most expensive. On timing, the 8-entry load/store queues closed 185 MHz with the core on its own (and saved 2,700 LUTs), while the 8-entry scheduler did worse, so the scheduler is not what limits the clock.</p>
+<p>The board’s clock comes from the processor system, which can only make 175, 177.8 and 200 MHz in this range. 177.8 is too small a step to pay for a smaller queue, so the next real target is 200 MHz, and that needs more than shrinking: the single-cycle loops (an ALU result feeding the next ALU operation, a load address feeding the cache, the next fetch address feeding the instruction cache) would each need another pipeline stage.</p>
+</section>
+<section id="a-clock-of-my-own">
+<h2>A clock of my own<a class="headerlink" href="#a-clock-of-my-own" title="Link to this heading">¶</a></h2>
+<p>The processor system’s clock generator can’t make anything between 177.8 and 200 MHz, so I stopped using it for the core. The PL now takes the processor system’s 100 MHz and makes its own clock with an MMCM (a clock generator in the FPGA fabric), which can make almost any frequency. In the same round I gave the core’s synthesis a clock constraint (it had none before, so synthesis never knew which paths were tight), flattened the core’s hierarchy, and moved two rare events (a store’s response and a CSR write) a cycle later.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Full KV260 design at a 200 MHz constraint</p></th>
+<th class="head"><p>Worst slack</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>before</p></td>
+<td><p>-0.746 ns</p></td>
+</tr>
+<tr class="row-odd"><td><p>MMCM clock, clocked and flattened synthesis, rare-event cuts</p></td>
+<td><p>-0.149 ns</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>An MMCM also lets me finish a build at a slightly lower frequency without placing and routing it again: I change its output divider on the routed design and check timing at the new clock. The -0.149 ns build closed at 192 MHz that way, and with one more round of optimization at 195.9 MHz with no slack to spare. On the board, 195.9 MHz runs CoreMark at 1,008 per second (5.14 per MHz), passes the 67 architecture tests (one timer-interrupt test only when run on its own) and scores 2.25 per MHz on Embench at -O3.</p>
+</section>
+<section id="sizing-the-branch-predictor">
+<h2>Sizing the branch predictor<a class="headerlink" href="#sizing-the-branch-predictor" title="Link to this heading">¶</a></h2>
+<p>The direction predictor is TAGE: a small table indexed by the branch address, plus several tagged tables indexed by the branch address mixed with more and more of the recent branch history. I swept the history lengths, the table size, the tag width and the number of tables, each against the four-table design I had (1,024 entries per table, history lengths 5, 12, 28 and 64). Embench is the average change in its score per MHz:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Tagged tables</p></th>
+<th class="head"><p>Entries each</p></th>
+<th class="head"><p>History lengths</p></th>
+<th class="head"><p>Embench</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>1,024</p></td>
+<td><p>5, 12, 28, 64</p></td>
+<td><p>baseline</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>1,024</p></td>
+<td><p>4, 10, 24, 64</p></td>
+<td><p>+0.27%</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>1,024</p></td>
+<td><p>6, 16, 36, 64</p></td>
+<td><p>-0.04%</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>1,024</p></td>
+<td><p>3, 8, 20, 64</p></td>
+<td><p>-0.42%</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>2,048</p></td>
+<td><p>5, 12, 28, 64</p></td>
+<td><p>+0.98%</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>2,048</p></td>
+<td><p>4, 10, 24, 64</p></td>
+<td><p>+1.15%</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>1,024</p></td>
+<td><p>6, 20, 64</p></td>
+<td><p>-0.69%</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>1,024</p></td>
+<td><p>4, 16, 64</p></td>
+<td><p>-0.81%</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>1,024</p></td>
+<td><p>4, 9, 18, 36, 64</p></td>
+<td><p>+0.47%</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Wider tags did not help (9 bits -0.03%, 10 bits -0.48%). Dropping to three tables costs close to 1%, and a fifth table gains less than half a percent while making the logic that picks between the tables deeper, and that logic was already among the paths failing at 200 MHz.</p>
+<p>Doubling every table to 2,048 entries was the biggest gain, and it only adds block RAM, so I expected it to be free. It wasn’t. The 200 MHz build with the bigger tables came in at -0.685 ns against -0.365 ns with the same RTL at 1,024 entries. Builds vary by about 0.2 ns from run to run, but that gap is larger, and about 0.3 ns is worth roughly 10 MHz. I kept 1,024 entries and took the better history lengths, which cost nothing.</p>
+</section>
+<section id="spending-clock-speed-on-ipc">
+<h2>Spending clock speed on IPC<a class="headerlink" href="#spending-clock-speed-on-ipc" title="Link to this heading">¶</a></h2>
+<p>Past 190 MHz, every remaining failing path is a loop that runs every cycle, and they all fail by about the same amount. Each fix moved the limit a few picoseconds, to the next loop. So I changed the order of work: performance per clock first, frequency last.</p>
+<p>The reason is that the last bit of frequency doesn’t carry over. Closure (trying placement settings and extra optimization passes on one routed design) is tuned to that one netlist. The settings that took one 200 MHz build to -0.10 ns did nothing for the next RTL change: -0.365 ns before and -0.365 ns after. Any change to the RTL throws that work away, so it belongs at the very end.</p>
+<p>Until then, I build every change the same way at a 200 MHz constraint and compare what it would close at. At these speeds 1% more instructions per cycle is worth about 1.9 MHz, so a change stays only if performance per clock times frequency goes up. The development builds must stay at 190 MHz or better, which keeps a few percent of frequency to trade. Changes that leave every cycle exactly as it was are always kept. The 195.9 MHz board build stays as the reference until a frozen design beats it on the board.</p>
+<p>The first batch under this rule:</p>
+<ul class="simple">
+<li><p>a divider that skips the steps it can tell will produce zero quotient bits (Embench +0.55%; <code class="docutils literal notranslate"><span class="pre">ud</span></code>, which divides a lot, takes 9.8% fewer cycles);</p></li>
+<li><p>the better TAGE history lengths;</p></li>
+<li><p>registers on paths that only matter rarely: the boot ROM’s output, the MMIO bridge and the UARTs;</p></li>
+<li><p>two load/store queue paths reworked so they compute less in the cycle.</p></li>
+</ul>
+<p>Together these gained 0.82% on Embench, left CoreMark unchanged, and gave the best 200 MHz build so far at -0.304 ns. After closure that design reaches about 192 MHz, below the 195.9 MHz board build, so the board build stays where it is for now.</p>
+</section>
+<section id="which-ipc-ideas-paid-for-themselves">
+<h2>Which IPC ideas paid for themselves<a class="headerlink" href="#which-ipc-ideas-paid-for-themselves" title="Link to this heading">¶</a></h2>
+<p>ORCA is more than twice NaxRiscv’s size, so an idea has to raise performance per second, not just per clock. Each one below ran CoreMark and the 19 Embench programs in simulation, and the ones that changed logic on a critical path also went through a full KV260 build:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Idea</p></th>
+<th class="head"><p>Embench per MHz</p></th>
+<th class="head"><p>CoreMark per MHz</p></th>
+<th class="head"><p>What happened to the clock</p></th>
+<th class="head"><p>Kept?</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Port 2 picks the oldest ready operation</p></td>
+<td><p>+0.5%</p></td>
+<td><p>0%</p></td>
+<td><p>no worse (it removes logic)</p></td>
+<td><p>yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>L0 branch target table, 128 to 512 entries</p></td>
+<td><p>+1.1%</p></td>
+<td><p>+0.1%</p></td>
+<td><p>no clear cost; 1,000 more LUTs</p></td>
+<td><p>yes</p></td>
+</tr>
+<tr class="row-even"><td><p>Load/store queues, 12 to 16 entries</p></td>
+<td><p>+1.4% (with the port fix)</p></td>
+<td><p>0%</p></td>
+<td><p>5.5% slower</p></td>
+<td><p>no</p></td>
+</tr>
+<tr class="row-odd"><td><p>Scheduler, 12 to 16 entries</p></td>
+<td><p>-2.0%</p></td>
+<td><p>+0.2%</p></td>
+<td><p></p></td>
+<td><p>no</p></td>
+</tr>
+<tr class="row-even"><td><p>128 physical registers instead of 64</p></td>
+<td><p>0%</p></td>
+<td><p>+0.4%</p></td>
+<td><p></p></td>
+<td><p>no</p></td>
+</tr>
+<tr class="row-odd"><td><p>Load result one cycle sooner (2-cycle load-to-use)</p></td>
+<td><p>+0.2%</p></td>
+<td><p>+3.0%</p></td>
+<td><p>failed by 2 ns</p></td>
+<td><p>no</p></td>
+</tr>
+<tr class="row-even"><td><p>A fifth tagged predictor table, or 2,048-entry tables</p></td>
+<td><p>+0.2 to +1.3%</p></td>
+<td><p>-0.4 to 0%</p></td>
+<td><p>bigger RAMs spread the placement</p></td>
+<td><p>no</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Port 2 serves loads, stores, multiplies, divides and CSR operations. It used to give memory operations priority regardless of age, so a stream of younger loads could hold back an older multiply that everything else was waiting on. Taking the oldest ready operation of any kind sped up <code class="docutils literal notranslate"><span class="pre">ud</span></code> by 6% and needs one priority pick fewer.</p>
+<p>The L0 is the small table that steers fetch in the same cycle. One Embench program, <code class="docutils literal notranslate"><span class="pre">nsichneu</span></code>, is a long stretch of code full of branches, and with 128 entries most of its taken branches missed and paid a cycle each. With 512 entries it runs 14.5% faster.</p>
+<p>The bigger scheduler was the surprise. On every program but one it helped a little, but <code class="docutils literal notranslate"><span class="pre">tarfind</span></code> ran 55% slower. With more instructions in flight, a load ran ahead of a store to the same address often enough that the memory-ordering predictor told it to wait for every older store. The real cause is that a store here only computes its address once its data is ready too, so a store fed by a multiply resolves its address late. Splitting the two would fix it, but the gain left over did not pay for the larger scheduler.</p>
+<p>Making a load’s result usable one cycle sooner was worth 3% on CoreMark, but checking for a cache hit in time to cancel the dependent instruction did not fit in one cycle: the build missed timing by 2 ns. Doing it properly means canceling and replaying everything issued in that window, which is a redesign for later.</p>
+</section>
+<section id="fusing-instruction-pairs">
+<h2>Fusing instruction pairs<a class="headerlink" href="#fusing-instruction-pairs" title="Link to this heading">¶</a></h2>
+<p>RV32 has no instruction that loads a full 32-bit constant, adds a shifted index, or zero-extends a halfword, so the compiler writes each as two instructions where the second overwrites the first. Macro-op fusion spots such a pair in decode and runs it as one operation. It saves a ROB entry and a scheduler slot, and when the second instruction waits on the first it saves a cycle too.</p>
+<p>Before building anything I counted how often each pair appears back to back in the retired instruction stream:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Pair</p></th>
+<th class="head"><p>Embench (share of instructions)</p></th>
+<th class="head"><p>CoreMark</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">lui</span></code> + <code class="docutils literal notranslate"><span class="pre">addi</span></code> (a 32-bit constant)</p></td>
+<td><p>1.0%</p></td>
+<td><p>0.2%</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">slli</span></code> by 1 to 3 + <code class="docutils literal notranslate"><span class="pre">add</span></code> (an array index)</p></td>
+<td><p>1.2%</p></td>
+<td><p>0.7%</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">slli</span></code> + <code class="docutils literal notranslate"><span class="pre">srli</span></code> (zero extend)</p></td>
+<td><p>0.7%</p></td>
+<td><p>0.05%</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">slli</span></code> + <code class="docutils literal notranslate"><span class="pre">srai</span></code> by 16 or 24 (sign extend)</p></td>
+<td><p>0.3%</p></td>
+<td><p>0.5%</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">addi</span></code> + branch (a loop counter)</p></td>
+<td><p>1.0%</p></td>
+<td><p>3.0%</p></td>
+</tr>
+<tr class="row-odd"><td><p>two loads from neighbouring words</p></td>
+<td><p>1.3%</p></td>
+<td><p>0.1%</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Then I tried the first four inside one fetch packet:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variant</p></th>
+<th class="head"><p>Embench per MHz</p></th>
+<th class="head"><p>CoreMark per MHz</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">lui</span></code> + <code class="docutils literal notranslate"><span class="pre">addi</span></code> and zero extend</p></td>
+<td><p>+0.35%</p></td>
+<td><p>+0.10%</p></td>
+</tr>
+<tr class="row-odd"><td><p>plus shift-add and sign extend</p></td>
+<td><p>+0.51%</p></td>
+<td><p>+0.23%</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>I kept only the first two. They need no new hardware in execute: the merged constant is still a <code class="docutils literal notranslate"><span class="pre">lui</span></code>, and the zero extend becomes an <code class="docutils literal notranslate"><span class="pre">andi</span></code> with a 32-bit mask. The other two need an extra shifter in front of the ALU’s adder, and that adder is in the loop that sets the clock. They were worth +0.16%, which is less than the clock they would risk. The 200 MHz build with fusion came in at the same timing as the build without it, for 255 more LUTs.</p>
+<p>The gains are small because most of these pairs are not on the chain of instructions that sets the pace. <code class="docutils literal notranslate"><span class="pre">crc32</span></code> is the exception. Its inner loop builds a constant and zero-extends a byte every pass, and it runs 4.8% faster. The loop counter and branch pair would matter most for CoreMark, but merging it puts an add in front of the branch compare, and that compare is on the slowest path in the core.</p>
+</section>
+<section id="splitting-stores">
+<h2>Splitting stores<a class="headerlink" href="#splitting-stores" title="Link to this heading">¶</a></h2>
+<p>A store here used to wait in the scheduler until both its address and its data were ready. While it waited, younger loads could not see its address, so they either guessed past it or waited. I split each store in two: the address half issues as soon as the base register is ready, and the store queue picks up the data later, from the address generator if it was already ready or from the result bus when its producer finishes.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variant</p></th>
+<th class="head"><p>Embench per MHz</p></th>
+<th class="head"><p>CoreMark per MHz</p></th>
+<th class="head"><p>Clock</p></th>
+<th class="head"><p>LUTs</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>split store, 12-entry scheduler</p></td>
+<td><p>+1.0%</p></td>
+<td><p>+0.25%</p></td>
+<td><p>no clear change</p></td>
+<td><p>+1,150</p></td>
+</tr>
+<tr class="row-odd"><td><p>split store, 16-entry scheduler</p></td>
+<td><p>+1.5%</p></td>
+<td><p>+0.5%</p></td>
+<td><p>about 0.1 ns slower</p></td>
+<td><p>+2,100</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The split’s real value is that it makes a bigger scheduler pay off. With 16 entries and no split, <code class="docutils literal notranslate"><span class="pre">tarfind</span></code> ran 55% slower, because loads kept overtaking stores whose addresses were late. With the split it runs 5.5% faster. But the data has to live in flip-flops, since several stores can take the same result in one cycle, and that costs over a thousand LUTs. For a core that is already more than twice NaxRiscv’s size, a percent of Embench was not worth it. It is not in the shipped build.</p>
+</section>
+<section id="stacking-the-small-gains">
+<h2>Stacking the small gains<a class="headerlink" href="#stacking-the-small-gains" title="Link to this heading">¶</a></h2>
+<p>Each remaining idea was worth half a percent to one percent, so I measured them all together: the split store with a 16-entry scheduler, 16-entry load and store queues, 2,048-entry TAGE tables and 128 physical registers, on top of fusion.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Embench per MHz</p></th>
+<th class="head"><p>CoreMark per MHz</p></th>
+<th class="head"><p>Clock (same flow)</p></th>
+<th class="head"><p>LUTs</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>without the stack</p></td>
+<td><p>2.349</p></td>
+<td><p>5.130</p></td>
+<td><p>about 182 MHz</p></td>
+<td><p>37,596</p></td>
+</tr>
+<tr class="row-odd"><td><p>with the stack</p></td>
+<td><p>2.447 (+4.1%)</p></td>
+<td><p>5.210 (+1.6%)</p></td>
+<td><p>about 174 MHz (-4.6%)</p></td>
+<td><p>44,673 (+19%)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Per second the stack is slower: -0.7% on Embench and -3.1% on CoreMark, for a fifth more area. The reason is in the timing reports. On the worst paths, routing is 62 to 75% of the delay, and the logic itself is only 1.2 to 2.0 ns of the 5 ns cycle. The chip is a third full, so space is not the problem. Wire length inside the loops that must finish in one cycle is: wakeup and select, the forwarding muxes, rename, the load and store queue compares and fetch steering. Every one of these structures gets longer wires when it grows. On this FPGA, more hardware only pays when it stays out of those loops.</p>
+</section>
+<section id="loading-a-cycle-sooner-properly">
+<h2>Loading a cycle sooner, properly<a class="headerlink" href="#loading-a-cycle-sooner-properly" title="Link to this heading">¶</a></h2>
+<p>A load’s result is usable three cycles after its cache request. Making that two cycles was worth 4% on CoreMark in an upper-bound model, but the first version failed timing by 2 ns because the cache hit had to cancel dependent instructions in the same cycle. The second version checks the hit a cycle later, kills a wrongly woken instruction in the ALU instead, and gives every result that depends on an unverified load a two-bit mark that follows it through the fast wakeups, so a miss kills the whole chain.</p>
+<p>Without the marks it was a loss (-0.4% on CoreMark), because dependents of a speculative instruction had to wait for the result bus. With them it gained 1.33% on CoreMark and 0.36% on Embench, but the build came in 0.47 ns worse, about 8% of the clock. It is not in the shipped build.</p>
+</section>
+<section id="more-execution-units-and-committing-out-of-order">
+<h2>More execution units, and committing out of order<a class="headerlink" href="#more-execution-units-and-committing-out-of-order" title="Link to this heading">¶</a></h2>
+<p>Port 2 handles loads, stores, multiplies, divides and CSR work, so I counted how often a ready operation waited for it.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Contention (share of cycles)</p></th>
+<th class="head"><p>Embench</p></th>
+<th class="head"><p>CoreMark</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>a memory operation and a multiply or divide both ready</p></td>
+<td><p>5.1%</p></td>
+<td><p>0.65%</p></td>
+</tr>
+<tr class="row-odd"><td><p>two or more memory operations ready</p></td>
+<td><p>22.7%</p></td>
+<td><p>10.0%</p></td>
+</tr>
+<tr class="row-even"><td><p>of those, two loads</p></td>
+<td><p>14.8%</p></td>
+<td><p>5.7%</p></td>
+</tr>
+<tr class="row-odd"><td><p>a store address went first while a load waited</p></td>
+<td><p>2.6%</p></td>
+<td><p>0.7%</p></td>
+</tr>
+<tr class="row-even"><td><p>port 2 held by an operation waiting for the divider</p></td>
+<td><p>0.5%</p></td>
+<td><p>0%</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A separate multiply port would serve the first row, which is small; the multiplier is already pipelined. Not selecting a multiply or divide while the divider is busy gained 0.02%. Most of the contention is between loads, and serving that needs a second load pipeline, which is a large structure. I also checked committing out of order: dependents here wake when a result is produced, not when it commits, and dispatch almost never waits for ROB space, so it would gain nothing.</p>
+</section>
+<section id="reaching-200-mhz">
+<h2>Reaching 200 MHz<a class="headerlink" href="#reaching-200-mhz" title="Link to this heading">¶</a></h2>
+<p>The 195.9 MHz build came from an unusually good placement. Across twenty builds of later RTL at a 200 MHz constraint, the worst slack landed between -0.2 and -1.1 ns, usually around -0.5. Closure settings tuned to one netlist did nothing for the next, so I froze the RTL first: everything above that cost clock stayed out, and only fusion and the changes that cost nothing went in.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Placement attempt on the frozen netlist</p></th>
+<th class="head"><p>Worst slack at 200 MHz</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>remap optimization, spread placement, 0.2 ns extra margin</p></td>
+<td><p>-0.560 ns</p></td>
+</tr>
+<tr class="row-odd"><td><p>the same from the optimized checkpoint</p></td>
+<td><p>-0.514 ns</p></td>
+</tr>
+<tr class="row-even"><td><p>remap optimization, net-delay placement, 0.2 ns extra margin</p></td>
+<td><p>0.000 ns, all constraints met</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The third met every constraint at 200 MHz, the first time the whole platform has. On the board it runs CoreMark at 1,032 per second (5.16 per MHz), 2.4% above the 195.9 MHz build, and Embench at 2.31 per MHz, 4.8% above it per second, with all 67 architecture tests passing and every test retiring exactly the instructions the simulation retires.</p>
+<p>One test needed a change to pass on the board. <code class="docutils literal notranslate"><span class="pre">InterruptsSm</span></code> raises interrupts through the timer’s memory-mapped registers and then idles a fixed number of loop iterations for each to arrive. Since the 195.9 MHz build, a register slice on the memory-mapped bus makes that store slower, while the larger L0 table makes the idle loop faster, so the interrupt arrived after the loop. The platform setting for that idle count went from 10 to 100 iterations.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="building.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Building</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="results.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Results</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026 Jason Huynh. All rights reserved.
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Design Decisions</a><ul>
+<li><a class="reference internal" href="#how-a-branch-mispredict-is-recovered">How a branch mispredict is recovered</a></li>
+<li><a class="reference internal" href="#a-naxriscv-style-issue-window">A NaxRiscv-style issue window</a></li>
+<li><a class="reference internal" href="#reaching-175-mhz">Reaching 175 MHz</a><ul>
+<li><a class="reference internal" href="#on-the-board">On the board</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#shrinking-for-clock-speed">Shrinking for clock speed</a></li>
+<li><a class="reference internal" href="#a-clock-of-my-own">A clock of my own</a></li>
+<li><a class="reference internal" href="#sizing-the-branch-predictor">Sizing the branch predictor</a></li>
+<li><a class="reference internal" href="#spending-clock-speed-on-ipc">Spending clock speed on IPC</a></li>
+<li><a class="reference internal" href="#which-ipc-ideas-paid-for-themselves">Which IPC ideas paid for themselves</a></li>
+<li><a class="reference internal" href="#fusing-instruction-pairs">Fusing instruction pairs</a></li>
+<li><a class="reference internal" href="#splitting-stores">Splitting stores</a></li>
+<li><a class="reference internal" href="#stacking-the-small-gains">Stacking the small gains</a></li>
+<li><a class="reference internal" href="#loading-a-cycle-sooner-properly">Loading a cycle sooner, properly</a></li>
+<li><a class="reference internal" href="#more-execution-units-and-committing-out-of-order">More execution units, and committing out of order</a></li>
+<li><a class="reference internal" href="#reaching-200-mhz">Reaching 200 MHz</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=3b5cce75"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>

@@ -1,0 +1,46 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2026.1 (win64) Build 6511674 Tue Jun 16 11:02:23 MDT 2026
+| Date         : Thu Oct 29 15:24:13 2026
+| Host         : host running 64-bit major release  (build 9200)
+| Command      : report_methodology -file <project>/reports/methodology_drc_routed.rpt
+| Design       : orca_kv260_wrapper
+| Device       : xck26-sfvc784-2LV-c
+| Speed File   : -2LV
+| Design State : Fully Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Report Methodology
+
+Table of Contents
+-----------------
+1. REPORT SUMMARY
+2. REPORT DETAILS
+
+1. REPORT SUMMARY
+-----------------
+            Netlist: netlist
+          Floorplan: checkpoint_routed
+      Design limits: <entire design considered>
+             Max checks: <unlimited>
+             Checks found: 2
++---------+----------+--------------------------------------------+--------+
+| Rule    | Severity | Description                                | Checks |
++---------+----------+--------------------------------------------+--------+
+| CLKC-40 | Advisory | Substitute PLLE4 for MMCME4 check          | 1      |
+| CLKC-56 | Advisory | MMCME4 with global clock driver has no LOC | 1      |
++---------+----------+--------------------------------------------+--------+
+
+2. REPORT DETAILS
+-----------------
+CLKC-40#1 Advisory
+Substitute PLLE4 for MMCME4 check  
+The MMCME4 cell orca_kv260_i/core_mmcm/inst/mmcme4_adv_inst has a single input clock whose source driver, UNKNOWN, is not optimally located and the MMCM has a configuration which could be accommodated by a PLL.  Consider changing the MMCM to a PLL which could align better with the input clock driver.
+Related violations: <none>
+
+CLKC-56#1 Advisory
+MMCME4 with global clock driver has no LOC  
+The MMCME4_ADV cell orca_kv260_i/core_mmcm/inst/mmcme4_adv_inst CLKIN1 or CLKIN2 pin is driven by global Clock buffer(s) orca_kv260_i/ps8_0/inst/buffer_pl_clk_0.PL_CLK_0_BUFG and does not have a LOC constraint. It is recommended to LOC the MMCM and use the CLOCK_DEDICATED_ROUTE constraint on the net(s) driven by the global Clock buffer(s).
+Related violations: <none>
+
+

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 640" width="1800" height="640" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 z" fill="context-stroke" stroke="context-stroke"/></marker></defs>
+<rect width="1800" height="640" fill="#ffffff"/>
+<text x="30" y="40" font-size="22" font-weight="bold" fill="#000">Addresses used during bring-up</text>
+<rect x="20" y="70" width="860" height="500" rx="18" fill="#f5f5f5" fill-opacity="0.5" stroke="#666" stroke-opacity="0.5"/>
+<text x="28" y="86" font-size="11" font-weight="bold" fill="#333" fill-opacity="0.7">Arm (PS) address space</text>
+<rect x="920" y="70" width="860" height="500" rx="18" fill="#f5f5f5" fill-opacity="0.5" stroke="#666" stroke-opacity="0.5"/>
+<text x="928" y="86" font-size="11" font-weight="bold" fill="#333" fill-opacity="0.7">ORCA address space</text>
+<path d="M860,350 L895,350 L895,250 L940,250" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M860,250 L900,250 L900,350 L940,350" fill="none" stroke="#82b366" stroke-width="1.2" marker-end="url(#a)"/>
+<rect x="40" y="110" width="820" height="80" rx="12.0" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="450.0" y="146" font-size="12" text-anchor="middle" fill="#000">OCM: 0xFFFD_0000 header, 0xFFFE_0000 receive ring</text>
+<text x="450.0" y="162" font-size="12" text-anchor="middle" fill="#000">console relay state shared with the host over JTAG</text>
+<rect x="40" y="210" width="820" height="80" rx="12.0" fill="#d5e8d4" stroke="#82b366" stroke-width="1"/>
+<text x="450.0" y="246" font-size="12" text-anchor="middle" fill="#000">PS DDR: 0x7000_0000 to 0x7FFF_FFFF (256 MiB, reserved no-map)</text>
+<text x="450.0" y="262" font-size="12" text-anchor="middle" fill="#000">kernel Image, device tree and CoreMark are written here by JTAG</text>
+<rect x="40" y="310" width="820" height="80" rx="12.0" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="450.0" y="346" font-size="12" text-anchor="middle" fill="#000">Host aperture: 0xA400_0000 (128 KiB)</text>
+<text x="450.0" y="362" font-size="12" text-anchor="middle" fill="#000">offset 0x00000: DMA buffer; offset 0x10000: ORCA MMIO pages</text>
+<rect x="40" y="410" width="820" height="80" rx="12.0" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="450.0" y="446" font-size="12" text-anchor="middle" fill="#000">HP0 port, 128-bit AXI4</text>
+<text x="450.0" y="462" font-size="12" text-anchor="middle" fill="#000">carries ORCA&#x27;s cached DDR window to PS DDR</text>
+<rect x="940" y="110" width="820" height="80" rx="12.0" fill="#e1d5e7" stroke="#9673a6" stroke-width="1"/>
+<text x="1350.0" y="146" font-size="12" text-anchor="middle" fill="#000">0x0000_0000: boot ROM overlay (4 KiB)</text>
+<text x="1350.0" y="162" font-size="12" text-anchor="middle" fill="#000">the boot stub that starts the image</text>
+<rect x="940" y="210" width="820" height="80" rx="12.0" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="1350.0" y="246" font-size="12" text-anchor="middle" fill="#000">0x0000_8000 to 0x0000_bfff: uncached DMA window</text>
+<text x="1350.0" y="262" font-size="12" text-anchor="middle" fill="#000">host aperture offset 0x00000 maps here</text>
+<rect x="940" y="310" width="820" height="80" rx="12.0" fill="#d5e8d4" stroke="#82b366" stroke-width="1"/>
+<text x="1350.0" y="346" font-size="12" text-anchor="middle" fill="#000">0x1000_0000 to 0x1FFF_FFFF: DDR window</text>
+<text x="1350.0" y="362" font-size="12" text-anchor="middle" fill="#000">maps to PS 0x7000_0000; the kernel runs from here</text>
+<rect x="940" y="410" width="820" height="80" rx="12.0" fill="#e1d5e7" stroke="#9673a6" stroke-width="1"/>
+<text x="1350.0" y="446" font-size="12" text-anchor="middle" fill="#000">0x8000_0000 to 0x8000_4FFF: MMIO pages</text>
+<text x="1350.0" y="462" font-size="12" text-anchor="middle" fill="#000">host aperture offset 0x10000 maps here; SoC CSR at 0x8000_3000, host console UART at 0x8000_4000</text>
+<text x="30" y="624" font-size="10" fill="#333">The same memory is named differently by the Arm side and by ORCA. The host aperture and the DDR window are the two bridges.</text></svg>

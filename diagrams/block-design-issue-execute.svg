@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 800" width="1800" height="800" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 z" fill="context-stroke" stroke="context-stroke"/></marker></defs>
+<rect width="1800" height="800" fill="#ffffff"/>
+<text x="30" y="40" font-size="22" font-weight="bold" fill="#000">Issue, register read, execute and writeback</text>
+<rect x="20" y="70" width="560" height="400" rx="18" fill="#f5f5f5" fill-opacity="0.5" stroke="#666" stroke-opacity="0.5"/>
+<text x="28" y="86" font-size="11" font-weight="bold" fill="#333" fill-opacity="0.7">Issue (stage 5)</text>
+<rect x="620" y="70" width="560" height="400" rx="18" fill="#f5f5f5" fill-opacity="0.5" stroke="#666" stroke-opacity="0.5"/>
+<text x="628" y="86" font-size="11" font-weight="bold" fill="#333" fill-opacity="0.7">Register read</text>
+<rect x="1220" y="70" width="560" height="400" rx="18" fill="#f5f5f5" fill-opacity="0.5" stroke="#666" stroke-opacity="0.5"/>
+<text x="1228" y="86" font-size="11" font-weight="bold" fill="#333" fill-opacity="0.7">Execute (stage 6)</text>
+<rect x="20" y="510" width="1760" height="250" rx="18" fill="#f5f5f5" fill-opacity="0.5" stroke="#666" stroke-opacity="0.5"/>
+<text x="28" y="526" font-size="11" font-weight="bold" fill="#333" fill-opacity="0.7">Writeback (stage 7)</text>
+<path d="M165,210 L165,240" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M435,210 L435,240" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M290,275 L590,275 L590,145 L640,145" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M560,285 L608,285 L608,98 L1035,98 L1035,110" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M765,180 L765,210" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1035,180 L1035,210" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M900,340 L900,360" fill="none" stroke="#d79b00" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1160,400 L1190,400 L1190,140 L1240,140" fill="none" stroke="#d79b00" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1370,380 L1370,400" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1370,450 L1370,490 L300,490 L300,560" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M560,610 L620,610" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M870,610 L900,610" fill="none" stroke="#d79b00" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1150,610 L1180,610" fill="none" stroke="#d79b00" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1430,610 L1460,610" fill="none" stroke="#d79b00" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1305,660 L1305,700 L585,700 L585,445 L585,442 L300,442 L300,440" fill="none" stroke="#d79b00" stroke-width="1.2" stroke-dasharray="3,3" marker-end="url(#a)"/>
+<rect x="40" y="110" width="520" height="100" rx="15.0" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="300.0" y="142" font-size="12" text-anchor="middle" fill="#000">Scheduler: 12 entries</text>
+<text x="300.0" y="156" font-size="12" text-anchor="middle" fill="#000">valid, ROB ID, two 6-bit source IDs, readiness bits, class</text>
+<text x="300.0" y="172" font-size="12" text-anchor="middle" fill="#000">resident wakeup from CDB broadcasts, same-cycle</text>
+<text x="300.0" y="186" font-size="12" text-anchor="middle" fill="#000">pairwise age matrix across all classes</text>
+<rect x="40" y="240" width="250" height="90" rx="13.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="165.0" y="274" font-size="12" text-anchor="middle" fill="#000">Ports 0 and 1</text>
+<text x="165.0" y="289" font-size="12" text-anchor="middle" fill="#000">oldest and second-oldest ready</text>
+<text x="165.0" y="304" font-size="12" text-anchor="middle" fill="#000">ALU or branch entry</text>
+<rect x="310" y="240" width="250" height="90" rx="13.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="435.0" y="266" font-size="12" text-anchor="middle" fill="#000">Port 2</text>
+<text x="435.0" y="282" font-size="12" text-anchor="middle" fill="#000">oldest ready memory entry first,</text>
+<text x="435.0" y="296" font-size="12" text-anchor="middle" fill="#000">else multiply/divide or CSR</text>
+<text x="435.0" y="312" font-size="12" text-anchor="middle" fill="#000">CSR waits for the ROB head</text>
+<rect x="40" y="360" width="520" height="80" rx="12.0" fill="#ffe6cc" stroke="#d79b00" stroke-width="1"/>
+<text x="300.0" y="389" font-size="12" text-anchor="middle" fill="#000">Wakeup inputs</text>
+<text x="300.0" y="404" font-size="12" text-anchor="middle" fill="#000">CDB wake view: reset, flush and duplicate suppression only</text>
+<text x="300.0" y="419" font-size="12" text-anchor="middle" fill="#000">speculative load wake one cycle after a cache-path load request</text>
+<rect x="640" y="110" width="250" height="70" rx="10.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="765.0" y="142" font-size="12" text-anchor="middle" fill="#000">alu_register_read</text>
+<text x="765.0" y="156" font-size="12" text-anchor="middle" fill="#000">one selection per ALU lane</text>
+<rect x="910" y="110" width="250" height="70" rx="10.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="1035.0" y="142" font-size="12" text-anchor="middle" fill="#000">aux_register_read</text>
+<text x="1035.0" y="156" font-size="12" text-anchor="middle" fill="#000">port 2 selection</text>
+<rect x="640" y="210" width="520" height="130" rx="19.5" fill="#ffe6cc" stroke="#d79b00" stroke-width="1"/>
+<text x="900.0" y="249" font-size="12" text-anchor="middle" fill="#000">Physical register file</text>
+<text x="900.0" y="264" font-size="12" text-anchor="middle" fill="#000">two 64 x 32 banks written independently</text>
+<text x="900.0" y="279" font-size="12" text-anchor="middle" fill="#000">per-register live-writer table picks the bank</text>
+<text x="900.0" y="294" font-size="12" text-anchor="middle" fill="#000">six asynchronous read ports: four for ports 0 and 1, two for port 2</text>
+<text x="900.0" y="309" font-size="12" text-anchor="middle" fill="#000">accepted same-cycle writes bypass the read</text>
+<rect x="640" y="360" width="520" height="80" rx="12.0" fill="#ffe6cc" stroke="#d79b00" stroke-width="1"/>
+<text x="900.0" y="389" font-size="12" text-anchor="middle" fill="#000">Payload array read</text>
+<text x="900.0" y="404" font-size="12" text-anchor="middle" fill="#000">106-bit context by ROB ID: PC, immediate, controls</text>
+<text x="900.0" y="419" font-size="12" text-anchor="middle" fill="#000">materialize_uop forms the unit&#x27;s input packet</text>
+<rect x="1240" y="110" width="160" height="60" rx="9.0" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="1320.0" y="136" font-size="12" text-anchor="middle" fill="#000">ALU 0</text>
+<text x="1320.0" y="152" font-size="12" text-anchor="middle" fill="#000">branch resolve</text>
+<rect x="1420" y="110" width="160" height="60" rx="9.0" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="1500.0" y="136" font-size="12" text-anchor="middle" fill="#000">ALU 1</text>
+<text x="1500.0" y="152" font-size="12" text-anchor="middle" fill="#000">branch resolve</text>
+<rect x="1600" y="110" width="160" height="60" rx="9.0" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="1680.0" y="136" font-size="12" text-anchor="middle" fill="#000">AGU</text>
+<text x="1680.0" y="152" font-size="12" text-anchor="middle" fill="#000">address to LSQ, 1 cycle</text>
+<rect x="1240" y="190" width="250" height="60" rx="9.0" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="1365.0" y="216" font-size="12" text-anchor="middle" fill="#000">MDU</text>
+<text x="1365.0" y="232" font-size="12" text-anchor="middle" fill="#000">multiply 4 cycles, divide iterative</text>
+<rect x="1510" y="190" width="250" height="60" rx="9.0" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="1635.0" y="216" font-size="12" text-anchor="middle" fill="#000">CSR unit</text>
+<text x="1635.0" y="232" font-size="12" text-anchor="middle" fill="#000">1 cycle</text>
+<rect x="1240" y="270" width="520" height="110" rx="16.5" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="1500.0" y="306" font-size="12" text-anchor="middle" fill="#000">LSU</text>
+<text x="1500.0" y="322" font-size="12" text-anchor="middle" fill="#000">memory select from registered LSQ state, then issue with a one-row alias check</text>
+<text x="1500.0" y="336" font-size="12" text-anchor="middle" fill="#000">forward from the store queue, or cancel the cache request and bounce</text>
+<text x="1500.0" y="352" font-size="12" text-anchor="middle" fill="#000">atomic sequencer: read, calculate, write, done</text>
+<rect x="1240" y="400" width="260" height="50" rx="7.5" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="1370.0" y="422" font-size="12" text-anchor="middle" fill="#000">Unit result registers</text>
+<text x="1370.0" y="436" font-size="12" text-anchor="middle" fill="#000">hold ungranted results</text>
+<rect x="1520" y="400" width="240" height="50" rx="7.5" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="1640.0" y="422" font-size="12" text-anchor="middle" fill="#000">Selective kill</text>
+<text x="1640.0" y="436" font-size="12" text-anchor="middle" fill="#000">clears validity only</text>
+<rect x="40" y="560" width="520" height="100" rx="15.0" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="300.0" y="592" font-size="12" text-anchor="middle" fill="#000">CDB arbiter</text>
+<text x="300.0" y="606" font-size="12" text-anchor="middle" fill="#000">two results per cycle from six sources</text>
+<text x="300.0" y="622" font-size="12" text-anchor="middle" fill="#000">rotating priority matrix, exactly-one rank test</text>
+<text x="300.0" y="636" font-size="12" text-anchor="middle" fill="#000">functional units hold ungranted results</text>
+<rect x="620" y="560" width="250" height="100" rx="15.0" fill="#ffe6cc" stroke="#d79b00" stroke-width="1"/>
+<text x="745.0" y="599" font-size="12" text-anchor="middle" fill="#000">PRF write</text>
+<text x="745.0" y="614" font-size="12" text-anchor="middle" fill="#000">first successful completion</text>
+<text x="745.0" y="629" font-size="12" text-anchor="middle" fill="#000">clears busy, writes the value</text>
+<rect x="900" y="560" width="250" height="100" rx="15.0" fill="#ffe6cc" stroke="#d79b00" stroke-width="1"/>
+<text x="1025.0" y="606" font-size="12" text-anchor="middle" fill="#000">ROB completion</text>
+<text x="1025.0" y="622" font-size="12" text-anchor="middle" fill="#000">ready bit, exception, branch result</text>
+<rect x="1180" y="560" width="250" height="100" rx="15.0" fill="#ffe6cc" stroke="#d79b00" stroke-width="1"/>
+<text x="1305.0" y="606" font-size="12" text-anchor="middle" fill="#000">Wakeup</text>
+<text x="1305.0" y="622" font-size="12" text-anchor="middle" fill="#000">scheduler readiness, LSQ store data</text>
+<rect x="1460" y="560" width="300" height="100" rx="15.0" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="1610.0" y="599" font-size="12" text-anchor="middle" fill="#000">Rename completion check</text>
+<text x="1610.0" y="614" font-size="12" text-anchor="middle" fill="#000">owner, physical destination and</text>
+<text x="1610.0" y="629" font-size="12" text-anchor="middle" fill="#000">recovery age qualify the write</text>
+<text x="30" y="784" font-size="10" fill="#333">Port 0 and 1 serve ALU and branch work. Port 2 serves memory address generation, multiply/divide and CSR work.</text></svg>

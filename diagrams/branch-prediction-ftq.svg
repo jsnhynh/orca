@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 800" width="1800" height="800" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 z" fill="context-stroke" stroke="context-stroke"/></marker></defs>
+<rect width="1800" height="800" fill="#ffffff"/>
+<text x="30" y="40" font-size="22" font-weight="bold" fill="#000">FTQ and recovery detail</text>
+<rect x="20" y="70" width="860" height="420" rx="18" fill="#f5f5f5" fill-opacity="0.5" stroke="#666" stroke-opacity="0.5"/>
+<text x="28" y="86" font-size="11" font-weight="bold" fill="#333" fill-opacity="0.7">FTQ entry (ftq_entry_t)</text>
+<rect x="920" y="70" width="860" height="420" rx="18" fill="#f5f5f5" fill-opacity="0.5" stroke="#666" stroke-opacity="0.5"/>
+<text x="928" y="86" font-size="11" font-weight="bold" fill="#333" fill-opacity="0.7">Redirect sources, highest priority first</text>
+<rect x="20" y="530" width="1760" height="220" rx="18" fill="#f5f5f5" fill-opacity="0.5" stroke="#666" stroke-opacity="0.5"/>
+<text x="28" y="546" font-size="11" font-weight="bold" fill="#333" fill-opacity="0.7">Flush kinds</text>
+<path d="M460,140 L440,140" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1350,180 L1350,200" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1350,270 L1350,290" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1350,360 L1350,380" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1760,145 L1780,145 L1780,640 L1760,640" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<rect x="40" y="110" width="400" height="60" rx="9.0" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="240.0" y="136" font-size="12" text-anchor="middle" fill="#000">pc</text>
+<text x="240.0" y="152" font-size="12" text-anchor="middle" fill="#000">fetch group address</text>
+<rect x="460" y="110" width="400" height="60" rx="9.0" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="660.0" y="136" font-size="12" text-anchor="middle" fill="#000">pred: branch_pred_t</text>
+<text x="660.0" y="152" font-size="12" text-anchor="middle" fill="#000">BTB hit, branch type, target; TAGE provider data</text>
+<rect x="40" y="190" width="400" height="60" rx="9.0" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="240.0" y="216" font-size="12" text-anchor="middle" fill="#000">ghr_cp</text>
+<text x="240.0" y="232" font-size="12" text-anchor="middle" fill="#000">global history at allocation, for recovery</text>
+<rect x="460" y="190" width="400" height="60" rx="9.0" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="660.0" y="216" font-size="12" text-anchor="middle" fill="#000">ras_cp</text>
+<text x="660.0" y="232" font-size="12" text-anchor="middle" fill="#000">RAS pointer checkpoint</text>
+<rect x="40" y="270" width="400" height="60" rx="9.0" fill="#ffe6cc" stroke="#d79b00" stroke-width="1"/>
+<text x="240.0" y="296" font-size="12" text-anchor="middle" fill="#000">valid and execute_recovered flags</text>
+<text x="240.0" y="312" font-size="12" text-anchor="middle" fill="#000">mutated by recovery, kept apart from the payload</text>
+<rect x="460" y="270" width="400" height="60" rx="9.0" fill="#ffe6cc" stroke="#d79b00" stroke-width="1"/>
+<text x="660.0" y="296" font-size="12" text-anchor="middle" fill="#000">return flag and initialized mask</text>
+<text x="660.0" y="312" font-size="12" text-anchor="middle" fill="#000">return scan, reset mask for zero reads</text>
+<rect x="40" y="360" width="820" height="100" rx="15.0" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="450.0" y="392" font-size="12" text-anchor="middle" fill="#000">Storage</text>
+<text x="450.0" y="406" font-size="12" text-anchor="middle" fill="#000">16 entries; the payload sits in two banks with asynchronous reads;</text>
+<text x="450.0" y="422" font-size="12" text-anchor="middle" fill="#000">a registered return-pending flag (the or of surviving returns and this cycle&#x27;s enqueued returns)</text>
+<text x="450.0" y="436" font-size="12" text-anchor="middle" fill="#000">selects the RAS bypass, so prediction starts from one flop instead of 16 entries</text>
+<rect x="940" y="110" width="820" height="70" rx="10.5" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="1350.0" y="142" font-size="12" text-anchor="middle" fill="#000">1 Architectural: trap, MRET, FENCE.I</text>
+<text x="1350.0" y="156" font-size="12" text-anchor="middle" fill="#000">registered arch_redirect</text>
+<rect x="940" y="200" width="820" height="70" rx="10.5" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="1350.0" y="232" font-size="12" text-anchor="middle" fill="#000">2 Commit backstop</text>
+<text x="1350.0" y="246" font-size="12" text-anchor="middle" fill="#000">commit compares the architectural outcome with the oldest FTQ entry and flushes if they disagree and execute did not repair it</text>
+<rect x="940" y="290" width="820" height="70" rx="10.5" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="1350.0" y="322" font-size="12" text-anchor="middle" fill="#000">3 Execute recovery</text>
+<text x="1350.0" y="336" font-size="12" text-anchor="middle" fill="#000">an ALU result is compared with its FTQ entry; among several, the smallest circular distance from the ROB head wins</text>
+<rect x="940" y="380" width="820" height="70" rx="10.5" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="1350.0" y="412" font-size="12" text-anchor="middle" fill="#000">4 L1 repair</text>
+<text x="1350.0" y="426" font-size="12" text-anchor="middle" fill="#000">L1 disagrees with L0, or L0 had nothing and L1 says taken: hold one cycle, then redirect</text>
+<rect x="40" y="580" width="820" height="130" rx="19.5" fill="#ffe6cc" stroke="#d79b00" stroke-width="1"/>
+<text x="450.0" y="626" font-size="12" text-anchor="middle" fill="#000">flush</text>
+<text x="450.0" y="642" font-size="12" text-anchor="middle" fill="#000">union of commit, execute recovery and architectural redirect;</text>
+<text x="450.0" y="656" font-size="12" text-anchor="middle" fill="#000">kills the front end and younger speculative work</text>
+<text x="450.0" y="672" font-size="12" text-anchor="middle" fill="#000">execute recovery is selective and keeps older work</text>
+<rect x="920" y="580" width="840" height="130" rx="19.5" fill="#ffe6cc" stroke="#d79b00" stroke-width="1"/>
+<text x="1340.0" y="626" font-size="12" text-anchor="middle" fill="#000">full_flush</text>
+<text x="1340.0" y="642" font-size="12" text-anchor="middle" fill="#000">commit and architectural redirects only;</text>
+<text x="1340.0" y="656" font-size="12" text-anchor="middle" fill="#000">also wipes rename, the ROB and the issue queues</text>
+<text x="1340.0" y="672" font-size="12" text-anchor="middle" fill="#000">branch checkpoints and the free-list head are restored from the commit state</text>
+<text x="30" y="784" font-size="10" fill="#333">The FTQ keeps what is needed to check and undo each prediction. Four redirect sources are prioritized.</text></svg>

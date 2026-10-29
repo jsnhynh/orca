@@ -1,0 +1,491 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../genindex.html"><link rel="search" title="Search" href="../../search.html"><link rel="next" title="Memory" href="../memory/index.html"><link rel="prev" title="Machine-mode traps" href="m_mode.html">
+
+    <!-- Generated with Sphinx 9.2.0 and Furo 2025.12.19 -->
+        <title>ISA and software contract - ORCA</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/orca.css?v=6f7e3969" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #3973DA;
+  --color-brand-content: #3973DA;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #5aa9f0;
+  --color-brand-content: #5aa9f0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #5aa9f0;
+  --color-brand-content: #5aa9f0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">ORCA</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  <span class="sidebar-brand-text">ORCA</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../results.html">Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../decisions.html">Design Decisions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../building.html">Building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../learnings.html">Learnings</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Microarchitecture</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Core</a><input aria-label="Toggle navigation of Core" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="stages.html">Pipeline stages</a><input aria-label="Toggle navigation of Pipeline stages" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="0-branch.html">Stage 0: Branch prediction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1-fetch.html">Stage 1: Fetch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2-decode.html">Stage 2: Decode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3-rename.html">Stage 3: Rename</a></li>
+<li class="toctree-l3"><a class="reference internal" href="4-dispatch.html">Stage 4: Dispatch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="5-issue.html">Stage 5: Issue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="6-execute.html">Stage 6: Execute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="7-writeback.html">Stage 7: Writeback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="8-commit.html">Stage 8: Commit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="m-extension.html">M extension: multiply and divide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="a-extension.html">A extension: atomics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="m_mode.html">Machine-mode traps</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">ISA and software contract</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../memory/index.html">Memory</a><input aria-label="Toggle navigation of Memory" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../memory/cache.html">L1 caches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../memory/boot-rom.html">Boot ROM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../memory/main-memory.html">DDR and main memory</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../soc/index.html">SoC</a><input aria-label="Toggle navigation of SoC" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../soc/interconnect.html">Interconnect and clocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../soc/peripherals.html">Peripherals and registers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../soc/platform.html">FPGA and KV260 boundary</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Verification</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../verification/index.html">Verification</a><input aria-label="Toggle navigation of Verification" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../verification/testbenches.html">Testbenches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../verification/system-tests.html">System tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../verification/coverage.html">Coverage</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">FPGA bring-up</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../bringup/index.html">FPGA bring-up</a><input aria-label="Toggle navigation of FPGA bring-up" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../bringup/infrastructure.html">Infrastructure</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="isa-and-software-contract">
+<h1>ISA and software contract<a class="headerlink" href="#isa-and-software-contract" title="Link to this heading">¶</a></h1>
+<p>ORCA implements <code class="docutils literal notranslate"><span class="pre">RV32IMA_Zicsr_Zifencei</span></code> and runs in machine mode, with a minimal user mode. RV32 denotes 32-bit integer registers and addresses, <code class="docutils literal notranslate"><span class="pre">I</span></code> the base integer ISA, <code class="docutils literal notranslate"><span class="pre">M</span></code> multiply and divide, and <code class="docutils literal notranslate"><span class="pre">A</span></code> word atomics (Zalrsc’s <code class="docutils literal notranslate"><span class="pre">LR.W</span></code> and <code class="docutils literal notranslate"><span class="pre">SC.W</span></code>, and Zaamo’s nine <code class="docutils literal notranslate"><span class="pre">AMO*.W</span></code>). Zicsr defines the CSR instructions and Zifencei defines <code class="docutils literal notranslate"><span class="pre">FENCE.I</span></code>.</p>
+<p>This page says what software may rely on. The pipeline mechanisms are on the <a class="reference internal" href="index.html"><span class="std std-doc">Core</span></a> page, and precise traps are on the <a class="reference internal" href="m_mode.html"><span class="std std-doc">Machine-mode traps</span></a> page.</p>
+<section id="instruction-to-hardware-map">
+<h2>Instruction-to-hardware map<a class="headerlink" href="#instruction-to-hardware-map" title="Link to this heading">¶</a></h2>
+<p>Decode in <code class="docutils literal notranslate"><span class="pre">rtl/cpu/2-decode/decode.sv</span></code> recognizes two instructions in parallel
+and turns each into an <code class="docutils literal notranslate"><span class="pre">instruction_t</span></code>. The opcode and function fields choose
+the path below.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Instruction group</p></th>
+<th class="head"><p>Execution path</p></th>
+<th class="head"><p>Architectural completion</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>integer ALU, <code class="docutils literal notranslate"><span class="pre">LUI</span></code>, <code class="docutils literal notranslate"><span class="pre">AUIPC</span></code></p></td>
+<td><p>scheduler port 0/1 -&gt; either ALU -&gt; CDB</p></td>
+<td><p>ROB writes <code class="docutils literal notranslate"><span class="pre">rd</span></code> at commit</p></td>
+</tr>
+<tr class="row-odd"><td><p>conditional branches</p></td>
+<td><p>scheduler port 0/1 -&gt; ALU compare/target -&gt; BPU side band</p></td>
+<td><p>ROB retires alone and trains SONAR</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">JAL</span></code>, <code class="docutils literal notranslate"><span class="pre">JALR</span></code></p></td>
+<td><p>scheduler port 0/1 -&gt; ALU target -&gt; BPU side band; CDB forwards <code class="docutils literal notranslate"><span class="pre">pc+4</span></code></p></td>
+<td><p>ROB writes <code class="docutils literal notranslate"><span class="pre">pc+4</span></code> and retires alone</p></td>
+</tr>
+<tr class="row-odd"><td><p>loads</p></td>
+<td><p>scheduler port 2 -&gt; AGU -&gt; load queue -&gt; D-cache or AXI -&gt; LSU -&gt; CDB</p></td>
+<td><p>ROB writes sign/zero-extended result</p></td>
+</tr>
+<tr class="row-even"><td><p>stores</p></td>
+<td><p>scheduler port 2 -&gt; AGU -&gt; store queue; wait for ROB authorization -&gt; LSU</p></td>
+<td><p>retire only after write response</p></td>
+</tr>
+<tr class="row-odd"><td><p>atomics</p></td>
+<td><p>scheduler port 2 -&gt; AGU -&gt; store queue; ROB authorizes only at its head -&gt; LSU read, modify, write -&gt; CDB</p></td>
+<td><p>retire after both the write response and the old word</p></td>
+</tr>
+<tr class="row-even"><td><p>multiply</p></td>
+<td><p>scheduler port 2 -&gt; four-cycle multiply pipeline -&gt; CDB</p></td>
+<td><p>ordinary ROB register write</p></td>
+</tr>
+<tr class="row-odd"><td><p>divide/remainder</p></td>
+<td><p>scheduler port 2 -&gt; iterative divider -&gt; CDB</p></td>
+<td><p>ordinary ROB register write</p></td>
+</tr>
+<tr class="row-even"><td><p>CSR/system</p></td>
+<td><p>scheduler port 2, only at the ROB head -&gt; CSR unit</p></td>
+<td><p>issue at ROB head and retire alone</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">FENCE</span></code></p></td>
+<td><p>ALU completion</p></td>
+<td><p>in-order retirement waits behind older memory work</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">FENCE.I</span></code></p></td>
+<td><p>ALU completion -&gt; ROB/L1 maintenance handshake</p></td>
+<td><p>D-cache writeback, both L1s invalidated, restart at <code class="docutils literal notranslate"><span class="pre">pc+4</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>An unsupported or malformed encoding still gets a ROB entry. Decode creates a ready, exception-marked entry that holds the raw instruction for <code class="docutils literal notranslate"><span class="pre">mtval</span></code>, and commit takes the illegal-instruction trap when that entry becomes the oldest.</p>
+</section>
+<section id="machine-visible-state">
+<h2>Machine-visible state<a class="headerlink" href="#machine-visible-state" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/8-commit/csr.sv</span></code> implements these machine facilities:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mstatus</span></code>, <code class="docutils literal notranslate"><span class="pre">misa</span></code>, <code class="docutils literal notranslate"><span class="pre">mie</span></code>, <code class="docutils literal notranslate"><span class="pre">mtvec</span></code>, <code class="docutils literal notranslate"><span class="pre">mscratch</span></code>, <code class="docutils literal notranslate"><span class="pre">mepc</span></code>, <code class="docutils literal notranslate"><span class="pre">mcause</span></code>, <code class="docutils literal notranslate"><span class="pre">mtval</span></code>,
+and hardware-backed <code class="docutils literal notranslate"><span class="pre">mip</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mcycle</span></code>/<code class="docutils literal notranslate"><span class="pre">mcycleh</span></code> and <code class="docutils literal notranslate"><span class="pre">minstret</span></code>/<code class="docutils literal notranslate"><span class="pre">minstreth</span></code>, including the read-only
+<code class="docutils literal notranslate"><span class="pre">cycle</span></code> and <code class="docutils literal notranslate"><span class="pre">instret</span></code> aliases;</p></li>
+<li><p>read-only-zero <code class="docutils literal notranslate"><span class="pre">mvendorid</span></code>, <code class="docutils literal notranslate"><span class="pre">marchid</span></code>, <code class="docutils literal notranslate"><span class="pre">mimpid</span></code>, <code class="docutils literal notranslate"><span class="pre">mhartid</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">mconfigptr</span></code>;</p></li>
+<li><p>legal WARL-zero <code class="docutils literal notranslate"><span class="pre">mstatush</span></code> for RV32;</p></li>
+<li><p>direct-mode trap entry, <code class="docutils literal notranslate"><span class="pre">MRET</span></code>, and software, timer, and external interrupts.</p></li>
+</ul>
+<p>Only <code class="docutils literal notranslate"><span class="pre">mstatus.MIE</span></code>, <code class="docutils literal notranslate"><span class="pre">MPIE</span></code>, and <code class="docutils literal notranslate"><span class="pre">MPP</span></code> exist. <code class="docutils literal notranslate"><span class="pre">mie</span></code>/<code class="docutils literal notranslate"><span class="pre">mip</span></code> expose only
+MSI, MTI, and MEI. <code class="docutils literal notranslate"><span class="pre">mtvec</span></code> and <code class="docutils literal notranslate"><span class="pre">mepc</span></code> are forced to four-byte alignment.
+<code class="docutils literal notranslate"><span class="pre">misa</span></code> is the fixed RV32IMA + U value, <code class="docutils literal notranslate"><span class="pre">0x4010_1101</span></code>.</p>
+<p><strong>User mode.</strong> No-MMU Linux runs user code in U-mode. It returns to U-mode with <code class="docutils literal notranslate"><span class="pre">mret</span></code> and <code class="docutils literal notranslate"><span class="pre">MPP</span> <span class="pre">=</span> <span class="pre">U</span></code>, and it expects system calls as cause 8. ORCA tracks the current privilege (M or U) in <code class="docutils literal notranslate"><span class="pre">csr.sv</span></code>, and <code class="docutils literal notranslate"><span class="pre">MPP</span></code> is WARL with the values {00, 11} (01 and 10 read as 00). A trap records the previous privilege in <code class="docutils literal notranslate"><span class="pre">MPP</span></code> and enters M, and <code class="docutils literal notranslate"><span class="pre">mret</span></code> returns to <code class="docutils literal notranslate"><span class="pre">MPP</span></code> and leaves <code class="docutils literal notranslate"><span class="pre">MPP</span> <span class="pre">=</span> <span class="pre">U</span></code>. In U-mode, decode makes machine CSRs (address bits [9:8] non-zero) and <code class="docutils literal notranslate"><span class="pre">mret</span></code> illegal, <code class="docutils literal notranslate"><span class="pre">ecall</span></code> reports cause 8 (11 in M), and the user counters (<code class="docutils literal notranslate"><span class="pre">cycle</span></code>, <code class="docutils literal notranslate"><span class="pre">time</span></code>, <code class="docutils literal notranslate"><span class="pre">instret</span></code>) stay readable. Machine interrupts are enabled in U-mode whatever <code class="docutils literal notranslate"><span class="pre">mstatus.MIE</span></code> says. There is no PMP, <code class="docutils literal notranslate"><span class="pre">MPRV</span></code> or <code class="docutils literal notranslate"><span class="pre">mcounteren</span></code>, so U-mode is not a protection boundary here. <code class="docutils literal notranslate"><span class="pre">user_mode_test</span></code> covers it. <code class="docutils literal notranslate"><span class="pre">WFI</span></code> is legal and resumes immediately, and it does not stop the clock.</p>
+<p>The SoC supplies a memory-mapped 64-bit <code class="docutils literal notranslate"><span class="pre">mtime</span></code> and <code class="docutils literal notranslate"><span class="pre">mtimecmp</span></code> block, a software interrupt bit and external interrupt sources. These are peripherals and not CPU CSRs, and the <a class="reference internal" href="../memory/index.html"><span class="std std-doc">Memory</span></a> page lists their addresses. The read-only <code class="docutils literal notranslate"><span class="pre">time</span></code> and <code class="docutils literal notranslate"><span class="pre">timeh</span></code> CSRs (<code class="docutils literal notranslate"><span class="pre">0xC01</span></code> and <code class="docutils literal notranslate"><span class="pre">0xC81</span></code>, used by <code class="docutils literal notranslate"><span class="pre">rdtime</span></code> and <code class="docutils literal notranslate"><span class="pre">rdtimeh</span></code>) alias that <code class="docutils literal notranslate"><span class="pre">mtime</span></code>. The peripheral exports its count to the core, which registers it, so a read lags <code class="docutils literal notranslate"><span class="pre">mtime</span></code> by one cycle. Writing them is an illegal instruction (<code class="docutils literal notranslate"><span class="pre">time_csr_test</span></code>).</p>
+</section>
+<section id="atomics">
+<h2>Atomics<a class="headerlink" href="#atomics" title="Link to this heading">¶</a></h2>
+<p>All atomics are word-sized and naturally aligned, and each one executes only when it is the oldest instruction. The <a class="reference internal" href="a-extension.html"><span class="std std-doc">A extension</span></a> page describes the instructions, the reservation, the exceptions and the pipeline path.</p>
+</section>
+<section id="precise-exception-boundary">
+<h2>Precise exception boundary<a class="headerlink" href="#precise-exception-boundary" title="Link to this heading">¶</a></h2>
+<p>The implemented synchronous causes are illegal instruction, breakpoint, machine-mode <code class="docutils literal notranslate"><span class="pre">ECALL</span></code>, taken control-target misalignment, load/store/AMO address misalignment, and uncached/MMIO AXI load/store/AMO access faults. A fault is tagged when it is detected and changes architectural state only at the ROB head.</p>
+<p>The cacheable line interface has no error response, so instruction access faults and cacheable load/store access faults cannot be generated. There is no supervisor mode, MMU, PMP, delegation, compressed instructions, floating point or vector ISA, and software must not expect any of them.</p>
+</section>
+<section id="software-support">
+<h2>Software support<a class="headerlink" href="#software-support" title="Link to this heading">¶</a></h2>
+<p>ORCAstrator is the freestanding software under <code class="docutils literal notranslate"><span class="pre">sw/</span></code>. It provides startup code, the linker script, UART output, counter helpers and small demos. There is no hosted C library; the no-MMU Linux under <code class="docutils literal notranslate"><span class="pre">sw/linux</span></code> is the operating-system environment.
+Programs enter at the boot ROM and use the addresses on the <a class="reference internal" href="../memory/index.html"><span class="std std-doc">Memory</span></a> page.</p>
+</section>
+<section id="validation">
+<h2>Validation<a class="headerlink" href="#validation" title="Link to this heading">¶</a></h2>
+<p>The pinned RISC-V ACT4 source is under <code class="docutils literal notranslate"><span class="pre">third_party/riscv-arch-test</span></code>, and ORCA’s device configuration is <code class="docutils literal notranslate"><span class="pre">sim/act/orca-rv32ima-zicsr-zifencei</span></code>. The generated suite contains RV32I, RV32M, Zaamo, Zalrsc, Zicsr, Zifencei,
+ExceptionsSm, and InterruptsSm tests (67 programs). Each program is one image linked at
+<code class="docutils literal notranslate"><span class="pre">0x1000_0000</span></code>, the bottom of the DDR window, and its halt macro leaves a pass or fail word in <code class="docutils literal notranslate"><span class="pre">x31</span></code> and in the
+last word of the DMA region. <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">act</span></code> loads each image into the DDR model, starts it through the boot ROM the way
+the board’s host does, and passes 67/67 through <code class="docutils literal notranslate"><span class="pre">cpu_tb</span></code>. The Sail
+reference is configured to match the implemented atomics: AMO arithmetic,
+eventual reservations, one-word reservation granule, and misaligned LR/SC/AMO
+raising an address-misaligned exception (cause 4 for LR, cause 6 for SC/AMO).
+The machine has no misaligned load/store support, so the Misalign tests are not
+selected.</p>
+<p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">isa-prereqs</span></code> checks the compiler, <code class="docutils literal notranslate"><span class="pre">mise</span></code>, and Sail model. <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">act</span></code>
+generates Sail-backed self-checking programs and executes them. Generated files
+are cached below <code class="docutils literal notranslate"><span class="pre">build/act/generated/&lt;fingerprint&gt;</span></code>; the fingerprint covers
+the ACT revision, extension list, ORCA configuration/macros, wrappers, Sail
+adapter, and selected toolchain identity, so a meaningful input change creates
+a new suite. The simulation’s images are the board’s images: <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">act-board</span></code> packs the same ELFs as flat binaries, the board host reads the mailbox word, and all 67 pass on the board.</p>
+<p>Directed RTL and assembly tests additionally exercise serialization, CSR
+write/read pairs, trap side-effect suppression, memory errors, interrupts, and
+self-modifying code across <code class="docutils literal notranslate"><span class="pre">FENCE.I</span></code>. Passing these tests is evidence for the implementation described here. It is not RISC-V International certification.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../memory/index.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Memory</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="m_mode.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Machine-mode traps</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026 Jason Huynh. All rights reserved.
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">ISA and software contract</a><ul>
+<li><a class="reference internal" href="#instruction-to-hardware-map">Instruction-to-hardware map</a></li>
+<li><a class="reference internal" href="#machine-visible-state">Machine-visible state</a></li>
+<li><a class="reference internal" href="#atomics">Atomics</a></li>
+<li><a class="reference internal" href="#precise-exception-boundary">Precise exception boundary</a></li>
+<li><a class="reference internal" href="#software-support">Software support</a></li>
+<li><a class="reference internal" href="#validation">Validation</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=3b5cce75"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>

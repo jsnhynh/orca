@@ -1,0 +1,607 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../genindex.html"><link rel="search" title="Search" href="../../search.html"><link rel="next" title="Stage 1: Fetch" href="1-fetch.html"><link rel="prev" title="Pipeline stages" href="stages.html">
+
+    <!-- Generated with Sphinx 9.2.0 and Furo 2025.12.19 -->
+        <title>Stage 0: Branch prediction - ORCA</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/orca.css?v=6f7e3969" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #3973DA;
+  --color-brand-content: #3973DA;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #5aa9f0;
+  --color-brand-content: #5aa9f0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #5aa9f0;
+  --color-brand-content: #5aa9f0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">ORCA</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  <span class="sidebar-brand-text">ORCA</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../results.html">Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../decisions.html">Design Decisions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../building.html">Building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../learnings.html">Learnings</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Microarchitecture</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Core</a><input aria-label="Toggle navigation of Core" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2 current has-children"><a class="reference internal" href="stages.html">Pipeline stages</a><input aria-label="Toggle navigation of Pipeline stages" checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Stage 0: Branch prediction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1-fetch.html">Stage 1: Fetch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2-decode.html">Stage 2: Decode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3-rename.html">Stage 3: Rename</a></li>
+<li class="toctree-l3"><a class="reference internal" href="4-dispatch.html">Stage 4: Dispatch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="5-issue.html">Stage 5: Issue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="6-execute.html">Stage 6: Execute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="7-writeback.html">Stage 7: Writeback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="8-commit.html">Stage 8: Commit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="m-extension.html">M extension: multiply and divide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="a-extension.html">A extension: atomics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="m_mode.html">Machine-mode traps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isa.html">ISA and software contract</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../memory/index.html">Memory</a><input aria-label="Toggle navigation of Memory" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../memory/cache.html">L1 caches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../memory/boot-rom.html">Boot ROM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../memory/main-memory.html">DDR and main memory</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../soc/index.html">SoC</a><input aria-label="Toggle navigation of SoC" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../soc/interconnect.html">Interconnect and clocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../soc/peripherals.html">Peripherals and registers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../soc/platform.html">FPGA and KV260 boundary</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Verification</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../verification/index.html">Verification</a><input aria-label="Toggle navigation of Verification" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../verification/testbenches.html">Testbenches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../verification/system-tests.html">System tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../verification/coverage.html">Coverage</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">FPGA bring-up</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../bringup/index.html">FPGA bring-up</a><input aria-label="Toggle navigation of FPGA bring-up" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../bringup/infrastructure.html">Infrastructure</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="stage-0-branch-prediction">
+<h1>Stage 0: Branch prediction<a class="headerlink" href="#stage-0-branch-prediction" title="Link to this heading">¶</a></h1>
+<p>This is where every cycle begins. Before anything can be fetched, something has to decide what to fetch, and SONAR, ORCA’s branch-prediction unit, is the block that guesses. Everything downstream is speculative until <a class="reference internal" href="8-commit.html"><span class="std std-doc">commit</span></a> says otherwise, so the quality of this guess sets the ceiling for the whole machine. It is also the part of the design I spent the most time tuning.</p>
+<p>Four structures work together here. A branch target buffer (BTB) remembers where a control transfer went. TAGE predicts whether a conditional branch is taken. The return-address stack (RAS) predicts function returns. The fetch target queue (FTQ) keeps the information needed to check those guesses later and undo the wrong ones.</p>
+<p>Related notes: <a class="reference internal" href="1-fetch.html"><span class="std std-doc">Stage 1: Fetch</span></a> and <a class="reference internal" href="index.html"><span class="std std-doc">Core</span></a>.</p>
+<section id="files">
+<h2>Files<a class="headerlink" href="#files" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>File</p></th>
+<th class="head"><p>Job</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/0-branch/bpu.sv</span></code></p></td>
+<td><p>container, prediction metadata FIFO, redirect priority</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/0-branch/l0_btb.sv</span></code></p></td>
+<td><p>512-entry LUTRAM table for same-cycle steering</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/0-branch/btb.sv</span></code></p></td>
+<td><p>512-entry two-way banked block-RAM target buffer</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/0-branch/tage.sv</span></code></p></td>
+<td><p>folded-history hashing, provider select, training</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/0-branch/tage_base_table.sv</span></code></p></td>
+<td><p>512-entry bimodal fallback</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/0-branch/tage_tagged_table.sv</span></code></p></td>
+<td><p>one 1024-entry tagged table (x4)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/0-branch/ras.sv</span></code></p></td>
+<td><p>16-entry return-address stack</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/0-branch/ftq.sv</span></code></p></td>
+<td><p>16-entry fetch target queue</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/0-branch/bpu_predict_ctrl.sv</span></code></p></td>
+<td><p>L1 verdict, hold, registered redirect</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/0-branch/bpu_alloc_ctrl.sv</span></code></p></td>
+<td><p>FTQ enqueue, speculative GHR/RAS updates</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/0-branch/bpu_commit_ctrl.sv</span></code></p></td>
+<td><p>training, commit backstop, perf counters</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/0-branch/bpu_execute_recover.sv</span></code></p></td>
+<td><p>execute-time misprediction detection</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="shared-predictor-types">
+<h2>Shared predictor types<a class="headerlink" href="#shared-predictor-types" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/common/branch_pkg.sv</span></code> holds the vocabulary these modules share: the table sizes, the four branch classes, and the packets passed between fetch, execute and commit. Four types matter:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">branch_pred_t</span></code> is a guess returned by the BTB and TAGE.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ftq_entry_t</span></code> adds the GHR and RAS checkpoints needed to undo that guess.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">branch_resolve_t</span></code> is the outcome calculated by an ALU.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">branch_recovery_t</span></code> is the single oldest wrong prediction chosen for repair.</p></li>
+</ul>
+<p>These are packed wires and stored records. <code class="docutils literal notranslate"><span class="pre">branch_recovery_t</span></code> holds one recovery transaction. It is not an exception queue and it is not a second ROB.</p>
+</section>
+<section id="the-two-speed-idea">
+<h2>The two-speed idea<a class="headerlink" href="#the-two-speed-idea" title="Link to this heading">¶</a></h2>
+<p>A 512-entry BTB and four TAGE tables live in SRAM, and an SRAM read takes a cycle. The I-cache address has to be driven in the current cycle. A synchronous memory read cannot sit in front of the logic that produces its own address unless every fetch pays an extra pipeline stage.</p>
+<p>SONAR’s answer is to run two predictors at different speeds:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cycle n     pc ──┬──&gt; L0 BTB (LUTRAM) ─&gt; immediate redirect target
+                 └──&gt; BTB + TAGE + RAS (SRAM) ─┐
+cycle n+1                                      └──&gt; L1 verdict
+                                                     agrees?  keep going
+                                                     differs? hold + repair
+</pre></div>
+</div>
+<p><strong>L0</strong> is 512 entries of distributed RAM indexed by the aligned fetch group. It answers in the same cycle, so a correctly learned taken branch costs zero bubbles. It stores taken targets, returns included: a return keeps the last address it went to, which is right for a function called from one place. L1 checks a return against the RAS, so a return whose caller changed costs the same one-cycle repair as a miss. A not-taken branch needs no steering.</p>
+<p><strong>L1</strong> is the real predictor. Its result arrives one cycle later, alongside the I-cache response, and is compared with what L0 did. If they agree, nothing happens. If they disagree, or L0 had nothing and L1 says taken, the packet is held for one cycle and the request stream is repaired.</p>
+<p>The price is a one-cycle bubble on L0 misses and disagreements. The gain is that the common path never sees SRAM latency, and the tables stay ordinary memories.</p>
+</section>
+<section id="l1-decision-and-metadata-alignment">
+<h2>L1 decision and metadata alignment<a class="headerlink" href="#l1-decision-and-metadata-alignment" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">bpu.sv</span></code> keeps a four-entry prediction-metadata FIFO that runs in parallel with the I-cache request stream. A request reserves a slot and records its PC immediately. One cycle later, when the BTB and TAGE SRAM outputs are ready, the same slot is marked ready and filled with the L0, BTB and TAGE results. An I-cache response may consume only the ready metadata at the head of the FIFO. Simulation assertions check the valid bit, the ready bit, the PC match and the occupancy bound.</p>
+<p>The FIFO also records the successor PC that fetch actually requested after the previous packet. This differs from remembering what L0 predicted, because L0 can be retrained while a request is stalled. <code class="docutils literal notranslate"><span class="pre">bpu_predict_ctrl.sv</span></code> suppresses an L1 repair only when L0 and L1 agree and the observed successor really is the predicted target. For a not-taken control packet, an observed successor that differs from the bundle fallthrough also forces a repair, even if no L0 prediction was captured. The repair decision compares the observed successor with L1’s selected next PC in both directions.</p>
+<p>When the BTB has no entry for a lane, the predictor can still build a prediction from the instruction itself. Fetch adds the immediate of a <code class="docutils literal notranslate"><span class="pre">JAL</span></code> or conditional branch to the lane PC and passes it in as <code class="docutils literal notranslate"><span class="pre">pred_direct</span></code>. <code class="docutils literal notranslate"><span class="pre">bpu_predict_ctrl.sv</span></code> treats the lane as taken when it is a <code class="docutils literal notranslate"><span class="pre">JAL</span></code>, or a conditional branch that TAGE predicts taken, and uses the computed target in place of the BTB target. It fills the prediction record with a hit, that target and the branch type, so everything downstream sees an ordinary BTB hit. The L0 compare skips such a lane, so the L0 is never taken to agree with a computed target and the lane repairs through the path below. A BTB hit always takes priority.</p>
+<p>A repair is a registered one-cycle pulse. It carries the correct PC, the lane-valid mask and the matching prediction metadata while the cache kills older speculative lookups. Directed checks cover correct and unknown fallthrough, wrong successors and upper-half fetch groups, and the architectural checker verifies retired branch outcomes.</p>
+</section>
+<section id="l0-btb">
+<h2>L0 BTB<a class="headerlink" href="#l0-btb" title="Link to this heading">¶</a></h2>
+<p>The table is indexed by <code class="docutils literal notranslate"><span class="pre">pc[IDX_W+2:3]</span></code>, the group address rather than the instruction address. One entry covers an aligned 8-byte fetch group, and a <code class="docutils literal notranslate"><span class="pre">slot</span></code> bit records which half of the group holds the branch. The 512 entries index with <code class="docutils literal notranslate"><span class="pre">pc[11:3]</span></code>, and the tag is the remaining 20 upper bits. A program with a lot of straight-line code full of branches touches many fetch groups, and a smaller table would miss on most of its taken branches and pay the one-cycle repair each time.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">strength</span></code> field is a 2-bit counter with an asymmetric update:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>taken     + miss  -&gt; install, strength = 2
+taken     + hit   -&gt; strength++ (saturate at 3)
+not-taken + hit   -&gt; strength == 3 ? demote to 2 : evict
+return            -&gt; trains like a taken jump (L1 checks it against the RAS)
+</pre></div>
+</div>
+<p>A saturated entry survives one not-taken outcome on purpose. A loop branch is taken many times and then falls through once, when the loop exits. Without that hysteresis every loop would pay a cold L0 miss the next time it runs.</p>
+<p>When slot 0 of a group already holds a learned taken branch, a slot-1 update is suppressed (<code class="docutils literal notranslate"><span class="pre">preserve_slot0</span></code>), because slot 1 is unreachable whenever slot 0 is taken.</p>
+<p><strong>Storage.</strong> The tag, slot, strength and target of each entry sit in one distributed-RAM word (<code class="docutils literal notranslate"><span class="pre">data_q</span></code>, <code class="docutils literal notranslate"><span class="pre">ram_style</span> <span class="pre">=</span> <span class="pre">&quot;distributed&quot;</span></code>, no reset). Only the 128 valid bits are flops. The RAM has one write port and two asynchronous read ports. The fetch lookup reads the entry for <code class="docutils literal notranslate"><span class="pre">lookup_pc</span></code> in the same cycle. Training reads the entry at <code class="docutils literal notranslate"><span class="pre">update.pc</span></code>, which is also the write address, so training is a read-modify-write on that second port: an install or a strength change writes the whole word at the clock edge, and an evict only clears the valid flop. Strength matters only for a valid entry, so a stale word behind a cleared valid bit does no harm. Reset clears the valid bits in one cycle and blocks RAM writes. The module has no stalls, flushes or error paths, and a lookup sees a training write from the next cycle.</p>
+</section>
+<section id="btb">
+<h2>BTB<a class="headerlink" href="#btb" title="Link to this heading">¶</a></h2>
+<p>The BTB has 512 entries arranged as 256 sets of two ways. The sets are split into two SRAM banks by <code class="docutils literal notranslate"><span class="pre">index[0]</span></code>, so both words of a fetch group read in the same cycle, and each bank keeps its two ways in two RAMs. Each entry packs a tag, a target and a branch type into a 64-bit word, and its valid bit lives in the same word (see <a class="reference internal" href="#valid-bits-in-the-ram">Valid bits in the RAM</a>). Each RAM is an <code class="docutils literal notranslate"><span class="pre">orca_ram_1r1w</span></code> with <code class="docutils literal notranslate"><span class="pre">STYLE(&quot;block&quot;)</span></code>: the read address is presented on the fetch-request edge and the data is used the next cycle, so it maps to block RAM rather than LUTRAM.</p>
+<p>The index folds in more PC bits, <code class="docutils literal notranslate"><span class="pre">pc[9:2]</span> <span class="pre">^</span> <span class="pre">pc[17:10]</span></code>. Adjacent words in an aligned fetch group still select opposite banks. Two ways matter because two hot branches can share a set: with one way, each of them evicts the other every time it is taken, and the other then mispredicts on every visit.</p>
+<p>A lookup reads both ways and compares both tags. The prediction carries the way that hit, or, on a miss, the way a new entry should take: an empty way first, otherwise one picked by a free-running bit. That way travels with the prediction through the FTQ, and commit trains it, so training never needs a second read of the table.</p>
+<p>The read and write ports of each RAM are independent, so a taken commit update can write while fetch reads the same bank. The RAM returns old data on a same-address read and write, so registered collision forwarding replaces the written way’s word with the incoming entry, and the lookup sees the trained target and type. If both input slots target one bank, slot 1 wins. The commit controller emits only slot-0 training, so the core trains one update per cycle. Not-taken updates do not write the BTB.</p>
+<p>Slot 1 is requested only when <code class="docutils literal notranslate"><span class="pre">pc[2]</span></code> is clear. That makes pc+4 for slot 1 a matter of setting bit 2, with no carry chain from <code class="docutils literal notranslate"><span class="pre">pc[3]</span></code> into the tag register inputs.</p>
+</section>
+<section id="tage">
+<h2>TAGE<a class="headerlink" href="#tage" title="Link to this heading">¶</a></h2>
+<p>TAGE stands for tagged geometric history length. ORCA uses four 1024-entry tagged tables with history lengths <code class="docutils literal notranslate"><span class="pre">{4,</span> <span class="pre">10,</span> <span class="pre">24,</span> <span class="pre">64}</span></code> over a 64-bit global history, plus a 512-entry bimodal base table. Longer histories can learn branch patterns that depend on more earlier branches.</p>
+<p>I chose this shape with a CoreMark sweep over table counts, table sizes and history lengths, recorded in the decision records. Longer history helped most, because loop exits whose bodies contain other branches stop being mispredicted. A 128-bit history did as well with 512 entries, but it would double the history checkpoint stored in every FTQ entry, and the FTQ sits on a critical path. A 64-bit history with 1024 entries was the better trade. ORCA has no loop predictor: with this history the loop-like branches that are still missed are about 0.35% of CoreMark.</p>
+<p>The tables are ordered by ascending history length, and each table folds only the history bits below its length. Table 0 uses five bits and table 3 uses 64. Longest-provider selection and allocation order both follow this order, and directed checks verify the table order and the four/eight-bit boundary.</p>
+<p>Index and tag are folded history XOR’d with PC bits:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>index[t] = pc[11:2]                   ^ idx_fold_q[t]
+tag[t]   = pc[19:12]                  ^ tag_fold_q[t]
+</pre></div>
+</div>
+<p>The folds are kept as registered state, so a lookup does not put a wide XOR tree in front of the SRAM address. When the global history register (GHR) changes or is recovered, the RTL registers the folded index and tag hashes of the new history. Folding is linear, so each candidate history (execute recovery, either commit-time recovery, the speculative shift) is folded in parallel, and the recovery priority selects among the folds. A commit-time restore is taken from the registered training update (<code class="docutils literal notranslate"><span class="pre">update_train_q</span></code>), one cycle after the branch retires, so the ROB head read and the commit mispredict decision do not reach the fold registers in the same cycle. The front end restarts after the commit flush anyway, so the extra cycle is not visible in the cycle counts. A simulation assertion checks the selected folds against folding <code class="docutils literal notranslate"><span class="pre">ghr_d</span></code> directly. The full GHR is also kept so recovery can restore an exact history.</p>
+<p>TAGE captures <code class="docutils literal notranslate"><span class="pre">lookup_ghr</span></code> with its SRAM request and carries it in <code class="docutils literal notranslate"><span class="pre">tage_pred_t</span></code> through the prediction metadata and the FTQ. Both slots of a lookup share that history, and commit uses it to rebuild the index and tag. <code class="docutils literal notranslate"><span class="pre">ftq_entry_t.ghr_cp</span></code> is the ordered allocation-time checkpoint used for recovery, and slot one’s checkpoint includes slot zero’s speculative outcome.</p>
+<p>Commit trains the branch and sets <code class="docutils literal notranslate"><span class="pre">recover_history</span></code> only when execute has not already recovered it. Explicit execute recovery takes priority, and an unrecovered direction miss falls to the commit backstop. These signals add metadata and no pipeline stage. The training fields come from the FTQ head and the committing branch every cycle, and only the valid bits wait for the commit decision, which arrives late through the FTQ dequeue; every consumer reads an update’s fields only when it is valid.</p>
+<p>Provider selection walks the tables in ascending order, so the longest matching history wins. <code class="docutils literal notranslate"><span class="pre">alt_pred</span></code> records what the previous provider would have said. <code class="docutils literal notranslate"><span class="pre">alloc_table</span></code> is computed at prediction time: it is the first table above the provider whose useful counter is zero. Because the allocation policy is decided at prediction time and carried in the FTQ, training is a direct SRAM write and needs no second read.</p>
+<p>The alternate prediction is used when the longest provider has zero usefulness and a counter of <code class="docutils literal notranslate"><span class="pre">011</span></code> or <code class="docutils literal notranslate"><span class="pre">100</span></code>. Provider counter training still happens, and usefulness compares the provider’s own direction against the alternate, not against the selected fallback. The selected prediction and the provider metadata travel together in the FTQ.</p>
+<p>Useful bits decay through a periodic sweep. A counter ticks on every training update, and on overflow the table walks every index and clears one useful bit. The sweep advances only on cycles with no real training write, so it never takes a port from architectural work.</p>
+</section>
+<section id="valid-bits-in-the-ram">
+<h2>Valid bits in the RAM<a class="headerlink" href="#valid-bits-in-the-ram" title="Link to this heading">¶</a></h2>
+<p>The BTB, the base table and the four tagged tables keep each entry’s valid bit in spare bits of the RAM word. Block RAM is not reset, so <code class="docutils literal notranslate"><span class="pre">sweep_clear.sv</span></code> walks every address once after reset (128 cycles for the BTB, 256 for the base-table banks, 512 for the tagged tables) and writes a zero word. While it runs, a table treats lookups as misses and ignores updates, so the predictor is unavailable for the first 256 to 512 cycles and the state after reset is an empty table.</p>
+<p>Every allocation or update writes the full word with the valid bit set. Usefulness aging writes only its own byte lane and leaves the valid bit alone. A simulation-only copy of the valid bits as a flop array (<code class="docutils literal notranslate"><span class="pre">valid_shadow_q</span></code>) is compared with the RAM bit on every lookup, and any difference in what a lookup returns stops the simulation.</p>
+</section>
+<section id="tage-table-storage">
+<h2>TAGE table storage<a class="headerlink" href="#tage-table-storage" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">tage_base_table.sv</span></code> stores a 2-bit saturating counter at each bimodal index. <code class="docutils literal notranslate"><span class="pre">tage_tagged_table.sv</span></code> stores an 8-bit tag, a 3-bit taken counter and a 2-bit usefulness value in each entry. Both modules split adjacent fetch slots across two SRAM banks. The valid bits live in the RAM word (the base table stores <code class="docutils literal notranslate"><span class="pre">{valid,</span> <span class="pre">counter}</span></code>, and a tagged entry sets a bit above the tag).</p>
+<p>Each bank is an <code class="docutils literal notranslate"><span class="pre">orca_ram_1r1w</span></code> with <code class="docutils literal notranslate"><span class="pre">STYLE(&quot;block&quot;)</span></code>, a simple dual-port block RAM. The read port always reads the lookup address, so the fetch request-valid signal reaches neither the RAM address nor its enable. The write port carries the queued or direct update. A lookup that meets a queued write to its bank is marked unusable (<code class="docutils literal notranslate"><span class="pre">read_sram_q</span></code> low) and relies on forwarding, and a direct write happens only when no lookup touches the bank. A used read result therefore never collides with a write.</p>
+<p>A tagged bank stores a 32-bit word in four byte lanes: <code class="docutils literal notranslate"><span class="pre">u[0]</span></code> alone in lane 0, <code class="docutils literal notranslate"><span class="pre">u[1]</span></code> alone in lane 1, and the counter and tag in lanes 2 and 3. Every write enables all four lanes, except a usefulness clear, which enables only the lane of the bit it clears. Block-RAM byte enables make that possible. A base bank has a single whole-word write enable.</p>
+<p>Lookup and training can want the same bank. A queued per-bank update drains before another read, and same-index forwarding makes the newest counter visible even before the write reaches SRAM. The lookup index comes late in the cycle (it can follow an L0 redirect), so a lookup captures both forwarding candidates, the queued update and the incoming one, and only the two one-bit index matches wait for the index; the read side picks the newer match. A tagged-table update has four meanings: train an existing provider, allocate a new tag after a miss, decay usefulness when no allocation slot was free, or clear one usefulness bit during the periodic sweep. All update payloads are captured with the prediction, so commit never needs a second SRAM read.</p>
+</section>
+<section id="ras">
+<h2>RAS<a class="headerlink" href="#ras" title="Link to this heading">¶</a></h2>
+<p>The RAS has 16 entries. A direct implementation would put a 16-way stack mux in the fetch-request path.</p>
+<p>Instead, one speculative mutation is queued. <code class="docutils literal notranslate"><span class="pre">top_q</span></code> and <code class="docutils literal notranslate"><span class="pre">second_q</span></code> cache the top two entries in flops, and a virtual pointer <code class="docutils literal notranslate"><span class="pre">ptr_v</span></code> exposes the queued push or pop immediately, so callers still see same-edge behavior. The physical stack array write happens on the following edge from registered state, hidden under the SRAM predictor lookup.</p>
+<p>The stack array is distributed RAM (<code class="docutils literal notranslate"><span class="pre">ram_style</span> <span class="pre">=</span> <span class="pre">&quot;distributed&quot;</span></code>, no reset) with one write port, the queued push, and three asynchronous read ports. <code class="docutils literal notranslate"><span class="pre">recover_ptr</span> <span class="pre">-</span> <span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">recover_ptr</span> <span class="pre">-</span> <span class="pre">2</span></code> refill <code class="docutils literal notranslate"><span class="pre">top_q</span></code> and <code class="docutils literal notranslate"><span class="pre">second_q</span></code> on a recovery, and <code class="docutils literal notranslate"><span class="pre">ptr_r</span> <span class="pre">-</span> <span class="pre">3</span></code> refills <code class="docutils literal notranslate"><span class="pre">second_q</span></code> after a pop. Each read is guarded by the pointer, so it returns only entries pushed since reset. A recovery cancels the queued push and blocks its stack write in the same cycle.</p>
+<p>Every predicted call pushes and every predicted return pops, even while older returns are still in flight. Each FTQ entry stores the stack pointer as it should be after that instruction, and a recovery restores it. A call on a wrong path can overwrite an entry that a return on that same path had just popped, and restoring the pointer does not restore that entry. The return that later reads it mispredicts once and is corrected at execute. In the benchmarks this costs a few hundred mispredicts across all of them, too few to pay for saving the top entry in every FTQ entry.</p>
+<p>The RAS peek (<code class="docutils literal notranslate"><span class="pre">peek_addr</span></code>, <code class="docutils literal notranslate"><span class="pre">peek_rdy</span></code>) is registered the same way. The stack computes its full next state (pointer, queued push or pop, top and second entries) and registers what the combinational peek would show, so the predicted-return target starts at a flop and not at the pointer compare and the top-of-stack mux.</p>
+</section>
+<section id="allocation-and-speculative-state">
+<h2>Allocation and speculative state<a class="headerlink" href="#allocation-and-speculative-state" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">bpu_alloc_ctrl.sv</span></code> turns predecoded control-flow lanes into an atomic FTQ enqueue. Readiness reserves room for both possible lanes using registered FTQ occupancy, which avoids a valid/ready loop through fetch. If only lane 1 has a branch, it is compacted onto FTQ enqueue port 0, and its returned <code class="docutils literal notranslate"><span class="pre">alloc_id</span></code> still goes back to fetch lane 1.</p>
+<p>Only conditional branches shift the speculative GHR. Calls push <code class="docutils literal notranslate"><span class="pre">pc+4</span></code> and returns pop the RAS, and acceptance gates every state change. Each FTQ entry stores the history state that should survive if that instruction later proves the prediction wrong. An unconditional slot-0 transfer kills slot 1, so at most one RAS mutation from a fetch group can be architecturally live.</p>
+</section>
+<section id="ftq">
+<h2>FTQ<a class="headerlink" href="#ftq" title="Link to this heading">¶</a></h2>
+<p>Every fetched control-flow instruction gets an entry, including a cold branch that had no BTB hit. The entry holds its PC, its prediction metadata, and the GHR and RAS-pointer checkpoints needed to undo speculation.</p>
+<p>Payload and mutable metadata are split on purpose:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">g_payload_bank[*].data_q</span></code>: PC, prediction and checkpoints, in two parity banks.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">valid_q</span></code> and <code class="docutils literal notranslate"><span class="pre">execute_recovered_q</span></code>: mutated by recovery.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">initialized_q</span></code>: reset mask, so unwritten slots read as zero at the dequeue ports.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">return_q</span></code>: per-slot return classification for the all-entry return scan.</p></li>
+</ul>
+<p>Folding these together would make <code class="docutils literal notranslate"><span class="pre">recovery.val</span></code> a mux select on about 2000 payload flops. Keeping them apart keeps recovery on the handful of bits it actually changes. Logical slot parity selects the bank and the remaining ID bits select its row. Adjacent candidate writes always target different banks, including the wrap from the last slot to zero, so each bank has one writer and needs no last-writer table. Both retirement reads and both execute lookups are asynchronous.</p>
+<p>Candidate payload writes use <code class="docutils literal notranslate"><span class="pre">enq_data.val</span> <span class="pre">&amp;&amp;</span> <span class="pre">enq_rdy</span></code>, independently of allocation acceptance. The write itself lands one cycle after allocation through a staging register per bank, which keeps the prediction logic out of the RAM’s write path; nothing reads an entry that soon, because execute lookups and commit dequeues come many cycles after a branch is fetched. An entry reads as written (the initialized mask) once its write has landed. Accepted allocation updates validity and recovery metadata. Flush and execute recovery preserve stored payloads, including the contents of invalid slots that a lookup can read. Reset clears the initialized mask and the metadata, and leaves the RAM data alone. The execute lookup ports skip the mask: a resolving branch’s entry is valid and its payload has long since landed, which <code class="docutils literal notranslate"><span class="pre">bpu.sv</span></code> asserts, and execute ignores the payload of an invalid entry. That keeps the mask’s mux off the execute redirect path.</p>
+<p>Allocation readiness depends only on registered occupancy. Crediting a same-cycle dequeue would build a combinational path from a retiring FTQ entry all the way into the I-cache request. The conservative rule costs at most one cycle when the FTQ is nearly full.</p>
+<p>The FTQ connects frontend speculation to backend recovery:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>prediction -&gt; FTQ allocation -&gt; decoded branch -&gt; execute validation
+                                           \-&gt; commit training
+</pre></div>
+</div>
+<p>It has ordinary circular <code class="docutils literal notranslate"><span class="pre">head</span></code>, <code class="docutils literal notranslate"><span class="pre">tail</span></code> and <code class="docutils literal notranslate"><span class="pre">count</span></code> state, can allocate two entries, and offers random lookup by FTQ ID for the two ALUs. Commit dequeues the oldest matching control transfer. Execute recovery invalidates entries younger than the resolving branch, marks that branch <code class="docutils literal notranslate"><span class="pre">execute_recovered</span></code>, and rewinds tail and count to the surviving prefix. Commit keeps retiring older branches during that cycle, so a dequeue in the same cycle is applied together with the truncation. A full flush invalidates every entry. An entry that becomes invalid keeps its payload, because only its validity matters until the slot is reused.</p>
+</section>
+<section id="recovery-paths">
+<h2>Recovery paths<a class="headerlink" href="#recovery-paths" title="Link to this heading">¶</a></h2>
+<p>There are four independent redirect sources, in priority order:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Source</p></th>
+<th class="head"><p>Latency</p></th>
+<th class="head"><p>Signal</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>architectural (trap / <code class="docutils literal notranslate"><span class="pre">MRET</span></code> / <code class="docutils literal notranslate"><span class="pre">FENCE.I</span></code>)</p></td>
+<td><p>registered</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">arch_redirect</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>commit backstop</p></td>
+<td><p>registered</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">commit_flush</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>execute misprediction</p></td>
+<td><p>registered</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">recovery</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>L1 prediction repair</p></td>
+<td><p>registered</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pred_redirect_val</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">flush</span></code> is the union of commit, execute recovery and architectural redirect, and it clears the front end. <code class="docutils literal notranslate"><span class="pre">full_flush</span></code> is the harder version, commit and architectural only, and it also wipes rename, the ROB and the issue queues. Execute recovery never touches the back end directly; see below.</p>
+<p>Execute recovery (<a class="reference internal" href="6-execute.html"><span class="std std-doc">stage 6</span></a>) compares each resolved branch with its FTQ entry. When several miss at once, the one with the smallest circular distance from the ROB head wins. Its recovery redirects only the front end: fetch restarts at the correct PC, the FTQ truncates after the branch, and the GHR and RAS pointer are restored from the entry. <code class="docutils literal notranslate"><span class="pre">execute_recovered</span></code> marks the entry as handled, so the commit backstop does not flush for the same branch.</p>
+<p>The back end is not repaired at execute. <code class="docutils literal notranslate"><span class="pre">bpu_execute_recover</span></code> raises <code class="docutils literal notranslate"><span class="pre">pending</span></code> (<code class="docutils literal notranslate"><span class="pre">fe_pending</span></code> in the core) until the back end is flushed, and rename takes no new group while it is set. The missed branch also raises <code class="docutils literal notranslate"><span class="pre">branch_repair</span></code>, and the ROB keeps that bit with the entry. When the branch retires, which it does only from the ROB head and never beside a younger instruction, the ROB raises <code class="docutils literal notranslate"><span class="pre">repair_commit</span></code>, and <code class="docutils literal notranslate"><span class="pre">core.sv</span></code> flushes the back end in the next cycle (<code class="docutils literal notranslate"><span class="pre">backend_flush_q</span></code>). That flush clears <code class="docutils literal notranslate"><span class="pre">pending</span></code> too. While a redirect is pending, a resolve younger than its branch is on the wrong path and is ignored. An older one that also missed is real, and it replaces the pending redirect, because rename has not moved since.</p>
+<p>The commit path in <code class="docutils literal notranslate"><span class="pre">bpu_commit_ctrl</span></code> is the correctness backstop. It compares the architectural outcome with the oldest FTQ prediction and flushes if they disagree and execute has not already repaired it. It is also where all training happens and where the branch performance counters accumulate. Only simulation reads those counters, so they exist only in simulation; hardware exports cycle and instret from the CSRs.</p>
+<p>Both checks treat an entry as predicted taken only when its record says hit, the same rule fetch uses. A computed direct target sets that hit, so it is checked like a BTB hit. A predecoded branch that has neither a BTB entry nor a computed target (a <code class="docutils literal notranslate"><span class="pre">JALR</span></code>, for example) still gets an FTQ entry. Its type comes from predecode, and with no hit it counts as predicted not taken. Reading the TAGE direction of such an entry as the prediction was a real bug: when TAGE said taken and the branch was taken, neither check recovered, although fetch had fallen through, and the wrong path retired. The retirement checker found it during a Linux boot (<code class="docutils literal notranslate"><span class="pre">__irq_exit_rcu</span></code>, where a <code class="docutils literal notranslate"><span class="pre">beqz</span></code> resolved taken and the fall-through retired), and <code class="docutils literal notranslate"><span class="pre">bpu_commit_eligibility_tb</span></code> covers the case at execute and commit. <code class="docutils literal notranslate"><span class="pre">bpu_alloc_ctrl</span></code> still shifts the TAGE direction of such a miss into the speculative history, which costs only accuracy because recovery restores the history.</p>
+</section>
+<section id="training-policy">
+<h2>Training policy<a class="headerlink" href="#training-policy" title="Link to this heading">¶</a></h2>
+<p>Everything trains at commit, never at execute. Execute can redirect the frontend quickly, but it must not write predictor state for an instruction that may itself be squashed. BTB writes are registered one extra cycle to keep the table write path short.</p>
+<p>The ROB serializes control-flow retirement, so at most one branch commits per cycle. That is why the BTB and TAGE update ports need only one live slot.</p>
+</section>
+<section id="known-limits">
+<h2>Known limits<a class="headerlink" href="#known-limits" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>There is no indirect-target predictor beyond the BTB, so a polymorphic call site mispredicts every time its target changes.</p></li>
+<li><p>A return-stack entry overwritten on a wrong path is not repaired (see <a class="reference internal" href="#ras">RAS</a>).</p></li>
+<li><p>L0 conflicts on larger code footprints, and it has no associativity.</p></li>
+<li><p>L1 repair bubbles show up whenever L0 misses or disagrees.</p></li>
+<li><p>Predictor state is not architectural and is reset at power-up.</p></li>
+</ul>
+</section>
+<section id="tests">
+<h2>Tests<a class="headerlink" href="#tests" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">sim/cpu/tb/0-branch/</span></code> holds <code class="docutils literal notranslate"><span class="pre">bpu_tb</span></code>, <code class="docutils literal notranslate"><span class="pre">bpu_predict_ctrl_tb</span></code>, <code class="docutils literal notranslate"><span class="pre">btb_tb</span></code>, <code class="docutils literal notranslate"><span class="pre">ftq_tb</span></code>, <code class="docutils literal notranslate"><span class="pre">l0_btb_tb</span></code>, <code class="docutils literal notranslate"><span class="pre">ras_tb</span></code>, <code class="docutils literal notranslate"><span class="pre">tage_tb</span></code> and <code class="docutils literal notranslate"><span class="pre">tage_table_tb</span></code>. <code class="docutils literal notranslate"><span class="pre">l0_btb_tb</span></code> fills all 128 entries and compares 20,000 random training updates with a model of the rules above. <code class="docutils literal notranslate"><span class="pre">ras_tb</span></code> recovers to every stack depth. <code class="docutils literal notranslate"><span class="pre">tage_table_tb</span></code> writes and reads every index of a tagged table and the base table, and checks that a usefulness clear changes only its own bit.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="1-fetch.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Stage 1: Fetch</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="stages.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Pipeline stages</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026 Jason Huynh. All rights reserved.
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Stage 0: Branch prediction</a><ul>
+<li><a class="reference internal" href="#files">Files</a></li>
+<li><a class="reference internal" href="#shared-predictor-types">Shared predictor types</a></li>
+<li><a class="reference internal" href="#the-two-speed-idea">The two-speed idea</a></li>
+<li><a class="reference internal" href="#l1-decision-and-metadata-alignment">L1 decision and metadata alignment</a></li>
+<li><a class="reference internal" href="#l0-btb">L0 BTB</a></li>
+<li><a class="reference internal" href="#btb">BTB</a></li>
+<li><a class="reference internal" href="#tage">TAGE</a></li>
+<li><a class="reference internal" href="#valid-bits-in-the-ram">Valid bits in the RAM</a></li>
+<li><a class="reference internal" href="#tage-table-storage">TAGE table storage</a></li>
+<li><a class="reference internal" href="#ras">RAS</a></li>
+<li><a class="reference internal" href="#allocation-and-speculative-state">Allocation and speculative state</a></li>
+<li><a class="reference internal" href="#ftq">FTQ</a></li>
+<li><a class="reference internal" href="#recovery-paths">Recovery paths</a></li>
+<li><a class="reference internal" href="#training-policy">Training policy</a></li>
+<li><a class="reference internal" href="#known-limits">Known limits</a></li>
+<li><a class="reference internal" href="#tests">Tests</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=3b5cce75"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>

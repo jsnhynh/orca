@@ -1,0 +1,526 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../genindex.html"><link rel="search" title="Search" href="../../search.html"><link rel="next" title="Stage 4: Dispatch" href="4-dispatch.html"><link rel="prev" title="Stage 2: Decode" href="2-decode.html">
+
+    <!-- Generated with Sphinx 9.2.0 and Furo 2025.12.19 -->
+        <title>Stage 3: Rename - ORCA</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/orca.css?v=6f7e3969" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #3973DA;
+  --color-brand-content: #3973DA;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #5aa9f0;
+  --color-brand-content: #5aa9f0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #5aa9f0;
+  --color-brand-content: #5aa9f0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">ORCA</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  <span class="sidebar-brand-text">ORCA</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../results.html">Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../decisions.html">Design Decisions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../building.html">Building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../learnings.html">Learnings</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Microarchitecture</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Core</a><input aria-label="Toggle navigation of Core" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2 current has-children"><a class="reference internal" href="stages.html">Pipeline stages</a><input aria-label="Toggle navigation of Pipeline stages" checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="0-branch.html">Stage 0: Branch prediction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1-fetch.html">Stage 1: Fetch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2-decode.html">Stage 2: Decode</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Stage 3: Rename</a></li>
+<li class="toctree-l3"><a class="reference internal" href="4-dispatch.html">Stage 4: Dispatch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="5-issue.html">Stage 5: Issue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="6-execute.html">Stage 6: Execute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="7-writeback.html">Stage 7: Writeback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="8-commit.html">Stage 8: Commit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="m-extension.html">M extension: multiply and divide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="a-extension.html">A extension: atomics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="m_mode.html">Machine-mode traps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isa.html">ISA and software contract</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../memory/index.html">Memory</a><input aria-label="Toggle navigation of Memory" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../memory/cache.html">L1 caches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../memory/boot-rom.html">Boot ROM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../memory/main-memory.html">DDR and main memory</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../soc/index.html">SoC</a><input aria-label="Toggle navigation of SoC" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../soc/interconnect.html">Interconnect and clocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../soc/peripherals.html">Peripherals and registers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../soc/platform.html">FPGA and KV260 boundary</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Verification</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../verification/index.html">Verification</a><input aria-label="Toggle navigation of Verification" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../verification/testbenches.html">Testbenches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../verification/system-tests.html">System tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../verification/coverage.html">Coverage</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">FPGA bring-up</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../bringup/index.html">FPGA bring-up</a><input aria-label="Toggle navigation of FPGA bring-up" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../bringup/infrastructure.html">Infrastructure</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="stage-3-rename">
+<h1>Stage 3: Rename<a class="headerlink" href="#stage-3-rename" title="Link to this heading">¶</a></h1>
+<p>Rename removes false dependencies between architectural names. Each writer to a nonzero integer register receives a new physical register, and readers take the latest physical ID from the speculative register alias table (RAT). The ROB ID tracks instruction age and retirement. It does not store values.</p>
+<p>Related notes: <a class="reference internal" href="2-decode.html"><span class="std std-doc">Stage 2: Decode</span></a>, <a class="reference internal" href="4-dispatch.html"><span class="std std-doc">Stage 4: Dispatch</span></a>, <a class="reference internal" href="5-issue.html"><span class="std std-doc">Stage 5: Issue</span></a>, <a class="reference internal" href="8-commit.html"><span class="std std-doc">Stage 8: Commit</span></a> and <a class="reference internal" href="index.html"><span class="std std-doc">Core</span></a>.</p>
+<section id="files">
+<h2>Files<a class="headerlink" href="#files" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>File</p></th>
+<th class="head"><p>Ownership</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/3-rename/rename.sv</span></code></p></td>
+<td><p>speculative/committed RATs, free list, busy table, destination ownership and the flush restore</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/3-rename/physical_regfile.sv</span></code></p></td>
+<td><p>physical values, write-bank selection, reset validity and combinational reads (a same-cycle write bypass is a parameter, off in the core)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="the-idea">
+<h2>The idea<a class="headerlink" href="#the-idea" title="Link to this heading">¶</a></h2>
+<p>I keep values, scheduling and lifetime control in separate places. <code class="docutils literal notranslate"><span class="pre">rename</span></code> allocates physical destinations and publishes source IDs. The scheduler stores 32-bit entries that hold only identity and readiness. When an instruction is selected, it spends one register-read cycle reading the physical register file (PRF) and the immutable ROB-indexed context, and then enters the functional-unit input registers. The load/store queues keep their own address and store-data state, so they are not a general reservation station.</p>
+</section>
+<section id="where-rename-sits">
+<h2>Where rename sits<a class="headerlink" href="#where-rename-sits" title="Link to this heading">¶</a></h2>
+<p>These blocks are siblings inside <code class="docutils literal notranslate"><span class="pre">core.sv</span></code>. Every scheduler selection enters a clocked <code class="docutils literal notranslate"><span class="pre">register_read</span></code> stage inside <code class="docutils literal notranslate"><span class="pre">issue.sv</span></code>, and the reads that follow are combinational before the functional-unit input register.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>core0
+├── rename_stage                 rename: RATs, allocation, readiness, flush restore
+├── prf_inst                     physical_regfile: 64 physical values
+├── payload_array_inst           payload_array: 64 immutable contexts
+├── dispatch_stage               dispatch: classify and allocate ROB context
+├── issue_stage                  issue: select, read PRF/context, form FU packet
+│   ├── sched_inst               scheduler: 12 entries, three issue ports, CSR ROB-head-only
+│   ├── alu_register_read        register_read: two held selections, then operand/context reads
+│   ├── aux_register_read        register_read: port 2 (MDU, CSR, AGU)
+│   └── lsq_inst                 lsq: twelve loads/twelve stores, filled by the AGU
+├── execute_stage                execute: ALU/AGU/LSU/MDU/CSR registers
+├── writeback_stage              cdb: two arbitrated completions
+├── commit_stage                 rob: 64 in-order retirement lifetimes
+└── csr_stage                    csr: architectural machine state
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">bpu_stage</span></code>, <code class="docutils literal notranslate"><span class="pre">fetch_stage</span></code> and <code class="docutils literal notranslate"><span class="pre">decode_stage</span></code> sit upstream. <code class="docutils literal notranslate"><span class="pre">cpu.sv</span></code> wraps this core with the caches and the memory router.</p>
+</section>
+<section id="rats-free-list-and-busy-table">
+<h2>RATs, free list, and busy table<a class="headerlink" href="#rats-free-list-and-busy-table" title="Link to this heading">¶</a></h2>
+<p>There are 32 architectural names and 64 physical registers. Each RAT holds 32 six-bit IDs.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>State in rename</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">spec_map</span></code>, <code class="docutils literal notranslate"><span class="pre">updated_q</span></code></p></td>
+<td><p>speculative RAT: newest destination allocated in program order, for the registers renamed since the last flush</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">committed_map</span></code></p></td>
+<td><p>committed RAT: architectural values established by retirement</p></td>
+</tr>
+<tr class="row-even"><td><p>free list</p></td>
+<td><p>circular FIFO of free physical IDs: a head pointer, a tail pointer, a commit head, and two LUTRAM banks</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">busy_q</span></code></p></td>
+<td><p>allocated values that have not successfully completed</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">owner_storage</span></code></p></td>
+<td><p>per-ROB LUTRAM: destination, architectural name and stale destination (<code class="docutils literal notranslate"><span class="pre">owner_writes_q</span></code>, <code class="docutils literal notranslate"><span class="pre">owner_pdst_q</span></code> and <code class="docutils literal notranslate"><span class="pre">owner_stale_q</span></code> are simulation views)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Reset maps x0..x31 to p0..p31 and queues p32..p63 in the free list. p0 always reads zero, is never allocated, and is never busy. Reset clears only PRF validity and bank metadata, and the data RAM contents are left alone.</p>
+<p>Both RATs live in LUTRAM (<code class="docutils literal notranslate"><span class="pre">multiport_lutram</span></code>, one bank per lane, so a group can write two registers in a cycle and the younger lane wins a collision). A flip-flop RAT would need a write mux on every bit and a 32-way read mux per port; the LUTRAM needs neither. Each entry stores the physical ID XORed with its register number, so an entry never written since reset reads back as its own register, and reset only clears the banks’ initialized masks.</p>
+<p>A flush cannot copy the committed RAT into the speculative one in a cycle, because a LUTRAM writes one entry per port per cycle. Instead, <code class="docutils literal notranslate"><span class="pre">updated_q</span></code> keeps one bit per register: rename sets it when it writes the register’s speculative entry, and a flush clears all of them. A read takes the speculative entry when the bit is set and the committed entry otherwise. So after a flush every register reads the committed RAT, and each one switches back to the speculative RAT the first time it is renamed again. <code class="docutils literal notranslate"><span class="pre">map_q</span></code> and <code class="docutils literal notranslate"><span class="pre">committed_q</span></code> are simulation views of the two maps.</p>
+<p>A two-instruction group reads each source before updating its own destination. The younger lane sees an older lane’s new mapping, including read-after-write dependencies and repeated writes to the same architectural name. An accepted instruction that writes nothing still records a ROB owner but allocates no physical value.</p>
+</section>
+<section id="acceptance-and-stalls">
+<h2>Acceptance and stalls<a class="headerlink" href="#acceptance-and-stalls" title="Link to this heading">¶</a></h2>
+<p>A group advances only when physical allocation, ROB allocation and the target scheduler or load/store queue all accept it. Resource checks are atomic. A stalled group causes no RAT, free-list or busy update. Rename also stalls while an execute redirect is pending (<code class="docutils literal notranslate"><span class="pre">fe_pending</span></code>), so the correct path waits until the back end is flushed. A lone second decoded lane compacts into queue lane zero without changing its allocated identity.</p>
+<section id="free-list">
+<h3>Free list<a class="headerlink" href="#free-list" title="Link to this heading">¶</a></h3>
+<p>Allocation pops consecutive entries from the free-list head. Lane zero takes the entry at the head and lane one takes the next, so a group needs no priority scan and the logic depth does not grow with the register count. The two banks hold alternate slots, so two pops always read different banks.</p>
+<p>A group is admitted only when a registered credit says at least one register per lane is free. The credit is computed from the next-state pointers, so admission never depends on the group’s own destination fields. A group that needs fewer registers still waits until two are free, which costs one register of capacity.</p>
+<p>Retirement pushes each committed writer’s stale ID at the tail, in program order, and a physical ID freed at an edge is available on the following cycle. The commit head advances with the tail and records the head position that the architectural state corresponds to.</p>
+<p>A flush sets the head to the commit head, which returns everything not yet committed to the free list at once. No allocation masks or per-register bitmaps are kept. Entries between a restored head and the tail are never overwritten, because they hold only IDs that younger, squashed instructions allocated and that cannot have committed. Slots not written since reset read as their reset ID, so the RAM needs no reset. Completion readiness and accepted PRF write data bypass combinationally in the same cycle.</p>
+</section>
+</section>
+<section id="completion-and-value-storage">
+<h2>Completion and value storage<a class="headerlink" href="#completion-and-value-storage" title="Link to this heading">¶</a></h2>
+<p>Every CDB packet carries both <code class="docutils literal notranslate"><span class="pre">dest_tag</span></code> (the ROB ID) and <code class="docutils literal notranslate"><span class="pre">pdst</span></code> (the physical destination). The ALU, the multiplier’s partial products, the divider transaction, the CSR unit, the LSU’s pending transaction and a store-forwarded load all preserve this identity.</p>
+<p><code class="docutils literal notranslate"><span class="pre">rename</span></code> qualifies each completion against its live ROB owner and the matching physical destination. It does that per execution unit, not per CDB lane: the owner table has one read port for each of the six units’ result registers (plus the two retirement ports), so each unit’s result is checked before the CDB arbitration picks which units take the two lanes. The CDB’s one-hot lane selects (<code class="docutils literal notranslate"><span class="pre">lane_select</span></code>) then pick each lane’s check, and its duplicate-ROB-ID suppression, at the end. Checking the lanes after the mux put the grant, the lane mux and the owner-table read in a row in front of the register-file write; a simulation assertion checks that every lane carries the unit its select names. An owned fault may mark the ROB entry ready and faulting but cannot publish a physical value. A successful first completion clears busy and enables its PRF write. Duplicate or stale writing completions do not write the PRF, clear busy or complete the ROB. A result that writes nothing still completes its live ROB owner.</p>
+<section id="wakeup-view">
+<h3>Wakeup view<a class="headerlink" href="#wakeup-view" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">rename</span></code> also produces <code class="docutils literal notranslate"><span class="pre">completion_wake</span></code>, which keeps only reset and flush plus duplicate suppression, and <code class="docutils literal notranslate"><span class="pre">core.sv</span></code> exposes it to the scheduler as <code class="docutils literal notranslate"><span class="pre">wake_cdb_ports</span></code>. It needs no owner check. Wrong-path work that completes before the back-end flush can wake only other wrong-path work, and the flush discards all of it. Completion itself (the PRF write, the busy clear and the ROB) keeps the owner checks through the owner-checked <code class="docutils literal notranslate"><span class="pre">cdb_ports</span></code>.</p>
+<p>Duplicate suppression compares both the ROB ID and the physical destination. An older lane with the same pair would pass the same owner checks and own the completion, so every live completion is also a wakeup, and a live result never strands its consumers. A stale result that reached the CDB would wake consumers before a valid write, and the FU squash rules and the LSU kill and epoch rules are what prevent that (see the limitations below).</p>
+<p>The allocation-only owner metadata is read by the incoming ROB ID. Each completion compares the returned physical destination with its packet and checks owner validity and busy state. The busy lookup uses the incoming physical ID in parallel with the metadata lookup, and the equality check makes this equivalent to indexing busy by the owner’s destination. An earlier eligible lane suppresses duplicates with the same ROB ID.</p>
+</section>
+<section id="ram-backed-owner-metadata">
+<h3>RAM-backed owner metadata<a class="headerlink" href="#ram-backed-owner-metadata" title="Link to this heading">¶</a></h3>
+<p>The 18-bit owner record holds writes-RD, architectural RD, and the physical and stale destinations. It lives in <code class="docutils literal notranslate"><span class="pre">multiport_lutram</span></code>. Two allocation writers and four asynchronous reads support two completions and two retirements. Owner validity is separate and mutable. A stalled allocation or a flush performs no metadata writes, and retirement reads the old metadata before a same-edge reallocation replaces it.</p>
+<p>The two allocations of one cycle always get consecutive ROB IDs, so one is even and the other odd. The owner memory uses that: even IDs live in one half-depth bank and odd IDs in the other, each bank takes the lane whose ID has its parity, and a read picks the bank with the ID’s low bit. Half-depth banks also pack twice as many bits per LUT. (<code class="docutils literal notranslate"><span class="pre">multiport_lutram</span></code> keeps its general form, one single-writer bank per write port and a live-writer selector per address, for memories without that guarantee.) A resettable initialized mask makes every unwritten entry read as zero without resetting the RAM payload. The owner memory turns that mask off (<code class="docutils literal notranslate"><span class="pre">MASK_UNWRITTEN</span></code>): every use of an owner record also checks <code class="docutils literal notranslate"><span class="pre">owner_valid_q</span></code>, which the same allocation sets, so the mask would only add a 64-way select in front of the owner check. Writes become visible after the edge, with no write-through bypass. The highest-numbered writer wins a collision, and rename asserts that accepted ROB allocation IDs are distinct. Disabled reads return zero and use address zero. There is no capacity handshake and no extra read cycle. Consumers own validity and lifetime, so flushing a consumer does not erase the RAM. Full-array diagnostic views exist only in simulation.</p>
+</section>
+<section id="physical-register-file">
+<h3>Physical register file<a class="headerlink" href="#physical-register-file" title="Link to this heading">¶</a></h3>
+<p>The PRF has two independently written 64-by-32 banks. A per-register live-writer table selects the current bank. Six asynchronous read ports serve:</p>
+<ul class="simple">
+<li><p>issue ports 0 and 1 (ALU and branch): four operands;</p></li>
+<li><p>issue port 2 (multiply/divide, CSR, or a memory op’s base and store data): two operands.</p></li>
+</ul>
+<p>Disabled ports address zero. The register file has no same-cycle write bypass in the core (<code class="docutils literal notranslate"><span class="pre">BYPASS</span></code> is off): a read sees the RAM, and a value read in the cycle it is written comes from a forward port instead (<a class="reference internal" href="5-issue.html"><span class="std std-doc">Issue</span></a>). The PRF uses distributed RAM, not synchronous block RAM or UltraRAM, to keep the issue-to-functional-unit cycle contract. Data enables are not fabric-gated clocks.</p>
+</section>
+</section>
+<section id="where-values-live">
+<h2>Where values live<a class="headerlink" href="#where-values-live" title="Link to this heading">¶</a></h2>
+<p>Committed and speculative integer values both live in <code class="docutils literal notranslate"><span class="pre">physical_regfile</span></code>. The committed RAT identifies architectural state, and retirement changes the map instead of copying values into a separate architectural array.</p>
+<p>The LSQ captures store data itself, or captures it later from a qualified CDB broadcast. Its AGU selection reads the base from the PRF after a ready memory operation is selected. Memory responses and forwarding keep the load’s physical destination. The ROB keeps a 32-bit result per entry only for branch outcomes (the taken bit and the target), and register values live in the PRF.</p>
+<p><code class="docutils literal notranslate"><span class="pre">payload_array</span></code> holds one 106-bit <code class="docutils literal notranslate"><span class="pre">uop_payload_t</span></code> per ROB entry: PC, immediate, destination information, operation controls, FTQ identity and CSR ID. Validity belongs to the ROB and the queues, and only an accepted allocation writes context.</p>
+</section>
+<section id="retirement-and-recovery">
+<h2>Retirement and recovery<a class="headerlink" href="#retirement-and-recovery" title="Link to this heading">¶</a></h2>
+<p>Retirement supplies accepted in-order ROB IDs for every instruction, including stores and non-writing operations. A writer updates the committed RAT and frees its recorded stale physical destination, never its newly committed destination. Older readers have already retired by the time that newer writer can retire.</p>
+<section id="recovery-is-a-flush">
+<h3>Recovery is a flush<a class="headerlink" href="#recovery-is-a-flush" title="Link to this heading">¶</a></h3>
+<p>Rename keeps no snapshots. When execute finds a mispredicted branch, it redirects only the front end, and rename stops accepting groups until the back end is flushed. That flush comes the cycle after the branch retires. By then every instruction rename holds a mapping for is either retired or on the wrong path, so returning every register to the committed RAT and the free list to its commit head is exact. Commit-time recoveries and architectural redirects use the same flush. After a flush every register reads the committed RAT, including accepted boundary retirements, and the committed physical values stay intact.</p>
+<p>Retirement reaches rename one cycle after the ROB commits: <code class="docutils literal notranslate"><span class="pre">retire_valid</span></code> and <code class="docutils literal notranslate"><span class="pre">retire_ids</span></code> are registered at the rename input, so commit eligibility does not reach the committed RAT, the free list and the flush restore in a single cycle. A flush in the next cycle still includes that retirement, because the retirement is written to the committed RAT on the flush edge, before the first rename reads it, and the ROB commits nothing in a flush cycle. A retired ROB slot is reallocated no earlier than the cycle after retirement, when the delayed retirement still reads the old owner metadata, and its owner-valid clear comes before the new allocation’s set in the same cycle. Stale IDs return to the free list a cycle later. Global CPU reset initializes both the rename and PRF metadata.</p>
+</section>
+</section>
+<section id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading">¶</a></h2>
+<p>The pair (ROB ID, physical ID) is not an unbounded generation token. A response that arrives after both IDs were reused would look identical by identity alone. FU pipeline squash and the LSU’s pending-kill and epoch protection must keep such responses from being published. The owner check in rename is an extra guard that sits on top of those lifetime rules.</p>
+</section>
+<section id="tests">
+<h2>Tests<a class="headerlink" href="#tests" title="Link to this heading">¶</a></h2>
+<p>The focused rename and PRF bench, the dispatch recovery bench, the CPU smoke tests and the retirement-checked CoreMark run exercise this stage. <code class="docutils literal notranslate"><span class="pre">fast_wakeup_tb</span></code> drives the active <code class="docutils literal notranslate"><span class="pre">scheduler</span></code>.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="4-dispatch.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Stage 4: Dispatch</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="2-decode.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Stage 2: Decode</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026 Jason Huynh. All rights reserved.
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Stage 3: Rename</a><ul>
+<li><a class="reference internal" href="#files">Files</a></li>
+<li><a class="reference internal" href="#the-idea">The idea</a></li>
+<li><a class="reference internal" href="#where-rename-sits">Where rename sits</a></li>
+<li><a class="reference internal" href="#rats-free-list-and-busy-table">RATs, free list, and busy table</a></li>
+<li><a class="reference internal" href="#acceptance-and-stalls">Acceptance and stalls</a><ul>
+<li><a class="reference internal" href="#free-list">Free list</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#completion-and-value-storage">Completion and value storage</a><ul>
+<li><a class="reference internal" href="#wakeup-view">Wakeup view</a></li>
+<li><a class="reference internal" href="#ram-backed-owner-metadata">RAM-backed owner metadata</a></li>
+<li><a class="reference internal" href="#physical-register-file">Physical register file</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#where-values-live">Where values live</a></li>
+<li><a class="reference internal" href="#retirement-and-recovery">Retirement and recovery</a><ul>
+<li><a class="reference internal" href="#recovery-is-a-flush">Recovery is a flush</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#limitations">Limitations</a></li>
+<li><a class="reference internal" href="#tests">Tests</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=3b5cce75"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>

@@ -1,0 +1,114 @@
+[    0.000000] Linux version 6.18.7 (jason@Station) (riscv32-buildroot-linux-uclibc-gcc.br_real (Buildroot -ga84c8b9-dirty) 15.3.0, GNU ld (GNU Binutils) 2.45.1) #9 Sun Oct 25 16:53:15 PDT 2026
+[    0.000000] Machine model: ORCA RV32IMA (kv260 jtag, 200 MHz)
+[    0.000000] earlycon: ns16550a0 at MMIO32 0x80001000 (options '115200n8')
+[    0.000000] printk: legacy bootconsole [ns16550a0] enabled
+[    0.000000] OF: reserved mem: Reserved memory: No reserved-memory node in the DT
+[    0.000000] Zone ranges:
+[    0.000000]   Normal   [mem 0x0000000010000000-0x000000001fffbfff]
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000010000000-0x000000001fffbfff]
+[    0.000000] Initmem setup node 0 [mem 0x0000000010000000-0x000000001fffbfff]
+[    0.000000] On node 0, zone Normal: 4 pages in unavailable ranges
+[    0.000000] riscv: base ISA extensions aim
+[    0.000000] riscv: ELF capabilities aim
+[    0.000000] Ticket spinlock: enabled
+[    0.000000] Kernel command line: earlycon console=ttyS0,115200
+[    0.000000] printk: log buffer data + meta data: 131072 + 409600 = 540672 bytes
+[    0.000000] Dentry cache hash table entries: 32768 (order: 5, 131072 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 16384 (order: 4, 65536 bytes, linear)
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 65532
+[    0.000000] mem auto-init: stack:all(zero), heap alloc:off, heap free:off
+[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+[    0.000000] NR_IRQS: 64, nr_irqs: 64, preallocated irqs: 0
+[    0.000000] riscv-intc: 32 local interrupts mapped
+[    0.000000] clint: clint@80010000: timer running at 199998000 Hz
+[    0.000000] clocksource: clint_clocksource: mask: 0xffffffffffffffff max_cycles: 0x2e202b921f, max_idle_ns: 440795203082 ns
+[    0.000009] sched_clock: 64 bits at 200MHz, resolution 5ns, wraps every 4398046511103ns
+[    0.009822] Console: colour dummy device 80x25
+[    0.015430] Calibrating delay loop (skipped), value calculated using timer frequency.. 399.99 BogoMIPS (lpj=799992)
+[    0.027342] pid_max: default: 32768 minimum: 301
+[    0.033500] Mount-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.042019] Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.070044] Memory: 254268K/262128K available (2317K kernel code, 883K rwdata, 481K rodata, 1439K init, 176K bss, 7592K reserved, 0K cma-reserved)
+[    0.088726] devtmpfs: initialized
+[    0.101644] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645041785100000 ns
+[    0.113140] posixtimers hash table entries: 512 (order: 0, 2048 bytes, linear)
+[    0.121734] futex hash table entries: 256 (4096 bytes on 1 NUMA nodes, total 4 KiB, linear).
+[    0.147277] clocksource: Switched to clocksource clint_clocksource
+[    0.309890] workingset: timestamp_bits=30 max_order=16 bucket_order=0
+[    0.318886] io scheduler mq-deadline registered
+[    0.324459] io scheduler kyber registered
+[    1.368914] Serial: 8250/16550 driver, 1 ports, IRQ sharing disabled
+[    1.384081] of_serial 80001000.serial: error -ENXIO: IRQ index 0 not found
+[    1.395603] printk: legacy console [ttyS0] disabled
+[    1.406131] 80001000.serial: ttyS0 at MMIO 0x80001000 (irq = 0, base_baud = 12499875) is a 16550A
+[    1.416799] printk: legacy console [ttyS0] enabled
+[    1.416799] printk: legacy console [ttyS0] enabled
+[    1.427941] printk: legacy bootconsole [ns16550a0] disabled
+[    1.427941] printk: legacy bootconsole [ns16550a0] disabled
+[    1.494740] clk: Disabling unused clocks
+[    1.515173] Freeing unused kernel image (initmem) memory: 1436K
+[    1.522504] This architecture does not have kernel memory protection.
+[    1.530024] Run /init as init process
+Saving 256 bits of non-creditable seed for next boot
+
+ORCA RV32IMA no-MMU Linux
+orca login: root
+Jan  1 00:00:05 login[34]: root login on 'ttyS0'
+~ # uname -a
+Linux orca 6.18.7 #9 Sun Oct 25 16:53:15 PDT 2026 riscv32 GNU/Linux
+~ # echo 'hello world from orca!'
+hello world from orca!
+~ # cat /proc/cpuinfo
+processor	: 0
+hart		: 0
+isa		: rv32ima_zicsr_zifencei_zaamo_zalrsc
+mmu		: none
+mvendorid	: 0x0
+marchid		: 0x0
+mimpid		: 0x0
+hart isa	: rv32ima_zicsr_zifencei_zaamo_zalrsc
+
+~ # ls /
+[1;34mbin[m      [1;32minit[m     [1;36mlinuxrc[m  [1;34mopt[m      [1;34mrun[m      [1;34mtmp[m
+[1;34mdev[m      [1;34mlib[m      [1;34mmedia[m    [1;34mproc[m     [1;34msbin[m     [1;34musr[m
+[1;34metc[m      [1;36mlib32[m    [1;34mmnt[m      [1;34mroot[m     [1;34msys[m      [1;34mvar[m
+~ # ps
+  PID USER       VSZ STAT COMMAND
+    1 root       788 S    init
+    2 root         0 SW   [kthreadd]
+    3 root         0 SW   [pool_workqueue_]
+    4 root         0 IW<  [kworker/R-slub_]
+    5 root         0 IW   [kworker/0:0-eve]
+    6 root         0 IW<  [kworker/0:0H]
+    7 root         0 IW   [kworker/0:1-pm]
+    8 root         0 IW   [kworker/u4:0-ev]
+    9 root         0 IW<  [kworker/R-mm_pe]
+   10 root         0 SW   [ksoftirqd/0]
+   11 root         0 SW   [kdevtmpfs]
+   12 root         0 IW<  [kworker/R-write]
+   13 root         0 IW<  [kworker/R-kbloc]
+   14 root         0 SW   [kswapd0]
+   15 root         0 IW   [kworker/u4:1]
+   34 root       816 S    -sh
+   38 root       796 R    ps
+~ # echo hello orca > /tmp/a.txt
+~ # cat /tmp/a.txt
+hello orca
+~ # ls -l /tmp
+-rw-r--r--    1 root     root            11 Jan  1 00:00 [0;0ma.txt[m
+~ # echo "2^200" | bc
+1606938044258990275541962092341162602522202993782792835301376
+~ # factor 1234567891011
+1234567891011: 3 7 13 67 107 630803
+~ # seq 1 5
+1
+2
+3
+4
+5
+~ # rm /tmp/a.txt
+~ # echo tour done
+tour done
+~ #

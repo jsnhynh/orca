@@ -1,0 +1,595 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../genindex.html"><link rel="search" title="Search" href="../../search.html"><link rel="next" title="Stage 3: Rename" href="3-rename.html"><link rel="prev" title="Stage 1: Fetch" href="1-fetch.html">
+
+    <!-- Generated with Sphinx 9.2.0 and Furo 2025.12.19 -->
+        <title>Stage 2: Decode - ORCA</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/orca.css?v=6f7e3969" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #3973DA;
+  --color-brand-content: #3973DA;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #5aa9f0;
+  --color-brand-content: #5aa9f0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #5aa9f0;
+  --color-brand-content: #5aa9f0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">ORCA</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  <span class="sidebar-brand-text">ORCA</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../results.html">Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../decisions.html">Design Decisions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../building.html">Building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../learnings.html">Learnings</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Microarchitecture</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Core</a><input aria-label="Toggle navigation of Core" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2 current has-children"><a class="reference internal" href="stages.html">Pipeline stages</a><input aria-label="Toggle navigation of Pipeline stages" checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="0-branch.html">Stage 0: Branch prediction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1-fetch.html">Stage 1: Fetch</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Stage 2: Decode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3-rename.html">Stage 3: Rename</a></li>
+<li class="toctree-l3"><a class="reference internal" href="4-dispatch.html">Stage 4: Dispatch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="5-issue.html">Stage 5: Issue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="6-execute.html">Stage 6: Execute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="7-writeback.html">Stage 7: Writeback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="8-commit.html">Stage 8: Commit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="m-extension.html">M extension: multiply and divide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="a-extension.html">A extension: atomics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="m_mode.html">Machine-mode traps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isa.html">ISA and software contract</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../memory/index.html">Memory</a><input aria-label="Toggle navigation of Memory" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../memory/cache.html">L1 caches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../memory/boot-rom.html">Boot ROM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../memory/main-memory.html">DDR and main memory</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../soc/index.html">SoC</a><input aria-label="Toggle navigation of SoC" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../soc/interconnect.html">Interconnect and clocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../soc/peripherals.html">Peripherals and registers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../soc/platform.html">FPGA and KV260 boundary</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Verification</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../verification/index.html">Verification</a><input aria-label="Toggle navigation of Verification" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../verification/testbenches.html">Testbenches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../verification/system-tests.html">System tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../verification/coverage.html">Coverage</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">FPGA bring-up</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../bringup/index.html">FPGA bring-up</a><input aria-label="Toggle navigation of FPGA bring-up" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../bringup/infrastructure.html">Infrastructure</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="stage-2-decode">
+<h1>Stage 2: Decode<a class="headerlink" href="#stage-2-decode" title="Link to this heading">¶</a></h1>
+<p>Decode is the simplest stage. Two instruction words go in and two <code class="docutils literal notranslate"><span class="pre">instruction_t</span></code> structs come out, into one register (the decode register) that rename reads in the next cycle. There are no queues, no arbitration and no recovery state.</p>
+<p>Decode is also where the core decides what is legal. Every illegal-instruction trap in ORCA starts here, so this small file carries a large share of the architectural contract.</p>
+<p>Related notes: <a class="reference internal" href="1-fetch.html"><span class="std std-doc">Stage 1: Fetch</span></a>, <a class="reference internal" href="3-rename.html"><span class="std std-doc">Stage 3: Rename</span></a>,
+<a class="reference internal" href="isa.html"><span class="std std-doc">ISA and software contract</span></a>, <a class="reference internal" href="m_mode.html"><span class="std std-doc">Machine-mode traps</span></a>.</p>
+<section id="files">
+<h2>Files<a class="headerlink" href="#files" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>File</p></th>
+<th class="head"><p>Job</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/2-decode/decode.sv</span></code></p></td>
+<td><p>full decode and legality checks into the decode register</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/cpu/common/uarch_pkg.sv</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">instruction_t</span></code>, CSR ID encoding</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rtl/common/riscv_isa_pkg.sv</span></code></p></td>
+<td><p>opcodes, funct fields, CSR addresses, causes</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="packets-and-constants">
+<h2>Packets and constants<a class="headerlink" href="#packets-and-constants" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">riscv_isa_pkg.sv</span></code> describes the software-visible language: 32-bit addresses,
+instructions and data, the 32 integer registers, reset PC zero, instruction
+encodings, CSR addresses, and exception causes. <code class="docutils literal notranslate"><span class="pre">uarch_pkg.sv</span></code> describes the
+machine that implements it: two-wide fetch/dispatch, a 64-entry ROB, queue
+sizes, six execute slots, and the packed records exchanged between stages.</p>
+<p>Keeping those roles separate matters. Changing an opcode constant changes the
+ISA contract. Changing <code class="docutils literal notranslate"><span class="pre">SCHED_ENTRIES</span></code> changes only capacity and should not
+change what software observes. The compact <code class="docutils literal notranslate"><span class="pre">CSRID_*</span></code> values are likewise an
+internal encoding; software still uses the architectural 12-bit CSR address.</p>
+</section>
+<section id="the-decoded-packet">
+<h2>The decoded packet<a class="headerlink" href="#the-decoded-packet" title="Link to this heading">¶</a></h2>
+<p>Everything downstream travels as one <code class="docutils literal notranslate"><span class="pre">instruction_t</span></code>. The unusual part is that
+it carries two operand pairs:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">src_0_a</span></code>, <code class="docutils literal notranslate"><span class="pre">src_0_b</span></code></p></td>
+<td><p>the ALU/AGU operand pair</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">src_1_a</span></code>, <code class="docutils literal notranslate"><span class="pre">src_1_b</span></code></p></td>
+<td><p>the raw <code class="docutils literal notranslate"><span class="pre">rs1</span></code> / <code class="docutils literal notranslate"><span class="pre">rs2</span></code> pair</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">uop_0</span></code></p></td>
+<td><p>primary <code class="docutils literal notranslate"><span class="pre">funct3</span></code> (ALU op, load/store width, CSR op)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">uop_1</span></code></p></td>
+<td><p>branch condition <code class="docutils literal notranslate"><span class="pre">funct3</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For an ALU instruction, <code class="docutils literal notranslate"><span class="pre">src_0</span></code> is what gets computed, possibly a PC and an immediate. For a branch, <code class="docutils literal notranslate"><span class="pre">src_0</span></code> computes <code class="docutils literal notranslate"><span class="pre">pc</span> <span class="pre">+</span> <span class="pre">imm</span></code> (the target) while <code class="docutils literal notranslate"><span class="pre">src_1</span></code> carries <code class="docutils literal notranslate"><span class="pre">rs1</span></code> and <code class="docutils literal notranslate"><span class="pre">rs2</span></code> for the condition compare. That is how one ALU produces both the branch target and the taken bit in one pass, and it is why <a class="reference internal" href="6-execute.html"><span class="std std-doc">execute</span></a> can pack the whole branch resolution into one result word.</p>
+<p>Stores use <code class="docutils literal notranslate"><span class="pre">src_0_a</span></code>/<code class="docutils literal notranslate"><span class="pre">src_0_b</span></code> for the address computation and <code class="docutils literal notranslate"><span class="pre">src_1_b</span></code> for
+the store data.</p>
+<p>Each <code class="docutils literal notranslate"><span class="pre">source_t</span></code> is <code class="docutils literal notranslate"><span class="pre">{data,</span> <span class="pre">tag,</span> <span class="pre">is_renamed}</span></code>. Decode fills in <code class="docutils literal notranslate"><span class="pre">data</span></code> for immediates and the PC, and puts the architectural register number into <code class="docutils literal notranslate"><span class="pre">tag</span></code>.
+<a class="reference internal" href="3-rename.html"><span class="std std-doc">Rename</span></a> later overwrites <code class="docutils literal notranslate"><span class="pre">tag</span></code> with a ROB tag.</p>
+</section>
+<section id="immediates">
+<h2>Immediates<a class="headerlink" href="#immediates" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">gen_imm</span></code> is a <code class="docutils literal notranslate"><span class="pre">casez</span></code> over the opcode that produces the I, S, B, U and J forms. The sign extension is written out for each format.</p>
+</section>
+<section id="csr-compression">
+<h2>CSR compression<a class="headerlink" href="#csr-compression" title="Link to this heading">¶</a></h2>
+<p>A 12-bit CSR address is wide for a pipeline that implements only about twenty registers. Decode compresses it to a 5-bit <code class="docutils literal notranslate"><span class="pre">csr_id</span></code>:</p>
+<div class="highlight-systemverilog notranslate"><div class="highlight"><pre><span></span><span class="n">CSRID_INVALID</span><span class="p">,</span><span class="w"> </span><span class="n">CSRID_CYCLE</span><span class="p">,</span><span class="w"> </span><span class="n">CSRID_MSTATUS</span><span class="p">,</span><span class="w"> </span><span class="n">CSRID_MTVEC</span><span class="p">,</span><span class="w"> </span><span class="p">...</span>
+<span class="n">CSRID_SYS_ECALL</span><span class="p">,</span><span class="w"> </span><span class="n">CSRID_SYS_EBREAK</span><span class="p">,</span><span class="w"> </span><span class="n">CSRID_SYS_MRET</span><span class="p">,</span><span class="w"> </span><span class="n">CSRID_SYS_WFI</span>
+</pre></div>
+</div>
+<p>System instructions (<code class="docutils literal notranslate"><span class="pre">funct3</span> <span class="pre">==</span> <span class="pre">0</span></code>) and CSR instructions share the opcode, so
+both decode into the same field. <code class="docutils literal notranslate"><span class="pre">CSRID_INVALID</span></code> marks a CSR that is not implemented, and it drives the illegal-instruction trap for an unknown CSR.</p>
+<p>Counter aliases collapse: <code class="docutils literal notranslate"><span class="pre">CSR_CYCLE</span></code> and <code class="docutils literal notranslate"><span class="pre">CSR_MCYCLE</span></code> both become
+<code class="docutils literal notranslate"><span class="pre">CSRID_CYCLE</span></code>. The core has one physical counter, and the unprivileged alias is another name for it.</p>
+</section>
+<section id="legality">
+<h2>Legality<a class="headerlink" href="#legality" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">legal_inst</span></code> is computed per opcode. The checks that matter:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Opcode</p></th>
+<th class="head"><p>Rule</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">JALR</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">funct3</span> <span class="pre">==</span> <span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">BRANCH</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">funct3</span></code> not in the two reserved encodings</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">LOAD</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">funct3</span></code> excludes <code class="docutils literal notranslate"><span class="pre">0b011</span></code>, <code class="docutils literal notranslate"><span class="pre">0b110</span></code>, <code class="docutils literal notranslate"><span class="pre">0b111</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">STORE</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">funct3</span></code> in <code class="docutils literal notranslate"><span class="pre">{B,</span> <span class="pre">H,</span> <span class="pre">W}</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ARI_ITYPE</span></code></p></td>
+<td><p>shift-immediate <code class="docutils literal notranslate"><span class="pre">funct7</span></code> must be <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">0x20</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ARI_RTYPE</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">funct7</span></code> in <code class="docutils literal notranslate"><span class="pre">{0,</span> <span class="pre">MULDIV,</span> <span class="pre">0x20}</span></code>, and <code class="docutils literal notranslate"><span class="pre">0x20</span></code> only for <code class="docutils literal notranslate"><span class="pre">ADD</span></code>/<code class="docutils literal notranslate"><span class="pre">SRL</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MISC_MEM</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">funct3</span></code> in <code class="docutils literal notranslate"><span class="pre">{FENCE,</span> <span class="pre">FENCE.I}</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">AMO</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">funct3</span> <span class="pre">==</span> <span class="pre">W</span></code>, a known <code class="docutils literal notranslate"><span class="pre">funct5</span></code>, and <code class="docutils literal notranslate"><span class="pre">rs2</span> <span class="pre">==</span> <span class="pre">0</span></code> for <code class="docutils literal notranslate"><span class="pre">LR.W</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">SYSTEM</span></code></p></td>
+<td><p>known <code class="docutils literal notranslate"><span class="pre">funct12</span></code>, and <code class="docutils literal notranslate"><span class="pre">rd</span> <span class="pre">==</span> <span class="pre">0</span> <span class="pre">&amp;&amp;</span> <span class="pre">rs1</span> <span class="pre">==</span> <span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CSR*</span></code></p></td>
+<td><p>known <code class="docutils literal notranslate"><span class="pre">csr_id</span></code>, and no write to a read-only (<code class="docutils literal notranslate"><span class="pre">addr[11:10]</span> <span class="pre">==</span> <span class="pre">2'b11</span></code>) CSR</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>That last rule is the architectural read-only-address check: a CSR instruction
+with write intent targeting an address whose top two bits are <code class="docutils literal notranslate"><span class="pre">11</span></code> is illegal.
+Write intent means <code class="docutils literal notranslate"><span class="pre">CSRRW</span></code>/<code class="docutils literal notranslate"><span class="pre">CSRRWI</span></code>, or a set/clear form with a non-zero source.
+WARL is a separate rule: a writable CSR may accept a write but force unsupported field values to a legal value in the CSR bank.</p>
+<p>Decode also chooses the later execution path. Loads and stores carry their
+width/sign <code class="docutils literal notranslate"><span class="pre">funct3</span></code>; M-extension operations preserve <code class="docutils literal notranslate"><span class="pre">funct7</span></code>; branches carry
+their comparison in <code class="docutils literal notranslate"><span class="pre">uop_1</span></code>; fences carry their <code class="docutils literal notranslate"><span class="pre">funct3</span></code>; and CSR instructions
+carry both compact ID and CSR operation. Atomics carry <code class="docutils literal notranslate"><span class="pre">funct3</span></code> (always <code class="docutils literal notranslate"><span class="pre">W</span></code>)
+and keep <code class="docutils literal notranslate"><span class="pre">funct7</span></code>, whose upper five bits are the atomic operation; <code class="docutils literal notranslate"><span class="pre">aq</span></code>/<code class="docutils literal notranslate"><span class="pre">rl</span></code>
+ride along unused. <code class="docutils literal notranslate"><span class="pre">x0</span></code> may appear as a source, but
+destination write intent is suppressed wherever the architecture says there
+is no result.</p>
+</section>
+<section id="exceptions">
+<h2>Exceptions<a class="headerlink" href="#exceptions" title="Link to this heading">¶</a></h2>
+<p>Three exception sources leave this stage, all encoded into the same fields:</p>
+<div class="highlight-systemverilog notranslate"><div class="highlight"><pre><span></span><span class="n">d_inst</span><span class="p">.</span><span class="n">exception</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">legal_inst</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">ecall</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">ebreak</span><span class="p">);</span>
+<span class="n">d_inst</span><span class="p">.</span><span class="n">exception_cause</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ecall</span><span class="w">  </span><span class="o">?</span><span class="w"> </span><span class="n">CAUSE_MACHINE_ECALL</span>
+<span class="w">                       </span><span class="o">:</span><span class="w"> </span><span class="n">ebreak</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">CAUSE_BREAKPOINT</span>
+<span class="w">                       </span><span class="o">:</span><span class="w">          </span><span class="n">CAUSE_ILLEGAL_INSTRUCTION</span><span class="p">;</span>
+<span class="n">d_inst</span><span class="p">.</span><span class="n">exception_tval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">legal_inst</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">32'd0</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">inst</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">mtval</span></code> for an illegal instruction is the instruction word itself, as the specification asks and as the test handlers check.</p>
+<p>An excepting instruction has <code class="docutils literal notranslate"><span class="pre">has_rd</span></code> and <code class="docutils literal notranslate"><span class="pre">rd</span></code> forced to zero. It still gets a ROB entry, because traps are precise and taken in order at commit, but it is never routed to an issue queue and never writes a register.</p>
+</section>
+<section id="handshake-and-the-decode-register">
+<h2>Handshake and the decode register<a class="headerlink" href="#handshake-and-the-decode-register" title="Link to this heading">¶</a></h2>
+<div class="highlight-systemverilog notranslate"><div class="highlight"><pre><span></span><span class="k">assign</span><span class="w"> </span><span class="n">decode_rdy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rename_rdy</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">decode_empty</span><span class="p">;</span>
+
+<span class="k">always_ff</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">clk</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rst</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">flush</span><span class="p">)</span><span class="w">    </span><span class="n">decoded_insts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="m">'0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">decode_rdy</span><span class="p">)</span><span class="w"> </span><span class="n">decoded_insts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="p">(</span><span class="n">fetch_vals</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="m">'0</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">decoded_insts_next</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="m">'0</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The instruction buffer’s head is decoded into <code class="docutils literal notranslate"><span class="pre">decoded_insts</span></code>, a register
+between decode and rename; rename, ROB allocation and queue insertion work
+from it in the next cycle. The register takes a new group when rename accepts
+the current one or when it holds nothing, so a bubble never blocks the buffer,
+and it holds its group while rename stalls. The buffer pops on the same
+<code class="docutils literal notranslate"><span class="pre">decode_rdy</span></code> edge. An empty fetch group loads zeros.</p>
+<p>Reset and <code class="docutils literal notranslate"><span class="pre">flush</span></code> clear the register. <code class="docutils literal notranslate"><span class="pre">flush</span></code> is the union flush, which includes execute-time branch recovery. Anything in decode when a branch mispredicts is younger than that branch, so nothing needs to be preserved selectively. Decode
+has no error response or retry protocol: legal instructions advance, while
+illegal ones advance as ready exception-marked ROB work.</p>
+<p>The register keeps the buffer, decode, rename and scheduler-entry path from chaining into one very long combinational path.</p>
+</section>
+<section id="macro-op-fusion">
+<h2>Macro-op fusion<a class="headerlink" href="#macro-op-fusion" title="Link to this heading">¶</a></h2>
+<p>Some instruction pairs exist only because RV32 has no single instruction for the job. <code class="docutils literal notranslate"><span class="pre">lui</span></code> then <code class="docutils literal notranslate"><span class="pre">addi</span></code> builds a 32-bit constant, and <code class="docutils literal notranslate"><span class="pre">slli</span></code> then <code class="docutils literal notranslate"><span class="pre">srli</span></code> by the same amount clears the top bits of a value (a zero extend). The first instruction’s result is overwritten by the second, so nothing else ever reads it.</p>
+<p>When both halves of such a pair arrive in the same fetch packet, decode merges them into one operation in lane 0 and drops lane 1:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Pair</p></th>
+<th class="head"><p>Becomes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">lui</span> <span class="pre">rd,</span> <span class="pre">u</span></code> then <code class="docutils literal notranslate"><span class="pre">addi</span> <span class="pre">rd,</span> <span class="pre">rd,</span> <span class="pre">i</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">lui</span> <span class="pre">rd</span></code> with the constant <code class="docutils literal notranslate"><span class="pre">u</span> <span class="pre">+</span> <span class="pre">i</span></code> already added</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">slli</span> <span class="pre">rd,</span> <span class="pre">rs,</span> <span class="pre">k</span></code> then <code class="docutils literal notranslate"><span class="pre">srli</span> <span class="pre">rd,</span> <span class="pre">rd,</span> <span class="pre">k</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">andi</span> <span class="pre">rd,</span> <span class="pre">rs</span></code> with a 32-bit mask of the low <code class="docutils literal notranslate"><span class="pre">32</span> <span class="pre">-</span> <span class="pre">k</span></code> bits</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The test is the same for both forms: lane 1 writes the register lane 0 wrote, reads it as its first source, and neither half carries a branch, a predictor entry or an exception. The merged operation runs through the ALU exactly like an ordinary <code class="docutils literal notranslate"><span class="pre">lui</span></code> or <code class="docutils literal notranslate"><span class="pre">andi</span></code>, so execute needs no change. The 20-bit add for <code class="docutils literal notranslate"><span class="pre">u</span> <span class="pre">+</span> <span class="pre">i</span></code> sits beside decode, not on the ALU path: the low 12 bits are <code class="docutils literal notranslate"><span class="pre">i</span></code>, and the upper 20 bits are <code class="docutils literal notranslate"><span class="pre">u</span></code> minus the sign bit of <code class="docutils literal notranslate"><span class="pre">i</span></code>.</p>
+<p>The merged operation keeps the first instruction’s PC and a <code class="docutils literal notranslate"><span class="pre">fused</span></code> bit. It takes one ROB entry, one scheduler slot and one cycle of ALU latency instead of two, and at commit the <code class="docutils literal notranslate"><span class="pre">fused</span></code> bit makes <code class="docutils literal notranslate"><span class="pre">minstret</span></code> count it as two instructions, so software sees the same instruction count as before.</p>
+<p>Only pairs inside one packet merge. Packets are aligned to 8 bytes, so a pair that starts on the upper word of a packet is left alone.</p>
+</section>
+<section id="known-limits">
+<h2>Known limits<a class="headerlink" href="#known-limits" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>No compressed (<code class="docutils literal notranslate"><span class="pre">C</span></code>) instruction support; every instruction is 32 bits and
+lanes are fixed to the 8-byte group.</p></li>
+<li><p>Fusion covers only the two pairs above, and only inside one fetch packet; there is no macro-op cracking.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">WFI</span></code> decodes to a valid system op but retires as a no-op; there is no
+low-power state.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FENCE</span></code> and <code class="docutils literal notranslate"><span class="pre">FENCE.I</span></code> share the <code class="docutils literal notranslate"><span class="pre">MISC_MEM</span></code> opcode and are distinguished by
+<code class="docutils literal notranslate"><span class="pre">uop_0</span></code> all the way through to commit.</p></li>
+</ul>
+</section>
+<section id="tests">
+<h2>Tests<a class="headerlink" href="#tests" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">sim/cpu/tb/2-decode/decode_tb.sv</span></code> covers immediate generation, operand routing, CSR ID mapping, the legality matrix, the register’s stall and flush behavior, and fusion (both forms and the near misses that must stay two instructions).</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="3-rename.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Stage 3: Rename</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="1-fetch.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Stage 1: Fetch</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026 Jason Huynh. All rights reserved.
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Stage 2: Decode</a><ul>
+<li><a class="reference internal" href="#files">Files</a></li>
+<li><a class="reference internal" href="#packets-and-constants">Packets and constants</a></li>
+<li><a class="reference internal" href="#the-decoded-packet">The decoded packet</a></li>
+<li><a class="reference internal" href="#immediates">Immediates</a></li>
+<li><a class="reference internal" href="#csr-compression">CSR compression</a></li>
+<li><a class="reference internal" href="#legality">Legality</a></li>
+<li><a class="reference internal" href="#exceptions">Exceptions</a></li>
+<li><a class="reference internal" href="#handshake-and-the-decode-register">Handshake and the decode register</a></li>
+<li><a class="reference internal" href="#macro-op-fusion">Macro-op fusion</a></li>
+<li><a class="reference internal" href="#known-limits">Known limits</a></li>
+<li><a class="reference internal" href="#tests">Tests</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=3b5cce75"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>

@@ -1,0 +1,530 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../genindex.html"><link rel="search" title="Search" href="../../search.html"><link rel="next" title="SoC" href="../soc/index.html"><link rel="prev" title="Boot ROM" href="boot-rom.html">
+
+    <!-- Generated with Sphinx 9.2.0 and Furo 2025.12.19 -->
+        <title>DDR and main memory - ORCA</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/orca.css?v=6f7e3969" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #3973DA;
+  --color-brand-content: #3973DA;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #5aa9f0;
+  --color-brand-content: #5aa9f0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #5aa9f0;
+  --color-brand-content: #5aa9f0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">ORCA</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  <span class="sidebar-brand-text">ORCA</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../results.html">Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../decisions.html">Design Decisions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../building.html">Building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../learnings.html">Learnings</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Microarchitecture</span></p>
+<ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../core/index.html">Core</a><input aria-label="Toggle navigation of Core" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../core/stages.html">Pipeline stages</a><input aria-label="Toggle navigation of Pipeline stages" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/0-branch.html">Stage 0: Branch prediction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/1-fetch.html">Stage 1: Fetch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/2-decode.html">Stage 2: Decode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/3-rename.html">Stage 3: Rename</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/4-dispatch.html">Stage 4: Dispatch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/5-issue.html">Stage 5: Issue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/6-execute.html">Stage 6: Execute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/7-writeback.html">Stage 7: Writeback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/8-commit.html">Stage 8: Commit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/m-extension.html">M extension: multiply and divide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/a-extension.html">A extension: atomics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/m_mode.html">Machine-mode traps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/isa.html">ISA and software contract</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Memory</a><input aria-label="Toggle navigation of Memory" checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cache.html">L1 caches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="boot-rom.html">Boot ROM</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">DDR and main memory</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../soc/index.html">SoC</a><input aria-label="Toggle navigation of SoC" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../soc/interconnect.html">Interconnect and clocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../soc/peripherals.html">Peripherals and registers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../soc/platform.html">FPGA and KV260 boundary</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Verification</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../verification/index.html">Verification</a><input aria-label="Toggle navigation of Verification" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../verification/testbenches.html">Testbenches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../verification/system-tests.html">System tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../verification/coverage.html">Coverage</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">FPGA bring-up</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../bringup/index.html">FPGA bring-up</a><input aria-label="Toggle navigation of FPGA bring-up" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../bringup/infrastructure.html">Infrastructure</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="ddr-and-main-memory">
+<h1>DDR and main memory<a class="headerlink" href="#ddr-and-main-memory" title="Link to this heading">¶</a></h1>
+<p>This page covers the memory behind the caches: the bridge to the board’s DDR, the uncached path into the same DDR, the simulation model that stands in for it, and the small RAM wrappers the rest of the design builds on.</p>
+<p>Related notes: <a class="reference internal" href="index.html"><span class="std std-doc">Memory</span></a>, <a class="reference internal" href="cache.html"><span class="std std-doc">L1 caches</span></a> and <a class="reference internal" href="../soc/index.html"><span class="std std-doc">SoC</span></a>.</p>
+<section id="ddr-line-bridge-rtl-mem-ddr-line-bridge-sv">
+<h2>DDR line bridge: <code class="docutils literal notranslate"><span class="pre">rtl/mem/ddr_line_bridge.sv</span></code><a class="headerlink" href="#ddr-line-bridge-rtl-mem-ddr-line-bridge-sv" title="Link to this heading">¶</a></h2>
+<p>The caches fetch a 64-byte line as four sequential 16-byte beats, one at a time. The bridge starts
+one AXI burst of four beats when a read misses its line buffer, so the other three beats of that
+refill are served from the buffer instead of paying the DDR latency again.</p>
+<ul class="simple">
+<li><p><strong>Window and translation.</strong> ORCA address <code class="docutils literal notranslate"><span class="pre">A</span></code> in the window becomes AXI address
+<code class="docutils literal notranslate"><span class="pre">PHYS_BASE</span> <span class="pre">+</span> <span class="pre">(A</span> <span class="pre">-</span> <span class="pre">WINDOW_BASE)</span></code>. A read outside the window returns zero and a write outside it is
+dropped. The line port has no error indication, so AXI error responses are not reported.</p></li>
+<li><p><strong>Reads.</strong> One read is outstanding. A burst is issued after the request arrives and only once every
+earlier write has been acknowledged, so a read can never return data older than a write the CPU
+already issued. The line buffer holds one line; a write to that line invalidates it, and a pending
+read of it is reissued after the writes drain.</p></li>
+<li><p><strong>Invalidate.</strong> An <code class="docutils literal notranslate"><span class="pre">invalidate</span></code> input also clears the buffered line. <code class="docutils literal notranslate"><span class="pre">memory</span></code> drives it while the CPU
+is stopped and whenever a write on the uncached DMA path completes, because those writes reach DDR
+without passing through the bridge. A burst already in flight finishes first, so the refill that
+follows never mixes beats of two lines.</p></li>
+<li><p><strong>Writes.</strong> Each accepted beat enters a four-entry FIFO and goes out as a single-beat AXI write with
+its byte strobes (<code class="docutils literal notranslate"><span class="pre">AW</span></code> and <code class="docutils literal notranslate"><span class="pre">W</span></code> may be accepted in either order). Up to eight writes may await
+their <code class="docutils literal notranslate"><span class="pre">B</span></code> response.</p></li>
+<li><p><strong>AXI rules.</strong> <code class="docutils literal notranslate"><span class="pre">valid</span></code> is held until accepted, <code class="docutils literal notranslate"><span class="pre">ready</span></code> for <code class="docutils literal notranslate"><span class="pre">R</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span></code> is always high, and bursts are
+64-byte aligned <code class="docutils literal notranslate"><span class="pre">INCR</span></code> of four 16-byte beats, so they never cross a 4 KiB boundary. The master ID is
+one bit and always zero; the shared mux adds the second bit that tells the two sources apart.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">ddr_line_bridge_tb</span></code> checks it against a reference memory behind <code class="docutils literal notranslate"><span class="pre">ddr_axi_mem</span></code> (random handshakes,
+latency, and write delay) with sequential line reads, sub-line reads, partial-strobe writes,
+read-after-write to the same line, out-of-window accesses, and valid-hold protocol assertions.
+Mutations that let reads overtake writes, skip the buffer invalidation, mistranslate addresses,
+ignore strobes or forward out-of-window writes each fail it. <code class="docutils literal notranslate"><span class="pre">soc_ddr_tb</span></code> runs the real SoC and a
+program (<code class="docutils literal notranslate"><span class="pre">ddr_window_test.s</span></code>) from DDR that uses every access size, 64 KiB through a 16 KiB cache, and
+code written into DDR, flushed with <code class="docutils literal notranslate"><span class="pre">fence.i</span></code> and executed.</p>
+</section>
+<section id="the-uncached-path-into-ddr">
+<h2>The uncached path into DDR<a class="headerlink" href="#the-uncached-path-into-ddr" title="Link to this heading">¶</a></h2>
+<p>The uncached CPU port and the host reach DDR over the 32-bit AXI crossbar. The crossbar’s
+memory target covers only the 16 KiB DMA region at the top of the window, so any other address below
+<code class="docutils literal notranslate"><span class="pre">0x8000_0000</span></code> is a decode error. From the target, four steps in <code class="docutils literal notranslate"><span class="pre">memory.sv</span></code> reach the processing system:</p>
+<ol class="arabic simple">
+<li><p><strong>ID remap.</strong> <code class="docutils literal notranslate"><span class="pre">axi_id_remap</span></code> narrows the crossbar’s five-bit IDs to one bit and restores them on the
+way back. It tracks two IDs at a time, with two transactions per ID.</p></li>
+<li><p><strong>Width conversion.</strong> <code class="docutils literal notranslate"><span class="pre">axi_dw_converter</span></code> widens the data from 32 to 128 bits. A 32-bit beat keeps its
+size, and its byte strobes pick the right four lanes of the 16-byte word. A burst of N beats stays N
+beats. Up to two reads are outstanding.</p></li>
+<li><p><strong>Address.</strong> The ORCA address becomes <code class="docutils literal notranslate"><span class="pre">DDR_PHYS_BASE</span> <span class="pre">+</span> <span class="pre">(A</span> <span class="pre">-</span> <span class="pre">DDR_BASE)</span></code>.</p></li>
+<li><p><strong>Merge.</strong> An <code class="docutils literal notranslate"><span class="pre">axi_mux</span></code> takes this path and the line bridge as its two sources and drives the single
+<code class="docutils literal notranslate"><span class="pre">M_AXI_DDR</span></code> master. It adds one ID bit, which routes each response back to its source, and registers
+the address channels, which costs one cycle on each.</p></li>
+</ol>
+<p>Writes on this path are visible to the CPU’s next line refill once their response returns, which is also
+when the host treats them as done. A narrow write to part of a word changes only the strobed
+bytes. Atomic AXI operations are disabled.</p>
+</section>
+<section id="simulation-model-sim-common-ddr-axi-mem-sv">
+<h2>Simulation model: <code class="docutils literal notranslate"><span class="pre">sim/common/ddr_axi_mem.sv</span></code><a class="headerlink" href="#simulation-model-sim-common-ddr-axi-mem-sv" title="Link to this heading">¶</a></h2>
+<p>Simulation stands in for the processing system with one AXI4 slave, used by every bench. It accepts
+bursts of any length and size up to the 16-byte bus, echoes IDs so the mux can route responses, and
+holds a response valid until the master accepts it. Two inputs, <code class="docutils literal notranslate"><span class="pre">stall_pct</span></code> and <code class="docutils literal notranslate"><span class="pre">max_latency</span></code>, add random
+handshake stalls and latency. A read samples the memory as each beat is driven, so a read issued ahead of
+an earlier write returns the old data; a write lands some cycles after all of its beats arrive.</p>
+<p>Two regions are modeled: the bottom of the window, sized by each bench, and the 16 KiB DMA region at the
+top, so no bench has to allocate the whole 256 MiB. An access outside both stops the simulation. Benches
+load program images by ORCA address (<code class="docutils literal notranslate"><span class="pre">load_hex</span></code>) and read memory back (<code class="docutils literal notranslate"><span class="pre">peek32</span></code>). They start programs
+the same way the board does: <code class="docutils literal notranslate"><span class="pre">sim/common/host_boot.svh</span></code> writes the entry address, argument and run ID
+to the SoC control registers over the host port, and the boot ROM stub jumps to the program.</p>
+<section id="port-timing">
+<h3>Port timing<a class="headerlink" href="#port-timing" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operation</p></th>
+<th class="head"><p>Acceptance</p></th>
+<th class="head"><p>Response</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CPU line write</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mem_req.valid</span> <span class="pre">&amp;&amp;</span> <span class="pre">mem_req_ready</span></code></p></td>
+<td><p>no separate response</p></td>
+</tr>
+<tr class="row-odd"><td><p>CPU line read of the ROM or an unmapped address</p></td>
+<td><p>same handshake</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mem_resp.valid</span></code> two clocks later</p></td>
+</tr>
+<tr class="row-even"><td><p>CPU line read of DDR</p></td>
+<td><p>same handshake</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mem_resp.valid</span></code> when the burst’s beat arrives; cached beats after the first are served from the buffer</p></td>
+</tr>
+<tr class="row-odd"><td><p>AXI read/write beat on the DMA region</p></td>
+<td><p>crossbar target handshake</p></td>
+<td><p>R/B returned by ID after the converter, the mux and DDR</p></td>
+</tr>
+<tr class="row-even"><td><p>AXI address with no target</p></td>
+<td><p>accepted by the crossbar</p></td>
+<td><p>R/B response is a decode error</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>DDR latency is set by the processing system on the board and by the bench in simulation, so none of
+these is a guaranteed end-to-end CPU latency.</p>
+</section>
+</section>
+<section id="clock-crossing">
+<h2>Clock crossing<a class="headerlink" href="#clock-crossing" title="Link to this heading">¶</a></h2>
+<p>The CPU line port, memory, and AXI fabric share <code class="docutils literal notranslate"><span class="pre">core_clk</span></code>; there is no line
+CDC or response FIFO. See <a class="reference internal" href="../soc/interconnect.html#clock-domain"><span class="std std-ref">SoC clock domain</span></a>.</p>
+</section>
+<section id="ram-wrappers">
+<h2>RAM wrappers<a class="headerlink" href="#ram-wrappers" title="Link to this heading">¶</a></h2>
+<p>The smaller arrays in the CPU use four wrappers under
+<code class="docutils literal notranslate"><span class="pre">rtl/mem/sram/</span></code>. All initialize their storage and read output to zero for FPGA
+power-up and simulation.</p>
+<section id="rtl-mem-sram-orca-ram-1rw-sv">
+<h3><code class="docutils literal notranslate"><span class="pre">rtl/mem/sram/orca_ram_1rw.sv</span></code><a class="headerlink" href="#rtl-mem-sram-orca-ram-1rw-sv" title="Link to this heading">¶</a></h3>
+<p>This is a single-clock, single-port RAM. <code class="docutils literal notranslate"><span class="pre">en</span></code> holds all state when low. When
+high, <code class="docutils literal notranslate"><span class="pre">we</span></code> chooses a masked write or a read at the shared address. A write also
+places the merged new word on <code class="docutils literal notranslate"><span class="pre">rdata</span></code>, so same-cycle read/write behavior is
+write-first. <code class="docutils literal notranslate"><span class="pre">MASK_GRAN</span></code> controls how many adjacent bits each mask bit covers,
+and <code class="docutils literal notranslate"><span class="pre">STYLE</span></code> is passed to Vivado’s <code class="docutils literal notranslate"><span class="pre">ram_style</span></code> attribute. The cache tag arrays
+use it with <code class="docutils literal notranslate"><span class="pre">MASK_GRAN</span> <span class="pre">=</span> <span class="pre">1</span></code>, and the predictor tables with <code class="docutils literal notranslate"><span class="pre">STYLE</span> <span class="pre">=</span> <span class="pre">&quot;block&quot;</span></code>.</p>
+</section>
+<section id="rtl-mem-sram-orca-ram-1r1w-sv">
+<h3><code class="docutils literal notranslate"><span class="pre">rtl/mem/sram/orca_ram_1r1w.sv</span></code><a class="headerlink" href="#rtl-mem-sram-orca-ram-1r1w-sv" title="Link to this heading">¶</a></h3>
+<p>This simple dual-port shape has a dedicated masked write address and a
+dedicated synchronous read address. <code class="docutils literal notranslate"><span class="pre">re</span></code> holds the read output when low. A
+same-address read and write returns the old word because both clocked updates
+use nonblocking assignments. The wrapper still has only one writer; it is not a true
+two-read/write-port RAM.</p>
+</section>
+<section id="rtl-mem-sram-orca-sram-1rw-xpm-sv">
+<h3><code class="docutils literal notranslate"><span class="pre">rtl/mem/sram/orca_sram_1rw_xpm.sv</span></code><a class="headerlink" href="#rtl-mem-sram-orca-sram-1rw-xpm-sv" title="Link to this heading">¶</a></h3>
+<p>The I-cache data banks use this byte-masked, 32-bit
+wrapper. In synthesis it maps one synchronous write-first port of
+<code class="docutils literal notranslate"><span class="pre">xpm_memory_tdpram</span></code> to block RAM with a one-cycle read latency. In simulation it
+delegates to <code class="docutils literal notranslate"><span class="pre">orca_ram_1rw</span></code>, so the testbenches see the same enabled-read and
+masked-write contract. The D-cache data banks use <code class="docutils literal notranslate"><span class="pre">orca_ram_1r1w</span></code> with
+<code class="docutils literal notranslate"><span class="pre">STYLE</span> <span class="pre">=</span> <span class="pre">&quot;block&quot;</span></code> instead, because a 512 by 32 bank fits one RAMB18 only in
+simple dual-port mode.</p>
+<p>None of these attributes is a physical implementation guarantee. Vivado must
+confirm the inferred primitive, collision mode, port count, and initialization
+for each instance.</p>
+</section>
+<section id="why-the-generic-and-xpm-paths-remain-separate">
+<h3>Why the generic and XPM paths remain separate<a class="headerlink" href="#why-the-generic-and-xpm-paths-remain-separate" title="Link to this heading">¶</a></h3>
+<p>The generic and XPM paths keep the caller-visible masks, arbitration, enabled-output hold and one-cycle storage reads identical across the two targets. Bit-masked predictor storage, byte-masked L1 banks and old-data dual-port arrays are different contracts, so none of them is an alias for another.</p>
+<p><strong>Evidence:</strong> <code class="docutils literal notranslate"><span class="pre">orca_ram_tb</span></code> checks the inferred RAM semantics, and the native ROM and SRAM benches exercise the real XPMs.</p>
+<p><strong>Limitations:</strong> <code class="docutils literal notranslate"><span class="pre">TARGET=xilinx</span></code> in Verilator is still a generic-storage simulation. It does not run the XPM models and does not prove routed timing. Changing a wrapper needs both the contract tests and an implementation review.</p>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../soc/index.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">SoC</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="boot-rom.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Boot ROM</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026 Jason Huynh. All rights reserved.
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">DDR and main memory</a><ul>
+<li><a class="reference internal" href="#ddr-line-bridge-rtl-mem-ddr-line-bridge-sv">DDR line bridge: <code class="docutils literal notranslate"><span class="pre">rtl/mem/ddr_line_bridge.sv</span></code></a></li>
+<li><a class="reference internal" href="#the-uncached-path-into-ddr">The uncached path into DDR</a></li>
+<li><a class="reference internal" href="#simulation-model-sim-common-ddr-axi-mem-sv">Simulation model: <code class="docutils literal notranslate"><span class="pre">sim/common/ddr_axi_mem.sv</span></code></a><ul>
+<li><a class="reference internal" href="#port-timing">Port timing</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#clock-crossing">Clock crossing</a></li>
+<li><a class="reference internal" href="#ram-wrappers">RAM wrappers</a><ul>
+<li><a class="reference internal" href="#rtl-mem-sram-orca-ram-1rw-sv"><code class="docutils literal notranslate"><span class="pre">rtl/mem/sram/orca_ram_1rw.sv</span></code></a></li>
+<li><a class="reference internal" href="#rtl-mem-sram-orca-ram-1r1w-sv"><code class="docutils literal notranslate"><span class="pre">rtl/mem/sram/orca_ram_1r1w.sv</span></code></a></li>
+<li><a class="reference internal" href="#rtl-mem-sram-orca-sram-1rw-xpm-sv"><code class="docutils literal notranslate"><span class="pre">rtl/mem/sram/orca_sram_1rw_xpm.sv</span></code></a></li>
+<li><a class="reference internal" href="#why-the-generic-and-xpm-paths-remain-separate">Why the generic and XPM paths remain separate</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=3b5cce75"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>
