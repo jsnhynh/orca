@@ -1,0 +1,592 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
+--------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version      : Vivado v.2026.1 (win64) Build 6511674 Tue Jun 16 11:02:23 MDT 2026
+| Date              : Sun Nov  1 14:49:44 2026
+| Host              : host running 64-bit major release  (build 9200)
+| Command           : report_timing_summary -file <project>/final-timing.rpt
+| Design            : orca_kv260_wrapper
+| Device            : xck26-sfvc784
+| Speed File        : -2LV  PRODUCTION 1.31 12-08-2025
+| Design State      : Physopt postRoute
+| Temperature Grade : C
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Summary Report
+
+------------------------------------------------------------------------------------------------
+| Timer Settings
+| --------------
+------------------------------------------------------------------------------------------------
+
+  Enable Multi Corner Analysis               :  Yes
+  Enable Pessimism Removal                   :  Yes
+  Pessimism Removal Resolution               :  Nearest Common Node
+  Enable Input Delay Default Clock           :  No
+  Enable Preset / Clear Arcs                 :  No
+  Disable Flight Delays                      :  No
+  Ignore I/O Paths                           :  No
+  Timing Early Launch at Borrowing Latches   :  No
+  Borrow Time for Max Delay Exceptions       :  Yes
+  Merge Timing Exceptions                    :  Yes
+  Inter-SLR Compensation                     :  Conservative
+
+  Corner  Analyze    Analyze    
+  Name    Max Paths  Min Paths  
+  ------  ---------  ---------  
+  Slow    Yes        Yes        
+  Fast    Yes        Yes        
+
+
+------------------------------------------------------------------------------------------------
+| Report Methodology
+| ------------------
+------------------------------------------------------------------------------------------------
+
+Rule     Severity  Description                                 Violations  
+-------  --------  ------------------------------------------  ----------  
+CLKC-40  Advisory  Substitute PLLE4 for MMCME4 check           1           
+CLKC-56  Advisory  MMCME4 with global clock driver has no LOC  1           
+
+Note: This report is based on the most recent report_methodology run and may not be up-to-date. Run report_methodology on the current design for the latest report.
+
+
+
+check_timing report
+
+Table of Contents
+-----------------
+1. checking no_clock (0)
+2. checking constant_clock (0)
+3. checking pulse_width_clock (0)
+4. checking unconstrained_internal_endpoints (0)
+5. checking no_input_delay (0)
+6. checking no_output_delay (6)
+7. checking multiple_clock (0)
+8. checking generated_clocks (0)
+9. checking loops (0)
+10. checking partial_input_delay (0)
+11. checking partial_output_delay (0)
+12. checking latch_loops (0)
+
+1. checking no_clock (0)
+------------------------
+ There are 0 register/latch pins with no clock.
+
+
+2. checking constant_clock (0)
+------------------------------
+ There are 0 register/latch pins with constant_clock.
+
+
+3. checking pulse_width_clock (0)
+---------------------------------
+ There are 0 register/latch pins which need pulse_width check
+
+
+4. checking unconstrained_internal_endpoints (0)
+------------------------------------------------
+ There are 0 pins that are not constrained for maximum delay.
+
+ There are 0 pins that are not constrained for maximum delay due to constant clock.
+
+
+5. checking no_input_delay (0)
+------------------------------
+ There are 0 input ports with no input delay specified.
+
+ There are 0 input ports with no input delay but user has a false path constraint.
+
+
+6. checking no_output_delay (6)
+-------------------------------
+ There are 0 ports with no output delay specified.
+
+ There are 6 ports with no output delay but user has a false path constraint (MEDIUM)
+
+ There are 0 ports with no output delay but with a timing clock defined on it or propagating through it
+
+
+7. checking multiple_clock (0)
+------------------------------
+ There are 0 register/latch pins with multiple clocks.
+
+
+8. checking generated_clocks (0)
+--------------------------------
+ There are 0 generated clocks that are not connected to a clock source.
+
+
+9. checking loops (0)
+---------------------
+ There are 0 combinational loops in the design.
+
+
+10. checking partial_input_delay (0)
+------------------------------------
+ There are 0 input ports with partial input delay specified.
+
+
+11. checking partial_output_delay (0)
+-------------------------------------
+ There are 0 ports with partial output delay specified.
+
+
+12. checking latch_loops (0)
+----------------------------
+ There are 0 combinational latch loops in the design through latch input
+
+
+
+------------------------------------------------------------------------------------------------
+| Design Timing Summary
+| ---------------------
+------------------------------------------------------------------------------------------------
+
+    WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
+    -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
+      0.000        0.000                      0                90081        0.009        0.000                      0                90081        1.000        0.000                       0                 25074  
+
+
+All user specified timing constraints are met.
+
+
+------------------------------------------------------------------------------------------------
+| Clock Summary
+| -------------
+------------------------------------------------------------------------------------------------
+
+Clock                              Waveform(ns)         Period(ns)      Frequency(MHz)
+-----                              ------------         ----------      --------------
+clk_pl_0                           {0.000 5.000}        10.000          100.000         
+  clk_out1_orca_kv260_core_mmcm_0  {0.000 2.500}        5.000           200.000         
+clk_pl_1                           {0.000 5.000}        10.000          100.000         
+
+
+------------------------------------------------------------------------------------------------
+| Intra Clock Table
+| -----------------
+------------------------------------------------------------------------------------------------
+
+Clock                                  WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
+-----                                  -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
+clk_pl_0                                                                                                                                                                             2.000        0.000                       0                     1  
+  clk_out1_orca_kv260_core_mmcm_0        0.000        0.000                      0                83863        0.009        0.000                      0                83863        1.000        0.000                       0                 25073  
+
+
+------------------------------------------------------------------------------------------------
+| Inter Clock Table
+| -----------------
+------------------------------------------------------------------------------------------------
+
+From Clock    To Clock          WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints  
+----------    --------          -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------  
+
+
+------------------------------------------------------------------------------------------------
+| Other Path Groups Table
+| -----------------------
+------------------------------------------------------------------------------------------------
+
+Path Group                       From Clock                       To Clock                             WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints  
+----------                       ----------                       --------                             -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------  
+**async_default**                clk_out1_orca_kv260_core_mmcm_0  clk_out1_orca_kv260_core_mmcm_0        1.156        0.000                      0                 6218        0.144        0.000                      0                 6218  
+
+
+------------------------------------------------------------------------------------------------
+| Timing Details
+| --------------
+------------------------------------------------------------------------------------------------
+
+
+---------------------------------------------------------------------------------------------------
+From Clock:  clk_pl_0
+  To Clock:  clk_pl_0
+
+Setup :           NA  Failing Endpoints,  Worst Slack           NA  ,  Total Violation           NA
+Hold  :           NA  Failing Endpoints,  Worst Slack           NA  ,  Total Violation           NA
+PW    :            0  Failing Endpoints,  Worst Slack        2.000ns,  Total Violation        0.000ns
+---------------------------------------------------------------------------------------------------
+
+
+Pulse Width Checks
+--------------------------------------------------------------------------------------
+Clock Name:         clk_pl_0
+Waveform(ns):       { 0.000 5.000 }
+Period(ns):         10.000
+Sources:            { orca_kv260_i/ps8_0/inst/PS8_i/PLCLK[0] }
+
+Check Type        Corner  Lib Pin            Reference Pin  Required(ns)  Actual(ns)  Slack(ns)  Location   Pin
+Min Period        n/a     MMCME4_ADV/CLKIN1  n/a            1.071         10.000      8.929      MMCM_X0Y3  orca_kv260_i/core_mmcm/inst/mmcme4_adv_inst/CLKIN1
+Max Period        n/a     MMCME4_ADV/CLKIN1  n/a            100.000       10.000      90.000     MMCM_X0Y3  orca_kv260_i/core_mmcm/inst/mmcme4_adv_inst/CLKIN1
+Low Pulse Width   Slow    MMCME4_ADV/CLKIN1  n/a            3.000         5.000       2.000      MMCM_X0Y3  orca_kv260_i/core_mmcm/inst/mmcme4_adv_inst/CLKIN1
+High Pulse Width  Slow    MMCME4_ADV/CLKIN1  n/a            3.000         5.000       2.000      MMCM_X0Y3  orca_kv260_i/core_mmcm/inst/mmcme4_adv_inst/CLKIN1
+
+
+
+---------------------------------------------------------------------------------------------------
+From Clock:  clk_out1_orca_kv260_core_mmcm_0
+  To Clock:  clk_out1_orca_kv260_core_mmcm_0
+
+Setup :            0  Failing Endpoints,  Worst Slack        0.000ns,  Total Violation        0.000ns
+Hold  :            0  Failing Endpoints,  Worst Slack        0.009ns,  Total Violation        0.000ns
+PW    :            0  Failing Endpoints,  Worst Slack        1.000ns,  Total Violation        0.000ns
+---------------------------------------------------------------------------------------------------
+
+
+Max Delay Paths
+--------------------------------------------------------------------------------------
+Slack (MET) :             0.000ns  (required time - arrival time)
+  Source:                 orca_kv260_i/orca_0/inst/u_soc/cpu0/core0/bpu_stage/pred_meta_head_q_reg[1]/C
+                            (rising edge-triggered cell FDRE clocked by clk_out1_orca_kv260_core_mmcm_0  {rise@0.000ns fall@2.500ns period=5.000ns})
+  Destination:            orca_kv260_i/orca_0/inst/u_soc/cpu0/core0/bpu_stage/u_tage/tag_fold_q_reg[3][6]/D
+                            (rising edge-triggered cell FDRE clocked by clk_out1_orca_kv260_core_mmcm_0  {rise@0.000ns fall@2.500ns period=5.000ns})
+  Path Group:             clk_out1_orca_kv260_core_mmcm_0
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            5.000ns  (clk_out1_orca_kv260_core_mmcm_0 rise@5.000ns - clk_out1_orca_kv260_core_mmcm_0 rise@0.000ns)
+  Data Path Delay:        4.935ns  (logic 1.895ns (38.399%)  route 3.040ns (61.601%))
+  Logic Levels:           15  (CARRY8=2 LUT4=1 LUT5=2 LUT6=8 MUXF7=1 RAMD32=1)
+  Clock Path Skew:        -0.047ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.393ns = ( 10.393 - 5.000 ) 
+    Source Clock Delay      (SCD):    5.024ns
+    Clock Pessimism Removal (CPR):    -0.416ns
+  Clock Uncertainty:      0.062ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.102ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.000ns
+  Clock Net Delay (Source):      2.857ns (routing 1.467ns, distribution 1.390ns)
+  Clock Net Delay (Destination): 2.634ns (routing 1.340ns, distribution 1.294ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_out1_orca_kv260_core_mmcm_0 rise edge)
+                                                      0.000     0.000 r  <hidden>
+    PS8_X0Y0             PS8                          0.000     0.000 r  orca_kv260_i/ps8_0/inst/PS8_i/PLCLK[0]
+                         net (fo=1, routed)           0.229     0.229    orca_kv260_i/ps8_0/inst/pl_clk_unbuffered[0]
+    BUFG_PS_X0Y81        BUFG_PS (Prop_BUFG_PS_I_O)
+                                                      0.038     0.267 r  orca_kv260_i/ps8_0/inst/buffer_pl_clk_0.PL_CLK_0_BUFG/O
+                         net (fo=1, routed)           1.611     1.878    orca_kv260_i/core_mmcm/inst/clk_in1
+    MMCM_X0Y3            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                     -0.103     1.775 r  orca_kv260_i/core_mmcm/inst/mmcme4_adv_inst/CLKOUT0
+                         net (fo=1, routed)           0.348     2.123    orca_kv260_i/core_mmcm/inst/clk_out1_orca_kv260_core_mmcm_0
+    BUFGCE_X0Y76         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.044     2.167 r  orca_kv260_i/core_mmcm/inst/clkout1_buf/O
+    X2Y1 (CLOCK_ROOT)    net (fo=25093, routed)       2.857     5.024    orca_kv260_i/orca_0/core_clk
+    SLICE_X40Y14         FDRE                                         r  orca_kv260_i/orca_0/inst/u_soc/cpu0/core0/bpu_stage/pred_meta_head_q_reg[1]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X40Y14         FDRE (Prop_BFF2_SLICEM_C_Q)
+                                                      0.115     5.139 r  orca_kv260_i/orca_0/inst/u_soc/cpu0/core0/bpu_stage/pred_meta_head_q_reg[1]/Q
+                         net (fo=178, routed)         0.311     5.450    orca_kv260_i/orca_0/inst/u_soc/cpu0/core0/bpu_stage/pred_meta_l0_pc_q_reg_0_3_0_13/ADDRD1
+    SLICE_X40Y13         RAMD32 (Prop_D5LUT_SLICEM_RADR1_O)
+                                                      0.190     5.640 r  orca_kv260_i/orca_0/inst/u_soc/cpu0/core0/bpu_stage/pred_meta_l0_pc_q_reg_0_3_0_13/RAMD/O
+                         net (fo=3, routed)           0.473     6.113    orca_kv260_i/orca_0/inst/u_soc/cpu0/core0/bpu_stage/l0_pred_pc0[6]
+    SLICE_X39Y10         LUT6 (Prop_C6LUT_SLICEL_I1_O)
+                                                      0.221     6.334 r  orca_kv260_i/orca_0/pred_redirect_pc[31]_i_112/O
+                         net (fo=1, routed)           0.015     6.349    orca_kv260_i/orca_0/pred_redirect_pc[31]_i_112_n_0
+    SLICE_X39Y10         CARRY8 (Prop_CARRY8_SLICEL_S[2]_CO[7])
+                                                      0.219     6.568 f  orca_kv260_i/orca_0/pred_redirect_pc_reg[31]_i_74/CO[7]
+                         net (fo=1, routed)           0.030     6.598    orca_kv260_i/orca_0/pred_redirect_pc_reg[31]_i_74_n_0
+    SLICE_X39Y11         CARRY8 (Prop_CARRY8_SLICEL_CI_CO[2])
+                                                      0.079     6.677 f  orca_kv260_i/orca_0/pred_redirect_pc_reg[31]_i_42/CO[2]
+                         net (fo=1, routed)           0.280     6.957    orca_kv260_i/orca_0/pred_redirect_pc_reg[31]_i_42_n_5
+    SLICE_X37Y13         LUT6 (Prop_H6LUT_SLICEM_I4_O)
+                                                      0.060     7.017 r  orca_kv260_i/orca_0/pred_redirect_pc[31]_i_28/O
+                         net (fo=1, routed)           0.307     7.324    orca_kv260_i/orca_0/pred_redirect_pc[31]_i_28_n_0
+    SLICE_X33Y15         LUT6 (Prop_H6LUT_SLICEL_I4_O)
+                                                      0.153     7.477 f  orca_kv260_i/orca_0/pred_redirect_pc[31]_i_16/O
+                         net (fo=3, routed)           0.111     7.588    orca_kv260_i/orca_0/pred_redirect_pc[31]_i_16_n_0
+    SLICE_X33Y13         LUT6 (Prop_H6LUT_SLICEL_I5_O)
+                                                      0.083     7.671 r  orca_kv260_i/orca_0/g_payload_bank[0].write_data_q[pred][btb][btype][1]_i_8/O
+                         net (fo=3, routed)           0.205     7.876    orca_kv260_i/orca_0/g_payload_bank[0].write_data_q[pred][btb][btype][1]_i_8_n_0
+    SLICE_X30Y16         LUT5 (Prop_B6LUT_SLICEL_I1_O)
+                                                      0.058     7.934 f  orca_kv260_i/orca_0/i_4_LOPT_REMAP_73/O
+                         net (fo=1, routed)           0.051     7.985    orca_kv260_i/orca_0/i_4/O_n_73
+    SLICE_X30Y16         LUT6 (Prop_E6LUT_SLICEL_I0_O)
+                                                      0.057     8.042 f  orca_kv260_i/orca_0/i_1_LOPT_REMAP_125/O
+                         net (fo=1, routed)           0.047     8.089    orca_kv260_i/orca_0/i_1/O_n_125
+    SLICE_X30Y16         LUT6 (Prop_D6LUT_SLICEL_I5_O)
+                                                      0.057     8.146 f  orca_kv260_i/orca_0/i_0_LOPT_REMAP_136/O
+                         net (fo=27, routed)          0.254     8.400    orca_kv260_i/orca_0/inst/u_soc/cpu0/core0/alloc_ports[0][pred][btb][btype][1]
+    SLICE_X29Y13         LUT4 (Prop_A6LUT_SLICEM_I0_O)
+                                                      0.083     8.483 r  orca_kv260_i/orca_0/ghr[63]_i_5/O
+                         net (fo=81, routed)          0.640     9.123    orca_kv260_i/orca_0/ghr[63]_i_5_n_0
+    SLICE_X23Y15         LUT6 (Prop_G6LUT_SLICEL_I2_O)
+                                                      0.137     9.260 r  orca_kv260_i/orca_0/tag_fold_q[1][6]_i_3/O
+                         net (fo=2, routed)           0.098     9.358    orca_kv260_i/orca_0/tag_fold_q[1][6]_i_3_n_0
+    SLICE_X23Y15         LUT6 (Prop_F6LUT_SLICEL_I5_O)
+                                                      0.136     9.494 r  orca_kv260_i/orca_0/tag_fold_q[2][6]_i_4/O
+                         net (fo=2, routed)           0.161     9.656    orca_kv260_i/orca_0/tag_fold_q[2][6]_i_4_n_0
+    SLICE_X23Y14         LUT5 (Prop_D6LUT_SLICEL_I3_O)
+                                                      0.152     9.808 r  orca_kv260_i/orca_0/tag_fold_q[3][6]_i_2/O
+                         net (fo=1, routed)           0.013     9.821    orca_kv260_i/orca_0/tag_fold_q[3][6]_i_2_n_0
+    SLICE_X23Y14         MUXF7 (Prop_F7MUX_CD_SLICEL_I0_O)
+                                                      0.095     9.916 r  orca_kv260_i/orca_0/tag_fold_q_reg[3][6]_i_1/O
+                         net (fo=1, routed)           0.043     9.959    orca_kv260_i/orca_0/inst/u_soc/cpu0/core0/bpu_stage/u_tage/tag_fold_d[3][6]
+    SLICE_X23Y14         FDRE                                         r  orca_kv260_i/orca_0/inst/u_soc/cpu0/core0/bpu_stage/u_tage/tag_fold_q_reg[3][6]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_out1_orca_kv260_core_mmcm_0 rise edge)
+                                                      5.000     5.000 r  <hidden>
+    PS8_X0Y0             PS8                          0.000     5.000 r  orca_kv260_i/ps8_0/inst/PS8_i/PLCLK[0]
+                         net (fo=1, routed)           0.181     5.181    orca_kv260_i/ps8_0/inst/pl_clk_unbuffered[0]
+    BUFG_PS_X0Y81        BUFG_PS (Prop_BUFG_PS_I_O)
+                                                      0.035     5.216 r  orca_kv260_i/ps8_0/inst/buffer_pl_clk_0.PL_CLK_0_BUFG/O
+                         net (fo=1, routed)           1.458     6.674    orca_kv260_i/core_mmcm/inst/clk_in1
+    MMCM_X0Y3            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                      0.739     7.413 r  orca_kv260_i/core_mmcm/inst/mmcme4_adv_inst/CLKOUT0
+                         net (fo=1, routed)           0.307     7.720    orca_kv260_i/core_mmcm/inst/clk_out1_orca_kv260_core_mmcm_0
+    BUFGCE_X0Y76         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.039     7.759 r  orca_kv260_i/core_mmcm/inst/clkout1_buf/O
+    X2Y1 (CLOCK_ROOT)    net (fo=25093, routed)       2.634    10.393    orca_kv260_i/orca_0/core_clk
+    SLICE_X23Y14         FDRE                                         r  orca_kv260_i/orca_0/inst/u_soc/cpu0/core0/bpu_stage/u_tage/tag_fold_q_reg[3][6]/C
+                         clock pessimism             -0.416     9.977    <hidden>
+                         clock uncertainty           -0.062     9.915    <hidden>
+    SLICE_X23Y14         FDRE (Setup_DFF_SLICEL_C_D)
+                                                      0.044     9.959    orca_kv260_i/orca_0/inst/u_soc/cpu0/core0/bpu_stage/u_tage/tag_fold_q_reg[3][6]
+  -------------------------------------------------------------------
+                         required time                          9.959    <hidden>
+                         arrival time                          -9.959    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.000    <hidden>
+
+
+
+
+
+Min Delay Paths
+--------------------------------------------------------------------------------------
+Slack (MET) :             0.009ns  (arrival time - required time)
+  Source:                 orca_kv260_i/orca_0/inst/u_soc/cpu0/core0/bpu_stage/u_tage/lookup_ghr_q_reg[7]/C
+                            (rising edge-triggered cell FDRE clocked by clk_out1_orca_kv260_core_mmcm_0  {rise@0.000ns fall@2.500ns period=5.000ns})
+  Destination:            orca_kv260_i/orca_0/inst/u_soc/cpu0/core0/bpu_stage/pred_meta_tage_q_reg[0][1][lookup_ghr][7]/D
+                            (rising edge-triggered cell FDRE clocked by clk_out1_orca_kv260_core_mmcm_0  {rise@0.000ns fall@2.500ns period=5.000ns})
+  Path Group:             clk_out1_orca_kv260_core_mmcm_0
+  Path Type:              Hold (Min at Slow Process Corner)
+  Requirement:            0.000ns  (clk_out1_orca_kv260_core_mmcm_0 rise@0.000ns - clk_out1_orca_kv260_core_mmcm_0 rise@0.000ns)
+  Data Path Delay:        0.213ns  (logic 0.112ns (52.460%)  route 0.101ns (47.540%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.101ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    4.989ns
+    Source Clock Delay      (SCD):    5.308ns
+    Clock Pessimism Removal (CPR):    -0.420ns
+  Clock Net Delay (Source):      2.549ns (routing 1.340ns, distribution 1.209ns)
+  Clock Net Delay (Destination): 2.822ns (routing 1.467ns, distribution 1.355ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_out1_orca_kv260_core_mmcm_0 rise edge)
+                                                      0.000     0.000 r  <hidden>
+    PS8_X0Y0             PS8                          0.000     0.000 r  orca_kv260_i/ps8_0/inst/PS8_i/PLCLK[0]
+                         net (fo=1, routed)           0.181     0.181    orca_kv260_i/ps8_0/inst/pl_clk_unbuffered[0]
+    BUFG_PS_X0Y81        BUFG_PS (Prop_BUFG_PS_I_O)
+                                                      0.035     0.216 r  orca_kv260_i/ps8_0/inst/buffer_pl_clk_0.PL_CLK_0_BUFG/O
+                         net (fo=1, routed)           1.458     1.674    orca_kv260_i/core_mmcm/inst/clk_in1
+    MMCM_X0Y3            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                      0.739     2.413 r  orca_kv260_i/core_mmcm/inst/mmcme4_adv_inst/CLKOUT0
+                         net (fo=1, routed)           0.307     2.720    orca_kv260_i/core_mmcm/inst/clk_out1_orca_kv260_core_mmcm_0
+    BUFGCE_X0Y76         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.039     2.759 r  orca_kv260_i/core_mmcm/inst/clkout1_buf/O
+    X2Y1 (CLOCK_ROOT)    net (fo=25093, routed)       2.549     5.308    orca_kv260_i/orca_0/core_clk
+    SLICE_X47Y8          FDRE                                         r  orca_kv260_i/orca_0/inst/u_soc/cpu0/core0/bpu_stage/u_tage/lookup_ghr_q_reg[7]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X47Y8          FDRE (Prop_EFF_SLICEL_C_Q)
+                                                      0.112     5.420 r  orca_kv260_i/orca_0/inst/u_soc/cpu0/core0/bpu_stage/u_tage/lookup_ghr_q_reg[7]/Q
+                         net (fo=4, routed)           0.101     5.522    orca_kv260_i/orca_0/inst/u_soc/cpu0/core0/bpu_stage/tage_pred[1][lookup_ghr][7]
+    SLICE_X48Y8          FDRE                                         r  orca_kv260_i/orca_0/inst/u_soc/cpu0/core0/bpu_stage/pred_meta_tage_q_reg[0][1][lookup_ghr][7]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_out1_orca_kv260_core_mmcm_0 rise edge)
+                                                      0.000     0.000 r  <hidden>
+    PS8_X0Y0             PS8                          0.000     0.000 r  orca_kv260_i/ps8_0/inst/PS8_i/PLCLK[0]
+                         net (fo=1, routed)           0.229     0.229    orca_kv260_i/ps8_0/inst/pl_clk_unbuffered[0]
+    BUFG_PS_X0Y81        BUFG_PS (Prop_BUFG_PS_I_O)
+                                                      0.038     0.267 r  orca_kv260_i/ps8_0/inst/buffer_pl_clk_0.PL_CLK_0_BUFG/O
+                         net (fo=1, routed)           1.611     1.878    orca_kv260_i/core_mmcm/inst/clk_in1
+    MMCM_X0Y3            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                     -0.103     1.775 r  orca_kv260_i/core_mmcm/inst/mmcme4_adv_inst/CLKOUT0
+                         net (fo=1, routed)           0.348     2.123    orca_kv260_i/core_mmcm/inst/clk_out1_orca_kv260_core_mmcm_0
+    BUFGCE_X0Y76         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.044     2.167 r  orca_kv260_i/core_mmcm/inst/clkout1_buf/O
+    X2Y1 (CLOCK_ROOT)    net (fo=25093, routed)       2.822     4.989    orca_kv260_i/orca_0/core_clk
+    SLICE_X48Y8          FDRE                                         r  orca_kv260_i/orca_0/inst/u_soc/cpu0/core0/bpu_stage/pred_meta_tage_q_reg[0][1][lookup_ghr][7]/C
+                         clock pessimism              0.420     5.409    <hidden>
+    SLICE_X48Y8          FDRE (Hold_GFF2_SLICEL_C_D)
+                                                      0.103     5.512    orca_kv260_i/orca_0/inst/u_soc/cpu0/core0/bpu_stage/pred_meta_tage_q_reg[0][1][lookup_ghr][7]
+  -------------------------------------------------------------------
+                         required time                         -5.512    <hidden>
+                         arrival time                           5.522    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.009    <hidden>
+
+
+
+
+
+Pulse Width Checks
+--------------------------------------------------------------------------------------
+Clock Name:         clk_out1_orca_kv260_core_mmcm_0
+Waveform(ns):       { 0.000 2.500 }
+Period(ns):         5.000
+Sources:            { orca_kv260_i/core_mmcm/inst/mmcme4_adv_inst/CLKOUT0 }
+
+Check Type        Corner  Lib Pin          Reference Pin  Required(ns)  Actual(ns)  Slack(ns)  Location  Pin
+Min Period        n/a     PS8/MAXIGP0ACLK  n/a            3.000         5.000       2.000      PS8_X0Y0  orca_kv260_i/ps8_0/inst/PS8_i/MAXIGP0ACLK
+Low Pulse Width   Slow    PS8/MAXIGP0ACLK  n/a            1.500         2.500       1.000      PS8_X0Y0  orca_kv260_i/ps8_0/inst/PS8_i/MAXIGP0ACLK
+High Pulse Width  Slow    PS8/MAXIGP0ACLK  n/a            1.500         2.500       1.000      PS8_X0Y0  orca_kv260_i/ps8_0/inst/PS8_i/MAXIGP0ACLK
+
+
+
+---------------------------------------------------------------------------------------------------
+Path Group:  **async_default**
+From Clock:  clk_out1_orca_kv260_core_mmcm_0
+  To Clock:  clk_out1_orca_kv260_core_mmcm_0
+
+Setup :            0  Failing Endpoints,  Worst Slack        1.156ns,  Total Violation        0.000ns
+Hold  :            0  Failing Endpoints,  Worst Slack        0.144ns,  Total Violation        0.000ns
+---------------------------------------------------------------------------------------------------
+
+
+Max Delay Paths
+--------------------------------------------------------------------------------------
+Slack (MET) :             1.156ns  (required time - arrival time)
+  Source:                 orca_kv260_i/orca_0/inst/u_soc/cpu0/stop_ctrl/tile_hold_reg_rep__0/C
+                            (rising edge-triggered cell FDPE clocked by clk_out1_orca_kv260_core_mmcm_0  {rise@0.000ns fall@2.500ns period=5.000ns})
+  Destination:            orca_kv260_i/orca_0/inst/u_soc/cpu0/l1_subsystem0/dcache/refill_wait_resp_q_reg/CLR
+                            (recovery check against rising-edge clock clk_out1_orca_kv260_core_mmcm_0  {rise@0.000ns fall@2.500ns period=5.000ns})
+  Path Group:             **async_default**
+  Path Type:              Recovery (Max at Slow Process Corner)
+  Requirement:            5.000ns  (clk_out1_orca_kv260_core_mmcm_0 rise@5.000ns - clk_out1_orca_kv260_core_mmcm_0 rise@0.000ns)
+  Data Path Delay:        3.716ns  (logic 0.113ns (3.041%)  route 3.603ns (96.959%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.027ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.529ns = ( 10.529 - 5.000 ) 
+    Source Clock Delay      (SCD):    5.095ns
+    Clock Pessimism Removal (CPR):    -0.407ns
+  Clock Uncertainty:      0.062ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.102ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.000ns
+  Clock Net Delay (Source):      2.928ns (routing 1.467ns, distribution 1.461ns)
+  Clock Net Delay (Destination): 2.770ns (routing 1.340ns, distribution 1.430ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_out1_orca_kv260_core_mmcm_0 rise edge)
+                                                      0.000     0.000 r  <hidden>
+    PS8_X0Y0             PS8                          0.000     0.000 r  orca_kv260_i/ps8_0/inst/PS8_i/PLCLK[0]
+                         net (fo=1, routed)           0.229     0.229    orca_kv260_i/ps8_0/inst/pl_clk_unbuffered[0]
+    BUFG_PS_X0Y81        BUFG_PS (Prop_BUFG_PS_I_O)
+                                                      0.038     0.267 r  orca_kv260_i/ps8_0/inst/buffer_pl_clk_0.PL_CLK_0_BUFG/O
+                         net (fo=1, routed)           1.611     1.878    orca_kv260_i/core_mmcm/inst/clk_in1
+    MMCM_X0Y3            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                     -0.103     1.775 r  orca_kv260_i/core_mmcm/inst/mmcme4_adv_inst/CLKOUT0
+                         net (fo=1, routed)           0.348     2.123    orca_kv260_i/core_mmcm/inst/clk_out1_orca_kv260_core_mmcm_0
+    BUFGCE_X0Y76         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.044     2.167 r  orca_kv260_i/core_mmcm/inst/clkout1_buf/O
+    X2Y1 (CLOCK_ROOT)    net (fo=25093, routed)       2.928     5.095    orca_kv260_i/orca_0/core_clk
+    SLICE_X26Y85         FDPE                                         r  orca_kv260_i/orca_0/inst/u_soc/cpu0/stop_ctrl/tile_hold_reg_rep__0/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X26Y85         FDPE (Prop_HFF_SLICEL_C_Q)
+                                                      0.113     5.208 f  orca_kv260_i/orca_0/inst/u_soc/cpu0/stop_ctrl/tile_hold_reg_rep__0/Q
+                         net (fo=59, routed)          3.603     8.810    orca_kv260_i/orca_0/inst/u_soc/cpu0/stop_ctrl/tile_hold_reg_rep__0_n_0
+    SLICE_X21Y78         FDCE                                         f  orca_kv260_i/orca_0/inst/u_soc/cpu0/l1_subsystem0/dcache/refill_wait_resp_q_reg/CLR
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_out1_orca_kv260_core_mmcm_0 rise edge)
+                                                      5.000     5.000 r  <hidden>
+    PS8_X0Y0             PS8                          0.000     5.000 r  orca_kv260_i/ps8_0/inst/PS8_i/PLCLK[0]
+                         net (fo=1, routed)           0.181     5.181    orca_kv260_i/ps8_0/inst/pl_clk_unbuffered[0]
+    BUFG_PS_X0Y81        BUFG_PS (Prop_BUFG_PS_I_O)
+                                                      0.035     5.216 r  orca_kv260_i/ps8_0/inst/buffer_pl_clk_0.PL_CLK_0_BUFG/O
+                         net (fo=1, routed)           1.458     6.674    orca_kv260_i/core_mmcm/inst/clk_in1
+    MMCM_X0Y3            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                      0.739     7.413 r  orca_kv260_i/core_mmcm/inst/mmcme4_adv_inst/CLKOUT0
+                         net (fo=1, routed)           0.307     7.720    orca_kv260_i/core_mmcm/inst/clk_out1_orca_kv260_core_mmcm_0
+    BUFGCE_X0Y76         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.039     7.759 r  orca_kv260_i/core_mmcm/inst/clkout1_buf/O
+    X2Y1 (CLOCK_ROOT)    net (fo=25093, routed)       2.770    10.529    orca_kv260_i/orca_0/core_clk
+    SLICE_X21Y78         FDCE                                         r  orca_kv260_i/orca_0/inst/u_soc/cpu0/l1_subsystem0/dcache/refill_wait_resp_q_reg/C
+                         clock pessimism             -0.407    10.122    <hidden>
+                         clock uncertainty           -0.062    10.060    <hidden>
+    SLICE_X21Y78         FDCE (Recov_DFF2_SLICEM_C_CLR)
+                                                     -0.093     9.967    orca_kv260_i/orca_0/inst/u_soc/cpu0/l1_subsystem0/dcache/refill_wait_resp_q_reg
+  -------------------------------------------------------------------
+                         required time                          9.967    <hidden>
+                         arrival time                          -8.810    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  1.156    <hidden>
+
+
+
+
+
+Min Delay Paths
+--------------------------------------------------------------------------------------
+Slack (MET) :             0.144ns  (arrival time - required time)
+  Source:                 orca_kv260_i/core_reset/U0/PR_OUT_DFF[0].FDRE_PER_replica_14/C
+                            (rising edge-triggered cell FDRE clocked by clk_out1_orca_kv260_core_mmcm_0  {rise@0.000ns fall@2.500ns period=5.000ns})
+  Destination:            orca_kv260_i/orca_0/inst/u_soc/u_peripherals/u_peripheral_xbar/gen_mst_port_mux[1].i_axi_lite_mux/gen_no_mux.i_w_spill_reg/spill_register_flushable_i/gen_spill_reg.a_data_q_reg[data][10]/CLR
+                            (removal check against rising-edge clock clk_out1_orca_kv260_core_mmcm_0  {rise@0.000ns fall@2.500ns period=5.000ns})
+  Path Group:             **async_default**
+  Path Type:              Removal (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk_out1_orca_kv260_core_mmcm_0 rise@0.000ns - clk_out1_orca_kv260_core_mmcm_0 rise@0.000ns)
+  Data Path Delay:        0.178ns  (logic 0.084ns (47.157%)  route 0.094ns (52.843%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.052ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    3.006ns
+    Source Clock Delay      (SCD):    3.353ns
+    Clock Pessimism Removal (CPR):    -0.398ns
+  Clock Net Delay (Source):      1.551ns (routing 0.805ns, distribution 0.746ns)
+  Clock Net Delay (Destination): 1.704ns (routing 0.880ns, distribution 0.824ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_out1_orca_kv260_core_mmcm_0 rise edge)
+                                                      0.000     0.000 r  <hidden>
+    PS8_X0Y0             PS8                          0.000     0.000 r  orca_kv260_i/ps8_0/inst/PS8_i/PLCLK[0]
+                         net (fo=1, routed)           0.129     0.129    orca_kv260_i/ps8_0/inst/pl_clk_unbuffered[0]
+    BUFG_PS_X0Y81        BUFG_PS (Prop_BUFG_PS_I_O)
+                                                      0.022     0.151 r  orca_kv260_i/ps8_0/inst/buffer_pl_clk_0.PL_CLK_0_BUFG/O
+                         net (fo=1, routed)           0.883     1.034    orca_kv260_i/core_mmcm/inst/clk_in1
+    MMCM_X0Y3            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                      0.566     1.600 r  orca_kv260_i/core_mmcm/inst/mmcme4_adv_inst/CLKOUT0
+                         net (fo=1, routed)           0.179     1.779    orca_kv260_i/core_mmcm/inst/clk_out1_orca_kv260_core_mmcm_0
+    BUFGCE_X0Y76         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.023     1.802 r  orca_kv260_i/core_mmcm/inst/clkout1_buf/O
+    X2Y1 (CLOCK_ROOT)    net (fo=25093, routed)       1.551     3.353    orca_kv260_i/core_reset/U0/slowest_sync_clk
+    SLICE_X44Y136        FDRE                                         r  orca_kv260_i/core_reset/U0/PR_OUT_DFF[0].FDRE_PER_replica_14/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X44Y136        FDRE (Prop_EFF_SLICEL_C_Q)
+                                                      0.084     3.437 f  orca_kv260_i/core_reset/U0/PR_OUT_DFF[0].FDRE_PER_replica_14/Q
+                         net (fo=229, routed)         0.094     3.531    orca_kv260_i/orca_0/peripheral_reset[0]_repN_14_alias
+    SLICE_X46Y136        FDCE                                         f  orca_kv260_i/orca_0/inst/u_soc/u_peripherals/u_peripheral_xbar/gen_mst_port_mux[1].i_axi_lite_mux/gen_no_mux.i_w_spill_reg/spill_register_flushable_i/gen_spill_reg.a_data_q_reg[data][10]/CLR
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_out1_orca_kv260_core_mmcm_0 rise edge)
+                                                      0.000     0.000 r  <hidden>
+    PS8_X0Y0             PS8                          0.000     0.000 r  orca_kv260_i/ps8_0/inst/PS8_i/PLCLK[0]
+                         net (fo=1, routed)           0.164     0.164    orca_kv260_i/ps8_0/inst/pl_clk_unbuffered[0]
+    BUFG_PS_X0Y81        BUFG_PS (Prop_BUFG_PS_I_O)
+                                                      0.023     0.187 r  orca_kv260_i/ps8_0/inst/buffer_pl_clk_0.PL_CLK_0_BUFG/O
+                         net (fo=1, routed)           0.964     1.151    orca_kv260_i/core_mmcm/inst/clk_in1
+    MMCM_X0Y3            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                     -0.079     1.072 r  orca_kv260_i/core_mmcm/inst/mmcme4_adv_inst/CLKOUT0
+                         net (fo=1, routed)           0.204     1.276    orca_kv260_i/core_mmcm/inst/clk_out1_orca_kv260_core_mmcm_0
+    BUFGCE_X0Y76         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.026     1.302 r  orca_kv260_i/core_mmcm/inst/clkout1_buf/O
+    X2Y1 (CLOCK_ROOT)    net (fo=25093, routed)       1.704     3.006    orca_kv260_i/orca_0/core_clk
+    SLICE_X46Y136        FDCE                                         r  orca_kv260_i/orca_0/inst/u_soc/u_peripherals/u_peripheral_xbar/gen_mst_port_mux[1].i_axi_lite_mux/gen_no_mux.i_w_spill_reg/spill_register_flushable_i/gen_spill_reg.a_data_q_reg[data][10]/C
+                         clock pessimism              0.398     3.404    <hidden>
+    SLICE_X46Y136        FDCE (Remov_EFF_SLICEL_C_CLR)
+                                                     -0.018     3.386    orca_kv260_i/orca_0/inst/u_soc/u_peripherals/u_peripheral_xbar/gen_mst_port_mux[1].i_axi_lite_mux/gen_no_mux.i_w_spill_reg/spill_register_flushable_i/gen_spill_reg.a_data_q_reg[data][10]
+  -------------------------------------------------------------------
+                         required time                         -3.386    <hidden>
+                         arrival time                           3.531    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.144    <hidden>
+
+
+
+
+

@@ -1,0 +1,65 @@
+
+21. Printing statistics.
+
+=== cpu ===
+
+        +----------Local Count, excluding submodules.
+        |        +-Local Area, excluding submodules.
+        |        | 
+   316393        - wires
+   429480        - wire bits
+     3536        - public wires
+   116623        - public wire bits
+       16        - ports
+     1382        - port bits
+   315155  7.8E+04 cells
+    31967  2.8E+03   AND2x2_ASAP7_75t_R
+     9695  848.119   AND3x1_ASAP7_75t_R
+     1092   111.45   AND4x1_ASAP7_75t_R
+      332   38.724   AND5x1_ASAP7_75t_R
+        5    1.166   AO211x2_ASAP7_75t_R
+    37754  3302.72   AO21x1_ASAP7_75t_R
+     1964  286.351   AO221x1_ASAP7_75t_R
+       85   14.872   AO222x2_ASAP7_75t_R
+      752   98.677   AO22x1_ASAP7_75t_R
+       13    3.033   AO31x2_ASAP7_75t_R
+     1733  202.137   AO32x1_ASAP7_75t_R
+       66    9.623   AO33x2_ASAP7_75t_R
+      734  128.421   AOI211x1_ASAP7_75t_R
+     6205  723.751   AOI21x1_ASAP7_75t_R
+       55   11.227   AOI221x1_ASAP7_75t_R
+      273   39.803   AOI22x1_ASAP7_75t_R
+    33319 2.43E+03   BUFx2_ASAP7_75t_R
+       13    1.137   BUFx3_ASAP7_75t_R
+        8    0.816   BUFx4_ASAP7_75t_R
+        6      0.7   BUFx5_ASAP7_75t_R
+      441  167.174   DFFASRHQNx1_ASAP7_75t_R
+    35072 1.02E+04   DFFHQNx1_ASAP7_75t_R
+    14154  619.096   INVx1_ASAP7_75t_R
+     1511  198.273   MAJx2_ASAP7_75t_R
+    30794 2.69E+03   NAND2x1_ASAP7_75t_R
+      160   25.661   NAND3x1_ASAP7_75t_R
+    14355 1.26E+03   NOR2x1_ASAP7_75t_R
+       82   13.151   NOR3x1_ASAP7_75t_R
+    27961 3.26E+03   OA211x2_ASAP7_75t_R
+    23381 2.39E+03   OA21x2_ASAP7_75t_R
+      735  128.596   OA222x2_ASAP7_75t_R
+     1773  258.503   OA22x2_ASAP7_75t_R
+       38    8.311   OA31x2_ASAP7_75t_R
+      108   15.746   OA33x2_ASAP7_75t_R
+     1851  215.901   OAI21x1_ASAP7_75t_R
+     2546  371.207   OAI22x1_ASAP7_75t_R
+     5496   480.79   OR2x2_ASAP7_75t_R
+    18487 1.62E+03   OR3x1_ASAP7_75t_R
+     1338  136.556   OR4x1_ASAP7_75t_R
+      410   47.822   OR5x1_ASAP7_75t_R
+     5685   911.76   XNOR2x2_ASAP7_75t_R
+     2538  407.044   XOR2x2_ASAP7_75t_R
+        8  601.976   fakeram7_64x28
+       16 2.41E+03   fakeram7_64x28_2p
+       64  1.1E+04   fakeram_512x8
+       80 2.75E+04   fakeram_512x8_2p
+
+   Chip area for module '\cpu': 78031.568320
+     of which used for sequential elements: 10394.169480 (13.32%)
+

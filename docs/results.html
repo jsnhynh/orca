@@ -1,0 +1,741 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Building" href="building.html"><link rel="prev" title="ORCA" href="index.html">
+
+    <!-- Generated with Sphinx 9.2.0 and Furo 2025.12.19 -->
+        <title>Results - ORCA</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="_static/orca.css?v=a76efa26" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #3973DA;
+  --color-brand-content: #3973DA;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #5aa9f0;
+  --color-brand-content: #5aa9f0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #5aa9f0;
+  --color-brand-content: #5aa9f0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">ORCA</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  <span class="sidebar-brand-text">ORCA</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Overview</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="building.html">Building</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Microarchitecture</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="uarch/core/index.html">Core</a><input aria-label="Toggle navigation of Core" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="uarch/core/0-branch.html">Stage 0: Branch Prediction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uarch/core/1-fetch.html">Stage 1: Fetch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uarch/core/2-decode.html">Stage 2: Decode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uarch/core/3-rename.html">Stage 3: Rename</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uarch/core/4-dispatch.html">Stage 4: Dispatch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uarch/core/5-issue.html">Stage 5: Issue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uarch/core/6-execute.html">Stage 6: Execute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uarch/core/7-writeback.html">Stage 7: Writeback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uarch/core/8-commit.html">Stage 8: Commit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uarch/core/m-extension.html">M Extension: Multiply and Divide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uarch/core/a-extension.html">A Extension: Atomics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uarch/core/m_mode.html">Machine-Mode Traps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uarch/core/isa.html">ISA and Software Contract</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="uarch/memory/index.html">Memory</a><input aria-label="Toggle navigation of Memory" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="uarch/memory/cache.html">L1 Caches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uarch/memory/boot-rom.html">Boot ROM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uarch/memory/main-memory.html">DDR and Main Memory</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="uarch/soc/index.html">SoC</a><input aria-label="Toggle navigation of SoC" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="uarch/soc/interconnect.html">Interconnect and Clocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uarch/soc/peripherals.html">Peripherals and Registers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uarch/soc/platform.html">FPGA and KV260 Boundary</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Verification</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="verification/index.html">Verification</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Bring-Up</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="bringup/fpga.html">FPGA Bring-Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bringup/asic-synthesis.html">ASIC Synthesis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bringup/linux.html">Linux Bring-Up</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="results">
+<h1>Results<a class="headerlink" href="#results" title="Link to this heading">¶</a></h1>
+<ul class="simple">
+<li><p><strong>CoreMark:</strong> 1,032 per second at 200 MHz, 5.16 per MHz, IPC 1.51. The board log prints 1,090 because CoreMark rounds its run time down to whole seconds; the cycle count gives 1,032.</p></li>
+<li><p><strong>Embench-IoT:</strong> 2.31 per MHz over all 19 programs, 461 per second at 200 MHz.</p></li>
+<li><p><strong>Branch prediction:</strong> 98.9% of conditional branches right on CoreMark, 2.1 mispredictions per thousand instructions.</p></li>
+<li><p><strong>Architecture tests:</strong> all 67 pass, and each retires exactly the instructions the simulation retires.</p></li>
+<li><p><strong>Linux:</strong> no-MMU kernel 6.18.7 reaches a shell with 256 MiB of RAM. 40 of 40 boots finished the scripted session.</p></li>
+</ul>
+<p>All the board numbers come from the same prebuilt bitstream and images that ship in the <a class="reference internal" href="building.html"><span class="std std-doc">kit</span></a>, run over JTAG with nothing running on the Arm side. Benchmarks are GCC 15.2 at <code class="docutils literal notranslate"><span class="pre">-O3</span></code>.</p>
+<section id="linux">
+<h2>Linux<a class="headerlink" href="#linux" title="Link to this heading">¶</a></h2>
+<p>No-MMU Linux 6.18.7 boots to a BusyBox shell with 256 MiB of RAM. The kernel reaches <code class="docutils literal notranslate"><span class="pre">/init</span></code> after 1.53 s of kernel time at 200 MHz. How the image is built and loaded is on the <a class="reference internal" href="bringup/linux.html"><span class="std std-doc">Linux bring-up</span></a> page.</p>
+</section>
+<section id="timing-and-size">
+<h2>Timing and size<a class="headerlink" href="#timing-and-size" title="Link to this heading">¶</a></h2>
+<p>The full SoC closes at 5.0 ns with no failing endpoints. Placement settings move this netlist anywhere from -0.56 to 0.000 ns, so I try several and keep the one that closes. The only on-chip RAM is the L1 caches while programs and data live in the board’s DDR.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Build</p></th>
+<th class="head"><p>LUTs</p></th>
+<th class="head"><p>Registers</p></th>
+<th class="head"><p>Block RAM</p></th>
+<th class="head"><p>DSP</p></th>
+<th class="head"><p>Clock</p></th>
+<th class="head"><p>Setup slack</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Full SoC, ran on the board</p></td>
+<td><p>36,304</p></td>
+<td><p>19,303</p></td>
+<td><p>25</p></td>
+<td><p>4</p></td>
+<td><p>200 MHz</p></td>
+<td><p>0.000 ns</p></td>
+</tr>
+<tr class="row-odd"><td><p>Core + L1 (Out of context)</p></td>
+<td><p>28,583</p></td>
+<td><p>11,368</p></td>
+<td><p>21</p></td>
+<td><p>4</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Core (Out of context)</p></td>
+<td><p>26,422</p></td>
+<td><p>10,404</p></td>
+<td><p>9</p></td>
+<td><p>4</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="where-the-core-s-luts-go">
+<h2>Where the core’s LUTs go<a class="headerlink" href="#where-the-core-s-luts-go" title="Link to this heading">¶</a></h2>
+<div class="bars"><div class="bar"><span>bpu</span><i style="width:100.0%"></i><em>6,365 LUTs</em></div><div class="bar"><span>issue</span><i style="width:92.0%"></i><em>5,855 LUTs</em></div><div class="bar"><span>execute</span><i style="width:88.5%"></i><em>5,636 LUTs</em></div><div class="bar"><span>cpu_l1_subsystem</span><i style="width:32.2%"></i><em>2,052 LUTs</em></div><div class="bar"><span>rob</span><i style="width:30.2%"></i><em>1,925 LUTs</em></div><div class="bar"><span>fetch</span><i style="width:27.5%"></i><em>1,753 LUTs</em></div><div class="bar"><span>rename</span><i style="width:25.0%"></i><em>1,592 LUTs</em></div><div class="bar"><span>payload_array</span><i style="width:21.2%"></i><em>1,347 LUTs</em></div><div class="bar"><span>cache</span><i style="width:17.6%"></i><em>1,120 LUTs</em></div><div class="bar"><span>physical_regfile</span><i style="width:13.8%"></i><em>876 LUTs</em></div><div class="bar"><span>decode</span><i style="width:12.2%"></i><em>778 LUTs</em></div><div class="bar"><span>icache</span><i style="width:10.9%"></i><em>696 LUTs</em></div></div><p>These are the largest blocks of the core plus L1 caches after place and route, routed alone out of context, which keeps the blocks apart. The shipped design is flattened for retiming, so its blocks can’t be told apart.</p>
+</section>
+<section id="core-comparison">
+<h2>Core Comparison<a class="headerlink" href="#core-comparison" title="Link to this heading">¶</a></h2>
+<p>To get a better idea on how the core performs, I compared ORCA with three of the best/common open-source out-of-order RISC-V cores that I could build and run under similar conditions: NaxRiscv (SpinalHDL), RSD (SystemVerilog) and BOOM (Chisel). I also threw in Arm’s published Cortex-A9 figure as an additional datapoint. I’m sure there are other open cores available but these are the one that I found that are commonly known and can be built as a 2-wide OoO core. Every open core runs the same CoreMark and Embench sources with GCC 15.2 at -O3 and build the same out-of-context Vivado flow on the KV260 part. The scope is the core plus its L1 caches.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>ORCA</p></th>
+<th class="head"><p>NaxRiscv</p></th>
+<th class="head"><p>RSD</p></th>
+<th class="head"><p>BOOM</p></th>
+<th class="head"><p>Cortex-A9*</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ISA</p></td>
+<td><p>RV32IMA</p></td>
+<td><p>RV32IMA</p></td>
+<td><p>RV32IM</p></td>
+<td><p>RV64GC</p></td>
+<td><p>ARMv7-A</p></td>
+</tr>
+<tr class="row-odd"><td><p>Width</p></td>
+<td><p>2-wide</p></td>
+<td><p>2-wide</p></td>
+<td><p>2-wide</p></td>
+<td><p>2-wide</p></td>
+<td><p>2-wide</p></td>
+</tr>
+<tr class="row-even"><td><p>Physical Registers</p></td>
+<td><p>64</p></td>
+<td><p>64</p></td>
+<td><p>64</p></td>
+<td><p>80</p></td>
+<td><p>not published</p></td>
+</tr>
+<tr class="row-odd"><td><p>ROB</p></td>
+<td><p>32</p></td>
+<td><p>64</p></td>
+<td><p>64</p></td>
+<td><p>64</p></td>
+<td><p>not published</p></td>
+</tr>
+<tr class="row-even"><td><p>Load/store queues</p></td>
+<td><p>12 + 12</p></td>
+<td><p>16 + 16</p></td>
+<td><p>16 + 16</p></td>
+<td><p>16 + 16</p></td>
+<td><p>not published</p></td>
+</tr>
+<tr class="row-odd"><td><p>Branch prediction</p></td>
+<td><p>L0 target cache, BTB, 4-table TAGE, 16-entry RAS</p></td>
+<td><p>BTB, GShare, RAS</p></td>
+<td><p>BTB, GShare, memory dependency predictor</p></td>
+<td><p>TAGE-L, BTB, RAS</p></td>
+<td><p>dynamic</p></td>
+</tr>
+<tr class="row-even"><td><p>Cache Ways</p></td>
+<td><p>2</p></td>
+<td><p>4</p></td>
+<td><p>2</p></td>
+<td><p>4</p></td>
+<td><p>configurable</p></td>
+</tr>
+<tr class="row-odd"><td><p>L1 I Cache</p></td>
+<td><p>32 KiB</p></td>
+<td><p>16 KiB</p></td>
+<td><p>4 KiB</p></td>
+<td><p>16 KiB</p></td>
+<td><p>configurable</p></td>
+</tr>
+<tr class="row-even"><td><p>L1 D Cache</p></td>
+<td><p>16 KiB</p></td>
+<td><p>16 KiB</p></td>
+<td><p>4 KiB</p></td>
+<td><p>16 KiB</p></td>
+<td><p>configurable</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>ORCA</p></th>
+<th class="head"><p>NaxRiscv</p></th>
+<th class="head"><p>RSD</p></th>
+<th class="head"><p>BOOM</p></th>
+<th class="head"><p>Cortex-A9*</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CoreMark/ MHz</p></td>
+<td><p>5.14</p></td>
+<td><p>4.66 (-9.3%)</p></td>
+<td><p>3.15 (-38.7%)</p></td>
+<td><p>4.44 (-13.6%)</p></td>
+<td><p>3.66*</p></td>
+</tr>
+<tr class="row-odd"><td><p>CoreMark IPC</p></td>
+<td><p>1.50</p></td>
+<td><p>1.36</p></td>
+<td><p>0.92</p></td>
+<td><p>1.50 (64-bit)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CoreMark/s</p></td>
+<td><p>1,027</p></td>
+<td><p>932 (-9.3%)</p></td>
+<td><p>485 (-52.8%)</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Embench/MHz</p></td>
+<td><p>2.36</p></td>
+<td><p>2.27 (-3.8%)</p></td>
+<td><p>1.24 (-47.5%)</p></td>
+<td><p>2.17 (-8.1%)(64-bit)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Clock reached</p></td>
+<td><p>200 MHz (full)</p></td>
+<td><p>200 MHz (ooc)</p></td>
+<td><p>154 MHz (ooc)</p></td>
+<td><p>no fit</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>LUTs</p></td>
+<td><p>28.6k</p></td>
+<td><p>12.0k (-58.0%)</p></td>
+<td><p>16.0k (-44.1%)</p></td>
+<td><p>123.2k (+330.8%)(synth)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Registers</p></td>
+<td><p>11.4k</p></td>
+<td><p>7.6k</p></td>
+<td><p>9.2k</p></td>
+<td><p>62.1k (synth)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Block RAM tiles</p></td>
+<td><p>21</p></td>
+<td><p>22.5</p></td>
+<td><p>14.5</p></td>
+<td><p>11 (synth)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>* Official single core published Coremark (<a class="reference external" href="https://www.eembc.org/coremark/scores.php">EEMBC</a>).</p>
+<p>The results show that our core arguably performs the best in its 2-wide superscalar class, with Nax being the most performant and best 1-1 comparison. ORCA is 10.2% faster in Coremark/s and 4.0% faster on Embench/Mhz then Nax but unfortunately 2.38x larger. This is likely due to our routing logic and larger TAGE based predictor.</p>
+</section>
+<section id="how-orca-compares-in-charts">
+<h2>How ORCA compares, in charts<a class="headerlink" href="#how-orca-compares-in-charts" title="Link to this heading">¶</a></h2>
+<figure class="chart"><svg viewBox="0 0 640 170" role="img" aria-label="CoreMark per MHz"><text class="chart-title" x="0" y="14">CoreMark per MHz</text><g><title>ORCA: 5.14 CoreMark/MHz - simulation, the 200 MHz board build&#x27;s RTL</title><text class="chart-label" x="142" y="40" text-anchor="end">ORCA</text><rect class="bar-emph" x="150" y="26" width="400.0" height="18" rx="3"/><text class="chart-value" x="556.0" y="40">5.14</text></g><g><title>NaxRiscv: 4.66 CoreMark/MHz - simulation</title><text class="chart-label" x="142" y="68" text-anchor="end">NaxRiscv</text><rect class="bar-other" x="150" y="54" width="362.6" height="18" rx="3"/><text class="chart-value" x="518.6" y="68">4.66</text></g><g><title>BOOM: 4.44 CoreMark/MHz - simulation, RV64 code, MMU and FPU present; LUTs after synthesis, does not fit the KV260</title><text class="chart-label" x="142" y="96" text-anchor="end">BOOM</text><rect class="bar-other" x="150" y="82" width="345.5" height="18" rx="3"/><text class="chart-value" x="501.5" y="96">4.44</text></g><g><title>RSD: 3.15 CoreMark/MHz - simulation</title><text class="chart-label" x="142" y="124" text-anchor="end">RSD</text><rect class="bar-other" x="150" y="110" width="245.1" height="18" rx="3"/><text class="chart-value" x="401.1" y="124">3.15</text></g><g><title>Cortex-A9*: 2.90 CoreMark/MHz - Arm&#x27;s published figure, not measured here</title><text class="chart-label" x="142" y="152" text-anchor="end">Cortex-A9*</text><rect class="bar-other" x="150" y="138" width="225.7" height="18" rx="3"/><text class="chart-value" x="381.7" y="152">2.90</text></g></svg><figcaption>CoreMark per MHz. Open cores measured with the same CoreMark source, compiler and flags; * Arm&#x27;s published figure.</figcaption><details><summary>Data</summary><table class="chart-data"><thead><tr><th>Core</th><th>CoreMark per MHz</th><th>Note</th></tr></thead><tbody><tr><td>ORCA</td><td>5.14</td><td>simulation, the 200 MHz board build&#x27;s RTL</td></tr><tr><td>NaxRiscv</td><td>4.66</td><td>simulation</td></tr><tr><td>BOOM</td><td>4.44</td><td>simulation, RV64 code, MMU and FPU present; LUTs after synthesis, does not fit the KV260</td></tr><tr><td>RSD</td><td>3.15</td><td>simulation</td></tr><tr><td>Cortex-A9*</td><td>2.90</td><td>Arm&#x27;s published figure, not measured here</td></tr></tbody></table></details></figure><figure class="chart"><svg viewBox="0 0 640 142" role="img" aria-label="Embench-IoT speed score per MHz"><text class="chart-title" x="0" y="14">Embench-IoT speed score per MHz</text><g><title>ORCA: 2.36 per MHz - simulation, the 200 MHz board build&#x27;s RTL</title><text class="chart-label" x="142" y="40" text-anchor="end">ORCA</text><rect class="bar-emph" x="150" y="26" width="400.0" height="18" rx="3"/><text class="chart-value" x="556.0" y="40">2.36</text></g><g><title>NaxRiscv: 2.27 per MHz - simulation</title><text class="chart-label" x="142" y="68" text-anchor="end">NaxRiscv</text><rect class="bar-other" x="150" y="54" width="384.4" height="18" rx="3"/><text class="chart-value" x="540.4" y="68">2.27</text></g><g><title>BOOM: 2.17 per MHz - simulation, RV64 code, MMU and FPU present; LUTs after synthesis, does not fit the KV260</title><text class="chart-label" x="142" y="96" text-anchor="end">BOOM</text><rect class="bar-other" x="150" y="82" width="367.4" height="18" rx="3"/><text class="chart-value" x="523.4" y="96">2.17</text></g><g><title>RSD: 1.24 per MHz - simulation</title><text class="chart-label" x="142" y="124" text-anchor="end">RSD</text><rect class="bar-other" x="150" y="110" width="210.9" height="18" rx="3"/><text class="chart-value" x="366.9" y="124">1.24</text></g></svg><figcaption>Embench-IoT speed score per MHz, all 19 programs, same binaries per ISA, each core in its own simulator.</figcaption><details><summary>Data</summary><table class="chart-data"><thead><tr><th>Core</th><th>Embench-IoT speed score per MHz</th><th>Note</th></tr></thead><tbody><tr><td>ORCA</td><td>2.36</td><td>simulation, the 200 MHz board build&#x27;s RTL</td></tr><tr><td>NaxRiscv</td><td>2.27</td><td>simulation</td></tr><tr><td>BOOM</td><td>2.17</td><td>simulation, RV64 code, MMU and FPU present; LUTs after synthesis, does not fit the KV260</td></tr><tr><td>RSD</td><td>1.24</td><td>simulation</td></tr></tbody></table></details></figure><figure class="chart"><svg viewBox="0 0 640 142" role="img" aria-label="LUTs, core plus L1 caches (thousands)"><text class="chart-title" x="0" y="14">LUTs, core plus L1 caches (thousands)</text><g><title>ORCA: 28.6k k LUTs - simulation, the 200 MHz board build&#x27;s RTL</title><text class="chart-label" x="142" y="40" text-anchor="end">ORCA</text><rect class="bar-emph" x="150" y="26" width="92.8" height="18" rx="3"/><text class="chart-value" x="248.8" y="40">28.6k</text></g><g><title>NaxRiscv: 12.0k k LUTs - simulation</title><text class="chart-label" x="142" y="68" text-anchor="end">NaxRiscv</text><rect class="bar-other" x="150" y="54" width="38.8" height="18" rx="3"/><text class="chart-value" x="194.8" y="68">12.0k</text></g><g><title>BOOM: 123.2k k LUTs - simulation, RV64 code, MMU and FPU present; LUTs after synthesis, does not fit the KV260</title><text class="chart-label" x="142" y="96" text-anchor="end">BOOM</text><rect class="bar-other" x="150" y="82" width="400.0" height="18" rx="3"/><text class="chart-value" x="556.0" y="96">123.2k</text></g><g><title>RSD: 16.0k k LUTs - simulation</title><text class="chart-label" x="142" y="124" text-anchor="end">RSD</text><rect class="bar-other" x="150" y="110" width="51.9" height="18" rx="3"/><text class="chart-value" x="207.9" y="124">16.0k</text></g></svg><figcaption>LUTs, core plus L1 caches, same KV260 part and Vivado flow (lower is smaller): after place and route, except BOOM, which is after synthesis because it does not fit the part.</figcaption><details><summary>Data</summary><table class="chart-data"><thead><tr><th>Core</th><th>LUTs, core plus L1 caches (thousands)</th><th>Note</th></tr></thead><tbody><tr><td>ORCA</td><td>28.6k</td><td>simulation, the 200 MHz board build&#x27;s RTL</td></tr><tr><td>NaxRiscv</td><td>12.0k</td><td>simulation</td></tr><tr><td>BOOM</td><td>123.2k</td><td>simulation, RV64 code, MMU and FPU present; LUTs after synthesis, does not fit the KV260</td></tr><tr><td>RSD</td><td>16.0k</td><td>simulation</td></tr></tbody></table></details></figure></section>
+<section id="asic-estimate">
+<h2>ASIC estimate<a class="headerlink" href="#asic-estimate" title="Link to this heading">¶</a></h2>
+<p>While the primary implementation target is FPGA, The core and L1 caches was also synthesized using Yosys to meet 1 GHz on ASAP7 standard cells before layout in about 0.081 mm². It’s only an estimate without placement or routing, and fake RAM timing. The timing, area and sizing reports are in <code class="docutils literal notranslate"><span class="pre">results/asap7/</span></code>, and the flow is on the <a class="reference internal" href="bringup/asic-synthesis.html"><span class="std std-doc">bring-up page</span></a>.</p>
+</section>
+<section id="performance-area-timing-tuning">
+<h2>Performance, Area, &amp; Timing Tuning<a class="headerlink" href="#performance-area-timing-tuning" title="Link to this heading">¶</a></h2>
+<p>In order to stay competitive, we targeted frequency by reducing structure size tuned by the benchmarks and frequency gains and increased IPC on non critical paths. Utilization managment came well over our competition and so seeking a reduction of half was simply not plausable without major redesign. RTL alone got us to 175 MHz.</p>
+<p>At 200MHz we were pushing the limits and trade-offs that set the core’s size and clock. Past 190 MHz every failing path was a complete loop that couldnt be pipelined in half or significanty reduced in structure size to offset routing delay.</p>
+<p>RTL timing changes got us from 175 to about 190 MHz, but reaching 200MHz from there simply was EDA tool luck rather then an RTL issue. Remap optimization with net-delay placement and 0.2 ns of extra margin as well as letting LLMs perform a greedy search on all build directive combinations let us close at 200MHz after a weeks long search with each build lasting approximately an hour on a Ryzen 9800x3d. This is a significant milestone as we reach similar frequencies to Nax at even double the size. Most builds closed around 190MHz with good settings.</p>
+<p>Each row is one variant against the design it would replace, built and run the same way. Embench and CoreMark columns are the change in <strong>score per MHz</strong>, so higher is better (for CoreMark that’s fewer cycles for the same work). Net per second multiplies the score change by the clock change. LUTs are core plus L1. Blank means I didn’t measure it for that change.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Change</p></th>
+<th class="head text-right"><p>Embench score/MHz</p></th>
+<th class="head text-right"><p>CoreMark score/MHz</p></th>
+<th class="head text-right"><p>Clock</p></th>
+<th class="head text-right"><p>LUTs</p></th>
+<th class="head text-right"><p>Net per second (Embench / CoreMark)</p></th>
+<th class="head"><p>Verdict</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Mispredict redirects the front end at execute, instead of repairing at commit</p></td>
+<td class="text-right"><p>+2.06%</p></td>
+<td class="text-right"><p>+0.94%</p></td>
+<td class="text-right"><p></p></td>
+<td class="text-right"><p>+1,041</p></td>
+<td class="text-right"><p></p></td>
+<td><p>kept</p></td>
+</tr>
+<tr class="row-odd"><td><p>No rename checkpoints</p></td>
+<td class="text-right"><p>-0.29%</p></td>
+<td class="text-right"><p>-0.06%</p></td>
+<td class="text-right"><p></p></td>
+<td class="text-right"><p>-1,499</p></td>
+<td class="text-right"><p></p></td>
+<td><p>kept</p></td>
+</tr>
+<tr class="row-even"><td><p>12-entry scheduler, instead of a 12-entry ordered window</p></td>
+<td class="text-right"><p>+12.8%</p></td>
+<td class="text-right"><p>+14.7%</p></td>
+<td class="text-right"><p></p></td>
+<td class="text-right"><p>+368 (queue)</p></td>
+<td class="text-right"><p></p></td>
+<td><p>kept</p></td>
+</tr>
+<tr class="row-odd"><td><p>Macro-op fusion</p></td>
+<td class="text-right"><p>+0.35%</p></td>
+<td class="text-right"><p>+0.10%</p></td>
+<td class="text-right"><p>same</p></td>
+<td class="text-right"><p>+255</p></td>
+<td class="text-right"><p>+0.4% / +0.1%</p></td>
+<td><p>kept</p></td>
+</tr>
+<tr class="row-even"><td><p>Divider skips steps with no quotient bits</p></td>
+<td class="text-right"><p>+0.55%</p></td>
+<td class="text-right"><p>0.00%</p></td>
+<td class="text-right"><p>same</p></td>
+<td class="text-right"><p>about 0</p></td>
+<td class="text-right"><p>+0.6% / 0.0%</p></td>
+<td><p>kept</p></td>
+</tr>
+<tr class="row-odd"><td><p>L0 target table, 128 to 512 entries</p></td>
+<td class="text-right"><p>+1.13%</p></td>
+<td class="text-right"><p>+0.10%</p></td>
+<td class="text-right"><p>-1.4%</p></td>
+<td class="text-right"><p>+1,014</p></td>
+<td class="text-right"><p>-0.3% / -1.3%</p></td>
+<td><p>kept</p></td>
+</tr>
+<tr class="row-even"><td><p>ROB, 64 to 32 entries</p></td>
+<td class="text-right"><p>-0.1%</p></td>
+<td class="text-right"><p>0.0%</p></td>
+<td class="text-right"><p></p></td>
+<td class="text-right"><p></p></td>
+<td class="text-right"><p></p></td>
+<td><p>kept</p></td>
+</tr>
+<tr class="row-odd"><td><p>Split store, 12-entry scheduler</p></td>
+<td class="text-right"><p>+1.02%</p></td>
+<td class="text-right"><p>+0.25%</p></td>
+<td class="text-right"><p>same</p></td>
+<td class="text-right"><p>+1,153</p></td>
+<td class="text-right"><p>+1.0% / +0.2%</p></td>
+<td><p>dropped: 3% more area for 1%</p></td>
+</tr>
+<tr class="row-even"><td><p>Split store, 16-entry scheduler</p></td>
+<td class="text-right"><p>+1.53%</p></td>
+<td class="text-right"><p>+0.47%</p></td>
+<td class="text-right"><p>-1.7%</p></td>
+<td class="text-right"><p>+2,115</p></td>
+<td class="text-right"><p>-0.2% / -1.2%</p></td>
+<td><p>dropped</p></td>
+</tr>
+<tr class="row-odd"><td><p>Load and store queues, 12 to 16</p></td>
+<td class="text-right"><p>+1.05%</p></td>
+<td class="text-right"><p>0.00%</p></td>
+<td class="text-right"><p>-5.5%</p></td>
+<td class="text-right"><p>more</p></td>
+<td class="text-right"><p>-4.5% / -5.5%</p></td>
+<td><p>dropped</p></td>
+</tr>
+<tr class="row-even"><td><p>Load and store queues, 12 to 8</p></td>
+<td class="text-right"><p>-3.0%</p></td>
+<td class="text-right"><p>-0.7%</p></td>
+<td class="text-right"><p></p></td>
+<td class="text-right"><p>-2,700</p></td>
+<td class="text-right"><p></p></td>
+<td><p>dropped</p></td>
+</tr>
+<tr class="row-odd"><td><p>Scheduler, 12 to 8 entries</p></td>
+<td class="text-right"><p>-4.1%</p></td>
+<td class="text-right"><p>-4.4%</p></td>
+<td class="text-right"><p>worse</p></td>
+<td class="text-right"><p></p></td>
+<td class="text-right"><p></p></td>
+<td><p>dropped</p></td>
+</tr>
+<tr class="row-even"><td><p>128 physical registers</p></td>
+<td class="text-right"><p>+0.56%</p></td>
+<td class="text-right"><p>+0.60%</p></td>
+<td class="text-right"><p>-1.6%</p></td>
+<td class="text-right"><p>+2,100</p></td>
+<td class="text-right"><p>-1.0% / -1.0%</p></td>
+<td><p>dropped</p></td>
+</tr>
+<tr class="row-odd"><td><p>TAGE, 1,024 to 2,048 entries</p></td>
+<td class="text-right"><p>+0.88%</p></td>
+<td class="text-right"><p>+0.09%</p></td>
+<td class="text-right"><p>-5.7%</p></td>
+<td class="text-right"><p>block RAM</p></td>
+<td class="text-right"><p>-4.9% / -5.6%</p></td>
+<td><p>dropped</p></td>
+</tr>
+<tr class="row-even"><td><p>Load result one cycle sooner</p></td>
+<td class="text-right"><p>+0.36%</p></td>
+<td class="text-right"><p>+1.33%</p></td>
+<td class="text-right"><p>-7.9%</p></td>
+<td class="text-right"><p>+422</p></td>
+<td class="text-right"><p>-7.6% / -6.7%</p></td>
+<td><p>dropped</p></td>
+</tr>
+<tr class="row-odd"><td><p>All the larger sizes together</p></td>
+<td class="text-right"><p>+4.14%</p></td>
+<td class="text-right"><p>+1.55%</p></td>
+<td class="text-right"><p>-4.6%</p></td>
+<td class="text-right"><p>+7,077</p></td>
+<td class="text-right"><p>-0.7% / -3.1%</p></td>
+<td><p>dropped</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="pulp-ip-vs-xilinx-ip">
+<h3>PULP IP vs Xilinx IP<a class="headerlink" href="#pulp-ip-vs-xilinx-ip" title="Link to this heading">¶</a></h3>
+<p>For the SoC components I chose PULP IP for the AXI crossbar and UART 16550. I also attempted to use Xilinx’s IP which saved about 3,000 LUTs with no performance variance, however I was unable to close 200MHz out of 20 builds due to seed/placement variance. I did NOT want to do another week’s worth of searching. PULP IP was kept. It might also be useful if I ever plan on doing the full ASIC flow.</p>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="building.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Building</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="index.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Home</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026 Jason Huynh. All rights reserved.
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Results</a><ul>
+<li><a class="reference internal" href="#linux">Linux</a></li>
+<li><a class="reference internal" href="#timing-and-size">Timing and size</a></li>
+<li><a class="reference internal" href="#where-the-core-s-luts-go">Where the core’s LUTs go</a></li>
+<li><a class="reference internal" href="#core-comparison">Core Comparison</a></li>
+<li><a class="reference internal" href="#how-orca-compares-in-charts">How ORCA compares, in charts</a></li>
+<li><a class="reference internal" href="#asic-estimate">ASIC estimate</a></li>
+<li><a class="reference internal" href="#performance-area-timing-tuning">Performance, Area, &amp; Timing Tuning</a><ul>
+<li><a class="reference internal" href="#pulp-ip-vs-xilinx-ip">PULP IP vs Xilinx IP</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=3b5cce75"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>

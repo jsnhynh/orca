@@ -1,0 +1,24 @@
+PASS      1/19 aha-mont64  cycles=2930096 instret=5011327 ipc=1.710 rc=0
+PASS      2/19 crc32  cycles=2326111 instret=4005411 ipc=1.722 rc=0
+PASS      3/19 depthconv  cycles=1491641 instret=2566710 ipc=1.721 rc=0
+PASS      4/19 edn  cycles=1785155 instret=3145557 ipc=1.762 rc=0
+PASS      5/19 huffbench  cycles=1785133 instret=1985724 ipc=1.112 rc=0
+PASS      6/19 matmult-int  cycles=1425388 instret=2392326 ipc=1.678 rc=0
+PASS      7/19 md5sum  cycles=1288207 instret=2241804 ipc=1.740 rc=0
+PASS      8/19 nettle-aes  cycles=2098055 instret=4061437 ipc=1.936 rc=0
+PASS      9/19 nettle-sha256  cycles=2396557 instret=4572483 ipc=1.908 rc=0
+PASS     10/19 nsichneu  cycles=1844883 instret=2242294 ipc=1.215 rc=0
+PASS     11/19 picojpeg  cycles=1768742 instret=2777175 ipc=1.570 rc=0
+PASS     12/19 qrduino  cycles=2579192 instret=2760866 ipc=1.070 rc=0
+PASS     13/19 sglib-combined  cycles=2446468 instret=2348107 ipc=0.960 rc=0
+PASS     14/19 slre  cycles=1680808 instret=2513998 ipc=1.496 rc=0
+PASS     15/19 statemate  cycles=1692034 instret=2604133 ipc=1.539 rc=0
+PASS     16/19 tarfind  cycles=851667 instret=1172824 ipc=1.377 rc=0
+PASS     17/19 ud  cycles=821669 instret=990738 ipc=1.206 rc=0
+PASS     18/19 wikisort  cycles=588768 instret=776485 ipc=1.319 rc=0
+PASS     19/19 xgboost  cycles=6064895 instret=3348091 ipc=0.552 rc=0
+embench on the board: 19 passed, 0 failed, 0 unknown, 0 timed out, 19 run
+-------------------------------------------------------------------------------------
+orca-board-O3: speed score per mhz 2.307 over 19 benchmarks
+orca-O3: speed score per mhz 2.358 over 19 benchmarks
+nax-O3: speed score per mhz 2.266 over 19 benchmarks

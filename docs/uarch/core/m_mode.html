@@ -1,0 +1,494 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../genindex.html"><link rel="search" title="Search" href="../../search.html"><link rel="next" title="ISA and Software Contract" href="isa.html"><link rel="prev" title="A Extension: Atomics" href="a-extension.html">
+
+    <!-- Generated with Sphinx 9.2.0 and Furo 2025.12.19 -->
+        <title>Machine-Mode Traps - ORCA</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/orca.css?v=a76efa26" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #3973DA;
+  --color-brand-content: #3973DA;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #5aa9f0;
+  --color-brand-content: #5aa9f0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #5aa9f0;
+  --color-brand-content: #5aa9f0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">ORCA</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  <span class="sidebar-brand-text">ORCA</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../results.html">Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../building.html">Building</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Microarchitecture</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Core</a><input aria-label="Toggle navigation of Core" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="0-branch.html">Stage 0: Branch Prediction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1-fetch.html">Stage 1: Fetch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-decode.html">Stage 2: Decode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3-rename.html">Stage 3: Rename</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4-dispatch.html">Stage 4: Dispatch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5-issue.html">Stage 5: Issue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="6-execute.html">Stage 6: Execute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="7-writeback.html">Stage 7: Writeback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="8-commit.html">Stage 8: Commit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="m-extension.html">M Extension: Multiply and Divide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="a-extension.html">A Extension: Atomics</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Machine-Mode Traps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isa.html">ISA and Software Contract</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../memory/index.html">Memory</a><input aria-label="Toggle navigation of Memory" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../memory/cache.html">L1 Caches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../memory/boot-rom.html">Boot ROM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../memory/main-memory.html">DDR and Main Memory</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../soc/index.html">SoC</a><input aria-label="Toggle navigation of SoC" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../soc/interconnect.html">Interconnect and Clocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../soc/peripherals.html">Peripherals and Registers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../soc/platform.html">FPGA and KV260 Boundary</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Verification</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../verification/index.html">Verification</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Bring-Up</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../bringup/fpga.html">FPGA Bring-Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bringup/asic-synthesis.html">ASIC Synthesis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bringup/linux.html">Linux Bring-Up</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="machine-mode-traps">
+<h1>Machine-Mode Traps<a class="headerlink" href="#machine-mode-traps" title="Link to this heading">¶</a></h1>
+<p>Traps are precise: software observes every older instruction complete and no younger instruction started. Faults arise out of order in decode, the ALU, the AGU and the LSU, and the ROB presents them in program order.</p>
+<section id="causes">
+<h2>Causes<a class="headerlink" href="#causes" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-right"><p>Cause</p></th>
+<th class="head"><p>Source</p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">mtval</span></code></p></th>
+<th class="head"><p>Status</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-right"><p>0</p></td>
+<td><p>misaligned taken branch or jump target</p></td>
+<td><p>target address</p></td>
+<td><p>implemented</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>1</p></td>
+<td><p>instruction access fault</p></td>
+<td><p>instruction address</p></td>
+<td><p>unreported; fetch has no error signal</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>2</p></td>
+<td><p>illegal or unsupported instruction</p></td>
+<td><p>raw instruction</p></td>
+<td><p>implemented</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>3</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">EBREAK</span></code></p></td>
+<td><p>zero</p></td>
+<td><p>implemented</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>4</p></td>
+<td><p>misaligned load address</p></td>
+<td><p>effective address</p></td>
+<td><p>implemented</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>5</p></td>
+<td><p>uncached load access fault</p></td>
+<td><p>effective address</p></td>
+<td><p>implemented</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>6</p></td>
+<td><p>misaligned store address</p></td>
+<td><p>effective address</p></td>
+<td><p>implemented</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>7</p></td>
+<td><p>uncached store access fault</p></td>
+<td><p>effective address</p></td>
+<td><p>implemented</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>8</p></td>
+<td><p>user-mode <code class="docutils literal notranslate"><span class="pre">ECALL</span></code></p></td>
+<td><p>zero</p></td>
+<td><p>implemented</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>11</p></td>
+<td><p>machine-mode <code class="docutils literal notranslate"><span class="pre">ECALL</span></code></p></td>
+<td><p>zero</p></td>
+<td><p>implemented</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Cacheable memory returns no errors and cannot fault. The design has no supervisor mode, translation, PMP, delegation or vectored <code class="docutils literal notranslate"><span class="pre">mtvec</span></code>.</p>
+</section>
+<section id="mechanism">
+<h2>Mechanism<a class="headerlink" href="#mechanism" title="Link to this heading">¶</a></h2>
+<p>Each fault attaches to a ROB tag and waits until that instruction reaches the head. Until then the entry may be complete, but it cannot change state, authorize a store, train the predictor or retire.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>decode / branch / load-store fault reports
+                  |
+                  v
+          rob exception state
+                  |
+           oldest instruction
+                  v
+          commit trap event
+                  |
+                  v
+   csr update + full flush + redirect
+</pre></div>
+</div>
+<section id="design-decision-one-exception-record-vs-per-entry-cause">
+<h3>Design Decision: One Exception Record vs Per-Entry Cause<a class="headerlink" href="#design-decision-one-exception-record-vs-per-entry-cause" title="Link to this heading">¶</a></h3>
+<p>Each ROB entry has one exception bit, and one register holds the oldest known fault (valid, ROB tag, cause, <code class="docutils literal notranslate"><span class="pre">tval</span></code>). A new report replaces it only when older. Per-entry cause and <code class="docutils literal notranslate"><span class="pre">tval</span></code> storage would add area and wide fields to the result bus and commit mux. A flush clears the record, so wrong-path faults never reach the head.</p>
+<p>When the tagged instruction reaches the head:</p>
+<ol class="arabic simple">
+<li><p>The ROB registers a trap event, which stops retirement and allocation.</p></li>
+<li><p>The CSR bank writes <code class="docutils literal notranslate"><span class="pre">mepc</span></code>, <code class="docutils literal notranslate"><span class="pre">mcause</span></code> and <code class="docutils literal notranslate"><span class="pre">mtval</span></code>, copies <code class="docutils literal notranslate"><span class="pre">MIE</span></code> to <code class="docutils literal notranslate"><span class="pre">MPIE</span></code>, clears <code class="docutils literal notranslate"><span class="pre">MIE</span></code>, saves the previous privilege in <code class="docutils literal notranslate"><span class="pre">MPP</span></code> and enters machine mode.</p></li>
+<li><p>A full flush clears all speculative state, including the FTQ, and fetch restarts at <code class="docutils literal notranslate"><span class="pre">mtvec</span></code>.</p></li>
+</ol>
+<p>The registered trap keeps this path off the ROB-to-front-end timing. The trap uses a dedicated redirect; routing it as a committed branch would train the BTB and TAGE with the handler address. A faulting instruction does not increment <code class="docutils literal notranslate"><span class="pre">minstret</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">MRET</span></code> retires, redirects to <code class="docutils literal notranslate"><span class="pre">mepc</span></code>, restores <code class="docutils literal notranslate"><span class="pre">MIE</span></code> from <code class="docutils literal notranslate"><span class="pre">MPIE</span></code> and sets <code class="docutils literal notranslate"><span class="pre">MPIE</span></code> to one.</p>
+</section>
+</section>
+<section id="csrs">
+<h2>CSRs<a class="headerlink" href="#csrs" title="Link to this heading">¶</a></h2>
+<p>Decode compresses the 12-bit CSR address into a short ID, and unknown CSRs or writes to read-only CSRs become illegal-instruction traps. CSR writes land one cycle after retirement, so retirement drives one register; CSR ops issue only at the head and nothing retires in that gap. <code class="docutils literal notranslate"><span class="pre">mepc</span></code> and <code class="docutils literal notranslate"><span class="pre">mtvec</span></code> are word aligned, <code class="docutils literal notranslate"><span class="pre">MPP</span></code> holds M or U, and <code class="docutils literal notranslate"><span class="pre">misa</span></code> reads <code class="docutils literal notranslate"><span class="pre">0x4010_1101</span></code>.</p>
+</section>
+<section id="uncached-accesses">
+<h2>Uncached Accesses<a class="headerlink" href="#uncached-accesses" title="Link to this heading">¶</a></h2>
+<p>AXI read errors on uncached loads return through the data router and LSU, and the entry completes as faulting without a register write.</p>
+<p>Uncached stores are one-shot. The store reaches the head, the ROB authorizes it once, the queue sends the write and waits, and an OKAY response permits retirement while an error raises cause 7 with the saved address. Interrupts wait behind an authorized store, so no flush can interrupt a write with an unknown outcome. Alignment is checked before any request leaves.</p>
+</section>
+<section id="interrupts">
+<h2>Interrupts<a class="headerlink" href="#interrupts" title="Link to this heading">¶</a></h2>
+<p>Interrupts use the same registered trap event. Each requires its enable and pending bits, plus <code class="docutils literal notranslate"><span class="pre">mstatus.MIE</span></code> in machine mode; U-mode always takes interrupts.</p>
+<ul class="simple">
+<li><p>Bits: <code class="docutils literal notranslate"><span class="pre">MSIE</span></code>/<code class="docutils literal notranslate"><span class="pre">MSIP</span></code>, <code class="docutils literal notranslate"><span class="pre">MTIE</span></code>/<code class="docutils literal notranslate"><span class="pre">MTIP</span></code>, <code class="docutils literal notranslate"><span class="pre">MEIE</span></code>/<code class="docutils literal notranslate"><span class="pre">MEIP</span></code>.</p></li>
+<li><p>Priority: external, software, timer. Direct <code class="docutils literal notranslate"><span class="pre">mtvec</span></code> sends all three to one handler.</p></li>
+<li><p>The request is registered and suppressed after a CSR write or trap, so a just-cleared enable takes effect immediately.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mepc</span></code> is the head’s PC. With an empty ROB, allocation admits one group to supply it.</p></li>
+<li><p>A head exception takes precedence, and an authorized store or started <code class="docutils literal notranslate"><span class="pre">FENCE.I</span></code> finishes first (<a class="reference internal" href="8-commit.html#interrupts"><span class="std std-ref">commit</span></a>).</p></li>
+</ul>
+<p>The timer is a 64-bit <code class="docutils literal notranslate"><span class="pre">mtime</span></code> and <code class="docutils literal notranslate"><span class="pre">mtimecmp</span></code> peripheral at <code class="docutils literal notranslate"><span class="pre">0x8000_2000</span></code>, with a CLINT view at <code class="docutils literal notranslate"><span class="pre">0x8001_0000</span></code> for Linux. The UART and a test source share the external interrupt, and software reads their status registers to identify the source. <code class="docutils literal notranslate"><span class="pre">WFI</span></code> resumes immediately.</p>
+</section>
+<section id="fences">
+<h2>Fences<a class="headerlink" href="#fences" title="Link to this heading">¶</a></h2>
+<p>When <code class="docutils literal notranslate"><span class="pre">FENCE</span></code> reaches the head, older loads have completed and older uncached stores have their responses. Uncached loads issue only at the head, so device reads cannot pass older stores or execute on a wrong path.</p>
+<p><code class="docutils literal notranslate"><span class="pre">FENCE.I</span></code> writes back and invalidates the D-cache, invalidates the I-cache, flushes the predictor and restarts fetch at <code class="docutils literal notranslate"><span class="pre">pc+4</span></code> (<a class="reference internal" href="8-commit.html#fence-i"><span class="std std-ref">commit</span></a>, <a class="reference internal" href="../memory/cache.html#l1-integration"><span class="std std-ref">caches</span></a>). This covers one hart and its host, with no general coherence.</p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.riscv.org/reference/isa/priv/machine.html">RISC-V machine-level ISA</a></p></li>
+<li><p><a class="reference external" href="https://docs.riscv.org/reference/isa/unpriv/zifencei.html">RISC-V Zifencei extension</a></p></li>
+</ul>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="isa.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">ISA and Software Contract</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="a-extension.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">A Extension: Atomics</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026 Jason Huynh. All rights reserved.
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Machine-Mode Traps</a><ul>
+<li><a class="reference internal" href="#causes">Causes</a></li>
+<li><a class="reference internal" href="#mechanism">Mechanism</a><ul>
+<li><a class="reference internal" href="#design-decision-one-exception-record-vs-per-entry-cause">Design Decision: One Exception Record vs Per-Entry Cause</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#csrs">CSRs</a></li>
+<li><a class="reference internal" href="#uncached-accesses">Uncached Accesses</a></li>
+<li><a class="reference internal" href="#interrupts">Interrupts</a></li>
+<li><a class="reference internal" href="#fences">Fences</a></li>
+<li><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=3b5cce75"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>

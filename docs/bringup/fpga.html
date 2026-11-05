@@ -1,0 +1,521 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="ASIC Synthesis" href="asic-synthesis.html"><link rel="prev" title="Verification" href="../verification/index.html">
+
+    <!-- Generated with Sphinx 9.2.0 and Furo 2025.12.19 -->
+        <title>FPGA Bring-Up - ORCA</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../_static/orca.css?v=a76efa26" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #3973DA;
+  --color-brand-content: #3973DA;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #5aa9f0;
+  --color-brand-content: #5aa9f0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #5aa9f0;
+  --color-brand-content: #5aa9f0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">ORCA</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <span class="sidebar-brand-text">ORCA</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../results.html">Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../building.html">Building</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Microarchitecture</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../uarch/core/index.html">Core</a><input aria-label="Toggle navigation of Core" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../uarch/core/0-branch.html">Stage 0: Branch Prediction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uarch/core/1-fetch.html">Stage 1: Fetch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uarch/core/2-decode.html">Stage 2: Decode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uarch/core/3-rename.html">Stage 3: Rename</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uarch/core/4-dispatch.html">Stage 4: Dispatch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uarch/core/5-issue.html">Stage 5: Issue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uarch/core/6-execute.html">Stage 6: Execute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uarch/core/7-writeback.html">Stage 7: Writeback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uarch/core/8-commit.html">Stage 8: Commit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uarch/core/m-extension.html">M Extension: Multiply and Divide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uarch/core/a-extension.html">A Extension: Atomics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uarch/core/m_mode.html">Machine-Mode Traps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uarch/core/isa.html">ISA and Software Contract</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../uarch/memory/index.html">Memory</a><input aria-label="Toggle navigation of Memory" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../uarch/memory/cache.html">L1 Caches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uarch/memory/boot-rom.html">Boot ROM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uarch/memory/main-memory.html">DDR and Main Memory</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../uarch/soc/index.html">SoC</a><input aria-label="Toggle navigation of SoC" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../uarch/soc/interconnect.html">Interconnect and Clocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uarch/soc/peripherals.html">Peripherals and Registers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uarch/soc/platform.html">FPGA and KV260 Boundary</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Verification</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../verification/index.html">Verification</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Bring-Up</span></p>
+<ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">FPGA Bring-Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asic-synthesis.html">ASIC Synthesis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux.html">Linux Bring-Up</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="fpga-bring-up">
+<h1>FPGA Bring-Up<a class="headerlink" href="#fpga-bring-up" title="Link to this heading">¶</a></h1>
+<a class="reference internal image-reference" href="../_images/kv260.svg"><img alt="KV260 bring-up over USB JTAG" src="../_images/kv260.svg" style="width: 100%;" />
+</a>
+<p>ORCA is implemented on the Kria KV260 at 200 MHz. The core and SoC sit in the programmable logic (PL), and the processing system’s (PS) DDR serves as ORCA’s only memory. A single USB cable carries configuration, program loading and the console, so no SD card or operating system is needed on the board.</p>
+<section id="pl-block-design">
+<h2>1. PL Block Design<a class="headerlink" href="#pl-block-design" title="Link to this heading">¶</a></h2>
+<p>The PL design is a small Vivado block design built around <code class="docutils literal notranslate"><span class="pre">orca_pl_top</span></code>, which is the full <a class="reference internal" href="../uarch/soc/index.html"><span class="std std-doc">SoC</span></a>. Five blocks surround it:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Block</p></th>
+<th class="head"><p>Role</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PS 32-bit master port (HPM0)</p></td>
+<td><p>host aperture: 128 KiB at <code class="docutils literal notranslate"><span class="pre">0xa400_0000</span></code> covering ORCA’s registers and DMA region</p></td>
+</tr>
+<tr class="row-odd"><td><p>PS 128-bit slave port (HP0)</p></td>
+<td><p>ORCA’s DDR path; ORCA <code class="docutils literal notranslate"><span class="pre">0x1000_0000</span></code> maps to PS <code class="docutils literal notranslate"><span class="pre">0x7000_0000</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>SmartConnect</p></td>
+<td><p>joins the PS master port to ORCA’s host port</p></td>
+</tr>
+<tr class="row-odd"><td><p>MMCM</p></td>
+<td><p>generates the 200 MHz core clock from the PS’s 100 MHz <code class="docutils literal notranslate"><span class="pre">pl_clk0</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>processor reset block</p></td>
+<td><p>holds ORCA in reset until the MMCM locks</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A single clock drives ORCA, both PS ports and the SmartConnect, so no clock domain crossings exist in the PL. The only package pins used are six status LEDs on the Pmod header.</p>
+<section id="design-decision-mmcm-vs-ps-clock">
+<h3>Design Decision: MMCM vs PS Clock<a class="headerlink" href="#design-decision-mmcm-vs-ps-clock" title="Link to this heading">¶</a></h3>
+<p>The PS PLLs can only produce 175, 177.8 and 200 MHz in the range of interest, and any other value would require retuning PLLs shared with the PS peripherals or DDR. An MMCM in the PL was chosen instead. It produces nearly any frequency from the PS’s 100 MHz and can be retuned on an already routed design without another place and route, which made it practical to test different clock targets.</p>
+</section>
+</section>
+<section id="implementation-settings">
+<h2>2. Implementation Settings<a class="headerlink" href="#implementation-settings" title="Link to this heading">¶</a></h2>
+<p>Timing closure at 200 MHz depended on both the RTL and the implementation settings. The RTL alone reached 175 MHz, and RTL changes for timing brought the design to about 190 MHz. The remaining step to 200 MHz came from placement: with the RTL frozen, more than twenty placement draws of roughly an hour each were run across directive combinations, and the first to meet every constraint is the recipe below. Each setting is listed with the measurement that justified it, on the netlist of that point in the project (worst setup slack at 200 MHz).</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Setting</p></th>
+<th class="head"><p>Effect on closure</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Core clock from an MMCM fed by the PS’s 100 MHz</p></td>
+<td><p>Together with a synthesis clock constraint, a flattened core and two rare-event register cuts, this round moved 200 MHz from -0.746 to -0.149 ns.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MMCM VCO at 1600 MHz (1600 / 8)</p></td>
+<td><p>Clock uncertainty fell from 0.062 to 0.053 ns against the wizard’s 1200 / 6; slack moved from -0.149 to -0.140 ns on the same routing.</p></td>
+</tr>
+<tr class="row-even"><td><p>Core synthesized alone with full flattening</p></td>
+<td><p>The largest single gain in a one-change-at-a-time directive sweep: -0.512 ns against -0.723 ns with hierarchy kept.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Global retiming on core synthesis</p></td>
+<td><p>No measurable change (-0.613 ns with and without), since retiming found nothing to move. It remains in the shipped recipe.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">opt_design</span> <span class="pre">-directive</span> <span class="pre">ExploreWithRemap</span></code></p></td>
+<td><p>Present in every run that closed 200 MHz.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">place_design</span> <span class="pre">-directive</span> <span class="pre">ExtraNetDelay_high</span></code></p></td>
+<td><p>On the same netlist: -0.196 ns placed, against -0.560 ns for <code class="docutils literal notranslate"><span class="pre">AltSpreadLogic_medium</span></code> and -0.673 ns for <code class="docutils literal notranslate"><span class="pre">AltSpreadLogic_high</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p>Setup over-constraint during placement (0.2 ns, 0.155 ns in the final build), removed before routing</p></td>
+<td><p>The placer targets a tighter clock than the router needs. The final placement measured -0.053 ns with the over-constraint applied.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Core clock buffer rooted in clock region X2Y1</p></td>
+<td><p>Used in the final closure. A pblock floorplan with the root at X1Y1 was tried twice and gave worse slack.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">route_design</span> <span class="pre">-directive</span> <span class="pre">AggressiveExplore</span></code></p></td>
+<td><p>Routed result of -0.084 ns on the first closing netlist.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-route closing loop: <code class="docutils literal notranslate"><span class="pre">phys_opt_design</span></code> with AggressiveExplore, AlternateReplication and AggressiveFanoutOpt, stopping at the first pass that fails to improve</p></td>
+<td><p>Took -0.084 ns to 0.000 ns. The final build ends at WNS 0.000 ns, WHS 0.009 ns.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The same tool version and thread count reproduce the same placement, while each route writes a different bitstream. Vivado runs on the Windows side, so a staging script copies the RTL, constraints and boot ROM image there, replacing only files it owns and recording a checksum per file. <code class="docutils literal notranslate"><span class="pre">fpga/kv260/project/build_200mhz.tcl</span></code> applies the settings above to the project.</p>
+<section id="design-decision-placement-search-vs-further-rtl-changes">
+<h3>Design Decision: Placement Search vs Further RTL Changes<a class="headerlink" href="#design-decision-placement-search-vs-further-rtl-changes" title="Link to this heading">¶</a></h3>
+<p>Past 190 MHz, every failing path was a single-cycle loop (wakeup and select, forwarding, rename, queue compares, fetch steering), and routing made up 62 to 75% of each path’s delay. These loops could not be pipelined without costing IPC, and settings that helped one netlist did nothing for the next. The decision was to put IPC first, freeze the RTL, and close the last step through placement alone.</p>
+</section>
+</section>
+<section id="loading-the-design">
+<h2>3. Loading the Design<a class="headerlink" href="#loading-the-design" title="Link to this heading">¶</a></h2>
+<p>The board is configured from the host over JTAG with <code class="docutils literal notranslate"><span class="pre">xsdb</span></code>, the Vivado debugger, through the script <code class="docutils literal notranslate"><span class="pre">kv260_jtag.tcl</span></code>:</p>
+<ol class="arabic simple">
+<li><p>The PS boot mode register is set to JTAG boot and a system reset is issued, so the PS boot ROM waits for the debugger instead of starting the flash firmware.</p></li>
+<li><p>The PL is configured with the bitstream.</p></li>
+<li><p>Vivado’s generated <code class="docutils literal notranslate"><span class="pre">psu_init</span></code> runs. It starts the PS clocks including <code class="docutils literal notranslate"><span class="pre">pl_clk0</span></code>, brings up the DDR controller, removes the PS to PL isolation and releases the PL reset.</p></li>
+<li><p>The console relay is loaded onto Arm core 0, and the script waits for its ready word.</p></li>
+</ol>
+<p>After setup, the script accepts one command per line on standard input (read a word, write a word, load a file into memory, read or write the console rings, reload the bitstream) and answers each with one line. <code class="docutils literal notranslate"><span class="pre">orca_host.py</span></code> drives this interface and holds ORCA’s register map and launch protocol. Reloading the bitstream resets ORCA, its caches and the DDR bridge while the PS and DDR stay configured, which gives every run a clean PL state.</p>
+</section>
+<section id="firmware">
+<h2>4. Firmware<a class="headerlink" href="#firmware" title="Link to this heading">¶</a></h2>
+<p>Two small programs run on the board without an operating system.</p>
+<p><strong>Console relay (Arm core 0, bare metal).</strong> ORCA’s UART is connected on chip to a second, host-facing UART, with TX and RX crossed like a null modem cable. Polling that UART one register at a time over JTAG is limited to a few hundred characters per second, which is far too slow for a Linux boot. The relay polls the UART locally and copies each received byte into a 64 KiB ring in PS on-chip memory at <code class="docutils literal notranslate"><span class="pre">0xfffe_0000</span></code>, and the host reads all new bytes in one bulk transfer. Keystrokes travel the other way through a 256-byte transmit ring at <code class="docutils literal notranslate"><span class="pre">0xfffd_0100</span></code>. The relay waits for a go flag before its first UART access, because the host programs the baud rate first and an Arm read during baud setup never completes. The console runs at 115200 baud.</p>
+<p><strong>Boot stub (ORCA boot ROM).</strong> The <a class="reference internal" href="../uarch/memory/boot-rom.html#the-boot-stub"><span class="std std-ref">boot stub</span></a> spins on the run ID register. When the host writes a new ID, the stub loads the entry address and argument, executes <code class="docutils literal notranslate"><span class="pre">FENCE.I</span></code>, and calls the program. On return, it writes the return value and the run ID to the last two words of the DMA region, which the host polls.</p>
+<p>From the host side, a launch is done in order: ORCA is stopped and the host waits for the stopped status, the completion words are cleared, the entry, argument and a new run ID are written and read back, and the run bit is set.</p>
+<section id="design-decision-arm-relay-vs-uart-pin">
+<h3>Design Decision: Arm Relay vs UART Pin<a class="headerlink" href="#design-decision-arm-relay-vs-uart-pin" title="Link to this heading">¶</a></h3>
+<p>A console on Pmod pins would need dedicated TX and RX pins and a serial connection to the host. Since the host already reaches the PL over JTAG, the console was routed through a second UART inside the SoC and relayed by the otherwise idle Arm core. No UART pins are used, and the Pmod header carries the status LEDs.</p>
+</section>
+</section>
+<section id="loading-larger-programs">
+<h2>5. Loading Larger Programs<a class="headerlink" href="#loading-larger-programs" title="Link to this heading">¶</a></h2>
+<p>Small payloads of up to about 8 KiB are written through the host aperture into the DMA region at <code class="docutils literal notranslate"><span class="pre">0x1fff_c100</span></code>. Larger images bypass ORCA completely: the debug port writes them directly into PS DDR at <code class="docutils literal notranslate"><span class="pre">0x7000_0000</span></code>, which ORCA sees as <code class="docutils literal notranslate"><span class="pre">0x1000_0000</span></code>.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Program</p></th>
+<th class="head"><p>Load</p></th>
+<th class="head"><p>Start</p></th>
+<th class="head"><p>Result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Architecture tests</p></td>
+<td><p>each test’s flat image into DDR over the debug port</p></td>
+<td><p>entry <code class="docutils literal notranslate"><span class="pre">0x1000_0000</span></code> through the boot stub</p></td>
+<td><p>pass or fail word in the mailbox (last DMA word), with cycle and instruction counts just below it</p></td>
+</tr>
+<tr class="row-odd"><td><p>Embench-IoT</p></td>
+<td><p>each program’s image into DDR</p></td>
+<td><p>entry <code class="docutils literal notranslate"><span class="pre">0x1000_0000</span></code></p></td>
+<td><p>return code, cycles and instructions of the timed call at DMA offset <code class="docutils literal notranslate"><span class="pre">0x800</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>CoreMark</p></td>
+<td><p>image into DDR</p></td>
+<td><p>entry <code class="docutils literal notranslate"><span class="pre">0x1000_0000</span></code></p></td>
+<td><p>console output, including the cycle and instruction counters</p></td>
+</tr>
+<tr class="row-odd"><td><p>Random programs</p></td>
+<td><p>image into DDR, with the signature area prefilled with a marker</p></td>
+<td><p>entry <code class="docutils literal notranslate"><span class="pre">0x1000_0000</span></code></p></td>
+<td><p>signature in the DMA region, compared with Sail</p></td>
+</tr>
+<tr class="row-even"><td><p>Linux</p></td>
+<td><p>kernel at DDR offset 0, device tree at <code class="docutils literal notranslate"><span class="pre">0x03f0_0000</span></code>, and a five-instruction shim into the DMA region</p></td>
+<td><p>the shim, with the device tree address as its argument (<a class="reference internal" href="linux.html"><span class="std std-doc">Linux</span></a>)</p></td>
+<td><p>console</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>By default, every architecture test and benchmark program starts from a fresh bitstream. The <code class="docutils literal notranslate"><span class="pre">--quick</span></code> option loads the bitstream once and restarts ORCA between programs, which runs the 67 architecture tests in about 30 seconds. The commands are listed in <a class="reference internal" href="../building.html"><span class="std std-doc">building</span></a>.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="asic-synthesis.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">ASIC Synthesis</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../verification/index.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Verification</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026 Jason Huynh. All rights reserved.
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">FPGA Bring-Up</a><ul>
+<li><a class="reference internal" href="#pl-block-design">1. PL Block Design</a><ul>
+<li><a class="reference internal" href="#design-decision-mmcm-vs-ps-clock">Design Decision: MMCM vs PS Clock</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#implementation-settings">2. Implementation Settings</a><ul>
+<li><a class="reference internal" href="#design-decision-placement-search-vs-further-rtl-changes">Design Decision: Placement Search vs Further RTL Changes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#loading-the-design">3. Loading the Design</a></li>
+<li><a class="reference internal" href="#firmware">4. Firmware</a><ul>
+<li><a class="reference internal" href="#design-decision-arm-relay-vs-uart-pin">Design Decision: Arm Relay vs UART Pin</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#loading-larger-programs">5. Loading Larger Programs</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=3b5cce75"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>
