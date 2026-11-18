@@ -1,0 +1,218 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1760 880" width="1760" height="880" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 z" fill="context-stroke" stroke="context-stroke"/></marker></defs>
+<rect width="1760" height="880" fill="#ffffff"/>
+<text x="30" y="40" font-size="22" font-weight="bold" fill="#000">Branch prediction unit: TAGE, BTB, RAS and FTQ</text>
+<rect x="240" y="80" width="1480" height="760" rx="18" fill="#f5f5f5" fill-opacity="0.6" stroke="#666" stroke-opacity="0.45"/>
+<text x="980.0" y="98" font-size="13" font-weight="bold" text-anchor="middle" fill="#333">Branch prediction unit</text>
+<rect x="280" y="120" width="1000" height="680" rx="18" fill="#f5f5f5" fill-opacity="0.6" stroke="#666" stroke-opacity="0.45"/>
+<text x="780.0" y="138" font-size="13" font-weight="bold" text-anchor="middle" fill="#333">TAGE</text>
+<rect x="1320" y="120" width="360" height="680" rx="18" fill="#f5f5f5" fill-opacity="0.6" stroke="#666" stroke-opacity="0.45"/>
+<text x="1500.0" y="138" font-size="13" font-weight="bold" text-anchor="middle" fill="#333">BTB and RAS</text>
+<path d="M100,360 L100,280" fill="none" stroke="#9673a6" stroke-width="1.2" stroke-dasharray="3,3" marker-end="url(#a)"/>
+<path d="M200,180 L320,180" fill="none" stroke="#9673a6" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M400,180 L440,180" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M600,200 L620,200 L620,244 L640,244" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M200,260 L220,260 L220,540 L320,540" fill="none" stroke="#9673a6" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M640,244 L600,244 L600,300 L560,300" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M640,244 L640,300" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M520,320 L520,380 L520,440 L520,440" fill="none" stroke="#d79b00" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M600,320 L600,360" fill="none" stroke="#d79b00" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M620,440 L620,440 L620,400" fill="none" stroke="#82b366" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M720,248 L720,280" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M800,248 L800,280" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M720,320 L720,380 L720,440 L720,440" fill="none" stroke="#d79b00" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M800,320 L800,360" fill="none" stroke="#d79b00" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M820,440 L820,440 L820,400" fill="none" stroke="#82b366" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M920,248 L920,280" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1000,248 L1000,280" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M920,320 L920,380 L920,440 L920,440" fill="none" stroke="#d79b00" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1000,320 L1000,360" fill="none" stroke="#d79b00" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1020,440 L1020,440 L1020,400" fill="none" stroke="#82b366" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1120,248 L1120,280" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1200,248 L1200,280" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1120,320 L1120,380 L1120,440 L1120,440" fill="none" stroke="#d79b00" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1200,320 L1200,360" fill="none" stroke="#d79b00" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1220,440 L1220,440 L1220,400" fill="none" stroke="#82b366" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M380,600 L380,640" fill="none" stroke="#82b366" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M520,600 L520,600 L520,640 L520,640" fill="none" stroke="#82b366" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M620,360 L620,360 L620,640 L620,640" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M440,660 L480,660" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M720,600 L720,600 L720,640 L720,640" fill="none" stroke="#82b366" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M820,360 L820,360 L820,640 L820,640" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M640,660 L680,660" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M920,600 L920,600 L920,640 L920,640" fill="none" stroke="#82b366" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1020,360 L1020,360 L1020,640 L1020,640" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M840,660 L880,660" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1120,600 L1120,600 L1120,640 L1120,640" fill="none" stroke="#82b366" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1220,360 L1220,360 L1220,640 L1220,640" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1040,660 L1080,660" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1160,680 L1160,720" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1080,740 L20,740 L20,280" fill="none" stroke="#d6b656" stroke-width="1.2" stroke-dasharray="3,3" marker-end="url(#a)"/>
+<path d="M1560,320 L1560,360" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1560,400 L1560,440" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1380,320 L1380,320 L1380,440 L1380,440" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1500,480 L1500,520" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1500,560 L1500,600" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1600,460 L1640,460" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1560,640 L1640,640" fill="none" stroke="#b85450" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1240,740 L1280,740 L1660,740 L1660,680" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<text x="100" y="323" font-size="10" text-anchor="middle" fill="#fff" stroke="#fff" stroke-width="4">deq</text>
+<text x="100" y="323" font-size="10" text-anchor="middle" fill="#666">deq</text>
+<text x="260" y="183" font-size="10" text-anchor="middle" fill="#fff" stroke="#fff" stroke-width="4">ghr  recover</text>
+<text x="260" y="183" font-size="10" text-anchor="middle" fill="#666">ghr  recover</text>
+<text x="220" y="403" font-size="10" text-anchor="middle" fill="#fff" stroke="#fff" stroke-width="4">pc[11:2]</text>
+<text x="220" y="403" font-size="10" text-anchor="middle" fill="#666">pc[11:2]</text>
+<text x="520" y="353" font-size="10" text-anchor="middle" fill="#fff" stroke="#fff" stroke-width="4">index</text>
+<text x="520" y="353" font-size="10" text-anchor="middle" fill="#666">index</text>
+<text x="600" y="343" font-size="10" text-anchor="middle" fill="#fff" stroke="#fff" stroke-width="4">tag</text>
+<text x="600" y="343" font-size="10" text-anchor="middle" fill="#666">tag</text>
+<text x="720" y="353" font-size="10" text-anchor="middle" fill="#fff" stroke="#fff" stroke-width="4">index</text>
+<text x="720" y="353" font-size="10" text-anchor="middle" fill="#666">index</text>
+<text x="800" y="343" font-size="10" text-anchor="middle" fill="#fff" stroke="#fff" stroke-width="4">tag</text>
+<text x="800" y="343" font-size="10" text-anchor="middle" fill="#666">tag</text>
+<text x="920" y="353" font-size="10" text-anchor="middle" fill="#fff" stroke="#fff" stroke-width="4">index</text>
+<text x="920" y="353" font-size="10" text-anchor="middle" fill="#666">index</text>
+<text x="1000" y="343" font-size="10" text-anchor="middle" fill="#fff" stroke="#fff" stroke-width="4">tag</text>
+<text x="1000" y="343" font-size="10" text-anchor="middle" fill="#666">tag</text>
+<text x="1120" y="353" font-size="10" text-anchor="middle" fill="#fff" stroke="#fff" stroke-width="4">index</text>
+<text x="1120" y="353" font-size="10" text-anchor="middle" fill="#666">index</text>
+<text x="1200" y="343" font-size="10" text-anchor="middle" fill="#fff" stroke="#fff" stroke-width="4">tag</text>
+<text x="1200" y="343" font-size="10" text-anchor="middle" fill="#666">tag</text>
+<text x="520" y="623" font-size="10" text-anchor="middle" fill="#fff" stroke="#fff" stroke-width="4">ctr</text>
+<text x="520" y="623" font-size="10" text-anchor="middle" fill="#666">ctr</text>
+<text x="620" y="503" font-size="10" text-anchor="middle" fill="#fff" stroke="#fff" stroke-width="4">hit</text>
+<text x="620" y="503" font-size="10" text-anchor="middle" fill="#666">hit</text>
+<text x="720" y="623" font-size="10" text-anchor="middle" fill="#fff" stroke="#fff" stroke-width="4">ctr</text>
+<text x="720" y="623" font-size="10" text-anchor="middle" fill="#666">ctr</text>
+<text x="820" y="503" font-size="10" text-anchor="middle" fill="#fff" stroke="#fff" stroke-width="4">hit</text>
+<text x="820" y="503" font-size="10" text-anchor="middle" fill="#666">hit</text>
+<text x="920" y="623" font-size="10" text-anchor="middle" fill="#fff" stroke="#fff" stroke-width="4">ctr</text>
+<text x="920" y="623" font-size="10" text-anchor="middle" fill="#666">ctr</text>
+<text x="1020" y="503" font-size="10" text-anchor="middle" fill="#fff" stroke="#fff" stroke-width="4">hit</text>
+<text x="1020" y="503" font-size="10" text-anchor="middle" fill="#666">hit</text>
+<text x="1120" y="623" font-size="10" text-anchor="middle" fill="#fff" stroke="#fff" stroke-width="4">ctr</text>
+<text x="1120" y="623" font-size="10" text-anchor="middle" fill="#666">ctr</text>
+<text x="1220" y="503" font-size="10" text-anchor="middle" fill="#fff" stroke="#fff" stroke-width="4">hit</text>
+<text x="1220" y="503" font-size="10" text-anchor="middle" fill="#666">hit</text>
+<text x="560" y="743" font-size="10" text-anchor="middle" fill="#fff" stroke="#fff" stroke-width="4">provider, alt, ghr</text>
+<text x="560" y="743" font-size="10" text-anchor="middle" fill="#666">provider, alt, ghr</text>
+<text x="1560" y="423" font-size="10" text-anchor="middle" fill="#fff" stroke="#fff" stroke-width="4">2x</text>
+<text x="1560" y="423" font-size="10" text-anchor="middle" fill="#666">2x</text>
+<text x="1440" y="383" font-size="10" text-anchor="middle" fill="#fff" stroke="#fff" stroke-width="4">targ, type  2x</text>
+<text x="1440" y="383" font-size="10" text-anchor="middle" fill="#666">targ, type  2x</text>
+<text x="1620" y="463" font-size="10" text-anchor="middle" fill="#fff" stroke="#fff" stroke-width="4">pc_targ</text>
+<text x="1620" y="463" font-size="10" text-anchor="middle" fill="#666">pc_targ</text>
+<text x="1600" y="643" font-size="10" text-anchor="middle" fill="#fff" stroke="#fff" stroke-width="4">pc_ret</text>
+<text x="1600" y="643" font-size="10" text-anchor="middle" fill="#666">pc_ret</text>
+<text x="1440" y="743" font-size="10" text-anchor="middle" fill="#fff" stroke="#fff" stroke-width="4">taken</text>
+<text x="1440" y="743" font-size="10" text-anchor="middle" fill="#666">taken</text>
+<rect x="0" y="120" width="200" height="160" rx="14.0" fill="#e1d5e7" stroke="#9673a6" stroke-width="1"/>
+<text x="100.0" y="139" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">FTQ</text>
+<rect x="8" y="150" width="184" height="18" rx="9" fill="#e1d5e7" fill-opacity="0.55" stroke="#9673a6" stroke-width="1"/>
+<text x="100.0" y="163" font-size="10" text-anchor="middle" fill="#000">pc | pred | alt | provider | ghr</text>
+<rect x="8" y="172" width="184" height="18" rx="9" fill="#e1d5e7" fill-opacity="0.55" stroke="#9673a6" stroke-width="1"/>
+<rect x="8" y="194" width="184" height="18" rx="9" fill="#e1d5e7" fill-opacity="0.55" stroke="#9673a6" stroke-width="1"/>
+<rect x="8" y="216" width="184" height="18" rx="9" fill="#e1d5e7" fill-opacity="0.55" stroke="#9673a6" stroke-width="1"/>
+<rect x="8" y="238" width="184" height="18" rx="9" fill="#e1d5e7" fill-opacity="0.55" stroke="#9673a6" stroke-width="1"/>
+<rect x="40" y="360" width="120" height="160" rx="14.0" fill="#e1d5e7" stroke="#9673a6" stroke-width="1"/>
+<text x="100.0" y="379" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">ROB</text>
+<rect x="48" y="390" width="104" height="18" rx="9" fill="#e1d5e7" fill-opacity="0.55" stroke="#9673a6" stroke-width="1"/>
+<rect x="48" y="412" width="104" height="18" rx="9" fill="#e1d5e7" fill-opacity="0.55" stroke="#9673a6" stroke-width="1"/>
+<rect x="48" y="434" width="104" height="18" rx="9" fill="#e1d5e7" fill-opacity="0.55" stroke="#9673a6" stroke-width="1"/>
+<rect x="48" y="456" width="104" height="18" rx="9" fill="#e1d5e7" fill-opacity="0.55" stroke="#9673a6" stroke-width="1"/>
+<rect x="48" y="478" width="104" height="18" rx="9" fill="#e1d5e7" fill-opacity="0.55" stroke="#9673a6" stroke-width="1"/>
+<rect x="320" y="160" width="80" height="40" rx="20.0" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="360.0" y="184" font-size="12" text-anchor="middle" fill="#000">mux</text>
+<rect x="440" y="160" width="160" height="80" rx="12.0" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="520.0" y="196" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">GHR (64)</text>
+<text x="520.0" y="212" font-size="11" text-anchor="middle" fill="#000">speculative</text>
+<rect x="640" y="240" width="600" height="8.0" rx="1.2" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="940.0" y="248" font-size="12" text-anchor="middle" fill="#000"> </text>
+<rect x="320" y="440" width="120" height="160" rx="14.0" fill="#d5e8d4" stroke="#82b366" stroke-width="1"/>
+<text x="380.0" y="459" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">Base</text>
+<rect x="328" y="470" width="104" height="18" rx="9" fill="#d5e8d4" fill-opacity="0.55" stroke="#82b366" stroke-width="1"/>
+<text x="380.0" y="483" font-size="10" text-anchor="middle" fill="#000">ctr (2)</text>
+<rect x="328" y="492" width="104" height="18" rx="9" fill="#d5e8d4" fill-opacity="0.55" stroke="#82b366" stroke-width="1"/>
+<rect x="328" y="514" width="104" height="18" rx="9" fill="#d5e8d4" fill-opacity="0.55" stroke="#82b366" stroke-width="1"/>
+<rect x="328" y="536" width="104" height="18" rx="9" fill="#d5e8d4" fill-opacity="0.55" stroke="#82b366" stroke-width="1"/>
+<rect x="328" y="558" width="104" height="18" rx="9" fill="#d5e8d4" fill-opacity="0.55" stroke="#82b366" stroke-width="1"/>
+<rect x="480" y="280" width="80" height="40" rx="20.0" fill="#ffe6cc" stroke="#d79b00" stroke-width="1"/>
+<text x="520.0" y="304" font-size="12" text-anchor="middle" fill="#000">HASH_0</text>
+<rect x="560" y="280" width="80" height="40" rx="20.0" fill="#ffe6cc" stroke="#d79b00" stroke-width="1"/>
+<text x="600.0" y="304" font-size="12" text-anchor="middle" fill="#000">HASH_1</text>
+<rect x="480" y="440" width="160" height="160" rx="14.0" fill="#d5e8d4" stroke="#82b366" stroke-width="1"/>
+<text x="560.0" y="459" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">TAGE [4]</text>
+<rect x="488" y="470" width="144" height="18" rx="9" fill="#d5e8d4" fill-opacity="0.55" stroke="#82b366" stroke-width="1"/>
+<text x="560.0" y="483" font-size="10" text-anchor="middle" fill="#000">ctr (3) | u (2) | tag (12)</text>
+<rect x="488" y="492" width="144" height="18" rx="9" fill="#d5e8d4" fill-opacity="0.55" stroke="#82b366" stroke-width="1"/>
+<rect x="488" y="514" width="144" height="18" rx="9" fill="#d5e8d4" fill-opacity="0.55" stroke="#82b366" stroke-width="1"/>
+<rect x="560" y="360" width="80" height="40" rx="20.0" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="600.0" y="384" font-size="12" text-anchor="middle" fill="#000">==?</text>
+<rect x="680" y="280" width="80" height="40" rx="20.0" fill="#ffe6cc" stroke="#d79b00" stroke-width="1"/>
+<text x="720.0" y="304" font-size="12" text-anchor="middle" fill="#000">HASH_0</text>
+<rect x="760" y="280" width="80" height="40" rx="20.0" fill="#ffe6cc" stroke="#d79b00" stroke-width="1"/>
+<text x="800.0" y="304" font-size="12" text-anchor="middle" fill="#000">HASH_1</text>
+<rect x="680" y="440" width="160" height="160" rx="14.0" fill="#d5e8d4" stroke="#82b366" stroke-width="1"/>
+<text x="760.0" y="459" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">TAGE [10]</text>
+<rect x="688" y="470" width="144" height="18" rx="9" fill="#d5e8d4" fill-opacity="0.55" stroke="#82b366" stroke-width="1"/>
+<text x="760.0" y="483" font-size="10" text-anchor="middle" fill="#000">ctr (3) | u (2) | tag (12)</text>
+<rect x="688" y="492" width="144" height="18" rx="9" fill="#d5e8d4" fill-opacity="0.55" stroke="#82b366" stroke-width="1"/>
+<rect x="688" y="514" width="144" height="18" rx="9" fill="#d5e8d4" fill-opacity="0.55" stroke="#82b366" stroke-width="1"/>
+<rect x="760" y="360" width="80" height="40" rx="20.0" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="800.0" y="384" font-size="12" text-anchor="middle" fill="#000">==?</text>
+<rect x="880" y="280" width="80" height="40" rx="20.0" fill="#ffe6cc" stroke="#d79b00" stroke-width="1"/>
+<text x="920.0" y="304" font-size="12" text-anchor="middle" fill="#000">HASH_0</text>
+<rect x="960" y="280" width="80" height="40" rx="20.0" fill="#ffe6cc" stroke="#d79b00" stroke-width="1"/>
+<text x="1000.0" y="304" font-size="12" text-anchor="middle" fill="#000">HASH_1</text>
+<rect x="880" y="440" width="160" height="160" rx="14.0" fill="#d5e8d4" stroke="#82b366" stroke-width="1"/>
+<text x="960.0" y="459" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">TAGE [24]</text>
+<rect x="888" y="470" width="144" height="18" rx="9" fill="#d5e8d4" fill-opacity="0.55" stroke="#82b366" stroke-width="1"/>
+<text x="960.0" y="483" font-size="10" text-anchor="middle" fill="#000">ctr (3) | u (2) | tag (12)</text>
+<rect x="888" y="492" width="144" height="18" rx="9" fill="#d5e8d4" fill-opacity="0.55" stroke="#82b366" stroke-width="1"/>
+<rect x="888" y="514" width="144" height="18" rx="9" fill="#d5e8d4" fill-opacity="0.55" stroke="#82b366" stroke-width="1"/>
+<rect x="960" y="360" width="80" height="40" rx="20.0" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="1000.0" y="384" font-size="12" text-anchor="middle" fill="#000">==?</text>
+<rect x="1080" y="280" width="80" height="40" rx="20.0" fill="#ffe6cc" stroke="#d79b00" stroke-width="1"/>
+<text x="1120.0" y="304" font-size="12" text-anchor="middle" fill="#000">HASH_0</text>
+<rect x="1160" y="280" width="80" height="40" rx="20.0" fill="#ffe6cc" stroke="#d79b00" stroke-width="1"/>
+<text x="1200.0" y="304" font-size="12" text-anchor="middle" fill="#000">HASH_1</text>
+<rect x="1080" y="440" width="160" height="160" rx="14.0" fill="#d5e8d4" stroke="#82b366" stroke-width="1"/>
+<text x="1160.0" y="459" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">TAGE [64]</text>
+<rect x="1088" y="470" width="144" height="18" rx="9" fill="#d5e8d4" fill-opacity="0.55" stroke="#82b366" stroke-width="1"/>
+<text x="1160.0" y="483" font-size="10" text-anchor="middle" fill="#000">ctr (3) | u (2) | tag (12)</text>
+<rect x="1088" y="492" width="144" height="18" rx="9" fill="#d5e8d4" fill-opacity="0.55" stroke="#82b366" stroke-width="1"/>
+<rect x="1088" y="514" width="144" height="18" rx="9" fill="#d5e8d4" fill-opacity="0.55" stroke="#82b366" stroke-width="1"/>
+<rect x="1160" y="360" width="80" height="40" rx="20.0" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="1200.0" y="384" font-size="12" text-anchor="middle" fill="#000">==?</text>
+<rect x="320" y="640" width="120" height="40" rx="20.0" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="380.0" y="664" font-size="12" text-anchor="middle" fill="#000">mux</text>
+<rect x="480" y="640" width="160" height="40" rx="20.0" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="560.0" y="664" font-size="12" text-anchor="middle" fill="#000">mux</text>
+<rect x="680" y="640" width="160" height="40" rx="20.0" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="760.0" y="664" font-size="12" text-anchor="middle" fill="#000">mux</text>
+<rect x="880" y="640" width="160" height="40" rx="20.0" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="960.0" y="664" font-size="12" text-anchor="middle" fill="#000">mux</text>
+<rect x="1080" y="640" width="160" height="40" rx="20.0" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="1160.0" y="664" font-size="12" text-anchor="middle" fill="#000">mux</text>
+<rect x="1080" y="720" width="160" height="40" rx="20.0" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="1160.0" y="744" font-size="12" text-anchor="middle" fill="#000">pred (2x)</text>
+<rect x="1360" y="160" width="280" height="160" rx="14.0" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="1500.0" y="179" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">BTB</text>
+<rect x="1368" y="190" width="264" height="18" rx="9" fill="#f5f5f5" fill-opacity="0.55" stroke="#666666" stroke-width="1"/>
+<text x="1500.0" y="203" font-size="10" text-anchor="middle" fill="#000">val | tag (12) | targ (32) | type (2)</text>
+<rect x="1368" y="212" width="264" height="18" rx="9" fill="#f5f5f5" fill-opacity="0.55" stroke="#666666" stroke-width="1"/>
+<rect x="1368" y="234" width="264" height="18" rx="9" fill="#f5f5f5" fill-opacity="0.55" stroke="#666666" stroke-width="1"/>
+<rect x="1520" y="360" width="80" height="40" rx="20.0" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="1560.0" y="384" font-size="12" text-anchor="middle" fill="#000">hit?</text>
+<rect x="1360" y="440" width="240" height="40" rx="20.0" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="1480.0" y="464" font-size="12" text-anchor="middle" fill="#000">priority select (lane 0)</text>
+<rect x="1440" y="520" width="120" height="40" rx="20.0" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="1500.0" y="544" font-size="12" text-anchor="middle" fill="#000">call / ret?</text>
+<rect x="1400" y="600" width="160" height="120" rx="14.0" fill="#f8cecc" stroke="#b85450" stroke-width="1"/>
+<text x="1480.0" y="619" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">RAS</text>
+<rect x="1408" y="630" width="144" height="18" rx="9" fill="#f8cecc" fill-opacity="0.55" stroke="#b85450" stroke-width="1"/>
+<text x="1480.0" y="643" font-size="10" text-anchor="middle" fill="#000">return pc</text>
+<rect x="1408" y="652" width="144" height="18" rx="9" fill="#f8cecc" fill-opacity="0.55" stroke="#b85450" stroke-width="1"/>
+<rect x="1640" y="440" width="40" height="240" rx="6.0" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="1660.0" y="564" font-size="12" text-anchor="middle" fill="#000">pc_sel</text>
+<text x="30" y="864" font-size="10" fill="#333">Solid arrows: prediction. Dashed arrows: dequeue at commit and the saved prediction. The global history is 64 bits; each table reads it folded to its own length.</text></svg>

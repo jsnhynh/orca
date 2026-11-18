@@ -1,0 +1,105 @@
+OpenSTA 3.1.0, ASAP7 typical corner, 1 GHz ideal clock
+
+worst slack max 30.46
+tns max 0.00
+slack<-200 0
+slack<-100 0
+slack<-50 0
+slack<0 0
+slack<50 643
+Startpoint: stop_ctrl.tile_hold_$_DFF_PP1__Q
+            (rising edge-triggered flip-flop clocked by clk)
+Endpoint: l1_subsystem0.dcache.init_set_q_$_DFFE_PP0P__Q_6
+          (recovery check against rising-edge clock clk)
+Path Group: asynchronous
+Path Type: max
+
+Fanout  Delay   Time   Description
+-------------------------------------------------------------
+          0.0    0.0   clock clk (rise edge)
+          0.0    0.0   clock network delay (ideal)
+          0.0    0.0 ^ stop_ctrl.tile_hold_$_DFF_PP1__Q/CLK (DFFASRHQNx1_ASAP7_75t_R)
+     1   48.2   48.2 ^ stop_ctrl.tile_hold_$_DFF_PP1__Q/QN (DFFASRHQNx1_ASAP7_75t_R)
+     7   29.3   77.6 ^ _634957_/Y (BUFx2_ASAP7_75t_R)
+     8   30.2  107.8 ^ _493504_/Y (BUFx2_ASAP7_75t_R)
+     3   28.2  136.0 ^ _fobuf_2473_b/Y (BUFx4_ASAP7_75t_R)
+     8   25.6  161.6 ^ _493757_/Y (BUFx2_ASAP7_75t_R)
+     3   28.2  189.7 ^ _fobuf_21691_b/Y (BUFx4_ASAP7_75t_R)
+     8   25.6  215.3 ^ _493829_/Y (BUFx2_ASAP7_75t_R)
+     3   28.2  243.5 ^ _fobuf_21697_b/Y (BUFx4_ASAP7_75t_R)
+     1   17.7  261.2 ^ _493834_/Y (BUFx2_ASAP7_75t_R)
+          0.0  261.2 ^ l1_subsystem0.dcache.init_set_q_$_DFFE_PP0P__Q_6/RESETN (DFFASRHQNx1_ASAP7_75t_R)
+               261.2   data arrival time
+
+       1000.0 1000.0   clock clk (rise edge)
+          0.0 1000.0   clock network delay (ideal)
+          0.0 1000.0   clock reconvergence pessimism
+              1000.0 ^ l1_subsystem0.dcache.init_set_q_$_DFFE_PP0P__Q_6/CLK (DFFASRHQNx1_ASAP7_75t_R)
+         12.2 1012.2   library recovery time
+              1012.2   data required time
+-------------------------------------------------------------
+              1012.2   data required time
+              -261.2   data arrival time
+-------------------------------------------------------------
+               751.0   slack (MET)
+
+
+Startpoint: core0.bpu_stage.u_l0_btb.target_q.0.2_addr_in_$_DFF_P__D_Q_$_DFF_P__Q
+            (rising edge-triggered flip-flop clocked by clk)
+Endpoint: core0.bpu_stage.u_btb.g_bank[0].g_way[0].ram.mem.0.0
+          (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: max
+
+Fanout  Delay   Time   Description
+-------------------------------------------------------------
+          0.0    0.0   clock clk (rise edge)
+          0.0    0.0   clock network delay (ideal)
+          0.0    0.0 ^ core0.bpu_stage.u_l0_btb.target_q.0.2_addr_in_$_DFF_P__D_Q_$_DFF_P__Q/CLK (DFFHQNx1_ASAP7_75t_L)
+     1   32.5   32.5 v core0.bpu_stage.u_l0_btb.target_q.0.2_addr_in_$_DFF_P__D_Q_$_DFF_P__Q/QN (DFFHQNx1_ASAP7_75t_L)
+     8   22.4   54.9 v _390093_/Y (BUFx2_ASAP7_75t_L)
+     8   28.2   83.1 v _390504_/Y (BUFx2_ASAP7_75t_R)
+     3   29.5  112.6 v _fobuf_7525_b/Y (BUFx4_ASAP7_75t_R)
+     8   28.4  141.0 v _406027_/Y (BUFx2_ASAP7_75t_R)
+     3   32.0  173.0 v _fobuf_10871_b/Y (BUFx4_ASAP7_75t_R)
+     8   26.9  200.0 v _406971_/Y (BUFx2_ASAP7_75t_R)
+     3   30.6  230.6 v _fobuf_11236_b/Y (BUFx4_ASAP7_75t_R)
+     1   31.0  261.6 v _462160_/Y (OA211x2_ASAP7_75t_R)
+     1   28.7  290.3 v _462171_/Y (OR3x1_ASAP7_75t_R)
+     1   16.7  307.0 v _462182_/Y (AND3x1_ASAP7_75t_R)
+     1   27.6  334.6 v _462193_/Y (OR3x1_ASAP7_75t_R)
+     1   16.7  351.3 v _462204_/Y (AND3x1_ASAP7_75t_R)
+     1   27.1  378.3 v _462737_/Y (OR3x1_ASAP7_75t_R)
+     1   18.2  396.5 v _462748_/Y (AND3x1_ASAP7_75t_R)
+     1   11.1  407.6 ^ _462759_/Y (OAI21x1_ASAP7_75t_R)
+     1   22.7  430.3 ^ _462770_/Y (OA21x2_ASAP7_75t_R)
+     1   33.5  463.9 v _462781_/Y (XNOR2x2_ASAP7_75t_R)
+     1   14.1  478.0 v _489249_/Y (AND4x1_ASAP7_75t_L)
+     6   29.1  507.1 v _489260_/Y (AND5x2_ASAP7_75t_L)
+     8   22.4  529.4 v _494716_/Y (BUFx3_ASAP7_75t_L)
+     3   23.3  552.7 v _fobuf_3599_b/Y (BUFx4_ASAP7_75t_L)
+     2   19.0  571.7 v _372576_/Y (OA21x2_ASAP7_75t_L)
+     1   15.2  586.8 v _372578_/Y (AO21x1_ASAP7_75t_L)
+     1   23.3  610.2 v _372580_/Y (OA211x2_ASAP7_75t_L)
+     1   16.9  627.1 v _372581_/Y (AO21x1_ASAP7_75t_L)
+     3   28.6  655.7 v _372582_/Y (AO221x2_ASAP7_75t_L)
+     5   24.2  679.9 v _372587_/Y (AO21x1_ASAP7_75t_L)
+     8   26.3  706.3 v _372588_/Y (BUFx2_ASAP7_75t_L)
+     8   52.8  759.1 ^ _372589_/Y (INVx2_ASAP7_75t_L)
+     8   88.0  847.1 v _600628_/Y (XNOR2x2_ASAP7_75t_L)
+     2   37.7  884.8 v _fobuf_36621_b/Y (BUFx5_ASAP7_75t_L)
+     5   34.7  919.5 v _fobuf_36622_b/Y (BUFx5_ASAP7_75t_L)
+          0.0  919.5 v core0.bpu_stage.u_btb.g_bank[0].g_way[0].ram.mem.0.0/addr_in[0] (fakeram7_64x28_2p)
+               919.5   data arrival time
+
+       1000.0 1000.0   clock clk (rise edge)
+          0.0 1000.0   clock network delay (ideal)
+          0.0 1000.0   clock reconvergence pessimism
+              1000.0 ^ core0.bpu_stage.u_btb.g_bank[0].g_way[0].ram.mem.0.0/clk (fakeram7_64x28_2p)
+        -50.0  950.0   library setup time
+               950.0   data required time
+-------------------------------------------------------------
+               950.0   data required time
+              -919.5   data arrival time
+-------------------------------------------------------------
+                30.5   slack (MET)

@@ -1,0 +1,72 @@
+// orca soc (kv260 over usb jtag, 150 MHz core clock (ps rpll / 10), 115200 baud console through the a53 relay (sw/kv260_relay)): rv32ima_zicsr_zifencei, machine mode, no mmu.
+// memory is the cached ddr window; the console is orca's 16550 at 0x8000_1000
+// (polled: no interrupt controller), the timer is the clint view at 0x8001_0000.
+/dts-v1/;
+
+/ {
+	#address-cells = <1>;
+	#size-cells = <1>;
+	compatible = "orca,orca-soc";
+	model = "ORCA RV32IMA (kv260 jtag, 150 MHz)";
+
+	chosen {
+		// plain earlycon: it reads the uart node (clock-frequency) and stdout-path; explicit
+		// earlycon options carry no clock and would program divisor 0
+		bootargs = "earlycon console=ttyS0,115200";
+		stdout-path = "serial0:115200n8";
+	};
+
+	aliases {
+		serial0 = &uart0;
+	};
+
+	cpus {
+		#address-cells = <1>;
+		#size-cells = <0>;
+		timebase-frequency = <149998505>;
+
+		cpu0: cpu@0 {
+			device_type = "cpu";
+			reg = <0>;
+			compatible = "riscv";
+			riscv,isa = "rv32ima_zicsr_zifencei";
+			riscv,isa-base = "rv32i";
+			riscv,isa-extensions = "i", "m", "a", "zicsr", "zifencei";
+			mmu-type = "riscv,none";
+			clock-frequency = <149998505>;
+
+			cpu0_intc: interrupt-controller {
+				#interrupt-cells = <1>;
+				interrupt-controller;
+				compatible = "riscv,cpu-intc";
+			};
+		};
+	};
+
+	memory@10000000 {
+		device_type = "memory";
+		reg = <0x10000000 0x0fffc000>; /* the top 16 KiB of the window is the uncached DMA region */
+	};
+
+	soc {
+		#address-cells = <1>;
+		#size-cells = <1>;
+		compatible = "simple-bus";
+		ranges;
+
+		clint@80010000 {
+			compatible = "sifive,clint0", "riscv,clint0";
+			reg = <0x80010000 0x10000>;
+			interrupts-extended = <&cpu0_intc 3>, <&cpu0_intc 7>;
+		};
+
+		uart0: serial@80001000 {
+			compatible = "ns16550a";
+			reg = <0x80001000 0x1000>;
+			reg-shift = <2>;
+			reg-io-width = <4>;
+			clock-frequency = <149998505>;
+			current-speed = <115200>;
+		};
+	};
+};

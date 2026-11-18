@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1520 840" width="1520" height="840" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 z" fill="context-stroke" stroke="context-stroke"/></marker></defs>
+<rect width="1520" height="840" fill="#ffffff"/>
+<text x="30" y="40" font-size="22" font-weight="bold" fill="#000">M extension: multiply and divide unit</text>
+<rect x="520" y="120" width="560" height="280" rx="18" fill="#f5f5f5" fill-opacity="0.6" stroke="#666" stroke-opacity="0.45"/>
+<text x="800.0" y="138" font-size="13" font-weight="bold" text-anchor="middle" fill="#333">Multiply (pipelined)</text>
+<rect x="520" y="440" width="560" height="280" rx="18" fill="#f5f5f5" fill-opacity="0.6" stroke="#666" stroke-opacity="0.45"/>
+<text x="800.0" y="458" font-size="13" font-weight="bold" text-anchor="middle" fill="#333">Divide (iterative)</text>
+<path d="M120,240 L120,280" fill="none" stroke="#82b366" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M200,320 L240,320 L240,260 L280,260" fill="none" stroke="#666666" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M440,240 L560,240" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M760,240 L840,240" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M940,280 L940,280" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M360,320 L360,480 L660,480 L660,520" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M760,560 L840,560" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M940,600 L940,600" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M840,640 L760,640" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1040,320 L1120,320 L1120,400 L1160,400 L1160,400" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M660,680 L660,732 L800,732 L1220,732 L1220,480 L1220,480" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1320,420 L1360,420" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<text x="500" y="243" font-size="10" text-anchor="middle" fill="#fff" stroke="#fff" stroke-width="4">mul, mulh*</text>
+<text x="500" y="243" font-size="10" text-anchor="middle" fill="#666">mul, mulh*</text>
+<text x="510" y="483" font-size="10" text-anchor="middle" fill="#fff" stroke="#fff" stroke-width="4">div, rem</text>
+<text x="510" y="483" font-size="10" text-anchor="middle" fill="#666">div, rem</text>
+<rect x="40" y="160" width="160" height="80" rx="12.0" fill="#d5e8d4" stroke="#82b366" stroke-width="1"/>
+<text x="120.0" y="196" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">Scheduler</text>
+<text x="120.0" y="212" font-size="11" text-anchor="middle" fill="#000">port 2, oldest ready</text>
+<rect x="40" y="280" width="160" height="80" rx="12.0" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="120.0" y="316" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">Register read</text>
+<text x="120.0" y="332" font-size="11" text-anchor="middle" fill="#000">rs1, rs2</text>
+<rect x="280" y="200" width="160" height="120" rx="14.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="360.0" y="256" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">Input register</text>
+<text x="360.0" y="272" font-size="11" text-anchor="middle" fill="#000">funct3, tags</text>
+<rect x="560" y="200" width="200" height="80" rx="12.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="660.0" y="236" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">Operand split</text>
+<text x="660.0" y="252" font-size="11" text-anchor="middle" fill="#000">b at bit 17</text>
+<rect x="840" y="200" width="200" height="80" rx="12.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="940.0" y="236" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">Partial products</text>
+<text x="940.0" y="252" font-size="11" text-anchor="middle" fill="#000">two, registered</text>
+<rect x="840" y="280" width="200" height="80" rx="12.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="940.0" y="316" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">Combine</text>
+<text x="940.0" y="332" font-size="11" text-anchor="middle" fill="#000">sign extend, 66 bits</text>
+<rect x="560" y="520" width="200" height="80" rx="12.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="660.0" y="556" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">Absolute values</text>
+<text x="660.0" y="572" font-size="11" text-anchor="middle" fill="#000">sign saved</text>
+<rect x="840" y="520" width="200" height="80" rx="12.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="940.0" y="556" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">Setup</text>
+<text x="940.0" y="572" font-size="11" text-anchor="middle" fill="#000">skip leading zeros</text>
+<rect x="840" y="600" width="200" height="80" rx="12.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="940.0" y="636" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">Radix-4 loop</text>
+<text x="940.0" y="652" font-size="11" text-anchor="middle" fill="#000">2 bits, 1 to 16 steps</text>
+<rect x="560" y="600" width="200" height="80" rx="12.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="660.0" y="636" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">Signed fixup</text>
+<text x="660.0" y="652" font-size="11" text-anchor="middle" fill="#000">div by zero, overflow</text>
+<rect x="1160" y="360" width="160" height="120" rx="14.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="1240.0" y="416" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">Result register</text>
+<text x="1240.0" y="432" font-size="11" text-anchor="middle" fill="#000">held until granted</text>
+<rect x="1360" y="360" width="120" height="120" rx="14.0" fill="#f5f5f5" stroke="#666666" stroke-width="1"/>
+<text x="1420.0" y="424" font-size="12" text-anchor="middle" fill="#000">CDB</text>
+<text x="30" y="824" font-size="10" fill="#333">Multiply: one new operation every cycle, four cycles from issue to visible result. Divide: iterative radix-4, one in flight; younger multiply and divide operations wait at issue.</text></svg>

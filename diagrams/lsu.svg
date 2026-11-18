@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1760 840" width="1760" height="840" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 z" fill="context-stroke" stroke="context-stroke"/></marker></defs>
+<rect width="1760" height="840" fill="#ffffff"/>
+<text x="30" y="40" font-size="22" font-weight="bold" fill="#000">Load/store unit: queues, alias check, cache port</text>
+<rect x="280" y="120" width="640" height="640" rx="18" fill="#f5f5f5" fill-opacity="0.6" stroke="#666" stroke-opacity="0.45"/>
+<text x="600.0" y="138" font-size="13" font-weight="bold" text-anchor="middle" fill="#333">Load/store queues</text>
+<rect x="1000" y="120" width="480" height="640" rx="18" fill="#f5f5f5" fill-opacity="0.6" stroke="#666" stroke-opacity="0.45"/>
+<text x="1240.0" y="138" font-size="13" font-weight="bold" text-anchor="middle" fill="#333">Load/store unit</text>
+<path d="M200,200 L320,200" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M600,280 L640,280" fill="none" stroke="#82b366" stroke-width="1.2" stroke-dasharray="3,3" marker-end="url(#a)"/>
+<path d="M480,440 L480,400" fill="none" stroke="#d79b00" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M780,400 L780,440" fill="none" stroke="#82b366" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M780,520 L780,560" fill="none" stroke="#d79b00" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M680,620 L640,620" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M340,400 L340,400 L340,560 L340,560" fill="none" stroke="#82b366" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M240,420 L260,420 L334,420 A6,6 0 0 1 346,420 L474,420 A6,6 0 0 1 486,420 L700,420 L700,400" fill="none" stroke="#9673a6" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M880,620 L940,620 L940,200 L1040,200" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M120,160 L120,72 L1140,72 L1140,160" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M480,680 L480,728 L980,728 L980,440 L1040,440" fill="none" stroke="#d6b656" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1140,240 L1140,280" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1140,360 L1140,400" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1140,480 L1140,520" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1240,200 L1520,200" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1520,320 L1500,320 L1240,320 L1240,320" fill="none" stroke="#9673a6" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1240,440 L1520,440" fill="none" stroke="#6c8ebf" stroke-width="1.2" marker-end="url(#a)"/>
+<path d="M1240,560 L1520,560" fill="none" stroke="#d79b00" stroke-width="1.2" marker-end="url(#a)"/>
+<text x="260" y="203" font-size="10" text-anchor="middle" fill="#fff" stroke="#fff" stroke-width="4">address, data</text>
+<text x="260" y="203" font-size="10" text-anchor="middle" fill="#666">address, data</text>
+<text x="480" y="423" font-size="10" text-anchor="middle" fill="#fff" stroke="#fff" stroke-width="4">wait bit</text>
+<text x="480" y="423" font-size="10" text-anchor="middle" fill="#666">wait bit</text>
+<text x="660" y="623" font-size="10" text-anchor="middle" fill="#fff" stroke="#fff" stroke-width="4">iss_pkt</text>
+<text x="660" y="623" font-size="10" text-anchor="middle" fill="#666">iss_pkt</text>
+<text x="480" y="423" font-size="10" text-anchor="middle" fill="#fff" stroke="#fff" stroke-width="4">token</text>
+<text x="480" y="423" font-size="10" text-anchor="middle" fill="#666">token</text>
+<text x="940" y="403" font-size="10" text-anchor="middle" fill="#fff" stroke="#fff" stroke-width="4">dmem_pkt</text>
+<text x="940" y="403" font-size="10" text-anchor="middle" fill="#666">dmem_pkt</text>
+<text x="560" y="75" font-size="10" text-anchor="middle" fill="#fff" stroke="#fff" stroke-width="4">early load: base in the DDR window</text>
+<text x="560" y="75" font-size="10" text-anchor="middle" fill="#666">early load: base in the DDR window</text>
+<text x="720" y="731" font-size="10" text-anchor="middle" fill="#fff" stroke="#fff" stroke-width="4">forward_pkt</text>
+<text x="720" y="731" font-size="10" text-anchor="middle" fill="#666">forward_pkt</text>
+<text x="1140" y="383" font-size="10" text-anchor="middle" fill="#fff" stroke="#fff" stroke-width="4">hit: loaded word</text>
+<text x="1140" y="383" font-size="10" text-anchor="middle" fill="#666">hit: loaded word</text>
+<text x="1380" y="203" font-size="10" text-anchor="middle" fill="#fff" stroke="#fff" stroke-width="4">request</text>
+<text x="1380" y="203" font-size="10" text-anchor="middle" fill="#666">request</text>
+<text x="1360" y="323" font-size="10" text-anchor="middle" fill="#fff" stroke="#fff" stroke-width="4">response</text>
+<text x="1360" y="323" font-size="10" text-anchor="middle" fill="#666">response</text>
+<rect x="40" y="160" width="160" height="80" rx="12.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="120.0" y="196" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">AGU</text>
+<text x="120.0" y="212" font-size="11" text-anchor="middle" fill="#000">base + offset</text>
+<rect x="40" y="360" width="200" height="120" rx="14.0" fill="#e1d5e7" stroke="#9673a6" stroke-width="1"/>
+<text x="140.0" y="416" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">ROB</text>
+<text x="140.0" y="432" font-size="11" text-anchor="middle" fill="#000">store token</text>
+<rect x="320" y="160" width="280" height="240" rx="14.0" fill="#d5e8d4" stroke="#82b366" stroke-width="1"/>
+<text x="460.0" y="179" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">Load queue (12)</text>
+<rect x="328" y="190" width="264" height="18" rx="9" fill="#d5e8d4" fill-opacity="0.55" stroke="#82b366" stroke-width="1"/>
+<text x="460.0" y="203" font-size="10" text-anchor="middle" fill="#000">tag | addr | mask | issued</text>
+<rect x="328" y="212" width="264" height="18" rx="9" fill="#d5e8d4" fill-opacity="0.55" stroke="#82b366" stroke-width="1"/>
+<rect x="328" y="234" width="264" height="18" rx="9" fill="#d5e8d4" fill-opacity="0.55" stroke="#82b366" stroke-width="1"/>
+<rect x="328" y="256" width="264" height="18" rx="9" fill="#d5e8d4" fill-opacity="0.55" stroke="#82b366" stroke-width="1"/>
+<rect x="328" y="278" width="264" height="18" rx="9" fill="#d5e8d4" fill-opacity="0.55" stroke="#82b366" stroke-width="1"/>
+<rect x="328" y="300" width="264" height="18" rx="9" fill="#d5e8d4" fill-opacity="0.55" stroke="#82b366" stroke-width="1"/>
+<rect x="328" y="322" width="264" height="18" rx="9" fill="#d5e8d4" fill-opacity="0.55" stroke="#82b366" stroke-width="1"/>
+<rect x="328" y="344" width="264" height="18" rx="9" fill="#d5e8d4" fill-opacity="0.55" stroke="#82b366" stroke-width="1"/>
+<rect x="328" y="366" width="264" height="18" rx="9" fill="#d5e8d4" fill-opacity="0.55" stroke="#82b366" stroke-width="1"/>
+<rect x="640" y="160" width="240" height="240" rx="14.0" fill="#d5e8d4" stroke="#82b366" stroke-width="1"/>
+<text x="760.0" y="179" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">Store queue (12)</text>
+<rect x="648" y="190" width="224" height="18" rx="9" fill="#d5e8d4" fill-opacity="0.55" stroke="#82b366" stroke-width="1"/>
+<text x="760.0" y="203" font-size="10" text-anchor="middle" fill="#000">tag | addr | data | token</text>
+<rect x="648" y="212" width="224" height="18" rx="9" fill="#d5e8d4" fill-opacity="0.55" stroke="#82b366" stroke-width="1"/>
+<rect x="648" y="234" width="224" height="18" rx="9" fill="#d5e8d4" fill-opacity="0.55" stroke="#82b366" stroke-width="1"/>
+<rect x="648" y="256" width="224" height="18" rx="9" fill="#d5e8d4" fill-opacity="0.55" stroke="#82b366" stroke-width="1"/>
+<rect x="648" y="278" width="224" height="18" rx="9" fill="#d5e8d4" fill-opacity="0.55" stroke="#82b366" stroke-width="1"/>
+<rect x="648" y="300" width="224" height="18" rx="9" fill="#d5e8d4" fill-opacity="0.55" stroke="#82b366" stroke-width="1"/>
+<rect x="648" y="322" width="224" height="18" rx="9" fill="#d5e8d4" fill-opacity="0.55" stroke="#82b366" stroke-width="1"/>
+<rect x="648" y="344" width="224" height="18" rx="9" fill="#d5e8d4" fill-opacity="0.55" stroke="#82b366" stroke-width="1"/>
+<rect x="648" y="366" width="224" height="18" rx="9" fill="#d5e8d4" fill-opacity="0.55" stroke="#82b366" stroke-width="1"/>
+<rect x="400" y="440" width="160" height="80" rx="12.0" fill="#ffe6cc" stroke="#d79b00" stroke-width="1"/>
+<text x="480.0" y="476" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">wait table</text>
+<text x="480.0" y="492" font-size="11" text-anchor="middle" fill="#000">256 bits</text>
+<rect x="680" y="440" width="200" height="80" rx="12.0" fill="#ffe6cc" stroke="#d79b00" stroke-width="1"/>
+<text x="780.0" y="476" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">store pick</text>
+<text x="780.0" y="492" font-size="11" text-anchor="middle" fill="#000">oldest authorized</text>
+<rect x="320" y="560" width="320" height="120" rx="14.0" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="480.0" y="609" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">Alias check</text>
+<text x="480.0" y="624" font-size="11" text-anchor="middle" fill="#000">older stores: forward,</text>
+<text x="480.0" y="639" font-size="11" text-anchor="middle" fill="#000">bounce or go to the cache</text>
+<rect x="680" y="560" width="200" height="120" rx="14.0" fill="#fff2cc" stroke="#d6b656" stroke-width="1"/>
+<text x="780.0" y="616" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">Issue register</text>
+<text x="780.0" y="632" font-size="11" text-anchor="middle" fill="#000">one memory op</text>
+<rect x="1040" y="160" width="200" height="80" rx="40.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="1140.0" y="204" font-size="12" text-anchor="middle" fill="#000">request select</text>
+<rect x="1040" y="280" width="200" height="80" rx="12.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="1140.0" y="316" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">pending</text>
+<text x="1140.0" y="332" font-size="11" text-anchor="middle" fill="#000">one in flight</text>
+<rect x="1040" y="400" width="200" height="80" rx="12.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="1140.0" y="436" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">result register</text>
+<text x="1140.0" y="452" font-size="11" text-anchor="middle" fill="#000">plus hold slot</text>
+<rect x="1040" y="520" width="200" height="80" rx="40.0" fill="#ffe6cc" stroke="#d79b00" stroke-width="1"/>
+<text x="1140.0" y="556" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">spec wake</text>
+<text x="1140.0" y="572" font-size="11" text-anchor="middle" fill="#000">and check</text>
+<rect x="1040" y="640" width="400" height="80" rx="12.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="1240.0" y="676" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">AMO sequencer</text>
+<text x="1240.0" y="692" font-size="11" text-anchor="middle" fill="#000">see the A extension</text>
+<rect x="1520" y="160" width="200" height="200" rx="14.0" fill="#e1d5e7" stroke="#9673a6" stroke-width="1"/>
+<text x="1620.0" y="256" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">L1 D-cache</text>
+<text x="1620.0" y="272" font-size="11" text-anchor="middle" fill="#000">16 KiB, 2-way</text>
+<rect x="1520" y="400" width="200" height="80" rx="12.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1"/>
+<text x="1620.0" y="436" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">CDB</text>
+<text x="1620.0" y="452" font-size="11" text-anchor="middle" fill="#000">mem_result</text>
+<rect x="1520" y="520" width="200" height="80" rx="12.0" fill="#d5e8d4" stroke="#82b366" stroke-width="1"/>
+<text x="1620.0" y="556" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">Scheduler</text>
+<text x="1620.0" y="572" font-size="11" text-anchor="middle" fill="#000">wake, check</text>
+<text x="30" y="824" font-size="10" fill="#333">Loads may run ahead of older stores whose address is unknown, guarded by a wait table. A store leaves only after the ROB authorizes it. Uncached addresses go out through the router&#x27;s AXI port.</text></svg>

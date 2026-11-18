@@ -1,0 +1,11 @@
+36722 buffers on 36535 nets
+start worst slack -291.1 tns -1020047 at 30 ps uncertainty
+pass 1: 24861 gates changed, worst slack -27.6 tns -12356
+pass 2: 327 gates changed, worst slack -16.3 tns -769
+pass 3: 15 gates changed, worst slack -10.7 tns -395
+pass 4: 14 gates changed, worst slack -6.2 tns -128
+pass 5: 14 gates changed, worst slack -1.7 tns -8
+pass 6: 15 gates changed, worst slack 0.5 tns 0
+mix Rvt 374224 (93.7%) Lvt 25246 (6.3%)
+area macro 38548 logic 26581 flop 12939 buffer 6680 total 84749 um2
+final worst slack 0.5 tns 0

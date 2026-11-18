@@ -1,0 +1,14 @@
+# commands typed by `./orca board linux --tour`, one per shell prompt. busybox only: no find, awk, free, top, tar or vi.
+uname -a
+echo 'hello world from orca!'
+cat /proc/cpuinfo
+ls /
+ps
+echo hello orca > /tmp/a.txt
+cat /tmp/a.txt
+ls -l /tmp
+echo "2^200" | bc
+factor 1234567891011
+seq 1 5
+rm /tmp/a.txt
+echo tour done
